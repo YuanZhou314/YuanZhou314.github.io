@@ -1,0 +1,770 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="周周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="单表查询 单表查询的语句实际上是一种声明式的语法，只是告诉MySQL要获取的数据符合哪些规则，至于具体的执行方式是MySQL自己来定。针对不同的场景，也有不同的执行计划， MySQL基于开销(cost)的优化器策略，哪种执行计划开销更低，就意味着性能更好，速度更快，就选择哪一种。以下是执行计划的类型： const 通过主键或者唯一二级索引与常数的等值比较来定位一条记录，是最快的执行方式。主键定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL查询的本质——单表与多表的查询方法">
+<meta property="og:url" content="http://example.com/2022/08/06/MySQL%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%9C%AC%E8%B4%A8%E2%80%94%E2%80%94%E5%8D%95%E8%A1%A8%E4%B8%8E%E5%A4%9A%E8%A1%A8%E7%9A%84%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="周周的地盘">
+<meta property="og:description" content="单表查询 单表查询的语句实际上是一种声明式的语法，只是告诉MySQL要获取的数据符合哪些规则，至于具体的执行方式是MySQL自己来定。针对不同的场景，也有不同的执行计划， MySQL基于开销(cost)的优化器策略，哪种执行计划开销更低，就意味着性能更好，速度更快，就选择哪一种。以下是执行计划的类型： const 通过主键或者唯一二级索引与常数的等值比较来定位一条记录，是最快的执行方式。主键定">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806194506.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806194518.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806194532.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806194548.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806194603.png">
+<meta property="article:published_time" content="2022-08-06T11:44:28.000Z">
+<meta property="article:modified_time" content="2022-08-06T11:46:46.244Z">
+<meta property="article:author" content="周周">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806194506.png">
+  
+  
+  
+  <title>MySQL查询的本质——单表与多表的查询方法 - 周周的地盘</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"OTIyisgVldQtTwVk1kC3xG75-gzGzoHsz","app_key":"7oB3ndT9XSQ2jtgBMxNhwe9W","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>周周的地盘</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="MySQL查询的本质——单表与多表的查询方法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-06 19:44" pubdate>
+          2022年8月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          36 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL查询的本质——单表与多表的查询方法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+
+<p><strong>单表查询</strong></p>
+<p>单表查询的语句实际上是一种声明式的语法，只是告诉MySQL要获取的数据符合哪些规则，至于具体的执行方式是MySQL自己来定。针对不同的场景，也有不同的执行计划， MySQL基于开销(cost)的优化器策略，哪种执行计划开销更低，就意味着性能更好，速度更快，就选择哪一种。以下是执行计划的类型：</p>
+<p><strong>const</strong></p>
+<p>通过<strong>主键</strong>或者<strong>唯一二级索引</strong>与常数的<strong>等值比较</strong>来定位一条记录，是最快的执行方式。主键定位直接返回，而唯一二级索引只需查询一次+回表一次即可返回</p>
+<p><strong>ref</strong></p>
+<p>较为常见的，在建立二级索引后直接使用其为等值查询条件。因为是等值的，索引会形成单点扫描区间。这种方法称为ref，规则是：搜索条件为<strong>二级索引列</strong>与<strong>常数</strong>进行<strong>等值比较</strong>，形成的扫描区间为<strong>单点扫描区间</strong>，采用二级索引来执行查询。这种方式的缺点就是每查到一次就回表一次，消耗大。</p>
+<ul>
+<li>且当二级索引列允许存储null时，都是用此ref方式访问。</li>
+<li>ref允许最左匹配机制，即最左连续列匹配联合索引，就可以使用ref</li>
+<li>当查询条件<strong>不为等值时不能用ref</strong></li>
+</ul>
+<p>（另外：在多表查询中，对被驱动表的主键或者不允许存储NULL值的唯一二级索引进行等值查找，使用的方法称为eq_ref）</p>
+<p><strong>ref_or_null</strong></p>
+<p>比ref多扫描了一些值为null的二级索引记录</p>
+<p><strong>range</strong></p>
+<p>使用索引执行查询时，对应的扫描区间为<strong>若干个单点扫描区间</strong>或者<strong>范围扫描区间</strong>。即包含多个单点扫描区间的查询条件，包含一个或全表扫描都不能称为range </p>
+<p><strong>index</strong></p>
+<p>直接<strong>扫描全部二级索引记录</strong>，且查询结果包含在索引列中，无需回表操作。即索引覆盖，因为二级索引比聚簇索引是要小很多的，就算全部扫描也不会消耗很多资源</p>
+<p><strong>all</strong></p>
+<p>全表扫描，适用于所有查询，但缺点就是慢</p>
+<p>注意：</p>
+<p>一般来说，具体使用哪种方法来执行，是MySQL中优化器的工作，它会访问表中少量数据获等方式，<strong>分析出多种执行计划中成本最小</strong>的来查询。</p>
+<p>一般来说，使用二级索引查询时，当拿到匹配的二级记录后，就算还有其他匹配条件，也会先根据结果（主键）执行回表操作，再检测该记录是否满足其他条件，满足则发送给客户端，不满足则忽略。</p>
+<p><strong>index_merge</strong> </p>
+<p>索引合并。使用多个索引来完成一次查询，有以下三种方式：</p>
+<ul>
+<li><strong>Intersection索引合并</strong></li>
+</ul>
+<p>举个栗子：SELECT * FROM sing_table WHERE key1 = ‘a’ AND key3 = ‘b’;</p>
+<p>一共有四种方式可以执行该查询：</p>
+<ol>
+<li><ol>
+<li>首先，是全表就不谈了，慢。</li>
+<li>其次，是使用key1的索引查询，则扫描区间为[‘a’,’a’]，查询到之后立刻回表，再匹配key3。</li>
+<li>然后，是按照key3的索引查询，同样的则扫描区间为[‘b’,’b’]，查询到之后立刻回表，再匹配key1</li>
+<li>最后，同时使用key1和key3的索引查询。在key1索引中扫描出匹配key1=a的记录，在key3索引中扫描出匹配key1=b的记录。由于在普通二级索引中，重复的索引值会按照主键来排序。所以在这个执行计划中，使用各自的索引扫描出来的记录也是主键排序的。又因为这里使用了 AND，需要查询两者条件都匹配的结果，所以<strong>找出两者查询的结果中主键相同的记录</strong>，再使用这些相同的主键<strong>一并执行回表</strong>，这样可能会省下很多回表带来的开销。这就是Intersection索引合并，它<strong>要求二级索引是排序的</strong>，也就是说我们的查询条件必须是等值的，只有等值才会排序。如果不使用等值条件，则不会使用Intersection索引合并（相当于各自使用ref，最后取重复集）</li>
+</ol>
+</li>
+</ol>
+<p>注意：如果条件中含有主键索引，则并不会扫描主键索引，而是和非主键索引一起形成等效的扫描区间。</p>
+<ul>
+<li><strong>Union索引合并</strong></li>
+</ul>
+<p>再举个栗子：SELECT * FROM sing_table WHERE key1 = ‘a’ OR key3 = ‘b’;</p>
+<p>和之前的例子差不多，只是AND换成了OR，但完全不同了，你肯定不能单独使用其中一个索引来查，否则会先查询二级索引所有记录，再全部回表，灾难性的回表代表巨大消耗！所以要么你全表查询，要么你就是用Union索引合并：</p>
+<p>在key1索引中扫描出匹配key1=a的记录，在key3索引中扫描出匹配key1=b的记录。因为这里用的是 OR ，只要匹配一个条件即可返回，所以只要<strong>根据两个结果集进行去重</strong>，把重复的ID去掉，接着就可以<strong>拿着剩下的ID区一并回表</strong>了，其实和Intersection索引是类似的，只不过它要的是重复的记录，这里要的是去掉重复的记录。同样，只有等值比较才可以使用这种Union索引合并。（相当于各自ref，然后去重）</p>
+<ul>
+<li><strong>Sort-Union索引合并</strong></li>
+</ul>
+<p>看这个名字其实就是比Union新增了一个Sort，那么它在什么地方加了排序呢？我们知道使用Union的条件是二级索引记录必须是按主键排序的，也就是说在SQL语句中，必须是等值的，类似上面的：key1 = ‘a’ OR key3 = ‘b’; 但如果是这种：key1 &lt; ‘a’ OR key3 &gt; ‘z’; 呢？使用Sort-Union排序可以先从key1索引中获得条件为“key1 &lt; ‘a’ ”的二级索引记录，并<strong>对其根据主键进行排序**；再从key3索引中获得条件为“key3 &gt; ‘z’ ”的二级索引记录，也对其根据主键进行排序。如此，又变成Union索引合并了。又可以减少很多回表操作。这种方法比普通的Union</strong>多了一层各自索引的主键值的排序**，也称Sort-Union索引合并。</p>
+<p>注意：只有Sort-Union而没有Sort-Intersecion的原因作者也有解释，但具体没怎么看明白：如果加入Sort-Intersecion，就需要<strong>为大量的二级索引记录按照主键值进行排序</strong>，这个成本可能比使用单个二级索引执行查询的成本都要高，所以mysql没有引入。</p>
+<p>在MySQL中执行计划使用EXPLAIN关键字查看，可以查看 SELECT,DELETE,INSERT,REPLACE,UPDATE语句的查询计划，查询出来的执行计划有两种查看方式（MySQL5.7+），：</p>
+<ul>
+<li>表格格式：EXPLAIN SQL</li>
+<li>json格式：EXPLAIN FORMAT =JSON SQL</li>
+</ul>
+<p>例：表格：</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806194506.png" srcset="/img/loading.gif" lazyload></p>
+<p> json:</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806194518.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>多表查询</strong></p>
+<p>MySQL是关系型数据库，一个非常重要的概念就是Join 。表关联的实质其实就是把各个表的记录都取出来依此匹配，并把匹配后的组合发给客户端。如果不加条件限制，给到客户端的记录将是几个表的乘积，也称<strong>笛卡尔积</strong>，因为需要每个表的每一条记录都与另一个表的每条记录相互匹配。这个过程有点像大规模的回表操作，或者代码中的嵌套for循环。</p>
+<p>因此，我们一般在连接查询时并不会全部匹配，而是会加上限制条件。这里的限制条件一般只有两种情况：</p>
+<ul>
+<li>单表限制条件。如：key=3或key&gt;1或key&lt;4。只针对key所在的表的限制条件</li>
+<li>多表限制条件。如：t1.m1=t2.m1、t1.n1&lt; t2.n2。就针对了t1和t2两个表的限制条件。</li>
+</ul>
+<p>在这里有必要提一下基本连接查询过程：假设有表t1和t2，t1作为驱动表，t2作为被驱动表。首先在t1表中，按照对应的限制条件，使用成本最小的单表查询方法去查询。每次在t1查询到一条记录，都需要根据这条记录去t2表查询匹配的记录。即<strong>驱动表只需要查询一次，而被驱动表可能需要访问多次</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806194532.png" srcset="/img/loading.gif" lazyload></p>
+<p>这种方式有个缺点，如果驱动表的某条记录，没有在被驱动表中找到相应记录，那么就连驱动表的那条记录也不会查询出来，这样就导致查询出来的数据有缺失。为了解决该问题，引出了连接另一个概念：外连接。<strong>在外连接中，即时驱动表中的记录在被驱动表中没有匹配的记录，也仍然需要加入到结果集</strong>。</p>
+<p>连接查询也需要有过滤条件，单表查询中使用WHERE，连接查询中的WHERE可能是不够用的。因此在连接查询中，存在着两种过滤条件：</p>
+<ul>
+<li><p>WHERE：<strong>不分内外连接</strong>，只要不匹配WHERE子句的条件，就不加入结果集。</p>
+</li>
+<li><p>ON：</p>
+</li>
+<li><ul>
+<li>对于外连接的驱动表来说，如果在被驱动表中找不到匹配ON子句的过滤条件，<strong>驱动表的记录还是会加入结果集</strong>，被驱动表找不到记录没有关系，填NULL即可。</li>
+<li>对于内连接的驱动表来说，ON等效于WHERE。</li>
+</ul>
+</li>
+</ul>
+<p>内连接的语法：</p>
+<p>select * from t1,t2; 等效于 select * from t1 join t2; 等效于 select * from t1 inner join t2; 等效于 select * from t1 cross join t2; 。</p>
+<p>推荐INNER JOIN的写法，语义明确</p>
+<p>外连接的语法：</p>
+<p>select * from t1 left join t2 on 连接条件 [where 普通过滤条件];</p>
+<p>left join 中左侧的表称为外表或者驱动表，右侧的表称为内表或被驱动表。外连接必须使用on来指出连接条件。</p>
+<p>right join也是一样的，只是左右驱动表位置换了，不再赘述</p>
+<p><strong>连接查询的原理</strong></p>
+<p><strong>嵌套循环连接</strong></p>
+<p>最基本的简单的连接查询算算法。驱动表只访问一次，但被驱动表却可能访问多次，且访问的次数取决于对驱动表执行单表查询后的结果集中有多少条记录（驱动表匹配到记录后立即去被驱动表查）</p>
+<p>多次如果每条驱动表的记录在被驱动表中都有很多，那么单表查询被驱动表的次数就会非常多，效率自然会不高。如果被驱动表的限制条件带有索引，那么有可能会使用ref、ref_or_null或者range等方式来查找，效率相对会快一些。所以在查询时，尽量避免select *，而是把真正使用到的列作为查询条件，这是在人为可控的情况下，优化查询。一般常用的列都会有索引，索引覆盖下查询效率会更高。</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806194548.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>基于块的嵌套循环连接</strong></p>
+<p>在表数据过于庞大的情况下，记录有可能是千万、亿级的规模，这种情况下的连接查询有可能会非常慢。基于块的嵌套循环连接是从减少被驱动表的访问次数入手，达到减少IO、提高效率的效果的。具体的做法就是在执行连接查询前申请一块固定大小的内存（也称Join Buffer），先将若干驱动表结果集里的记录装在这个内存中，然后开始扫描被驱动表，<strong>每条被驱动表的记录一次性地与Join Buffer中的多条驱动表记录进行匹配</strong>，由于匹配在内存中完成，无需IO，所以可以大大减少IO量。</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806194603.png" srcset="/img/loading.gif" lazyload></p>
+<p>Join Buffer的大小通过启动项或系统变量进行配置，默认为256KB。一般在<strong>不能使用索引且自己机器的内存较大</strong>的情况下，可以尝试调大Join Buffer来进行连接查询的优化。需要注意的是Join Buffer并不会放所有驱动表的列，只存放查询列表中的列和过滤条件的列。因此我们查询时少用select * ，这样Join Buffer可以存放更多的记录。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MySQL查询的本质——单表与多表的查询方法</div>
+      <div>http://example.com/2022/08/06/MySQL查询的本质——单表与多表的查询方法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>周周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月6日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/06/MySQL%E5%8D%95%E8%A1%A8%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%88%90%E6%9C%AC/" title="MySQL单表查询的成本">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL单表查询的成本</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/06/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%AF%BE%E7%A8%8B%E2%80%94%E2%80%94%E2%80%94%E2%80%94Hadoop/" title="大数据课程————Hadoop">
+                        <span class="hidden-mobile">大数据课程————Hadoop</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"OTIyisgVldQtTwVk1kC3xG75-gzGzoHsz","appKey":"7oB3ndT9XSQ2jtgBMxNhwe9W","path":"window.location.pathname","placeholder":"说点什么吧","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-uv"></span>
+         次
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,736 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="周周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一些概念机器学习的历史人为指定决策规则。人为指定决策规则适合处理人们非常熟悉处理过程的应用，一旦数据量过大、数据处理过程复杂或者任务有所变化，就需要机器学习上场了。早在19世纪的50到80年代，科学家们就有着让计算机算法代替人脑思考的想法，最初，机器学习只用于垃圾邮件清理，数学公式分析等简单领域，然而后来其应用场景越来越多，无论是图片过滤，语音分析，数据清洗等领域都能看到机器学习的身影。到如今">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习实践（一）：鸢尾花分类">
+<meta property="og:url" content="http://example.com/2022/08/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E9%B8%A2%E5%B0%BE%E8%8A%B1%E5%88%86%E7%B1%BB/index.html">
+<meta property="og:site_name" content="周周的地盘">
+<meta property="og:description" content="一些概念机器学习的历史人为指定决策规则。人为指定决策规则适合处理人们非常熟悉处理过程的应用，一旦数据量过大、数据处理过程复杂或者任务有所变化，就需要机器学习上场了。早在19世纪的50到80年代，科学家们就有着让计算机算法代替人脑思考的想法，最初，机器学习只用于垃圾邮件清理，数学公式分析等简单领域，然而后来其应用场景越来越多，无论是图片过滤，语音分析，数据清洗等领域都能看到机器学习的身影。到如今">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203500.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203517.png">
+<meta property="article:published_time" content="2022-08-06T12:34:30.000Z">
+<meta property="article:modified_time" content="2022-08-06T12:35:39.112Z">
+<meta property="article:author" content="周周">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203500.png">
+  
+  
+  
+  <title>机器学习实践（一）：鸢尾花分类 - 周周的地盘</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"OTIyisgVldQtTwVk1kC3xG75-gzGzoHsz","app_key":"7oB3ndT9XSQ2jtgBMxNhwe9W","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>周周的地盘</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="机器学习实践（一）：鸢尾花分类"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-06 20:34" pubdate>
+          2022年8月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          27 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">机器学习实践（一）：鸢尾花分类</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+
+<h3 id="一些概念"><a href="#一些概念" class="headerlink" title="一些概念"></a>一些概念</h3><h4 id="机器学习的历史"><a href="#机器学习的历史" class="headerlink" title="机器学习的历史"></a>机器学习的历史</h4><p>人为指定决策规则。人为指定决策规则适合处理人们非常熟悉处理过程的应用，一旦数据量过大、数据处理过程复杂或者任务有所变化，就需要机器学习上场了。<br>早在19世纪的50到80年代，科学家们就有着让计算机算法代替人脑思考的想法，最初，机器学习只用于垃圾邮件清理，数学公式分析等简单领域，然而后来其应用场景越来越多，无论是图片过滤，语音分析，数据清洗等领域都能看到机器学习的身影。到如今无论是智能手机，航空运输，智能驾驶等方方面面都可以看到 AI 的身影</p>
+<p>机器学习主要应用数据科学领域，它与普通程序开发的主要区别在于一般程序，数据往往来源于不同的数据库，通过对数据进行复杂转化，运算得到最后的结果。而机器学习目的并不是为了得到最后的运算结果，而是对计算过程进行分析，总结出一套运算的规则。只要数据量足够多，运算规则就越准确。最后可以根据这套规则对没有通过验证的数据进行预算，得到预算后的值。只要使用的规则正确，预算的结果的正确率往往可以达到95%以上。</p>
+<p>深度学习开始只是机器学习的一分支领域，它更强调从连续的层中进行学习，这种层级结构中的每一层代表不同程序的抽象，层级越高，抽象程度越大。这些层主要通过神经网络的模型学习得到的，最大的模型会有上百层之多。而最简单的神经网络分为输入层，中间层（中间层往往会包含多个隐藏层），输出层。<br><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203500.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h4><h5 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h5><p>用户将输入和预期输出提供给算法，算法根据给定输入给出预期输出。这里的”监督”就是样例的预期输出，这个输出“监督”着算法。监督学习算法需要提供大量数据</p>
+<ul>
+<li>识别信封上手写的邮政编码</li>
+<li>基于医学影像判断肿瘤是否为良性</li>
+<li>检测信用卡交易中的诈骗行为<br>常见的监督学习包含了线性回归、k近邻、朴素贝叶斯分类 、决策树、随机森林与梯度提升决策树、支持向量机等多种算法，</li>
+</ul>
+<h5 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h5><p>只有输入数据已知，没预期的输出数据。理解和评估此类算法比较困难，例如</p>
+<ul>
+<li>分析一些列博客文章的主题</li>
+<li>将客户分类为具有相似偏好的群组</li>
+<li>检测网站的异常访问模式</li>
+</ul>
+<p>常见的无监督学习分为聚类、降维两大类，包含了PCA（主成分分析）、NMF（非负矩阵分解）、t-SNE（流形学习）、k均值聚类、DBSCAN 等多种算法</p>
+<p>机器学习中的每个实体或每一行称为样本or数据点，每一列或者描述实体的属性成为特征。</p>
+<p>构建机器学习解决方案需要注意的点：</p>
+<ul>
+<li>我的问题是什么？已经收集到的数据能够回答这个问题了吗？</li>
+<li>我的问题如何表达成机器学习问题？</li>
+<li>我收集的问题是否足够表达我想解决的问题？</li>
+<li>提取了数据的哪些特征？这些特征是否能实现真正的预测？</li>
+<li>如果预测应用是否成功？</li>
+<li>这个解决方案与商业产品中的其他部分是如何影响的？</li>
+</ul>
+<hr>
+<h3 id="各项工具"><a href="#各项工具" class="headerlink" title="各项工具"></a>各项工具</h3><p>（版本均未指定，默认最新）</p>
+<p>scikit-learn：机器学习库，包含各种算法</p>
+<p>NumPy：科学计算的基础包，包括各种数组，数学函数等，在机器学习中主要用到的是，将NumPy数组格式的数据传给算法</p>
+<p>SciPy：科学计算的函数集合，包含线性代数高级程序、特殊函数函数和统计分布等。在这里主要用到scipy.sparse输出稀疏矩阵（大部分元素为0，非0元素分布无规律）</p>
+<p>Matplotlib：科学绘图库，可生成数据的可视化内容</p>
+<p>Pandas：处理和分析数据的库，基于DataFrame的数据结构，类似一个Excel表格，pandas中包含各种操作这个数据结构的API，还可以提取各种文件格式和数据库中的数据</p>
+<p>mglearn：《Python机器学习基础教程》书本自带库，用于美化绘图</p>
+<hr>
+<h3 id="鸢尾花分类"><a href="#鸢尾花分类" class="headerlink" title="鸢尾花分类"></a>鸢尾花分类</h3><p>数据来源：<strong>内置在sklearn的datasets中</strong>，由load_iris()函数获取</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.datasets <span class="hljs-keyword">import</span> load_iris<br>datas=load_iris()<br></code></pre></td></tr></table></figure>
+
+<p>数据内容（主要）</p>
+<p>data：样本数据，格式为Numpy数组。例如：[5.1 3.5 1.4 0.2]，每行数据代表一朵花的测量数据</p>
+<p>target：测量过的每朵花的品种，同样是一维Numpy数组。对应data中的每一行数据所测得的结果</p>
+<p>target_names：想要预测的花的品种，target中的结果对应着这里的names。是一个字符串数组</p>
+<p>feature_names：对每个特征进行说明，对应data中的各个属性。字符串数组</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203517.png" srcset="/img/loading.gif" lazyload></p>
+<p>DESCR：数据集的简要说明，类似备注</p>
+<p><strong>规划数据：测试集</strong></p>
+<p>注意：不能用训练的数据来测试模型，因为模型会记住训练时用的数据集，所以会100%“预测”结果，这无法评估模型的泛化（预测）能力，应该使用测试数据集，确保这些数据集模型之前从未见过。一般的做法是将原有的数据集拿出25%作为测试用</p>
+<p>train_test_split函数会将数据集打乱后，按照比例分割给X_train, X_test, y_train, y_test四个子集，X_train包含75%，X_test为25%，调用子集的shape()函数可看到数量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">X_train, X_test, y_train, y_test = train_test_split(datas[<span class="hljs-string">&#x27;data&#x27;</span>], datas[<span class="hljs-string">&#x27;target&#x27;</span>], random_state=0)<br></code></pre></td></tr></table></figure>
+
+<p><strong>检查数据：可视化</strong></p>
+<p>Ps:反正没怎么能看懂这些生成的图~在预测测试数据时应该是非必要的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">将需要可视化的数据转成DataFrame<br>iris_dataframe=pd.DataFrame(X_train, columns=datas.feature_names)<br><br>grr = pd.scatter_matrix(iris_dataframe, c=y_train, figsize=(15, 15), marker=<span class="hljs-string">&#x27;o&#x27;</span>,hist_kwds=&#123;<span class="hljs-string">&#x27;bins&#x27;</span>: 20&#125;, s=60, alpha=.8, cmap=mglearn.cm3)<br><span class="hljs-comment">#执行绘制</span><br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<p><strong>训练数据：基于训练构建模型</strong></p>
+<p>k近邻算法：在训练集中寻找与新数据点距离最近的数据点，将找到的数据点的标签赋值给新数据点，达到预测效果，k的含义指训练集与新数据点中最近的任意k个邻居，利用邻居中数量最多的类别做预测</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment">#创建KNeighborsClassifier的实例，算法就封装在实例中，这里只需设置邻居为1即可</span><br>knn=KNeighborsClassifier(n_neighbors=1)<br><span class="hljs-comment">#构建基于训练的模型，fit函数返回的信息无需关注，它只修改了knn对象</span><br>knn.fit(X_train, y_train)<br></code></pre></td></tr></table></figure>
+
+<p><strong>预测数据</strong></p>
+<p>将新的数据传入模型，模型会预测出结果</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua">#将样本数据封装成numpy数组<br>X_new = np.array(<span class="hljs-string">[[5,2.9,1,0.2]]</span>)<br><br>#封装好的数组传给knn的predict函数进行预测<br>prediction=knn.predict(X_new)<br><br>#查看预测结果和结果在target中对应的品种<br><span class="hljs-built_in">print</span>(prediction)<br><span class="hljs-built_in">print</span>(datas[<span class="hljs-string">&#x27;target_names&#x27;</span>][prediction])<br></code></pre></td></tr></table></figure>
+
+<p><strong>评估模型</strong></p>
+<p>预测测试数据集，并和已知的品种进行对比，就可以计算出精度，从而衡量模型的优劣</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#需要用到之前的测试集</span><br>y_pred=knn.predict(X_test)<br><br><span class="hljs-comment">#计算精度1</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;预测比例：&#123;:.2f&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(np.mean(y_pred == y_test)))<br><br><span class="hljs-comment">#计算精度2</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;预测比例：&#123;:.2f&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(knn.score(X_test, y_test)))<br></code></pre></td></tr></table></figure>
+
+<p>问题：数据分测试集这部分没有看懂</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>机器学习实践（一）：鸢尾花分类</div>
+      <div>http://example.com/2022/08/06/机器学习实践（一）：鸢尾花分类/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>周周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月6日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/06/DPKI%E7%9A%84%E5%B4%9B%E8%B5%B7%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E5%AD%97%E8%BA%AB%E4%BB%BD-DID/" title="DPKI的崛起之路——分布式数字身份(DID)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">DPKI的崛起之路——分布式数字身份(DID)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/06/Ubuntu18-04%E4%BD%BF%E7%94%A8%E7%A6%BB%E7%BA%BF%E6%BA%90%E7%A0%81%E5%8C%85%E5%AE%89%E8%A3%85Mysql/" title="Ubuntu18.04使用离线源码包安装Mysql">
+                        <span class="hidden-mobile">Ubuntu18.04使用离线源码包安装Mysql</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"OTIyisgVldQtTwVk1kC3xG75-gzGzoHsz","appKey":"7oB3ndT9XSQ2jtgBMxNhwe9W","path":"window.location.pathname","placeholder":"说点什么吧","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-uv"></span>
+         次
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

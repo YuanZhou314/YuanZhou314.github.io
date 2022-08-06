@@ -1,0 +1,832 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="周周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="HDFS基本概念 是一个文件系统，用于存储文件，通过目录树来定位文件；是分布式的，由多个服务器联合起来实现其功。 适合场景：一次写入，多次读出，不可更改。文件写入后就不需要再改变 HDFS特征 优点  高容错，文件报错多个副本 适合处理大数据，数据规模到GB、TB甚至TP；文件数量多到百万级以上均可处理 可建构廉价机器上  缺点  不适合低延迟数据访问，实时场景不合适 无法高效对大量小文件进行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据课程————HDFS">
+<meta property="og:url" content="http://example.com/2022/08/06/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%AF%BE%E7%A8%8B%E2%80%94%E2%80%94%E2%80%94%E2%80%94HDFS/index.html">
+<meta property="og:site_name" content="周周的地盘">
+<meta property="og:description" content="HDFS基本概念 是一个文件系统，用于存储文件，通过目录树来定位文件；是分布式的，由多个服务器联合起来实现其功。 适合场景：一次写入，多次读出，不可更改。文件写入后就不需要再改变 HDFS特征 优点  高容错，文件报错多个副本 适合处理大数据，数据规模到GB、TB甚至TP；文件数量多到百万级以上均可处理 可建构廉价机器上  缺点  不适合低延迟数据访问，实时场景不合适 无法高效对大量小文件进行">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193437.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193523.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193552.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193610.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193625.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/1560490/202110/1560490-20211008075447431-470533680.png">
+<meta property="article:published_time" content="2022-08-06T11:34:00.000Z">
+<meta property="article:modified_time" content="2022-08-06T11:37:17.602Z">
+<meta property="article:author" content="周周">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193437.png">
+  
+  
+  
+  <title>大数据课程————HDFS - 周周的地盘</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"OTIyisgVldQtTwVk1kC3xG75-gzGzoHsz","app_key":"7oB3ndT9XSQ2jtgBMxNhwe9W","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>周周的地盘</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="大数据课程————HDFS"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-06 19:34" pubdate>
+          2022年8月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">大数据课程————HDFS</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+
+<p><strong>HDFS基本概念</strong></p>
+<p>是一个文件系统，用于存储文件，通过目录树来定位文件；是分布式的，由多个服务器联合起来实现其功。</p>
+<p>适合场景：一次写入，多次读出，不可更改。文件写入后就不需要再改变</p>
+<p><strong>HDFS特征</strong></p>
+<p>优点</p>
+<ul>
+<li>高容错，文件报错多个副本</li>
+<li>适合处理大数据，数据规模到GB、TB甚至TP；文件数量多到百万级以上均可处理</li>
+<li>可建构廉价机器上</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>不适合低延迟数据访问，实时场景不合适</li>
+<li>无法高效对大量小文件进行存储（占用大量NN内存来存储目录和块信息，且小文件的寻址时间超过读取时间，违反了HDFS的设计目标）</li>
+<li>不支持并发写入、文件随机修改，不允许多线程写入</li>
+<li>仅支持数据追加，不允许文件修改 </li>
+</ul>
+<p><strong>组成架构</strong></p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193437.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><p>NameNode：即NN，Master，是整个HDFS的管理者，</p>
+</li>
+<li><ul>
+<li>管理HDFS的NmaeSpeace</li>
+<li>配置副本策略</li>
+<li>管理Block的映射信息</li>
+<li>处理客户端读写请求</li>
+</ul>
+</li>
+<li><p>DataNode：即DN，Slave，NN下达的命令由DN执行实际的操作</p>
+</li>
+<li><ul>
+<li>存储实际的数据块</li>
+<li>执行数据块的读写操作</li>
+</ul>
+</li>
+<li><p>Secondary NameNode：NN的冷备份，当NN挂掉后并不会立刻替换NN</p>
+</li>
+<li><ul>
+<li>辅助NN，定期合并Fsimage和Edits，并推送给NN</li>
+<li>紧急情况下可辅助恢复NN</li>
+</ul>
+</li>
+<li><p>Client：客户端</p>
+</li>
+<li><ul>
+<li>文件切分。</li>
+<li>与NameNode交互，读取文件位置信息</li>
+<li>与DataNode交互，读取或写入数据</li>
+<li>提供命令管理HDFS，如HDFS格式化</li>
+<li>通过命令访问HDFS，如HDFS增删改查</li>
+</ul>
+</li>
+</ul>
+<p><strong>HDFS的块大小</strong></p>
+<p>HDFS是分块存储，块大小通过配置参数dfs.blocksize来规定，默认大小在Hadoop2/3版本是128M，1.x版本是64M。</p>
+<p>HDFS是块大小主要取决于磁盘传输的速率，普通机械硬盘一般80<del>90MB/s，固态200</del>300MB/s</p>
+<ul>
+<li>HDFS块设置太小，会增加寻址时间</li>
+<li>HDFS块设置太大，传输时间会明显大于寻址时间，导致程序处理这块数据会非常慢</li>
+</ul>
+<p>准则：寻址时间为传输时间的1%为最佳状态。</p>
+<p><strong>HDFS的Shell操作</strong></p>
+<ul>
+<li><p>上传</p>
+</li>
+<li><ul>
+<li>-moveFromLocal：从本地剪切粘贴到HDFS</li>
+<li>-copyFromLocal 或 -put：从本地文件系统中拷贝文件到HDFS路径去</li>
+<li>-appendToFile：追加一个文件到已经存在的文件末尾</li>
+</ul>
+</li>
+<li><p>下载、直接操作</p>
+</li>
+<li><ul>
+<li>-copyToLocal 或 -get ：从HDFS 拷贝到本地</li>
+<li>-ls: 显示目录信息</li>
+<li>-cat：显示文件内容</li>
+<li>-chgrp、-chmod、-chown：Linux文件系统中的用法一样，修改文件所属权限</li>
+<li>-mkdir：创建路径</li>
+<li>-cp：从HDFS的一个路径拷贝到HDFS的另一个路径</li>
+<li>-mv：在HDFS目录中移动文件</li>
+<li>-tail：显示一个文件的末尾1kb的数据</li>
+<li>-rm：删除文件或文件夹</li>
+<li>-rm -r：递归删除目录及目录里面内容</li>
+<li>-du -h -s ：统计文件夹的大小信息</li>
+<li>-setrep：设置HDFS中文件的副本数量，最大副本数取决于节点数</li>
+</ul>
+</li>
+</ul>
+<p><strong>HDFS的API操作</strong></p>
+<p>   环境搭建：</p>
+<ul>
+<li>资料包中打开windows依赖，将文件夹拷贝到本地文件，并对其添加环境变量（windows上不需要安装hadoop服务器，只需安装此文件中的winutils即可）</li>
+<li>创建maven项目，添加hadoop等相关依赖</li>
+<li>添加日志打印等级，创建包、类，干代码</li>
+<li>注意：IDEA的jar包依赖问题困扰了很久才解决。猜测是可能本地仓库的问题，下次如果还会出现的话，把仓库删了重新换回原始的.m2试试。还有环境变量一定要注意，如果有参数不对可以优先打桩出来看看是否正确</li>
+</ul>
+<p>都是代码实现，在IDEA中</p>
+<p>HDFS的读写数据流程：面试重点</p>
+<p> <img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193523.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>HDFS读数据流程</strong></p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193552.png" srcset="/img/loading.gif" lazyload></p>
+<p>节点距离计算</p>
+<p>在HDFS写数据的过程中，NN会选择距离上离带上传数据最近的DN接收数据。</p>
+<p>节点距离：两个节点到达最近共同祖先的距离总和。</p>
+<p>解释：将网络分层，数出节点到达共同祖先的另一节点即可</p>
+<p>副本存储节点选择——机架感知</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193610.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>NameNode和DataNode的工作机制</strong></p>
+<p>注意的点：</p>
+<p>secondary NameNode向NameNode checkpoint时的条件：</p>
+<ol>
+<li><p>定时时间到</p>
+</li>
+<li><ul>
+<li>hdfs-default.xml中有所描述，即 dfs.namenode.checkpoint.period字段，默认设置为3600s。即每个小时2NN会向NN请求checkpoint</li>
+</ul>
+</li>
+<li><p>Edits中的数据满了</p>
+</li>
+<li><ul>
+<li>hdfs-default.xml中有所描述，即 dfs.namenode.checkpoint.txns字段，当操作次数到达100w次时，2NN执行checkpoint，检查次数的时间由 dfs.namenode.checkpoint.check.period设置，默认为60s即每分钟检查一次操作次数</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193625.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>Fsimage和Edits解析</strong></p>
+<p>NameNode被格式化之后，将会在$HADOOP_HOME/data/tmp/dfs/name/cirrent目录下产生如下文件</p>
+<p><img src="https://img2020.cnblogs.com/blog/1560490/202110/1560490-20211008075447431-470533680.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>Fsimage：HDFS文件系统元数据的一个永久性的检查点，包含HDFS文件系统的所有目录和文件inode的序列化信息</p>
+<p>Edits：存放HDFS文件系统的所有更新操作，客户端执行的写操作会首先被记录到Edits文件中（追加操作）</p>
+<p>seen_txid：保存的是一个数字，最后一个edits_的数字</p>
+<ul>
+<li>oiv查看Fsimage文件</li>
+</ul>
+<p>语法：hdfs oiv -p 文件类型 -i镜像文件 -o 转换后文件输出路径</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">例子：<br>hadoop103:<span class="hljs-number">8088</span>hdfs oiv -p XML -i fsimage_0000000000000000025 -o <span class="hljs-regexp">/opt/m</span>odule<span class="hljs-regexp">/hadoop-3.1.3/</span>fsimage.xml<br>cat <span class="hljs-regexp">/opt/m</span>odule<span class="hljs-regexp">/hadoop-3.1.3/</span>fsimage.xml<br></code></pre></td></tr></table></figure>
+
+<p>fsimage.xml文件中，记录了HDFS中的文件树，并使用inode来作为元数据中的目录管理节点，与文件一一对应。</p>
+<ul>
+<li>oev查看Edits</li>
+</ul>
+<p>语法：hdfs oev -p 文件类型 -i编辑日志 -o 转换后文件输出路径</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">例子：<br>hdfs oev -p XML -i edits_inprogress_0000000000000000289 -o <span class="hljs-regexp">/opt/</span>software/edits.xml<br>cat <span class="hljs-regexp">/opt/m</span>odule<span class="hljs-regexp">/hadoop-3.1.3/</span>edits.xml<br></code></pre></td></tr></table></figure>
+
+<p>edits.xml中记录了写入追加的操作。</p>
+<p>NN和2NN最大的区别就是2NN没有edits_inprogress这个记录最新操作的文件，因此如果发生数据丢失，最有可能丢失的是最近一次操作，而往期操作被存放在2NN中</p>
+<p><strong>DataNode 的工作机制</strong></p>
+<p>服务及开机之后，DN会主动向NN发送当前节点的所有块信息（活动的块，非死亡块）（注册）</p>
+<p>块信息——数据、数据长度、校验和、时间戳</p>
+<p>在开机之后：</p>
+<ul>
+<li>DN会自己自我检查块信息（每6小时，字段：dfs.datanode.directoryscan.interval）查询之后立即向NN汇报（每6小时，字段dfs.blockreport.intervalMsec）所有块信息</li>
+<li>DN会每3秒发起心跳信号，告诉NN它还存活。若超过10分钟+30秒（timeOut=2<em>dfs.namenode.heartbeat.recheck-interval + 10</em>dfs.heartbeat.interval）NN仍未收到DN的的心跳信号，NN则认为该DN不可用，即不再使用该节点读写数据</li>
+</ul>
+<p><strong>HDFS数据完整性校验</strong></p>
+<p>原始数据封装后在末尾添加CRC校验位，HDFS接收数据后重新CRC计算与传输过来的校验位比较看是否一致</p>
+<p>待续</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>大数据课程————HDFS</div>
+      <div>http://example.com/2022/08/06/大数据课程————HDFS/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>周周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月6日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/06/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%AF%BE%E7%A8%8B%E2%80%94%E2%80%94%E2%80%94%E2%80%94Hadoop/" title="大数据课程————Hadoop">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">大数据课程————Hadoop</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/06/%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%AF%BE%E7%A8%8B%E2%80%94%E2%80%94%E2%80%94%E2%80%94MapReduce/" title="大数据课程————MapReduce">
+                        <span class="hidden-mobile">大数据课程————MapReduce</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"OTIyisgVldQtTwVk1kC3xG75-gzGzoHsz","appKey":"7oB3ndT9XSQ2jtgBMxNhwe9W","path":"window.location.pathname","placeholder":"说点什么吧","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-uv"></span>
+         次
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

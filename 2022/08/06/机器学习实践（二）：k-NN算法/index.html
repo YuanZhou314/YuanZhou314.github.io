@@ -1,0 +1,746 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="周周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="两种监督机器学习问题许多算法都有分类和回归两种形式  分类：预测类别标签 二分类：两个类别之间区分 正类：需要获得的一类 反类：不需要的一类   多分类：两个以上的类别区分   回归：预测一个连续值（浮点数或实数），这个值在给定范围内任意取值，不必精确到某一个基体数值  术语泛化：如果一个模型可以对新数据做出准确预测，那么可以说该模型能够从训练集泛化到测试集，预测精度即为泛化精度 拟合：模型预">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习实践（二）：k-NN算法">
+<meta property="og:url" content="http://example.com/2022/08/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9Ak-NN%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="周周的地盘">
+<meta property="og:description" content="两种监督机器学习问题许多算法都有分类和回归两种形式  分类：预测类别标签 二分类：两个类别之间区分 正类：需要获得的一类 反类：不需要的一类   多分类：两个以上的类别区分   回归：预测一个连续值（浮点数或实数），这个值在给定范围内任意取值，不必精确到某一个基体数值  术语泛化：如果一个模型可以对新数据做出准确预测，那么可以说该模型能够从训练集泛化到测试集，预测精度即为泛化精度 拟合：模型预">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203918.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203937.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203949.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203959.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204015.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204028.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204043.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204056.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204111.png">
+<meta property="article:published_time" content="2022-08-06T12:38:48.000Z">
+<meta property="article:modified_time" content="2022-08-06T12:41:26.968Z">
+<meta property="article:author" content="周周">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203918.png">
+  
+  
+  
+  <title>机器学习实践（二）：k-NN算法 - 周周的地盘</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"OTIyisgVldQtTwVk1kC3xG75-gzGzoHsz","app_key":"7oB3ndT9XSQ2jtgBMxNhwe9W","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>周周的地盘</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="机器学习实践（二）：k-NN算法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-06 20:38" pubdate>
+          2022年8月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">机器学习实践（二）：k-NN算法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+
+<h3 id="两种监督机器学习问题"><a href="#两种监督机器学习问题" class="headerlink" title="两种监督机器学习问题"></a>两种监督机器学习问题</h3><p>许多算法都有分类和回归两种形式</p>
+<ul>
+<li>分类：预测类别标签<ul>
+<li>二分类：两个类别之间区分<ul>
+<li>正类：需要获得的一类</li>
+<li>反类：不需要的一类</li>
+</ul>
+</li>
+<li>多分类：两个以上的类别区分</li>
+</ul>
+</li>
+<li>回归：预测一个连续值（浮点数或实数），这个值在给定范围内任意取值，不必精确到某一个基体数值</li>
+</ul>
+<h3 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h3><p>泛化：如果一个模型可以对新数据做出准确预测，那么可以说该模型能够从训练集<strong>泛化</strong>到测试集，预测精度即为泛化精度</p>
+<p>拟合：模型预测时对训练集的依赖<br><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203918.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>当模型较为复杂、过分关注细节，在训练集中预测表现很好但不能泛化到新数据时，称之为过拟合</li>
+<li>当模型过于简单，无法抓住数据的全部内容和变化，在训练集上表现很差，称之为欠拟合</li>
+</ul>
+<p>总的来说，模型越复杂，在训练数据上的预测结果就越好；但如果模型过于复杂，<br>去过多关注训练集中每个单独的数据点，模型就不能很好地泛化到新数据上。因此，二者之间存在一个最佳位置，可以得到最佳的泛化性能，这就是我们需要的模型<br><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203937.png" srcset="/img/loading.gif" lazyload></p>
+<p>模型复杂度和数据集大小的关系：数据集中包含的数据点的变化范围越大，在不发生过拟合的前提下模型就越复杂（相同或相似的数据点除外）</p>
+<p>其他属于补充：</p>
+<ul>
+<li>特征较少的数据集：低维数据集</li>
+<li>特征较多的数据集：高维数据集（不同维度的数据集中得出的结论可能是不同的，互相不适用）</li>
+<li>特征与特征的乘机也可以作为特征——特征工程：包含导出特征的方法</li>
+</ul>
+<h3 id="k-NN算法——人云亦云"><a href="#k-NN算法——人云亦云" class="headerlink" title="k-NN算法——人云亦云"></a>k-NN算法——人云亦云</h3><p>一种非参、惰性的算法模型：模型本身不会对数据做任何假设，模型结构贴合数据，且训练数据的过程很快</p>
+<h4 id="k近邻分类"><a href="#k近邻分类" class="headerlink" title="k近邻分类"></a>k近邻分类</h4><p><strong>预测过程</strong></p>
+<p>给定一个训练数据集，对新的输入实例，在训练数据集中找到与该实例最邻近的K个实例，这K个实例的多数属于某个类，就把该输入实例分类到这个类中</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203949.png" srcset="/img/loading.gif" lazyload></p>
+<p>图解：单一近邻是k-NN最简单的版本，只需考虑最近距离的点。分类结果就是最近的训练集中的点所在的分类</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203959.png" srcset="/img/loading.gif" lazyload></p>
+<p>图解：任意(k)个邻居时，采用投票法指定标签，即k个邻居中分类比例占多数的为最后的预测结果</p>
+<p><strong>KNeighborsClassifier的决策边界</strong></p>
+<p>如果是二维数据集，可以再xy平面上画出所有可能的预测结果，根据点的所属类别对平面着色，这样就可以查看决策边界</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><span class="hljs-keyword">import</span> mglearn<br><span class="hljs-keyword">from</span> sklearn.neighbors <span class="hljs-keyword">import</span> KNeighborsClassifier<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>X, y = mglearn.datasets.make_forge()<br>X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=<span class="hljs-number">0</span>)<br>clf = KNeighborsClassifier(n_neighbors=<span class="hljs-number">3</span>)<br>clf.fit(X_train, y_train)<br><span class="hljs-built_in">print</span>(clf.predict(X_test))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#123;:.2&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(clf.score(X_test, y_test)))<br>fig, axes=plt.subplots(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">3</span>))<br><span class="hljs-keyword">for</span> n_neighbors, ax <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">9</span>], axes):<br>    clf = KNeighborsClassifier(n_neighbors=n_neighbors).fit(X, y)<br>    mglearn.plots.plot_2d_separator(clf, X, fill=<span class="hljs-literal">True</span>, eps=<span class="hljs-number">0.5</span>, ax=ax, alpha=<span class="hljs-number">.4</span>)<br>    mglearn.discrete_scatter(X[:, <span class="hljs-number">0</span>], X[:, <span class="hljs-number">1</span>], y, ax=ax)<br>    ax.set_title(<span class="hljs-string">&quot;&#123;&#125; neighbor(s)&quot;</span>.<span class="hljs-built_in">format</span>(n_neighbors))<br>    ax.set_xlabel(<span class="hljs-string">&quot;feature 0&quot;</span>)<br>    ax.set_ylabel(<span class="hljs-string">&quot;feature 1&quot;</span>)<br>    axes[<span class="hljs-number">0</span>].legend(loc=<span class="hljs-number">3</span>)<br>p1=plt.scatter(X[y==<span class="hljs-number">0</span>,<span class="hljs-number">0</span>], X[y==<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], color=<span class="hljs-string">&#x27;blue&#x27;</span>)<br>p2=plt.scatter(X[y==<span class="hljs-number">1</span>,<span class="hljs-number">0</span>], X[y==<span class="hljs-number">1</span>, <span class="hljs-number">1</span>], color=<span class="hljs-string">&#x27;green&#x27;</span>)<br>p3=plt.scatter(X[y==<span class="hljs-number">2</span>,<span class="hljs-number">0</span>], X[y==<span class="hljs-number">2</span>, <span class="hljs-number">1</span>], color=<span class="hljs-string">&#x27;red&#x27;</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204015.png" srcset="/img/loading.gif" lazyload></p>
+<p>图解：当单一邻居决策时，边界紧挨着训练数据点，边界很陡峭；当邻居越来越多，边界越平滑。而更平滑的边界对应的模型也就更简单</p>
+<p><strong>模型复杂度和泛化能力的关系</strong></p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> mglearn<br><span class="hljs-title">from</span> sklearn.datasets <span class="hljs-keyword">import</span> load_breast_cancer<br><span class="hljs-title">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><span class="hljs-title">from</span> sklearn.neighbors <span class="hljs-keyword">import</span> KNeighborsClassifier<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><span class="hljs-title">cancer</span> = load_breast_cancer()<br><span class="hljs-type">X_train</span>, <span class="hljs-type">X_test</span>, y_train, y_test = train_test_split(<br><span class="hljs-title">cancer</span>.<span class="hljs-class"><span class="hljs-keyword">data</span>, cancer.target, stratify=cancer.target, random_state=66)</span><br><span class="hljs-title">training_accuracy</span> = []<br><span class="hljs-title">test_accuracy</span> = []<br><span class="hljs-title">neighbors_settings</span> = range(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>)<br><span class="hljs-title">for</span> n_neighbors <span class="hljs-keyword">in</span> neighbors_settings:<br>    clf = <span class="hljs-type">KNeighborsClassifier</span>(n_neighbors=n_neighbors)<br>    clf.fit(<span class="hljs-type">X_train</span>, y_train)<br>    training_accuracy.append(clf.score(<span class="hljs-type">X_train</span>, y_train))<br>    test_accuracy.append(clf.score(<span class="hljs-type">X_test</span>, y_test))<br><br><span class="hljs-title">plt</span>.plot(neighbors_settings, training_accuracy, label=<span class="hljs-string">&quot;training accuracy&quot;</span>)<br><span class="hljs-title">plt</span>.plot(neighbors_settings, test_accuracy, label=<span class="hljs-string">&quot;test accuracy&quot;</span>)<br><span class="hljs-title">plt</span>.ylabel(<span class="hljs-string">&quot;Accuracy&quot;</span>)<br><span class="hljs-title">plt</span>.xlabel(<span class="hljs-string">&quot;n_neighbors&quot;</span>)<br><span class="hljs-title">plt</span>.legend()<br><span class="hljs-title">plt</span>.show()<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204028.png" srcset="/img/loading.gif" lazyload></p>
+<p>图解：</p>
+<ul>
+<li>当单一邻居时，训练集的预测结果十分准确，而测试集精度很低。这边是单一近邻的模型过于复杂</li>
+<li>随着邻居增多，模型变得简单，训练集的精度逐渐下降。当近邻达到10时，模型又过于简单，性能变差</li>
+<li>最佳的性能在中间的某一处，途中大概在6处，测试集与训练集预测结果最为接近</li>
+</ul>
+<p>k近邻回归</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> mglearn<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br>mglearn.plots.plot_knn_regression(n_neighbors=<span class="hljs-number">1</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<p>单个和多个近邻预测结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204043.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204056.png" srcset="/img/loading.gif" lazyload></p>
+<p>sklearn中KNeighborsRegressor类实现回归</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.neighbors <span class="hljs-keyword">import</span> KNeighborsRegressor<br><span class="hljs-keyword">import</span> mglearn<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><br>X, y = mglearn.datasets.make_wave(n_samples=<span class="hljs-number">40</span>)<br><span class="hljs-comment"># 将wave数据集分为训练集和测试集</span><br>X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=<span class="hljs-number">0</span>)<br><span class="hljs-comment"># 模型实例化，并将邻居个数设为3</span><br>reg = KNeighborsRegressor(n_neighbors=<span class="hljs-number">3</span>)<br><span class="hljs-comment"># 利用训练数据和训练目标值来拟合模型</span><br>reg.fit(X_train, y_train)<br><br><span class="hljs-comment"># 预测测试集</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Test set predictions:\n&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(reg.predict(X_test)))<br><br><span class="hljs-comment"># 评估模型，返回的是R2分数</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Test set R^2: &#123;:.2f&#125;&quot;</span>.<span class="hljs-built_in">format</span>(reg.score(X_test, y_test)))<br></code></pre></td></tr></table></figure>
+
+<p>回归模型同样适用score方法来评估模型，返回的是R2分数，R2分数就是决定系数，是回归模型预测的优度度量，位于1~0之间，当为1时就是完美预测，等于0就是常数模型，即只能预测训练集的平均值</p>
+<p><strong>分析KNeighborsRegressor</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.neighbors <span class="hljs-keyword">import</span> KNeighborsRegressor<br><span class="hljs-keyword">import</span> mglearn<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><br>X, y = mglearn.datasets.make_wave(n_samples=<span class="hljs-number">40</span>)<br><span class="hljs-comment"># 将wave数据集分为训练集和测试集</span><br>X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=<span class="hljs-number">0</span>)<br>fig, axes = plt.subplots(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, figsize=(<span class="hljs-number">15</span>, <span class="hljs-number">4</span>))<br><span class="hljs-comment"># 创建1000个数据点，在-3和3之间均匀分布</span><br>line = np.linspace(-<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1000</span>).reshape(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)<br><span class="hljs-keyword">for</span> n_neighbors, ax <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">9</span>], axes):<br>    <span class="hljs-comment"># 利用1个、3个或9个邻居分别进行预测</span><br>    reg = KNeighborsRegressor(n_neighbors=n_neighbors)<br>    reg.fit(X_train, y_train)<br>    ax.plot(line, reg.predict(line))<br>    ax.plot(X_train, y_train, <span class="hljs-string">&#x27;^&#x27;</span>, c=mglearn.cm2(<span class="hljs-number">0</span>), markersize=<span class="hljs-number">8</span>)<br>    ax.plot(X_test, y_test, <span class="hljs-string">&#x27;v&#x27;</span>, c=mglearn.cm2(<span class="hljs-number">1</span>), markersize=<span class="hljs-number">8</span>)<br>    ax.set_title(<span class="hljs-string">&quot;&#123;&#125; neighbor(s)\n train score: &#123;:.2f&#125; test score: &#123;:.2f&#125;&quot;</span>.<span class="hljs-built_in">format</span>(n_neighbors, reg.score(X_train, y_train),<br>    reg.score(X_test, y_test)))<br>    ax.set_xlabel(<span class="hljs-string">&quot;Feature&quot;</span>)<br>    ax.set_ylabel(<span class="hljs-string">&quot;Target&quot;</span>)<br>axes[<span class="hljs-number">0</span>].legend([<span class="hljs-string">&quot;Model predictions&quot;</span>, <span class="hljs-string">&quot;Training data/target&quot;</span>,<span class="hljs-string">&quot;Test data/target&quot;</span>], loc=<span class="hljs-string">&quot;best&quot;</span>)<br><br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204111.png" srcset="/img/loading.gif" lazyload></p>
+<p>图解：单一邻居时，训练集的每个点都对预测结果有显著影响，预测结果的图像经过所有数据点，这样并不稳定；邻居多的时候，预测结果更为平滑，但对训练数据的拟合不好</p>
+<p>总结：kNeighbors分类似的重要参数：邻居个数、数据点之间的距离度量方法。度量方法一般使用 欧式距离 ，即直线距离</p>
+<ul>
+<li>优点：构建模型简单，容易理解，调整参数不多，性能也够</li>
+<li>缺点：当数据量（特征多或样本数大）较大时，预测速度较慢。需要对数据进行预处理，对特殊的数据集效果不太好</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>机器学习实践（二）：k-NN算法</div>
+      <div>http://example.com/2022/08/06/机器学习实践（二）：k-NN算法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>周周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月6日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/06/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/" title="区块链学习大纲">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">区块链学习大纲</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/06/DPKI%E7%9A%84%E5%B4%9B%E8%B5%B7%E4%B9%8B%E8%B7%AF%E2%80%94%E2%80%94%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E5%AD%97%E8%BA%AB%E4%BB%BD-DID/" title="DPKI的崛起之路——分布式数字身份(DID)">
+                        <span class="hidden-mobile">DPKI的崛起之路——分布式数字身份(DID)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"OTIyisgVldQtTwVk1kC3xG75-gzGzoHsz","appKey":"7oB3ndT9XSQ2jtgBMxNhwe9W","path":"window.location.pathname","placeholder":"说点什么吧","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-uv"></span>
+         次
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
