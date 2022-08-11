@@ -1,7 +1,11 @@
 ---
 title: 'IDEA运行测试错误Failed to resolve org.junit.platform:junit-platform-launcher'
 date: 2022-08-06 19:28:37
-tags:
+tags: 
+- Java
+categories: 
+- Dev
+
 ---
 
 <!-- more -->

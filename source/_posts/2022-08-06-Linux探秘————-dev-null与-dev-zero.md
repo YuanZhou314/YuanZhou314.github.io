@@ -1,7 +1,9 @@
 ---
 title: Linux探秘————/dev/null与/dev/zero
 date: 2022-08-06 20:02:15
-tags:
+tags: Linux
+categories: Ops
+index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/Linux.jpg
 ---
 
 <!-- more -->

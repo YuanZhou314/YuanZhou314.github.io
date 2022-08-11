@@ -1,7 +1,9 @@
 ---
 title: Docker进阶-Dockerfile-镜像构建发布
 date: 2022-08-06 20:04:28
-tags:
+tags: Docker
+index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/docke1.png
+categories: Ops
 ---
 
 <!-- more -->

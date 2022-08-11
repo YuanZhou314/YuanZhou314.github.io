@@ -1,7 +1,11 @@
 ---
 title: Linux-Crontab食用指南
 date: 2022-08-06 19:59:18
-tags:
+tags: 
+- Linux
+- Crontab
+categories: Ops
+index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/Linux.jpg
 ---
 
 <!-- more -->

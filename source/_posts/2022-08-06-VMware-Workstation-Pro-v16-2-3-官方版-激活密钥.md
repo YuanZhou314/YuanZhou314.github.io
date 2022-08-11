@@ -1,7 +1,8 @@
 ---
 title: VMware Workstation Pro v16.2.3 官方版+激活密钥
 date: 2022-08-06 20:26:03
-tags:
+tags: VM
+categories: Dev
 ---
 
 <!-- more -->

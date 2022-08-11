@@ -13,7 +13,7 @@ timezone: 'Asia/Shanghai'
 
 # URL 
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://zhouyinglin.cn
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -105,11 +105,16 @@ deploy:
   type: git
   repo: https://github.com/YuanZhou314/yuanzhou314.github.io.git
   branch: main
-  token: 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
+  token: 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
 
 leancloud_counter_security:
   enable_sync: true
-  app_id: OTIyisgVldQtTwVk1kC3xG75-gzGzoHsz
-  app_key: 7oB3ndT9XSQ2jtgBMxNhwe9W
+  app_id: DOFm5rBfeIBUxN13vhiXlS4S-MdYXbMMI
+  app_key: FJKOtk5nWqYzGoXXiFAvHIDC
   username: # Will be asked while deploying if is left blank
   password: # Recommmended to be left blank. Will be asked while deploying if is left blank
+# 站点地图
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml

@@ -1,7 +1,9 @@
 ---
 title: Layer单选框 radio问题总结
 date: 2022-08-06 18:35:07
-tags:
+tags: JavaScript
+categories:  Dev
+index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/layUI.png
 ---
 
 <!-- more -->

@@ -1,7 +1,13 @@
 ---
 title: Eclipse配置Maven的本地仓库和阿里云镜像
 date: 2022-08-06 18:43:32
-tags:
+tags: 
+- Java
+- Maven
+
+categories: 
+- Dev
+index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/maven.jpg
 ---
 
 <!-- more -->

@@ -1,7 +1,8 @@
 ---
 title: Windows dos下Mysql中文乱码
 date: 2022-08-06 17:35:12
-tags:
+tags: MySQL
+categories: Dev
 ---
 在dos客户端输出窗口中查询表中的数据,还有项目部署到服务器上时前台的页面，中文数据都显示成乱码…………
 

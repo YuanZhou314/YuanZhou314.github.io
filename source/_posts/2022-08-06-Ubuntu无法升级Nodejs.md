@@ -1,7 +1,8 @@
 ---
 title: Ubuntu无法升级Nodejs
 date: 2022-08-06 20:52:03
-tags:
+tags: NodeJS
+categories: Dev
 ---
 
 <!-- more -->

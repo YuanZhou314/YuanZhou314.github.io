@@ -2,6 +2,10 @@
 title: 大数据课程————MapReduce
 date: 2022-08-06 19:29:46
 tags:
+- Big Data
+- Hadoop
+categories: Study
+index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/BigData.jpg
 ---
 
 <!-- more -->

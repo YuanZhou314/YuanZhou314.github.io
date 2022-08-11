@@ -3,7 +3,9 @@ title: >-
   MySQL Workbench 连接数据库提示SSL connection error: SSL is required but the server
   doesn't support it
 date: 2022-08-06 20:17:03
-tags:
+tags: MySQL
+categories: Dev
+index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/MySQL.png
 ---
 
 <!-- more -->

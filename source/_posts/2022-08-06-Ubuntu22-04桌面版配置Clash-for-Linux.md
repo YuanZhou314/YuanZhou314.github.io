@@ -1,7 +1,12 @@
 ---
 title: Ubuntu22.04桌面版配置Clash for Linux
 date: 2022-08-06 20:44:20
-tags:
+tags: 
+- Ubuntu
+- Linux
+- VPN
+categories: Study
+index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/Linux.jpg
 ---
 
 <!-- more -->

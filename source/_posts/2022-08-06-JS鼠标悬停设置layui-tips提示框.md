@@ -1,7 +1,10 @@
 ---
 title: JS鼠标悬停设置layui tips提示框
 date: 2022-08-06 18:40:40
-tags:
+tags: JavaScript
+categories: Dev
+index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/layUI.png
+
 ---
 
 <!-- more -->

@@ -1,7 +1,10 @@
 ---
 title: 原地TP——SSH连接本机windows子系统的Ubantu
 date: 2022-08-06 20:22:49
-tags:
+tags: 
+- Ubuntu
+- Linux
+categories: Dev
 ---
 
 <!-- more -->
