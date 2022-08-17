@@ -16,7 +16,7 @@ Python、MySQL、LeetCode、机器学习、Linux、Big Data、Java、BlockChain�
 Maven、数据结构、JVM、JavaScript、Crontab、Shell、Ubuntu、VPN、NodeJS、String、VM、Hadoop、
 Life、树莓派、Git、Hexo
  -->
-<img src="https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/image-20220809223028790.png"/>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220809223028790.png"/>
 
 环境为Ubuntu，nodeJS版本12.0.0，npm版本6.9.0，hexo版本5.4.2
 
@@ -40,7 +40,7 @@ aplayer
 hexo-tag-aplayer
 ```
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/image-20220809224238027.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220809224238027.png)
 
 
 
@@ -48,7 +48,7 @@ hexo-tag-aplayer
 
 （**注意后面我所说的source文件夹都指的是主题目录下的**）
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/image-20220809224433775.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220809224433775.png)
 
 
 
@@ -137,7 +137,7 @@ LRC文件即歌词文件，格式一般是时间轴+歌词
 
 把在source下创建一个lrcs目录，将所有的LRC文件丢进去
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/image-20220809231716929.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220809231716929.png)
 
 歌词放在这个位置，部署后通过域名+/lrcs/xxx.lrc就可以访问到了，同时amusic.js文件配置好对应位置即可
 
@@ -175,7 +175,7 @@ const ap = new APlayer({
 
 由于fluid主题中留有footer的位置，这里也是一些小组件首选放置之地
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/image-20220809230845547.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220809230845547.png)
 
 ```html
 <link rel="stylesheet" href="/dist/APlayer.min.css">
@@ -188,4 +188,4 @@ const ap = new APlayer({
 
 
 
-![image-20220809233230726](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/image-20220809233230726.png)
+![image-20220809233230726](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220809233230726.png)

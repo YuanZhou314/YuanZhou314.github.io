@@ -32,7 +32,7 @@ https://blog.csdn.net/weixin_33991418/article/details/93206334
 
 重启ubuntu，启动时按esc或shift，进入引导项
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203018.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806203018.png)
 
  
 
@@ -40,7 +40,7 @@ https://blog.csdn.net/weixin_33991418/article/details/93206334
 
 选择第二个，再选择第二个 recrovery mode，开机程序走完之后，进入Recovery Menu页面 ，选择root，回车
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203031.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806203031.png)
 
  
 
@@ -48,7 +48,7 @@ https://blog.csdn.net/weixin_33991418/article/details/93206334
 
 回车后下面提示再按回车，再按一下，就能看到熟悉的 root@user ~#了
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203041.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806203041.png)
 
  
 
@@ -60,7 +60,7 @@ https://blog.csdn.net/weixin_33991418/article/details/93206334
 pkexec chown root:root /etc/sudoers /etc/sudoers.d -R
 ```
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203125.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806203125.png)
 
  
 
@@ -68,7 +68,7 @@ pkexec chown root:root /etc/sudoers /etc/sudoers.d -R
 
 回车，然后重启Ubuntu即可正常修改root密码了
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806203149.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806203149.png)
 
  
 

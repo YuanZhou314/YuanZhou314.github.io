@@ -5,7 +5,7 @@ tags:
 - Linux
 - Crontab
 categories: Ops
-index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/Linux.jpg
+index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/Linux.jpg
 ---
 
 <!-- more -->
@@ -14,7 +14,7 @@ index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/L
 
 我们先来看看wiki的说法：
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806195943.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806195943.png)
 
  
 
@@ -24,7 +24,7 @@ index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/L
 
 再来看看官方（http://crontab.org/）对crontab的定义：
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806195954.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806195954.png)
 
  
 

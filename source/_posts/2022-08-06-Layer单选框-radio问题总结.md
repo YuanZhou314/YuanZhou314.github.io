@@ -3,7 +3,7 @@ title: Layer单选框 radio问题总结
 date: 2022-08-06 18:35:07
 tags: JavaScript
 categories:  Dev
-index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/layUI.png
+index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/layUI.png
 ---
 
 <!-- more -->

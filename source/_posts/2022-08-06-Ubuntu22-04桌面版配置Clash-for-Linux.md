@@ -6,7 +6,7 @@ tags:
 - Linux
 - VPN
 categories: Study
-index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/Linux.jpg
+index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/Linux.jpg
 ---
 
 <!-- more -->
@@ -21,7 +21,7 @@ index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/L
 
 注意系统架构，我这里下的是clash-freebsd-amd64-v3-v1.11.0.gz
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204455.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806204455.png)
 
  
 
@@ -45,7 +45,7 @@ clash
 
 如此稍等一会儿，重新打开一个终端，查看一下~/.config/clash这个目录是否生成了下面3个文件。这其中config.yaml和Country.db是我们需要配置的。这三个文件如果已经生成，则上面的clash进程可以暂时关掉了。后面配置好了yaml再重新启动
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204526.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806204526.png)
 
  
 
@@ -72,7 +72,7 @@ FATA[0000] Parse config error: yaml: unmarshal errors: line 1: cannot unmarshal 
 
 目前我所了解的情况是，通过在线订阅转换工具，例如下面的 http://www.flyjiang.cn/ 来转换Clash类型的订阅地址。
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204540.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806204540.png)
 
  
 
@@ -84,7 +84,7 @@ FATA[0000] Parse config error: yaml: unmarshal errors: line 1: cannot unmarshal 
 
 把这个短链拿到上面步骤去，生成yaml配置文件。（不用复制网页内容，直接用wget下载即可）
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204559.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806204559.png)
 
  
 
@@ -104,6 +104,6 @@ clash -d ~/.config/clash/
 
 注意：clash进程和网络代理同时开启，才可以正常上网。如果clash开启但网络代理关闭，则无法使用，甚至连正常的网络都没法打开，这一点蛮坑的，所以最好设置clash开机自启，不然会比较麻烦
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806204633.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806204633.png)
 
 但是开启自启我搞了半天也没搞好，查看clash的状态的时候也是没有启动、失败的，有经验的朋友也可以留言告知一下，不胜感激

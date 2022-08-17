@@ -17,6 +17,6 @@ user ALL=(root) NOPASSWORD:yum *
 
 上面语句的作用是：
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806202154.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806202154.png)
 
  

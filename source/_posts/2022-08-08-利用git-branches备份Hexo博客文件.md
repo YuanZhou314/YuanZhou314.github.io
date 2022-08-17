@@ -6,7 +6,7 @@ tags:
   - Git
   - Hexo
 date: 2022-08-08 17:41:00
-index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/git.png
+index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/git.png
 ---
 输入hexo d之后，Hexo根据源文件来渲染所有的页面，并部署到github上。编辑、维护文章和配置时都在本地操作，因此本地文件就显得尤为重要。一旦本地文件丢失，就无法再对博客进行维护。所以对源文件的备份是必须的。
 <!-- more -->
@@ -15,11 +15,11 @@ index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/g
 
 源文件:
 
-![image-20220808104848697](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/image-20220808104848697.png)
+![image-20220808104848697](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220808104848697.png)
 
 编译部署后：
 
-![image-20220808104848697](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/image-20220808104643046.png)
+![image-20220808104848697](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220808104643046.png)
 
 这些编译后的文件在源文件也放了一份，它们自动生成在.deploy_git中。部署的时候就把这些文件上传到github，其他类似主题文件、配置文件都不会上传。因此解决的办法就是讲源文件做备份，上传到仓库的另一个分支。
 
@@ -27,7 +27,7 @@ index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/g
 
 首先在github上新建一个HexoBackup分支，新建分支后，HexoBackup分支中的内容与main相同。
 
-![image-20220808105424792](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/image-20220808105424792.png)
+![image-20220808105424792](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220808105424792.png)
 
 在本地（我的是windows）目录打开git bash，将HexoBackup分支clone下来
 
@@ -37,7 +37,7 @@ index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/g
 
 然后将除了`.git`文件夹以外的所有文件都删掉，然后将之前写的博客源文件全部复制过来，并且删掉`.deploy_git`文件夹。
 
-![image-20220808110138075](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/image-20220808105424792.png)
+![image-20220808110138075](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220808105424792.png)
 
 **忽略文件**
 
@@ -66,6 +66,6 @@ git commit -m "add branch"  # 提交到本地仓库
 git push origin HexoBackup  # 提交到远程仓库的HexoBackup分支
 ```
 
-![image-20220808111508247](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/image-20220808111508247.png)
+![image-20220808111508247](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220808111508247.png)
 
 

@@ -10,7 +10,7 @@ categories: Dev
 
 其他乱七八糟配置就不扯了，先上项目结构图
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806184436.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806184436.png)
 
  
 

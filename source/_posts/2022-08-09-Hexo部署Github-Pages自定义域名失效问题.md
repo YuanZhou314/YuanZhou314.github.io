@@ -5,7 +5,7 @@ categories:
 tags:
   - Hexo
 date: 2022-08-09 10:26:39
-index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/download.png
+index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/download.png
 ---
 
 <!-- more -->

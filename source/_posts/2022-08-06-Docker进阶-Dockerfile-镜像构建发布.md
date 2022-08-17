@@ -2,7 +2,7 @@
 title: Docker进阶-Dockerfile-镜像构建发布
 date: 2022-08-06 20:04:28
 tags: Docker
-index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/docke1.png
+index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/docke1.png
 categories: Ops
 ---
 
@@ -64,7 +64,7 @@ CMD ["/bin/bash"]
 - 指令是大写字母
 - 执行顺序从上至下，每个指令都会创建提交一个新的镜像层
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806200522.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806200522.png)
 
  
 
@@ -80,7 +80,7 @@ Docker容器：镜像运行起来提供服务器
 
 ## Docker指令
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806200538.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806200538.png)
 
  
 
@@ -109,13 +109,13 @@ ENV            #构建的时候设置环境变量
 
 当一个镜像使用CMD指定容器启动后运行的命令时，只有最后一个会真实生效，并且当从外部启动时新增了额外的命令时，CMD的命令会被替代。如：构建镜像时使用了CMD ['ls', '-a']，启动容器后会自动打印当前目录列表，但如果启动时额外加了参数 -l，这时的-l并不会和ls -a合并成新命令，而是替代ls -a作为新命令。但-l并非完整命令，所以当容器启动时就会报错
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806200655.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806200655.png)
 
  
 
  当一个镜像使用ENTRYPOINT指定容器启动后运行的命令时，在外部启动容器时可以追加命令，拿上面的例子说，如果构建时使用ENTRYPOINT ['ls', '-a']，外部启动时额外加了-l，则这里的-l会和镜像自带的ls -a 合并成完整命令ls -al 
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806200708.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806200708.png)
 
  
 
@@ -125,7 +125,7 @@ ENV            #构建的时候设置环境变量
 
 手动配置镜像，一般从scratch 开始（dockerhub中99%的镜像从这个基础镜像过来的）。手动配置之前，可以用**docker history**命令查看其他镜像的构建步骤：
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806200810.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806200810.png)
 
  
 
@@ -372,7 +372,7 @@ ffb151e67a73: Pushing [=====================>                             ]  26.
 
 创建命名空间
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806201034.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806201034.png)
 
  
 
@@ -380,7 +380,7 @@ ffb151e67a73: Pushing [=====================>                             ]  26.
 
 创建容器镜像
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806201046.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806201046.png)
 
  
 
@@ -392,13 +392,13 @@ ffb151e67a73: Pushing [=====================>                             ]  26.
 
 仓库地址：
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806201101.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806201101.png)
 
  
 
 官方push流程
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806201113.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806201113.png)
 
  
 
@@ -453,7 +453,7 @@ v1: digest: sha256:a08b7a9ba95cb7cc624975f07d2fb4b686f316d1ae319cc557f2ce71291c7
 
 在阿里云的版本页面可以看到push 上来的镜像
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806201143.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806201143.png)
 
  
 
@@ -461,7 +461,7 @@ v1: digest: sha256:a08b7a9ba95cb7cc624975f07d2fb4b686f316d1ae319cc557f2ce71291c7
 
 -------------------------------------------Docker入门结束--------------------------------------------
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806201204.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806201204.png)
 
  
 

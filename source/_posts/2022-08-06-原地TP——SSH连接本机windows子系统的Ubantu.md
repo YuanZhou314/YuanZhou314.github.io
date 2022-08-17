@@ -11,7 +11,7 @@ categories: Dev
 
 首先需要开启一个子系统，先在控制面板-程序-启用或关闭windows功能，勾选适用于Linux的Windows子系统
 
- ![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806202319.png)
+ ![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806202319.png)
 
  
 
@@ -108,7 +108,7 @@ sudo service ssh --full-restart
 
 打开win键搜索任务计划程序，右上角点击创建基本任务
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806202348.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806202348.png)
 
  
 
@@ -132,7 +132,7 @@ sudo service ssh --full-restart
 
 然后点击完成。然后在计划库中找到刚才新增的任务，右键选择属性
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806202402.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806202402.png)
 
  
 
@@ -142,7 +142,7 @@ sudo service ssh --full-restart
 
 这里一定要选择“不管用户是否登录都要运行”，这才是真正的开机自启。它默认是选择“只在用户登录时运行”，看起来没有什么区别，但每个人电脑环境不太一样，看别人只会开机时弹出黑色窗口，但我的电脑却压根不会自启。因此最好是选择到这个位置。
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806202412.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806202412.png)
 
  
 

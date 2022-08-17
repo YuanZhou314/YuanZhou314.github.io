@@ -5,7 +5,7 @@ tags:
 - Big Data
 - Hadoop
 categories: Study
-index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/BigData.jpg
+index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/BigData.jpg
 ---
 
 <!-- more -->
@@ -101,7 +101,7 @@ MapReduce框架
 
 - 基本流程：
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193038.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806193038.png)
 
  
 
@@ -131,9 +131,9 @@ TextInputFormat是默认的FileInputFormat实现类。按行读取每条记录�
 6. 溢写程序启动后，对80M内容的Key做排序，排序是MapReduce模型默认的行为，是对序列化的字节做的排序
 7. 合并溢写文件，每次溢写都会在磁盘生成一个临时文件，多Mapper输出结果大，则会有多次溢写，有多个临时文件，整个数据处理结束后，开始对磁盘中的临时文件做Merge合并成一个文件，并写入磁盘，并为这个we你按提供一个索引文件，记录每个reduce对应数据的偏移
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193053.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806193053.png)
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193115.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806193115.png)
 
  
 
@@ -141,11 +141,11 @@ TextInputFormat是默认的FileInputFormat实现类。按行读取每条记录�
 
  
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193129.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806193129.png)
 
  
 
- ![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193155.png)
+ ![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806193155.png)
 
  
 
@@ -162,9 +162,9 @@ Shuffle大致分为四个步骤：
 3. combiner规约：溢写前、合并小文件等都会用到的操作，可选
 4. 分组：小文件合并成一个大文件后，对其进行归并排序、分组
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193205.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806193205.png)
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806193218.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806193218.png)
 
  
 

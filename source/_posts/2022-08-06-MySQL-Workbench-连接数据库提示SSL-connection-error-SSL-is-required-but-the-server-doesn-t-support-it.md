@@ -5,14 +5,14 @@ title: >-
 date: 2022-08-06 20:17:03
 tags: MySQL
 categories: Dev
-index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/MySQL.png
+index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/MySQL.png
 ---
 
 <!-- more -->
 
 mysql下载器下载了mysql worbench后无法连接远端数据库，提示SSL之类的错误
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806201747.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806201747.png)
 
  
 
@@ -22,7 +22,7 @@ mysql下载器下载了mysql worbench后无法连接远端数据库，提示SSL�
 
  
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806201800.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806201800.png)
 
  
 

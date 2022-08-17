@@ -105,7 +105,7 @@ public class MybatisTestCase {
 }
 ```
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806185712.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806185712.png)
 
  
 

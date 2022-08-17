@@ -5,7 +5,7 @@ tags:
 - Java
 - 数据结构
 categories: Dev
-index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/Arraylist.png
+index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/Arraylist.png
 ---
 ArrayList是Java集合常用的数据结构之一，继承自AbstractList，实现了List，RandomAccess、Cloneable、Serializable等一系列接口…………
 <!-- more -->
@@ -18,52 +18,52 @@ ArrayList是Java集合常用的数据结构之一，继承自AbstractList，实�
 
 ArrayList的底层是由数组实现
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180401.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180401.png)
 
 默认size的初始大小为10：
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180551.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180551.png)
 
 ArrayList定义了两个类常量数组：EMPTY_ELEMENTDATA（EE）和DEFAULTCAPACITY_EMPTY_ELEMENTDATA（DEE）
 
 注释：EE，用于ArrayList空实例的共享空数组实例
 
 DEE，用于默认大小空实例的共享空数组实例，将EE和DEE区分开，以便在添加第一个元素时知道要增加多少
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180614.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180614.png)
 
 三个构造函数，包括一个无参构造和两个有参构造：
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180648.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180648.png)
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180701.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180701.png)
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180711.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180711.png)
 
  
 
 注：无参构造创建的实例是DEFAULTCAPACITY_EMPTY_ELEMENTDATA，有参构造创建的实例是EMPTY_ELEMENTDATA
 
 然后是add( )方法：
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180744.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180744.png)
 
 当第一次调用add(E e)方法时，判断是不是无参构造方法创建的对象，如果是，则将DEFAULT_CAPACITY作为ArrayLiat的容量，此时minCapacity = 1
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180802.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180802.png)
 
 还有其他add方法例如：
 
  addAll( Collection<? extends E> c )
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180818.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180818.png)
 add( int index, E element )
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180851.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180851.png)
 
 等等....这些方法中都包含ensureCapacitylnternal( int Capacity )方法，确保无参构造在创建实例并添加第一个元素时，最小的容量是默认大小10。
 
 　　而有参构造创建空实例后，在add( E e )方法添加元素扩容情况是这样的：
 
 **新容量为旧容量的1.5倍**
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180911.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180911.png)
 
 
 在Java7中，ArrayList的构造方法只有EMPTY_ELEMENTDATA即EE, 而Java8中DEE代替了EE，但是原来的EE还存在，只是作用改变了：
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180926.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180926.png)
 
  
 
@@ -74,10 +74,10 @@ add( int index, E element )
  以无参构造为例：
 
 首先无参构造初以默认大小来始化内部数组
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806180949.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180949.png)
 
 然后是扩容，使用add( )方法
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806181005.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806181005.png)
 
 ensureCapacityInternal方法中的size代表执行添加前的元素个数，通过现有的元素个数数组的容量进行对比，若需要扩容则扩容。
 
@@ -86,10 +86,10 @@ ensureCapacityInternal方法中的size代表执行添加前的元素个数，通
  
 
 扩容条件：若数组的长度eleentData的长度小于做小需要的容量minCapacity，就需要扩容
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806181021.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806181021.png)
 
 扩容逻辑：
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806181021.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806181021.png)
 
 注：
 
@@ -102,7 +102,7 @@ ensureCapacityInternal方法中的size代表执行添加前的元素个数，通
  
 
 **ArrayList的remove( int index )方法**
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806181055.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806181055.png)
 
 当我们调用remove( int index )时，首先调用rangrCheck( ) 方法检查index是否合法，再判断要删除的元素是否位于数组的最后一个位置。
 

@@ -3,7 +3,7 @@ title: Python import的本质
 date: 2022-08-06 20:27:25
 tags: Python
 categories: Dev
-index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/Python.jpg
+index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/Python.jpg
 
 ---
 ModuleNotFoundError: No module named 是经常能碰到的事情.这篇文章详细解释了Python导入模块的细节…………

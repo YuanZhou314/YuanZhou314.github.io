@@ -7,14 +7,14 @@ tags:
 
 categories: 
 - Dev
-index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/maven.jpg
+index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/maven.jpg
 ---
 
 <!-- more -->
 
 先确定自己电脑是否安装了Maven和安装位置，具体查询方法直接win+R键打开运行窗口，输入cmd打开dos窗口，再输入mvn -v即可查询安装的位置
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806184146.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806184146.png)
 
  
 
@@ -31,25 +31,25 @@ index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/old/m
 </mirror> 
 ```
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806184214.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806184214.png)
 
  
 
  然后找到<localRepository>标签，将里面的内容修改为你Maven本地仓库即可（可以创建一个新的文件夹），这里我没有修改。
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806184231.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806184231.png)
 
  
 
  然后是修改Eclipse内的配置Window-Preferences 这里修改是的是maven的地址
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806184242.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806184242.png)
 
  
 
  然后修改刚才修改过的setting.xml和本地仓库，我的本地仓库由于没有修改，依旧是.m2文件夹
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806184259.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806184259.png)
 
  
 

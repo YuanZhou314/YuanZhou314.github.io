@@ -103,9 +103,9 @@ theme: fluid
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://github.com/YuanZhou314/yuanzhou314.github.io.git
+  repo: git@github.com:YuanZhou314/yuanzhou314.github.io.git
   branch: main
-  token: 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
+  token: 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
 
 leancloud_counter_security:
   enable_sync: true

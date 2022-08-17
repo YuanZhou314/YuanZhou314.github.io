@@ -53,7 +53,7 @@ node默认的安装目录与使用管理工具n安装的目录不一致
 
 而 n 默认安装路径是 /usr/local，需要通过通过N_PREFIX变量来修改 n 的默认node安装路径。
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/20220806205242.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806205242.png)
 
  
 

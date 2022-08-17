@@ -5,7 +5,7 @@ categories:
 tags:
   - Hexo
 date: 2022-08-10 17:50:24
-index_img: https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/download-16601251561781.png
+index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/download-16601251561781.png
 ---
 在Fluid官网可以看到。Fluid默认支持了很多评论系统，国内用的比较多的还是Waline，但我并没有发现在Fluid主体下添加Walined之类的文章，所以这里也记录一下操作路程以及踩的一些坑
 <!-- more -->
@@ -17,7 +17,7 @@ Life、树莓派、Git、Hexo
  -->
 
 
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/image-20220810164855153.png)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220810164855153.png)
 
 我之前是用valine的，但无奈太难用了，也不支持通知，所以就换成Waline。其实[Waline官方文档](https://waline.js.org/guide/get-started.html)搭建配置写的十分详细，本文档也是参考Waline来写的，只是添加了我本人的补充，请耐心观看。
 
@@ -29,11 +29,11 @@ Life、树莓派、Git、Hexo
 
 2. 点击左上角 [创建应用](https://console.leancloud.app/apps) 并起一个你喜欢的名字 (请选择免费的开发版):
 
-   ![创建应用](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/leancloud-1.f7a36b20.png)
+   ![创建应用](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/leancloud-1.f7a36b20.png)
 
 3. 进入应用，选择左下角的 `设置` > `应用 Key`。你可以看到你的 `APP ID`,`APP Key` 和 `Master Key`。请记录它们，以便后续使用。
 
-   ![ID 和 Key](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/leancloud-2.4cc69975.png)
+   ![ID 和 Key](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/leancloud-2.4cc69975.png)
 
 
 
@@ -105,10 +105,10 @@ custom_html: '<div id="waline"></div>
   </script>'
 ```
 
-![image-20220810174800349](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/image-20220810174800349.png)
+![image-20220810174800349](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220810174800349.png)
 
 再配置comment插件的地方
-![](https://raw.githubusercontent.com/YuanZhou314/PicRepo/main/imgs/1f49de838b4445488b81a4801c20952.jpg)
+![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/1f49de838b4445488b81a4801c20952.jpg)
 
 到这里就OK了，部署之后就可以正常运行了。然后访问 `<serverURL>/ui/register` 进行注册，就可以管理评论了。（部署到github后需要等几分钟再查看）
 
