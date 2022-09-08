@@ -375,6 +375,7 @@ navbar:
                  { key: "category", link: "/categories/", icon: "iconfont icon-category-fill" },
                  { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
                  ]}
+    - { key: "百宝箱", link: "/boxs/", icon: "iconfont icon-switch-fill" }
     - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
     - { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
 
@@ -857,7 +858,6 @@ waline:
   serverURL: 'comment-dzjwqlugb-yuanzhou314.vercel.app'
   path: window.location.pathname
   meta: ['nick', 'mail', 'link']
-  requiredMeta: ['nick']
   login: 'enable'
   lang: 'zh-CN'
   emoji: ['https://unpkg.com/@waline/emojis@1.0.1/tieba','https://unpkg.com/@waline/emojis@1.0.1/bilibili']
@@ -1060,6 +1060,30 @@ links:
       link: "https://github.com/fluid-dev/hexo-theme-fluid",
       avatar: "/img/favicon.png"
     }
+    - {
+      title: "W4J1e",
+      intro: "个人博客",
+      link: "https://hin.cool/",
+      avatar: "https://cdn.hin.cool/pic/my/dl3.png"
+    }
+    - {
+      title: "CangLan",
+      intro: "明眸如初",
+      link: "https://www.zywvvd.com",
+      avatar: "https://www.zywvvd.com/image/avatar.png"
+    }
+    - {
+      title: "poetry",
+      intro: "程序员poetry的博客",
+      link: "https://blog.poetries.top/",
+      avatar: "https://avatars.githubusercontent.com/u/16177576?v=4"
+    }
+    - {
+      title: "SeaYJ",
+      intro: "眰恦",
+      link: "https://seayj.cn/",
+      avatar: "https://seayj.cn/medias/logo.png"
+    }
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image
@@ -1080,6 +1104,9 @@ links:
     # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis | giscus
     type: disqus
 
+ #显示天气
+weather:
+        enable: ture
 
 #---------------------------
 # 以下是配置 JS CSS 等静态资源的 URL 前缀，可以自定义成 CDN 地址，
