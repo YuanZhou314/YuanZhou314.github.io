@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site 标题/副标题/描述/关键字/语言/时区
-title: 周周的地盘
+title: 小周的地盘
 subtitle: ''
 description: ''
 keywords:
-author: 周周
+author: 小周
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
@@ -28,7 +28,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+#skip_render: "boxs/*"
 
 # Writing
 new_post_name: :year-:month-:day-:title.md # File name of new posts
@@ -118,17 +118,14 @@ sitemap:
   path: sitemap.xml
 baidusitemap:
   path: baidusitemap.xml
- #安全，文章加密
-encrypt:
-        abstract: 这里有东西被加密了，需要输入密码查看哦。 
-        message: 您好, 这里需要密码. 
-        tags: 
-                - {name: tagName, password: 密码A} 
-                - {name: tagName, password: 密码B} 
-        wrong_pass_message: 抱歉, 这个密码看着不太对, 请再试试. 
-        wrong_hash_message: 好吧，你发现Bug了，(╯°□°）╯︵ ┻━┻
 
-#显示天气
-#weather:
-#  enable: true
-
+# Security
+encrypt: # hexo-blog-encrypt
+  abstract: 这里是私人页面, 请输入口令查看.
+  message:  请输入圆周率第724位~730位查看!
+  silent: true
+  tags: 
+  - {name: tagName, password: 密码A}
+  - {name: tagName, password: 密码B}
+  wrong_pass_message: 密码不对哦,你确定是这几位数吗?
+  wrong_hash_message: 抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.

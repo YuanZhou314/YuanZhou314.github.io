@@ -249,7 +249,7 @@ custom_html: '<div id="waline"></div>
     };
     Waline.init({
       el: "#waline",
-      serverURL: "https://comment-dzjwqlugb-yuanzhou314.vercel.app/",
+      serverURL: "https://comment.zhouyinglin.cn/",
       locale,
     });
   </script>'
@@ -378,6 +378,7 @@ navbar:
     - { key: "百宝箱", link: "/boxs/", icon: "iconfont icon-switch-fill" }
     - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
     - { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
+    - { key: "wormhole", link: "https://www.foreverblog.cn/go.html", icon: "iconfont icon-rss" }
 
 # 搜索功能，基于 hexo-generator-search 插件，若已安装其他搜索插件请关闭此功能，以避免生成多余的索引文件
 # Search feature, based on hexo-generator-search. If you have installed other search plugins, please disable this feature to avoid generating redundant index files
@@ -855,7 +856,7 @@ valine:
 # Derived from Valine, with self-hosted service and new features
 # See: https://waline.js.org/
 waline:
-  serverURL: 'comment-dzjwqlugb-yuanzhou314.vercel.app'
+  serverURL: 'https://comment.zhouyinglin.cn/'
   path: window.location.pathname
   meta: ['nick', 'mail', 'link']
   login: 'enable'
@@ -1015,6 +1016,41 @@ page:
   banner_mask_alpha: 0.3
 
 
+#---------------------------
+# 百宝箱
+# boxs
+#---------------------------
+boxs:
+  enable: true
+  banner_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/default.png
+  banner_img_height: 60
+  banner_mask_alpha: 0.3
+  subtitle: 百宝箱
+  items: 
+    - {
+      title: "随机密码",
+      intro: "随机密码生成器",
+      link: "https://zhouyinglin.cn/boxs/PasswordBuilder.html",
+      avatar: "https://f.bmcx.com/file/suijimimashengcheng/i_c_o.png?v=20031915"
+    }
+    - {
+      title: "圈小猫",
+      intro: "吾爱破解404页小游戏",
+      link: "https://zhouyinglin.cn/boxs/CatchTheCat.html",
+      avatar: "https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220919162835341.png"
+    }
+    - {
+      title: "离线恐龙",
+      intro: "Chrome内置离线游戏",
+      link: "https://zhouyinglin.cn/boxs/ChromeOfflineGame.html",
+      avatar: "https://chromedino.com/img/color_image.png"
+    }
+    - {
+      title: "超级马里奥",
+      intro: "超级马里奥在线",
+      link: "https://supermario-game.com/",
+      avatar: "https://supermario-game.com/media-files/mobile/mario_red_wallpaper.jpg"
+    }
 
 #---------------------------
 # 404页
@@ -1083,6 +1119,36 @@ links:
       intro: "眰恦",
       link: "https://seayj.cn/",
       avatar: "https://seayj.cn/medias/logo.png"
+    }
+    - {
+      title: "mflyyou",
+      intro: "张攀钦",
+      link: "http://mflyyou.cn/",
+      avatar: "http://oss.mflyyou.cn/source/medias/avatars/my-pic.jpeg"
+    }
+    - {
+      title: "AnFrank's Blog",
+      intro: "AnFrank",
+      link: "https://enfangzhong.github.io/",
+      avatar: "https://enfangzhong.github.io/images/avatar.jpg"
+    }
+    - {
+      title: "洪卫の博客",
+      intro: "洪卫",
+      link: "https://sunhwee.com/",
+      avatar: "https://sunhwee.com/medias/avatars/hwsun.jpg"
+    }
+    - {
+      title: "Chor's blog",
+      intro: "Chor",
+      link: "https://chorer.github.io/",
+      avatar: "https://myblog-1258623898.cos.ap-chengdu.myqcloud.com/personal/person-1.jpg"
+    }
+    - {
+      title: "十年之约",
+      intro: "博客集中地",
+      link: "https://www.foreverblog.cn/",
+      avatar: "https://xyears.cn/view/img/logo.png"
     }
 
   # 当成员头像加载失败时，替换为指定图片
