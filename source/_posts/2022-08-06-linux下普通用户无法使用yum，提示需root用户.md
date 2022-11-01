@@ -1,8 +1,9 @@
 ---
 title: linux下普通用户无法使用yum，提示需root用户
-date: 2022-08-06 20:21:32
 tags: Linux
 categories: Ops
+abbrlink: '91527534'
+date: 2022-08-06 20:21:32
 ---
 
 <!-- more -->

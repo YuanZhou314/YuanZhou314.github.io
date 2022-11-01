@@ -5,8 +5,9 @@ categories:
 tags:
   - Hexo
   - Life
+abbrlink: 4783f4d1
 date: 2022-08-09 23:38:52
-index_img: 
+index_img:
 ---
 Aplayer是一个非常好看、简洁而优雅的音乐播放器，配置起来也不繁杂，但是其中也有一些坑，这里记录一下。
 <!-- more -->

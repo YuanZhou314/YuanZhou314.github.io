@@ -5,8 +5,9 @@ categories:
 tags:
   - Git
   - Hexo
+index_img: 'https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/git.png'
+abbrlink: 202ef432
 date: 2022-08-08 17:41:00
-index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/git.png
 ---
 输入hexo d之后，Hexo根据源文件来渲染所有的页面，并部署到github上。编辑、维护文章和配置时都在本地操作，因此本地文件就显得尤为重要。一旦本地文件丢失，就无法再对博客进行维护。所以对源文件的备份是必须的。
 <!-- more -->
@@ -32,7 +33,7 @@ index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/git.png
 在本地（我的是windows）目录打开git bash，将HexoBackup分支clone下来
 
 ```bash
- git clone -b HexoBackup https://github.com/xxx…….github.io
+ git clone -b HexoBackup https://github.com/YuanZhou314/yuanzhou314.github.io.git
 ```
 
 然后将除了`.git`文件夹以外的所有文件都删掉，然后将之前写的博客源文件全部复制过来，并且删掉`.deploy_git`文件夹。

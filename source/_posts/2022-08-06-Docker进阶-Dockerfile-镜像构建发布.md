@@ -1,9 +1,10 @@
 ---
 title: Docker进阶-Dockerfile-镜像构建发布
-date: 2022-08-06 20:04:28
 tags: Docker
-index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/docke1.png
+index_img: 'https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/docke1.png'
 categories: Ops
+abbrlink: 9af169b7
+date: 2022-08-06 20:04:28
 ---
 
 <!-- more -->

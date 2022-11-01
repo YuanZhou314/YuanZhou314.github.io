@@ -1,8 +1,9 @@
 ---
 title: unix、dos、mac文本格式区分
-date: 2022-08-06 20:03:35
 tags: String
 categories: Study
+abbrlink: c3c62a73
+date: 2022-08-06 20:03:35
 ---
 
 <!-- more -->

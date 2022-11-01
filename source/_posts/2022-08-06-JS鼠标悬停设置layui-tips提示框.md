@@ -1,10 +1,10 @@
 ---
 title: JS鼠标悬停设置layui tips提示框
-date: 2022-08-06 18:40:40
 tags: JavaScript
 categories: Dev
-index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/layUI.png
-
+index_img: 'https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/layUI.png'
+abbrlink: 871dcbde
+date: 2022-08-06 18:40:40
 ---
 
 <!-- more -->

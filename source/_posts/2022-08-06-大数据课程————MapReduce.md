@@ -1,11 +1,12 @@
 ---
 title: 大数据课程————MapReduce
-date: 2022-08-06 19:29:46
 tags:
-- Big Data
-- Hadoop
+  - Big Data
+  - Hadoop
 categories: Study
-index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/BigData.jpg
+index_img: 'https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/BigData.jpg'
+abbrlink: e8243c3
+date: 2022-08-06 19:29:46
 ---
 
 <!-- more -->

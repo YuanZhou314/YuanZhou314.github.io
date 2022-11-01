@@ -1,9 +1,10 @@
 ---
 title: Linux探秘————/dev/null与/dev/zero
-date: 2022-08-06 20:02:15
 tags: Linux
 categories: Ops
-index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/Linux.jpg
+index_img: 'https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/Linux.jpg'
+abbrlink: a71cbc0a
+date: 2022-08-06 20:02:15
 ---
 
 <!-- more -->

@@ -1,9 +1,10 @@
 ---
 title: Ajax返回error可能出现的问题
-date: 2022-08-06 18:12:36
 tags: Web
 categories: Dev
-index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/ajax.jpg
+index_img: 'https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/ajax.jpg'
+abbrlink: 474a0c40
+date: 2022-08-06 18:12:36
 ---
 AJAX常用于浏览器与Web服务器之间的异步通信,使得网页无需从服务端获取过量的数据
 <!-- more -->

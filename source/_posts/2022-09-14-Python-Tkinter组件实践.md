@@ -4,8 +4,9 @@ categories:
   - Dev
 tags:
   - Python
+index_img: 'https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/tkinter.png'
+abbrlink: cb8c1ce4
 date: 2022-09-14 12:34:33
-index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/tkinter.png
 ---
 
 <!-- more -->

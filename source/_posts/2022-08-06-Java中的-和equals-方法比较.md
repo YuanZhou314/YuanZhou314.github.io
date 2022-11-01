@@ -1,12 +1,11 @@
 ---
 title: Java中的==和equals( )方法比较
+tags:
+  - Java
+categories:
+  - Dev
+abbrlink: 6c898a14
 date: 2022-08-06 17:47:28
-tags: 
-- Java
-
-categories: 
-- Dev
-
 ---
 在Java中，equals和==都是用于检测两个字符串是否相等，返回类型也都是boolean值，但是二者内部处理却不一样…………
 <!-- more -->

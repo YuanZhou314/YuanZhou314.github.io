@@ -1,8 +1,9 @@
 ---
 title: SpringBoot配置mybatis使用的两种方式
-date: 2022-08-06 18:55:55
 tags: Java
 categories: Dev
+abbrlink: '1054e826'
+date: 2022-08-06 18:55:55
 ---
 
 <!-- more -->

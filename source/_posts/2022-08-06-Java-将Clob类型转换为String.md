@@ -1,8 +1,9 @@
 ---
 title: Java 将Clob类型转换为String
-date: 2022-08-06 18:19:10
 tags: MySQL
 categories: Dev
+abbrlink: 83c6036c
+date: 2022-08-06 18:19:10
 ---
 
 <!-- more -->

@@ -1,9 +1,9 @@
 ---
 title: Springboot 测试类没有找到bean注入
-date: 2022-08-06 18:44:56
 tags: Java
 categories: Dev
-
+abbrlink: a76de31a
+date: 2022-08-06 18:44:56
 ---
 
 <!-- more -->

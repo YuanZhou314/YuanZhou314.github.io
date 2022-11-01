@@ -5,8 +5,9 @@ categories:
 tags:
   - Linux
   - Shell
+index_img: 'https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/sed.jpg'
+abbrlink: d4d4abf9
 date: 2022-08-11 17:39:23
-index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/sed.jpg
 ---
 sed+grep配合使用即可实现。当然还有更多方式，例如find搭配perl、awk等，自己摸索吧
 <!-- more -->

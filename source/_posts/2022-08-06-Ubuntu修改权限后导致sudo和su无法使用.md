@@ -1,11 +1,11 @@
 ---
 title: Ubuntu修改权限后导致sudo和su无法使用
-date: 2022-08-06 20:29:41
-tags: 
-- Ubuntu
-- Linux
+tags:
+  - Ubuntu
+  - Linux
 categories: Ops
-
+abbrlink: 70b5976f
+date: 2022-08-06 20:29:41
 ---
 
 <!-- more -->

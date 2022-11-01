@@ -4,8 +4,10 @@ categories:
   - Dev
 tags:
   - Hexo
+index_img: >-
+  https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/download-16601251561781.png
+abbrlink: d4c8af85
 date: 2022-08-10 17:50:24
-index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/download-16601251561781.png
 ---
 在Fluid官网可以看到。Fluid默认支持了很多评论系统，国内用的比较多的还是Waline，但我并没有发现在Fluid主体下添加Walined之类的文章，所以这里也记录一下操作路程以及踩的一些坑
 <!-- more -->

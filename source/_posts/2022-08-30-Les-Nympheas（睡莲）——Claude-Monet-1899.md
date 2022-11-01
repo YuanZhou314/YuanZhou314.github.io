@@ -5,8 +5,10 @@ categories:
 tags:
   - 美学
   - 绘画
+index_img: >-
+  https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/%E7%9D%A1%E8%8E%B2%E6%B1%A0-%E8%8E%AB%E5%A5%88.jpg
+abbrlink: c5d7a32d
 date: 2022-08-30 17:39:40
-index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/%E7%9D%A1%E8%8E%B2%E6%B1%A0-%E8%8E%AB%E5%A5%88.jpg
 ---
 
 <!-- more -->

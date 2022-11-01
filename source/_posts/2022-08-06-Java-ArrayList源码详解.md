@@ -1,11 +1,12 @@
 ---
 title: Java ArrayList源码详解
-date: 2022-08-06 18:02:50
-tags: 
-- Java
-- 数据结构
+tags:
+  - Java
+  - 数据结构
 categories: Dev
-index_img: https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/Arraylist.png
+index_img: 'https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/Arraylist.png'
+abbrlink: d09355de
+date: 2022-08-06 18:02:50
 ---
 ArrayList是Java集合常用的数据结构之一，继承自AbstractList，实现了List，RandomAccess、Cloneable、Serializable等一系列接口…………
 <!-- more -->

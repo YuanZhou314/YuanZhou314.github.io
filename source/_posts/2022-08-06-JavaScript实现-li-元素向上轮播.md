@@ -1,11 +1,11 @@
 ---
 title: JavaScript实现<li>元素向上轮播
-date: 2022-08-06 18:17:36
 tags:
-- JavaScript
-categories: 
-- Dev
-
+  - JavaScript
+categories:
+  - Dev
+abbrlink: 78f84231
+date: 2022-08-06 18:17:36
 ---
 
 <!-- more -->
