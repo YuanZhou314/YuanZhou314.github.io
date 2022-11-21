@@ -6,6 +6,7 @@ comment: true
 ---
 欢迎来到我的小站，感谢关注。本站基于[Hexo框架](https://hexo.io/zh-cn/)+[Fluid主题](https://github.com/fluid-dev/hexo-theme-fluid)搭建；评论系统使用的是[Vercel](https://vercel.com)部署的[Waline](https://waline.js.org)(后变更为独立部署)；左下音乐插件是[Aplayer](https://aplayer.js.org/#/)；服务器、COS图床和域名均购于[腾讯云](https://cloud.tencent.com/)。如果感兴趣的小伙伴可以自己尝试搭建一下。
 
+PS:近期Waline受限，无法评论，有缘再会啦(更新正常)
 
 #### 关于站长
 
