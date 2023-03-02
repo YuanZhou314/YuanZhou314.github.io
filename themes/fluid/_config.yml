@@ -856,7 +856,7 @@ valine:
 # Derived from Valine, with self-hosted service and new features
 # See: https://waline.js.org/
 waline:
-  serverURL: 'https://comment.zhouyinglin.cn/'
+  serverURL: 'https://waline-comment-blond.vercel.app/'
   path: window.location.pathname
   meta: ['nick', 'mail', 'link']
   login: 'enable'

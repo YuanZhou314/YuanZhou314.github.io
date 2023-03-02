@@ -31,7 +31,7 @@ date: 2022-08-08 17:41:00
 
 ![](https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220808105424792.png)
 
-在本地（我的是windows）目录打开git bash，将新建的HexoBackup分支clone下来
+在本地（我的是windows）目录打开git bash，将新建的HexoBackup分支clone到本地，然后将除了`.git`文件夹以外的所有文件都删掉。
 
 ```
  git clone -b HexoBackup https://github.com/YuanZhou314/yuanzhou314.github.io.git
@@ -39,7 +39,7 @@ date: 2022-08-08 17:41:00
 
 **数据下载**
 
-将当前目录下除了`.git`文件夹以外的所有文件都删掉，然后将服务器上需要备份的数据压缩打包，用FTP软件下载到windows本地。
+然后将服务器上需要备份的数据压缩打包，用FTP软件下载到windows本地。
 
 ```
 tar -zcvf blog.tar.gz --exclude=blog/node_modules blog

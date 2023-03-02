@@ -7,6 +7,7 @@ tags:
 abbrlink: dc95e40f
 date: 2022-12-18 16:13:15
 index_img:
+math: true
 ---
 
 <!-- more -->
@@ -19,7 +20,6 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
  -->
 先提供一个LaTex公式编辑器在线网站，更加快捷：https://latexlive.com/home
 
-补充:写完才发现原生hexo不支持latex公式,不过md支持就可以了,就是hexo上不太美观,下次有心情再研究下怎么渲染公式吧
 
 ## 添加公式的方法
 
