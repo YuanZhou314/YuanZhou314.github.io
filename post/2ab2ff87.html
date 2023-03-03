@@ -1,0 +1,969 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/zz.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="小周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前置概念：   磁盘预读：内存跟磁盘在发生数据交互的时候，一般情况下有一个最小的逻辑单元，即&quot;页&quot;&#x2F;“datapage”，页一般由操作系统决定是多大，一般是4k或8k。而进行数据交互的时候，可以取页的整数倍来读取。如innodb引擎每次读取数据都是16k   B+树    每个关键字对应一棵子树 每个结点关键字个数n的范围是[m&#x2F;2]&lt;&#x3D;n&lt;&#x3D;m 叶节点是包含信息">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySql索引基本原理">
+<meta property="og:url" content="https://zhouyinglin.cn/post/2ab2ff87.html">
+<meta property="og:site_name" content="小周的院子">
+<meta property="og:description" content="前置概念：   磁盘预读：内存跟磁盘在发生数据交互的时候，一般情况下有一个最小的逻辑单元，即&quot;页&quot;&#x2F;“datapage”，页一般由操作系统决定是多大，一般是4k或8k。而进行数据交互的时候，可以取页的整数倍来读取。如innodb引擎每次读取数据都是16k   B+树    每个关键字对应一棵子树 每个结点关键字个数n的范围是[m&#x2F;2]&lt;&#x3D;n&lt;&#x3D;m 叶节点是包含信息">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/MySQL.png">
+<meta property="article:published_time" content="2022-08-06T11:24:15.000Z">
+<meta property="article:modified_time" content="2022-12-15T02:32:52.000Z">
+<meta property="article:author" content="小周">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/MySQL.png">
+  
+  
+  
+    <meta name="baidu-site-verification" content="code-bMcoZ9RRBp" />
+  
+  <title>MySql索引基本原理 - 小周的院子</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhouyinglin.cn","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DOFm5rBfeIBUxN13vhiXlS4S-MdYXbMMI","app_key":"FJKOtk5nWqYzGoXXiFAvHIDC","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小周的院子</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+    
+    <!-- 添加zyl天气 -->
+
+<div id="tp-weather-widget"></div>
+    <script>
+        (function (a, h, g, f, e, d, c, b) { b = function () { d = h.createElement(g); c = h.getElementsByTagName(g)[0]; d.src = e; d.charset = "utf-8"; d.async = 1; c.parentNode.insertBefore(d, c) }; a["SeniverseWeatherWidgetObject"] = f; a[f] || (a[f] = function () { (a[f].q = a[f].q || []).push(arguments) }); a[f].l = +new Date(); if (a.attachEvent) { a.attachEvent("onload", b) } else { a.addEventListener("load", b, false) } }(window, document, "script", "SeniverseWeatherWidget", "//cdn.sencdn.com/widget2/static/js/bundle.js?t=" + parseInt((new Date().getTime() / 100000000).toString(), 10)));
+        window.SeniverseWeatherWidget('show', {
+            flavor: "slim",
+            location: "WKJ1F428HH2F",
+            geolocation: true,
+            language: "zh-Hans",
+            unit: "c",
+            theme: "auto",
+            token: "5089001e-aa9f-41c5-862d-e416aabf81f7",
+            hover: "enabled",
+            container: "tp-weather-widget"
+        })
+    </script>
+
+
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文章
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    归档
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/boxs/">
+                <i class="iconfont icon-switch-fill"></i>
+                百宝箱
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.foreverblog.cn/go.html">
+                <i class="iconfont icon-rss"></i>
+                虫洞
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202212161220542.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="MySql索引基本原理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-06 19:24" pubdate>
+          2022年8月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySql索引基本原理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<p>前置概念：</p>
+<ul>
+<li>
+<p>磁盘预读：内存跟磁盘在发生数据交互的时候，一般情况下有一个最小的逻辑单元，即&quot;页&quot;/“datapage”，页一般由操作系统决定是多大，一般是4k或8k。而进行数据交互的时候，可以取页的整数倍来读取。如innodb引擎每次读取数据都是16k</p>
+</li>
+<li>
+<p>B+树</p>
+</li>
+<li>
+<ul>
+<li>每个关键字对应一棵子树</li>
+<li>每个结点关键字个数n的范围是[m/2]&lt;=n&lt;=m</li>
+<li>叶节点是包含信息的，其他所有非叶节点仅起到索引作用，包含了对应子树的最大关键字和指向该子树的指针</li>
+</ul>
+</li>
+<li>
+<p>mysql底层构造</p>
+</li>
+<li>
+<ul>
+<li>
+<p>client层——&gt;server层——&gt;存储引擎</p>
+</li>
+<li>
+<ul>
+<li>client向server层发送SQL语句，server层通过连接器接收</li>
+<li>server层的分析器对SQL语句进行语法分析，转变为AST抽象语法树</li>
+<li>server层使用优化器对语句中具体查询的数据</li>
+<li>执行器与存储引擎进行IO交互，获取查询结果</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806192503.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>从头遍历</p>
+<p>没有索引的查找方法：从第一页记录开始查，遍历所有数据页，相当耗费资源和时间。</p>
+<p>简单的索引方案——一层目录</p>
+<ol>
+<li>假设一个数据页的数据已经存储满了，这时再添加一条记录。如果该记录的主键比现有记录最大的主键小：首先必然会产生页的分裂，其次，现有的最大主键用户记录会移到新的数据页，而新插入的用户记录则插入到原来已满的数据页。页的分裂始终保持——下一个数据页中用户主键值必须大于上一页的用户记录主键值。</li>
+<li>再假设上述页分裂操作多次执行，导致数据页数量非常多。此时应该给这些数据页按照主键大小整合目录页。目录页只包含1.数据页上最小的用户主键值。2.数据页的页号。如此，只要将目录页放在连续的内存中，即可快速通过主键查找到用户记录</li>
+</ol>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806192532.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>InnoDB的索引——B+树</p>
+<p>前置信息：由于面向的是真实的数据库用户，因此数据量有时会非常大。一个page只有16KB,别说用户记录了，就连目录项都有可能装不完。并且，如果数据页做了增删操作，那么所有目录项也需要做调整，这样非常浪费空间和资源。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806192546.png" srcset="/img/loading.gif" lazyload alt></p>
+<ol>
+<li>因此，MySQL将数据页和目录页做一个复用，由于目录项和用户记录比较相似，因此让他们使用同一个页模版——0x45BF，即FIL_PAGE_INDEX。只使用一条属性record_type将二者区分。除此之外，页的结构、记录分组(槽)等等都是一样的（另外，page Header中信息自然时不一样的）。</li>
+<li>如果数据量实在太多，一张16KB全部装着目录项的page也不够用，则产生页分裂，使用多个目录页来装；数据量巨大，连目录页都太多了，查找起来很慢，则会产生更高层次的目录，将目录页存储起来！这种结构，就称之为B+树。最顶端的节点是根节点，中间的节点为非叶子节点，而最底端的节点为叶子节点。所有的用户记录均被存储在叶子节点中。</li>
+</ol>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806192601.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806192618.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>像这种层级往上叠的结构，每增加一个层级，所能容纳的数据成几何倍数增长，一个数据页已经可以存放很多条用户记录了，一层数据页则可以更多，一层目录页更是数量爆炸！</p>
+<p>一般情况下，我们用到B+树的层级不会超过4层，这样只需查找3个目录页+1个数据页+页内二分查找，即可快速定位记录。不要小看这4层的B+树，4层B+ 树已经可以存放千万级数据了，如果还想放再多数据，只能扩容或者加表</p>
+<p>聚簇索引，具有以下两个特点的B+树称为聚簇索引：</p>
+<ol>
+<li>
+<p>使用记录主键的大小进行记录和页的排序</p>
+</li>
+<li>
+<ul>
+<li>页内记录按住键大小排序形成单向链表结构，页内划成分组，每组最大记录的偏移量记录在槽中，放在页目录中。</li>
+<li>数据页按页中用户记录的主键大小排序成双向链表（用于对主键的范围查找和分页查找）</li>
+<li>目录页（存放目录项的数据页）分为不同层级，同层目录页根据页中住键大小顺序排列形成双向链表</li>
+</ul>
+</li>
+<li>
+<p>叶子节点存储的是完整的用户记录，即不是二级索引，而是记录中存储了所有列的值（包括隐藏列）</p>
+</li>
+</ol>
+<p>只要我们的记录拥有以下特点，那么我们就不需要手动显式地使用INDEX创建索引，MYSQL会自动创建聚簇索引，在InnoDB中，聚簇索引就是数据的存储方式，即：索引即数据，数据即索引。</p>
+<p>而从存储方面来说，索引和数据本身是存储在磁盘的，查询数据时会优先将索引加载在内存。索引存储的信息就是存放目录项的数据页。在一个磁盘块中，指针大小是固定的，因此当选择某字段当索引时，应该尽量减小键值所占用的空间，这样可以指数级地增加用于存放数据的空间</p>
+<p>Mysql中的索引使用的是B+树，而为什么不使用其他数据结构做呢？</p>
+<ul>
+<li>
+<p>hash：哈希冲突；范围查询时需逐个遍历；对于内存空间要求高。mysql中也存在hash，即memory引擎使用的是hash索引，innodb支持自适应hash，即系统根据数据类型判断使用哪种存储结构</p>
+</li>
+<li>
+<p>树</p>
+</li>
+<li>
+<ul>
+<li>
+<p>二叉树：无序</p>
+</li>
+<li>
+<p>BST：二叉查找树：插入时有序，左子树小于子树根节点，右子树大于子树根节点</p>
+</li>
+<li>
+<ul>
+<li>插入连续值时，可能退化成链表，时间复杂度提高</li>
+</ul>
+</li>
+<li>
+<p>AVL：平衡二叉查找树：有序，为了解决连续值退化的问题，通过左旋或右旋让树平衡，保持最短子树和最长子树高度不能超过1</p>
+</li>
+<li>
+<ul>
+<li>通过插入性能的损失来弥补查询性能的提升</li>
+</ul>
+</li>
+<li>
+<p>红黑树：在旋转平衡的基础上，添加变色的行为。保持最长子树不超过最短子树的2倍即可。使得查询性能和插入性能近似一致</p>
+</li>
+</ul>
+</li>
+<li>
+<p>随着数据的插入，树的深度越来越深，意味着IO次数越多，影响数据读取的效率，因此使用开始使用树</p>
+</li>
+<li>
+<ul>
+<li>
+<p>B树：多岔树，有序，非叶子节点也是存储着数据的，占用空间较大</p>
+</li>
+<li>
+<p>B+树：多岔树，有序，只有叶子节点存储着数据，非叶子节点存储的是指针</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>索引的创建跟存储引擎是挂钩的，存储引擎表示不同数据在磁盘的不同组织形式</p>
+<p>在windows上的Mysql中，文件都是以不同后缀并成对的形式存在。数据结构用的都是B+树，而存储形式又有所不同</p>
+<ul>
+<li>
+<p>.frm：存放表结构</p>
+</li>
+<li>
+<p>.MYD和.MYI：引擎是myisam，非聚簇索引。</p>
+</li>
+<li>
+<ul>
+<li>.MYD：数据，Data</li>
+<li>.MYI：索引，index</li>
+</ul>
+</li>
+<li>
+<p>.ibd：存储数据+索引，即引擎是innodb。只能有一个聚簇索引，可以有很多非聚簇索引。在插入数据时，必须要包含一个索引的key值。这个索引的key值可以是主键；若没有主键也可以是唯一键；若唯一键也没有，就会有一个自生成的6字节的rowid（对用户不可见）</p>
+</li>
+</ul>
+<p>——聚簇索引与非聚簇索引——二者取决于数据和索引是否是放在一起的</p>
+<p>——mysql表中有且至少有一个索引</p>
+<p>索引覆盖：若查询结果包含普通索引列和聚簇索引列，则会直接返回，不需要从聚簇索引查询任何数据，这就叫索引覆盖</p>
+<ul>
+<li>注：面试常问——在设置主键时是否需要自增？答：在满足业务需求的情况下，能自增尽量自增。因为自增是累加的，对前面的数据没有影响，无需做插入操作，也就无需做磁盘块/页分裂的操作（即：页分裂。当在一页数据里插入数据时，如果数据满了就需要分裂成多个页或者磁盘块来存储，父亲节点也可能需要分裂，而分裂会影响效率）。追加的效率较高</li>
+</ul>
+<p>最左匹配：组合索引的匹配规则。若一张表里有两列是组合索引，那么使用时必须先匹配左侧的列，再匹配右侧列</p>
+<ul>
+<li>select * fro table where name=? and age=? 允许使用</li>
+<li>select * fro table where name=? 允许使用</li>
+<li>select * fro table where age=? 无法使用</li>
+<li>select * fro table where age=? and name=? 允许使用</li>
+<li>只要查询条件是组合索引，那么就算顺序相反，mysql内部的优化器会调整对应的顺序</li>
+</ul>
+<p>索引下推（mysql5.7后特性）：使用组合索引时，直接根据组合索引在存储引擎中获取对应数据，无需在server层二次过滤（5.7之前），减少了server层于存储引擎的交互，减少了IO量，提高了效率</p>
+<p>聚簇索引的条件必须是以主键大小排序，即这个B+树的查询条件为主键。而如果以其他列作为查询条件，我们需要换一个树！重新新建一颗B+树，这个树采用其他列作为查询条件，而它的叶子节点并不会存放完整的用户记录，只会存放该列所在记录的主键。它的目录项也不会使用主键+页号，而是使用其他列+页号搭配。</p>
+<p>二级索引的查询过程：</p>
+<p>由于其他列可能没有唯一约束，所以匹配到的可能有多个主键（记录）。因此当查询到第一条记录后，我们通过查询到的主键到聚簇索引中查找完整的用户记录。这个过程（通过携带主键回到聚簇索引里查询完整的用户记录的过程）就叫回表。然后再返回到刚才的B+树，回到刚才定位到的那条用户记录，顺着记录所形成的单向链表找到其他符合条件的记录，然后再回表，再继续找……</p>
+<p>回表的定义：根据普通索引查询到聚簇索引的key值之后，再根据key值在聚簇索引中获取所有行记录。回表走了2次B+树</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806192641.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>由于这种以非主键列的大小为排序规则而建立的树需要执行回表才能查到完整用户记录，所以这种B+树也称为二级索引，这颗B+树是为其他列所建立的索引，该列是索引列。索引列记录的不是完整的用户信息。</p>
+<p>数据存储在磁盘，一般情况况下查询速率慢，都是卡在IO上。因此需要在满足需求的前提下提高IO效率：</p>
+<ul>
+<li>减少IO次数</li>
+<li>减少IO量</li>
+</ul>
+<p>profiling——mysql自带的性能分析工具（单条语句）</p>
+<ul>
+<li>开启profiling：set profiling=1;</li>
+<li>执行SQL语句，然后show profiles; 即可查出上条语句执行的实际时间</li>
+<li>想要查询profiles结果表中具体某条语句的所有状态耗费时长，或者想查询某条语句的某个状态的使用情况，根据可使用profiles表语句对应的Query_ID来查询，语法如下：show profile for [type] query [id]。但这种查询方式在未来版本可能会被其他工具所取代</li>
+</ul>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806192704.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806192742.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>进阶–Myysql性能模式：</p>
+<p>5.7默认开启性能模式，在初始数据库中，会有一个performance_schema库，里面有众多相关表，而通过show variables like ‘performance_schema’;查询性能模式的开启状态。而修改状态无法直接update，需要更改mysql配置文件my.cnf</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ov41137Vo?p=10">https://www.bilibili.com/video/BV1ov41137Vo?p=10</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Ops/" class="category-chain-item">Ops</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/MySQL/">#MySQL</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MySql索引基本原理</div>
+      <div>https://zhouyinglin.cn/post/2ab2ff87.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>小周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月6日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月15日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/d601b667.html" title="IDEA运行测试错误Failed to resolve org.junit.platform:junit-platform-launcher">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">IDEA运行测试错误Failed to resolve org.junit.platform:junit-platform-launcher</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/1054e826.html" title="SpringBoot配置mybatis使用的两种方式">
+                        <span class="hidden-mobile">SpringBoot配置mybatis使用的两种方式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-comment-blond.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"login":"enable","lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.0.1/tieba","https://unpkg.com/@waline/emojis@1.0.1/bilibili"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+     
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <div id="waline"></div> <script> const locale = { placeholder: "说点什么吧！(填写邮箱可在被回复时收到邮件提醒)", }; Waline.init({ el: "#waline", serverURL: "https://comment.zhouyinglin.cn/", locale, }); </script>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <link rel="stylesheet" href="/dist/APlayer.min.css"> <div id="aplayer"></div> <script type="text/javascript" src="/dist/APlayer.min.js"></script> <script type="text/javascript" src="/js/amusic.js"></script>  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div class="statistics" style="font-size: 0.85rem"> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #3c4858;"  id="hitokoto"></span></a> <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script></div>  <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-pv"></span>
+         次 
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总用户量 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+<div class="statistics">
+ 	<a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+ </div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

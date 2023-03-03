@@ -1,0 +1,850 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/zz.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="小周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="ArrayList是Java集合常用的数据结构之一，继承自AbstractList，实现了List，RandomAccess、Cloneable、Serializable等一系列接口…………">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java ArrayList源码详解">
+<meta property="og:url" content="https://zhouyinglin.cn/post/d09355de.html">
+<meta property="og:site_name" content="小周的院子">
+<meta property="og:description" content="ArrayList是Java集合常用的数据结构之一，继承自AbstractList，实现了List，RandomAccess、Cloneable、Serializable等一系列接口…………">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/Arraylist.png">
+<meta property="article:published_time" content="2022-08-06T10:02:50.000Z">
+<meta property="article:modified_time" content="2022-12-15T02:32:52.000Z">
+<meta property="article:author" content="小周">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/Arraylist.png">
+  
+  
+  
+    <meta name="baidu-site-verification" content="code-bMcoZ9RRBp" />
+  
+  <title>Java ArrayList源码详解 - 小周的院子</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhouyinglin.cn","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DOFm5rBfeIBUxN13vhiXlS4S-MdYXbMMI","app_key":"FJKOtk5nWqYzGoXXiFAvHIDC","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小周的院子</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+    
+    <!-- 添加zyl天气 -->
+
+<div id="tp-weather-widget"></div>
+    <script>
+        (function (a, h, g, f, e, d, c, b) { b = function () { d = h.createElement(g); c = h.getElementsByTagName(g)[0]; d.src = e; d.charset = "utf-8"; d.async = 1; c.parentNode.insertBefore(d, c) }; a["SeniverseWeatherWidgetObject"] = f; a[f] || (a[f] = function () { (a[f].q = a[f].q || []).push(arguments) }); a[f].l = +new Date(); if (a.attachEvent) { a.attachEvent("onload", b) } else { a.addEventListener("load", b, false) } }(window, document, "script", "SeniverseWeatherWidget", "//cdn.sencdn.com/widget2/static/js/bundle.js?t=" + parseInt((new Date().getTime() / 100000000).toString(), 10)));
+        window.SeniverseWeatherWidget('show', {
+            flavor: "slim",
+            location: "WKJ1F428HH2F",
+            geolocation: true,
+            language: "zh-Hans",
+            unit: "c",
+            theme: "auto",
+            token: "5089001e-aa9f-41c5-862d-e416aabf81f7",
+            hover: "enabled",
+            container: "tp-weather-widget"
+        })
+    </script>
+
+
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文章
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    归档
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/boxs/">
+                <i class="iconfont icon-switch-fill"></i>
+                百宝箱
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.foreverblog.cn/go.html">
+                <i class="iconfont icon-rss"></i>
+                虫洞
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202212161220542.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Java ArrayList源码详解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-06 18:02" pubdate>
+          2022年8月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java ArrayList源码详解</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>ArrayList是Java集合常用的数据结构之一，继承自AbstractList，实现了List，RandomAccess、Cloneable、Serializable等一系列接口…………</p>
+<span id="more"></span>
+<p><strong>简介</strong></p>
+<p>ArrayList是Java集合常用的数据结构之一，继承自AbstractList，实现了List，RandomAccess、Cloneable、Serializable等一系列接口，支持快速访问，复制和序列化。底层是基于数组实现容量大小动态变化，允许null值存在。</p>
+<p><strong>部分源码分析</strong></p>
+<p>ArrayList的底层是由数组实现</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180401.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>默认size的初始大小为10：<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180551.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>ArrayList定义了两个类常量数组：EMPTY_ELEMENTDATA（EE）和DEFAULTCAPACITY_EMPTY_ELEMENTDATA（DEE）</p>
+<p>注释：EE，用于ArrayList空实例的共享空数组实例</p>
+<p>DEE，用于默认大小空实例的共享空数组实例，将EE和DEE区分开，以便在添加第一个元素时知道要增加多少<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180614.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>三个构造函数，包括一个无参构造和两个有参构造：<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180648.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180701.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180711.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>注：无参构造创建的实例是DEFAULTCAPACITY_EMPTY_ELEMENTDATA，有参构造创建的实例是EMPTY_ELEMENTDATA</p>
+<p>然后是add( )方法：<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180744.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>当第一次调用add(E e)方法时，判断是不是无参构造方法创建的对象，如果是，则将DEFAULT_CAPACITY作为ArrayLiat的容量，此时minCapacity = 1<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180802.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>还有其他add方法例如：</p>
+<p>addAll( Collection&lt;? extends E&gt; c )<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180818.png" srcset="/img/loading.gif" lazyload alt><br>
+add( int index, E element )<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180851.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>等等…这些方法中都包含ensureCapacitylnternal( int Capacity )方法，确保无参构造在创建实例并添加第一个元素时，最小的容量是默认大小10。</p>
+<p>而有参构造创建空实例后，在add( E e )方法添加元素扩容情况是这样的：</p>
+<p><strong>新容量为旧容量的1.5倍</strong><br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180911.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>在Java7中，ArrayList的构造方法只有EMPTY_ELEMENTDATA即EE, 而Java8中DEE代替了EE，但是原来的EE还存在，只是作用改变了：<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180926.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>当容量为0时，会创建一个空数组，赋值给elementData，当一个应用中有很多这样的ArrayList空实例时，就会有很多空数组，这样使用EMPTY_ELEMENTDATA就是为了优化性能，所有的ArrayList空实例都指向同一个数组。而DEE（DEFAULTCAPACITY_EMPTY_ELEMENTDATA）就是为了保证无参构造方法常见的实例在添加第一个元素时，最小的容量是默认的10.</p>
+<p><strong>ArrayList的扩容</strong></p>
+<p>以无参构造为例：</p>
+<p>首先无参构造初以默认大小来始化内部数组<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806180949.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>然后是扩容，使用add( )方法<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806181005.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>ensureCapacityInternal方法中的size代表执行添加前的元素个数，通过现有的元素个数数组的容量进行对比，若需要扩容则扩容。</p>
+<p>ensureCapacityInternal(size + 1)就是将要添加的额元素放入数组中</p>
+<p>扩容条件：若数组的长度eleentData的长度小于做小需要的容量minCapacity，就需要扩容<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806181021.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>扩容逻辑：<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806181021.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>注：</p>
+<p>\1. &gt;&gt;位运算，右移一位代表oldCapacity / 2，位运算效率更高</p>
+<p>\2. JDK7后增加对元素个数的最大个数判断，MAX_ARRAY_SIZE为int最大值减去8</p>
+<p>\3. 复制元素方法扩容。使用延迟分配对象数组空间，当数组加满数组容量后才会按照1.5倍扩容。</p>
+<p><strong>ArrayList的remove( int index )方法</strong><br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806181055.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>当我们调用remove( int index )时，首先调用rangrCheck( ) 方法检查index是否合法，再判断要删除的元素是否位于数组的最后一个位置。</p>
+<p>当index是最后一个，则直接将数组的最后一个位置置空，即size-1即可；</p>
+<p>当index不是最后一个，调用System.arraycopy( )方法复制数组，将从index+1开始，所有元素都往前挪一个位置，再将数组最后一个位置置空。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Dev/" class="category-chain-item">Dev</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Java/">#Java</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Java ArrayList源码详解</div>
+      <div>https://zhouyinglin.cn/post/d09355de.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>小周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月6日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月15日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/474a0c40.html" title="Ajax返回error可能出现的问题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Ajax返回error可能出现的问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/6c898a14.html" title="Java中的==和equals( )方法比较">
+                        <span class="hidden-mobile">Java中的==和equals( )方法比较</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-comment-blond.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"login":"enable","lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.0.1/tieba","https://unpkg.com/@waline/emojis@1.0.1/bilibili"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+     
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <div id="waline"></div> <script> const locale = { placeholder: "说点什么吧！(填写邮箱可在被回复时收到邮件提醒)", }; Waline.init({ el: "#waline", serverURL: "https://comment.zhouyinglin.cn/", locale, }); </script>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <link rel="stylesheet" href="/dist/APlayer.min.css"> <div id="aplayer"></div> <script type="text/javascript" src="/dist/APlayer.min.js"></script> <script type="text/javascript" src="/js/amusic.js"></script>  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div class="statistics" style="font-size: 0.85rem"> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #3c4858;"  id="hitokoto"></span></a> <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script></div>  <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-pv"></span>
+         次 
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总用户量 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+<div class="statistics">
+ 	<a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+ </div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

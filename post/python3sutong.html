@@ -1,0 +1,1755 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/zz.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="小周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="数据类型 官方文档：https:&#x2F;&#x2F;docs.python.org&#x2F;zh-cn&#x2F;3.8&#x2F;library&#x2F;stdtypes.html# 数字、二进制（略） 字符串 str对象，即字符串。单引号&#39;xxx&#39;、双引号&quot;xxx&quot;、三重引号&quot;&quot;&quot;xxx&quot;&quot;&quot;表示。由Unicode码构成的不可变序列，实现了所有一般序列的操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3.8速通">
+<meta property="og:url" content="https://zhouyinglin.cn/post/python3sutong.html">
+<meta property="og:site_name" content="小周的院子">
+<meta property="og:description" content="数据类型 官方文档：https:&#x2F;&#x2F;docs.python.org&#x2F;zh-cn&#x2F;3.8&#x2F;library&#x2F;stdtypes.html# 数字、二进制（略） 字符串 str对象，即字符串。单引号&#39;xxx&#39;、双引号&quot;xxx&quot;、三重引号&quot;&quot;&quot;xxx&quot;&quot;&quot;表示。由Unicode码构成的不可变序列，实现了所有一般序列的操作">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhouyinglin.cn/C:/Users/v_vzylzhou/AppData/Roaming/Typora/typora-user-images/image-20221018101345894.png">
+<meta property="og:image" content="https://zhouyinglin.cn/C:/Users/v_vzylzhou/AppData/Roaming/Typora/typora-user-images/image-20221018101315765.png">
+<meta property="article:published_time" content="2022-11-07T03:41:53.000Z">
+<meta property="article:modified_time" content="2022-12-20T10:17:50.203Z">
+<meta property="article:author" content="小周">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://zhouyinglin.cn/C:/Users/v_vzylzhou/AppData/Roaming/Typora/typora-user-images/image-20221018101345894.png">
+  
+  
+  
+    <meta name="baidu-site-verification" content="code-bMcoZ9RRBp" />
+  
+  <title>Python3.8速通 - 小周的院子</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhouyinglin.cn","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DOFm5rBfeIBUxN13vhiXlS4S-MdYXbMMI","app_key":"FJKOtk5nWqYzGoXXiFAvHIDC","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小周的院子</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+    
+    <!-- 添加zyl天气 -->
+
+<div id="tp-weather-widget"></div>
+    <script>
+        (function (a, h, g, f, e, d, c, b) { b = function () { d = h.createElement(g); c = h.getElementsByTagName(g)[0]; d.src = e; d.charset = "utf-8"; d.async = 1; c.parentNode.insertBefore(d, c) }; a["SeniverseWeatherWidgetObject"] = f; a[f] || (a[f] = function () { (a[f].q = a[f].q || []).push(arguments) }); a[f].l = +new Date(); if (a.attachEvent) { a.attachEvent("onload", b) } else { a.addEventListener("load", b, false) } }(window, document, "script", "SeniverseWeatherWidget", "//cdn.sencdn.com/widget2/static/js/bundle.js?t=" + parseInt((new Date().getTime() / 100000000).toString(), 10)));
+        window.SeniverseWeatherWidget('show', {
+            flavor: "slim",
+            location: "WKJ1F428HH2F",
+            geolocation: true,
+            language: "zh-Hans",
+            unit: "c",
+            theme: "auto",
+            token: "5089001e-aa9f-41c5-862d-e416aabf81f7",
+            hover: "enabled",
+            container: "tp-weather-widget"
+        })
+    </script>
+
+
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文章
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    归档
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/boxs/">
+                <i class="iconfont icon-switch-fill"></i>
+                百宝箱
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.foreverblog.cn/go.html">
+                <i class="iconfont icon-rss"></i>
+                虫洞
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202212161220542.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python3.8速通"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-07 11:41" pubdate>
+          2022年11月7日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          19k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          159 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python3.8速通</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<!-- categories:Dev、Ops、Study、Sth、News、work-->
+<!-- tags: 
+Python、MySQL、LeetCode、机器学习、Linux、Big Data、Java、BlockChain、Docker、Web 、分布式、
+Maven、数据结构、JVM、JavaScript、Crontab、Shell、Ubuntu、VPN、NodeJS、String、VM、Hadoop、
+Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美学、写作、哲学、文档、绘画、前端、
+历史、政治、社会、导购
+ -->
+<h3 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h3>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#">https://docs.python.org/zh-cn/3.8/library/stdtypes.html#</a></p>
+<p>数字、二进制（略）</p>
+<p>字符串</p>
+<p>str对象，即字符串。单引号<code>'xxx'</code>、双引号<code>&quot;xxx&quot;</code>、三重引号<code>&quot;&quot;&quot;xxx&quot;&quot;&quot;</code>表示。由Unicode码构成的不可变序列，实现了所有一般序列的操作（略）</p>
+<h4 id="format函数"><a class="markdownIt-Anchor" href="#format函数"></a> format()函数</h4>
+<p>通过format对字符串进行占位操作。或者使用另一种写法<code>f&quot;xxx……&quot;</code>，注意使用该写法时{}中应使用变量名，而非index</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs routeros">name = <span class="hljs-string">&quot;xiaozhou&quot;</span><br>age = 18<br>height = 1.8<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;我的名字是 &#123;&#125; !我 &#123;&#125; 岁了，我 &#123;&#125; 米高~&quot;</span>.format(name, age, height))<br><br><span class="hljs-comment"># 可以通过index来调整传入的值，甚至可以复用</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;我的名字是 &#123;0&#125; !我 &#123;2&#125; 岁了，我 &#123;1&#125; 米高,我就是&#123;0&#125;&quot;</span>.format(name, height, age))<br><br><span class="hljs-comment"># 可以根据key来传值，也可以设置百分比(如下保留2位小数点)</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;我的名字是 &#123;nm&#125; !我 &#123;age&#125; 岁了，我 &#123;ht:.2f&#125; 米高,我就是&#123;nm&#125;&quot;</span>.format(<span class="hljs-attribute">nm</span>=name, <span class="hljs-attribute">ht</span>=height, <span class="hljs-attribute">age</span>=age))<br><br><span class="hljs-comment"># 另一种写法,在字符串前加 f,&#123;&#125;中可以是运算符</span><br><span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;我的名字是 &#123;name&#125; !我 &#123;age&#125; 岁了，我 &#123;height&#125; 米高~&quot;</span>)<br><br>ROUTEROS<br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:,</td>
+<td>每 3 个 0 就用逗号隔开，比如 1,000</td>
+</tr>
+<tr>
+<td>:b</td>
+<td>该数字的二进制</td>
+</tr>
+<tr>
+<td>:d</td>
+<td>整数型</td>
+</tr>
+<tr>
+<td>:f</td>
+<td>小数模式</td>
+</tr>
+<tr>
+<td>:%</td>
+<td>百分比模式</td>
+</tr>
+</tbody>
+</table>
+<h4 id="字符串修改"><a class="markdownIt-Anchor" href="#字符串修改"></a> 字符串修改</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方式</th>
+<th style="text-align:left">意思</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">strip</td>
+<td style="text-align:left">去除两端的空白符</td>
+<td>“ 我不想要前后的空白，但是 中间\n的可以有\n “.strip()</td>
+</tr>
+<tr>
+<td style="text-align:left">replace</td>
+<td style="text-align:left">替换字符，未找到不替换不报错</td>
+<td>“帮我替换掉你好”.replace(“你好”, “Hello”)</td>
+</tr>
+<tr>
+<td style="text-align:left">lower</td>
+<td style="text-align:left">全部做小写处理</td>
+<td>print(“How ABOUT lower CaSe?”.lower())</td>
+</tr>
+<tr>
+<td style="text-align:left">upper</td>
+<td style="text-align:left">全部做大写处理</td>
+<td>print(“And upper CaSe?”.upper())</td>
+</tr>
+<tr>
+<td style="text-align:left">title</td>
+<td style="text-align:left">仅开头的字母大写</td>
+<td>print(“do tiTle For me”.title())</td>
+</tr>
+<tr>
+<td style="text-align:left">split</td>
+<td style="text-align:left">按要求分割</td>
+<td>`print(“你</td>
+</tr>
+<tr>
+<td style="text-align:left">join</td>
+<td style="text-align:left">按要求合并</td>
+<td>`print(“</td>
+</tr>
+<tr>
+<td style="text-align:left">startswith</td>
+<td style="text-align:left">判断是否为某字段开头</td>
+<td>print(“我在街头看到你”.startswith(“我在”))</td>
+</tr>
+<tr>
+<td style="text-align:left">endswith</td>
+<td style="text-align:left">判断是否为某字段结尾</td>
+<td>print(“我在巷尾看到你”.endswith(“看到你”))</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一般序列</strong></p>
+<p>三种基本序列操作：list、tuple、range。大部分序列均支持以下操作</p>
+<table>
+<thead>
+<tr>
+<th><code>x in s</code></th>
+<th>如果 <em>s</em> 中的某项等于 <em>x</em> 则结果为 <code>True</code>，否则为 <code>False</code></th>
+<th>(1)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x not in s</code></td>
+<td>如果 <em>s</em> 中的某项等于 <em>x</em> 则结果为 <code>False</code>，否则为 <code>True</code></td>
+<td>(1)</td>
+</tr>
+<tr>
+<td><code>s + t</code></td>
+<td><em>s</em> 与 <em>t</em> 相拼接</td>
+<td>(6)(7)</td>
+</tr>
+<tr>
+<td><code>s * n</code> 或 <code>n * s</code></td>
+<td>相当于 <em>s</em> 与自身进行 <em>n</em> 次拼接</td>
+<td>(2)(7)</td>
+</tr>
+<tr>
+<td><code>s[i]</code></td>
+<td><em>s</em> 的第 <em>i</em> 项，起始为 0</td>
+<td>(3)</td>
+</tr>
+<tr>
+<td><code>s[i:j]</code></td>
+<td><em>s</em> 从 <em>i</em> 到 <em>j</em> 的切片</td>
+<td>(3)(4)</td>
+</tr>
+<tr>
+<td><code>s[i:j:k]</code></td>
+<td><em>s</em> 从 <em>i</em> 到 <em>j</em> 步长为 <em>k</em> 的切片</td>
+<td>(3)(5)</td>
+</tr>
+<tr>
+<td><code>len(s)</code></td>
+<td><em>s</em> 的长度</td>
+<td></td>
+</tr>
+<tr>
+<td><code>min(s)</code></td>
+<td><em>s</em> 的最小项</td>
+<td></td>
+</tr>
+<tr>
+<td><code>max(s)</code></td>
+<td><em>s</em> 的最大项</td>
+<td></td>
+</tr>
+<tr>
+<td><code>s.index(x[, i[, j]])</code></td>
+<td><em>x</em> 在 <em>s</em> 中首次出现项的索引号（索引号在 <em>i</em> 或其后且在 <em>j</em> 之前）</td>
+<td>(8)</td>
+</tr>
+<tr>
+<td><code>s.count(x)</code></td>
+<td><em>x</em> 在 <em>s</em> 中出现的总次数</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="列表list"><a class="markdownIt-Anchor" href="#列表list"></a> 列表list</h3>
+<p>list=[‘1’,’2’,’3’]，可存放不同类型元素，支持多维列表</p>
+<p><strong>创建</strong></p>
+<p>list=[]</p>
+<p>list=[1,2,3,4]</p>
+<p>lx for x in iterable迭代器生成</p>
+<p>list()转换</p>
+<p><strong>增</strong></p>
+<p>追加：append()函数</p>
+<p>插入：insert(index, n)函数：将n插入index这个位置</p>
+<p><strong>删</strong></p>
+<p>按下标删除1：pop(index)函数，无参则删除末尾元素</p>
+<p>按下标删除2：del listname[index]，del indexname删除整个变量</p>
+<p>按元素删除：remove(n)函数: n为list中的元素，并非index</p>
+<p><strong>改</strong></p>
+<p>改元素：list[index]=’xxx’</p>
+<p>清空元素：clear()函数</p>
+<p>合并列表：s.extend(list)：将list的内容追加到s后面</p>
+<p>反转列表：reverse()函数，反转元素</p>
+<p>排序列表：sort()函数，对本函数进行原地排序</p>
+<p><strong>查</strong></p>
+<p>查位置：index()函数，元素返回所在下标</p>
+<p>查内容：list(index)，以下标查询元素内容</p>
+<h3 id="字典dict"><a class="markdownIt-Anchor" href="#字典dict"></a> 字典Dict</h3>
+<p>dic={“n1”:1, “n2”:”2”, “n3”:[13,4,5]}。键值对形式存在，key是唯一键，value可不同类型、可重复。键值对保留为插入时顺序</p>
+<p><strong>创建</strong></p>
+<ul>
+<li>空字典：dic={}</li>
+<li>字典：dic={“n1”:’”1”, “m”:”2”}</li>
+<li>字典推导式：<code>&#123;x: x**2 for x in (2, 4, 6)&#125;</code></li>
+<li>dict()转换：dict(spe=123, guido=456,jack=789)</li>
+</ul>
+<p><strong>增</strong></p>
+<p>dic[key]=value，直接添加</p>
+<p>复制其他dic：copy()函数</p>
+<p><strong>删</strong></p>
+<p>删除指定kv：pop(key)函数，key必填，删除前返回value值</p>
+<p>删除指定kv：del dic[key]：若key不存在则报错。</p>
+<p>清空dic: clear()函数</p>
+<p><strong>改</strong></p>
+<p>更新dic的值：update()</p>
+<p>修改指定key的值：dic[‘key’]=xxx</p>
+<p><strong>查</strong></p>
+<p>查字典长度：len(dic)函数</p>
+<p>查是否存在：key in dic 或key not in dic</p>
+<p>查所有key：items()函数</p>
+<p>查所有value：values()函数</p>
+<p>查指定value：get(key)函数</p>
+<p>返回value，若没有则个返回默认值：setdefault(key，default)函数</p>
+<p><strong>其他</strong></p>
+<p>循环方式(1)同时获取键值对：<code>for k, v in knights.items():print(k,v)</code></p>
+<p>循环方式(2)获取指定键值对：<code>for i,v in enumerate(['a', 'b', 'c']):print(i,v)</code></p>
+<p>循环方式(3)多序列循环：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs stylus">questions = <span class="hljs-selector-attr">[<span class="hljs-string">&#x27;name&#x27;</span>, <span class="hljs-string">&#x27;quest&#x27;</span>, <span class="hljs-string">&#x27;favorite color&#x27;</span>]</span><br>answers = <span class="hljs-selector-attr">[<span class="hljs-string">&#x27;lancelot&#x27;</span>, <span class="hljs-string">&#x27;the holy grail&#x27;</span>, <span class="hljs-string">&#x27;blue&#x27;</span>]</span><br><span class="hljs-keyword">for</span> <span class="hljs-selector-tag">q</span>,<span class="hljs-selector-tag">a</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(questions, answers):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;What is your &#123;0&#125;, it is &#123;1&#125;&#x27;</span><span class="hljs-selector-class">.format</span>(<span class="hljs-selector-tag">q</span>,a))<br><br>STYLUS<br></code></pre></td></tr></table></figure>
+<p>…………</p>
+<h3 id="元组"><a class="markdownIt-Anchor" href="#元组"></a> 元组</h3>
+<p>files = (“file1”, “file2”, “file3”)，注意列表用[]，元组用()，也可无需使用()，决定元组的是逗号而不是括号。</p>
+<p>元组是不可变序列，元素定义初始化后不可更改。</p>
+<p><strong>增</strong></p>
+<p>tup=()</p>
+<p>tup=2,3,4或tup=(2,3,4)：此语法是一样的</p>
+<p>tuple()函数转换</p>
+<ul>
+<li>元组打包：tup=1，2，3</li>
+<li>序列解包：x,y,z = tup，tup可分别赋值给x、y、z</li>
+</ul>
+<p><strong>查</strong></p>
+<p>查数量：len()</p>
+<p>查位置：index(n)查询n所在下标</p>
+<p>查指定元素：tup[index]</p>
+<h3 id="set集合"><a class="markdownIt-Anchor" href="#set集合"></a> set集合</h3>
+<p>files = {“file1”, “file3”, “file5”} ， set中的是无序、不重复的，常用于元素检测、消除重复元素、交集并集等操作。</p>
+<p><strong>创建</strong></p>
+<ul>
+<li>创建带元素的集合：files = {“file1”, “file3”, “file5”}</li>
+<li>创建空集：a=set()</li>
+<li>集合推导式：<code>&#123;c for c in 'abracadabra' if c not in 'abc'&#125;</code></li>
+<li>set()函数转换</li>
+</ul>
+<p><strong>增</strong></p>
+<p>add()函数 新增元素</p>
+<p><strong>删</strong></p>
+<p>set.remove(n)：删除n元素</p>
+<p><strong>改</strong></p>
+<p>update()函数 更新</p>
+<p>clear()清空</p>
+<p><strong>数学操作</strong></p>
+<p>交集：set.intersection(set1) 即&amp;，获取共同存在的元素集合</p>
+<p>并集：set.union(set1) 即 | ，获取两者所有元素（不重复）</p>
+<p>补集：set.difference(set1) 即 - ，获取set中set1不存在的元素</p>
+<h3 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h3>
+<p><strong>定义</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-keyword">def</span> <span class="hljs-title function_">function</span>(<span class="hljs-params">parm1，parm2</span>):<br>		……<br>		<span class="hljs-keyword">return</span> xxx<br><br><span class="hljs-variable constant_">PYTHON</span><br></code></pre></td></tr></table></figure>
+<p><strong>传参</strong></p>
+<p>Python的参数传递既不是值传递也不是引用传递，而是赋值传递。参数传递时，Python让新变量与原变量指向了相同的对象。一个对象是可以被多个变量所指向的，也就是说一个参数传入函数后，会有另一个变量指向它</p>
+<ul>
+<li>当参数为不可变对象时，所有指向该变量的值总是一样的，不会改变（改变之后是一个新对象）</li>
+<li>当参数为可变对象时，在函数中修改时对影响所有指向该对象的变量</li>
+</ul>
+<p>注意：</p>
+<ol>
+<li>变量是可以被删除的，但对象无法被删除</li>
+<li>要想在函数中改变外部传进来的参数，要么重新对其赋值，要么将其return</li>
+</ol>
+<p><strong>参数类型</strong></p>
+<ul>
+<li>必传参数：直接声明</li>
+<li>关键字参数：传参时可设置参数名，防止乱序<code>function(parm1=0, parm2=1)</code></li>
+<li>默认参数，调用时可选填：<code>def function(parm1, parm=1)</code></li>
+<li>不定量参数，调用时可传入更多参数：<code>def function(parm1, *parm2)</code></li>
+</ul>
+<p><strong>匿名函数</strong></p>
+<p>lambda表达式创建，没有代码块，只有一个表达式<code>sum = lambda parm1, parm2 : parm1 + parm2</code></p>
+<h3 id="类"><a class="markdownIt-Anchor" href="#类"></a> 类</h3>
+<p>创建：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Pepole</span>:<br>		<span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params"><span class="hljs-variable language_">self</span></span>):<br>				<span class="hljs-variable language_">self</span>.name=<span class="hljs-string">&#x27;xxx&#x27;</span><br>				……<br>xxx=xxx<br>……<br><br><span class="hljs-variable constant_">RUBY</span><br></code></pre></td></tr></table></figure>
+<p><code>self</code>：在类中获取当前类的功能或属性</p>
+<p><code>__init__()</code>：类被实例化时会自动调用<code>__init__()</code>函数，用于初始化设置</p>
+<p><strong>继承</strong></p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">class</span> <span class="hljs-symbol">Chinese</span>(<span class="hljs-symbol">Pepole</span>):<br>		……<br><br><span class="hljs-symbol">ANGELSCRIPT</span><br></code></pre></td></tr></table></figure>
+<p>Chinese继承了Pepole类，继承了Pepole的函数和属性，在子类中可以复用Pepole的属性和函数，以减少公有属性或功能的开发</p>
+<p><strong>函数和属性的私有化</strong></p>
+<table>
+<thead>
+<tr>
+<th>私有程度</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_ 一个下划线开头，如_age</td>
+<td>弱隐藏，不想让调用者使用。但若必须调用还是可以用的</td>
+</tr>
+<tr>
+<td>__ 两个下划线开头，如__password</td>
+<td>强隐藏，不让调用者使用，自己在内部可以用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>类的特殊方法</strong></p>
+<p><code>__init__()</code>类被实例化后自动调用，可被继承。若在子类中调用父类，需要显式调用父类的<code>__init__()</code>方法，以确保父类正确初始化</p>
+<p><code>__repr__()</code>输出对象的字符串（正式值），返回的字符串准确、无歧义，尽可能表达出如何创建出来的这个对象</p>
+<p><code>__str__()</code>输出对象的字符串（非正式值），返回的字符串可读性更高，使用更方便</p>
+<p><code>__iter__()</code>创建迭代器时被调用，遍历序列时使用</p>
+<p><code>__next__()</code>从容器中返回下一项</p>
+<p>……</p>
+<p><strong>模块管理</strong></p>
+<p>如下多种引用方式：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-comment"># 引用其他模块（也可以是同路径下.py文件）</span><br>import <span class="hljs-built_in">file</span> <span class="hljs-comment"># file为文件名，不带py</span><br>print(<span class="hljs-built_in">file</span>.create_name()) <span class="hljs-comment"># create_name是file.py中定义的函数</span><br><br><span class="hljs-comment"># 引用其他模块中的多个函数</span><br><span class="hljs-keyword">from</span> <span class="hljs-built_in">file</span> import get_name, get_age<br><br><span class="hljs-comment"># 引用模块下所有函数</span><br><span class="hljs-keyword">from</span> <span class="hljs-built_in">file</span> import *<br><br><span class="hljs-comment"># 模块重命名，使用 as 关键字</span><br>import <span class="hljs-built_in">file</span> <span class="hljs-keyword">as</span> f<br><br>APPLESCRIPT<br></code></pre></td></tr></table></figure>
+<h2 id="编码风格"><a class="markdownIt-Anchor" href="#编码风格"></a> 编码风格</h2>
+<ol>
+<li>使用4个空格缩进，不使用制表符</li>
+<li>一行代码不超过79字符</li>
+<li>函数和类之间用空行分开</li>
+<li>注释尽量单独放一行</li>
+<li>函数、类明规则命名</li>
+<li>…………</li>
+</ol>
+<h2 id="目录管理"><a class="markdownIt-Anchor" href="#目录管理"></a> 目录管理</h2>
+<p><strong>增</strong></p>
+<p>新增目录：<code>os.mkdir()</code>，多级目录<code>os.makedirs()</code></p>
+<p>复制文件：<code>shutil.copy2()</code></p>
+<p><strong>删</strong></p>
+<p>删除空目录：<code>os.removedirs</code></p>
+<p>删除目录及其所有子目录(需导入) ：<code>shutil.rmtree()</code></p>
+<p><strong>查</strong></p>
+<p>查看当前目录：<code>os.getcmd()</code>、<code>realpath</code></p>
+<p>查看某文件所在的目录名：<code>os.path.dirname()</code></p>
+<p>查看当前目录下的文件列表<code>os.listdir</code></p>
+<p>查看文件或目录是否存在：<code>os.path.exists()</code></p>
+<p>查看是否是文件/目录：<code>os.path.isfile()/isdir()</code></p>
+<p><strong>其他操作</strong></p>
+<p>切分文件全名中的目录和文件：<code>os.path.split()</code></p>
+<h2 id="文件操作"><a class="markdownIt-Anchor" href="#文件操作"></a> 文件操作</h2>
+<p>获取当前工作区目录：<code>os.path.split(os.path.realpath(__file__))[0]</code></p>
+<p>如果在只写模式中读取，或在只读模式中写入，会报<code>io.UnsupportedOperation</code>错误</p>
+<p><strong>增</strong></p>
+<ul>
+<li><code>w</code>为写入模式，文件不存在则创建，文件已存在则直接会覆盖</li>
+<li><code>w+</code>为可读可写模式，不存在则创建，文件已存在则直接会覆盖</li>
+<li><code>a</code>为写入模式，文件不存在则创建，已存在则不覆盖，追加在文件末尾</li>
+<li><code>a+</code>可读可写，文件不存在则创建，已存在则不覆盖，追加在文件末尾</li>
+</ul>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">f=<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;new_text.txt&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>):<br>	f.<span class="hljs-built_in">write</span>(<span class="hljs-string">&quot;abcdefg&quot;</span>)<br>	f.flose()<br>	<br><span class="hljs-comment"># 或者使用with写法</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;new_text.txt&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>) <span class="hljs-keyword">as</span> f:<br>	f.writelines([<span class="hljs-string">&quot;abcdefg\n&quot;</span>,<span class="hljs-string">&quot;123456\n&quot;</span>])<br><br>LIVECODESERVER<br></code></pre></td></tr></table></figure>
+<p>**with：**当使用with时，会自动调用类的<code>__enter__()</code>，然后开始执行with下面的语句，执行结束后会自动调用<code>__exit__()</code></p>
+<p>**writelines：**传入列表格式的数据使用，会分行写入</p>
+<p><strong>删</strong></p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">import</span> <span class="hljs-variable">os</span><br><br><span class="hljs-variable"><span class="hljs-keyword">if</span></span> <span class="hljs-function"><span class="hljs-title">exists</span>(<span class="hljs-string">&quot;text.txt&quot;</span>):</span><br><span class="hljs-function">	<span class="hljs-variable">os.remove</span>()</span><br><span class="hljs-variable"><span class="hljs-keyword">else</span></span>:<br>	<span class="hljs-function"><span class="hljs-title">print</span>(<span class="hljs-string">&quot;This file does not exist!&quot;</span>)</span><br><br><span class="hljs-variable">ISBL</span><br></code></pre></td></tr></table></figure>
+<p><strong>查/改</strong></p>
+<ul>
+<li><code>r</code>为读取模式，文件不存在时会报<code>FileNotFoundError</code>错误</li>
+<li><code>r+</code>为可读可写模式，文件不存在时会报<code>FileNotFoundError</code>错误，写操作会覆盖</li>
+</ul>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-meta"># 修改</span><br>with open(<span class="hljs-string">&quot;test.txt&quot;</span>, <span class="hljs-string">&quot;r+&quot;</span>) as f:<span class="hljs-type"></span><br>    <span class="hljs-keyword">new</span><span class="hljs-type">_context</span> = f.read()+<span class="hljs-string">&quot;\n66666666666&quot;</span><br>    f.write(<span class="hljs-keyword">new</span><span class="hljs-type">_context</span>)<br>    print(<span class="hljs-string">&quot;新内容:\n&quot;</span>+<span class="hljs-keyword">new</span><span class="hljs-type">_context</span>)<br><br>HAXE<br></code></pre></td></tr></table></figure>
+<p><strong>读写二进制</strong></p>
+<p><code>wb</code>&amp;<code>rb</code>为读写二进制数据，<code>r</code>读取文件时，读到文档结束符（EOF）就算是读完了，但字节<code>\x1A(26)</code>转成字符后就是文档结束符，因此使用<code>r</code>可能会出现文档读取不全的现象。</p>
+<ul>
+<li>使用<code>r</code>读取，<code>read()</code>返回的是字符串数据</li>
+<li>使用<code>rb</code>读取，<code>read()</code>返回的是bytes数据</li>
+</ul>
+<p><strong>指定编码</strong></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">with</span> <span class="hljs-keyword">open</span>(&quot;test.txt&quot;,&quot;w&quot;, encoding=&quot;utf-8&quot;)<br>	……<br><br>PGSQL<br></code></pre></td></tr></table></figure>
+<h2 id="异常处理"><a class="markdownIt-Anchor" href="#异常处理"></a> 异常处理</h2>
+<p><strong>使用场景</strong></p>
+<p>在不确定某段代码是否能成功执行时，就需要使用异常处理。如文件读取、解析Json文件等，就需要用到<code>FileNotFoundError</code>或者<code>JSONDecodeError</code>等。</p>
+<p><strong>注意！</strong></p>
+<p>不能滥用异常，在流程控制的逻辑中，一般不用异常处理，如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 如下是错误用法</span><br>d = &#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;jason&#x27;</span>, <span class="hljs-string">&#x27;age&#x27;</span>: <span class="hljs-number">20</span>&#125;<br><span class="hljs-keyword">try</span>:<br>    value = d[<span class="hljs-string">&#x27;dob&#x27;</span>]<br>    ...<br><span class="hljs-keyword">except</span> KeyError <span class="hljs-keyword">as</span> err:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;KeyError: &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(err))<br> <span class="hljs-comment"># 如下才是合理写法</span><br> <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;dob&#x27;</span> <span class="hljs-keyword">in</span> d:<br>     value = d[dob]<br></code></pre></td></tr></table></figure>
+<p><strong>捕获单个异常</strong></p>
+<p><code>except</code>：捕获异常</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">try</span>: <span class="hljs-comment"># try下面的代码报的FileNotFoundError错误都能被except捕捉到</span><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;no_file.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> f:<br>        <span class="hljs-built_in">print</span>(f.read())<br><span class="hljs-keyword">except</span> FileNotFoundError <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(e)<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;no_file.txt&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>) <span class="hljs-keyword">as</span> f:<br>        f.write(<span class="hljs-string">&quot;I&#x27;m no_file.txt&quot;</span>)  <span class="hljs-comment"># 进行异常处理</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;new file &#x27;no_file.txt&#x27; has been written&quot;</span>)<br><br>PYTHON<br></code></pre></td></tr></table></figure>
+<p><strong>捕获多个异常</strong></p>
+<p>注意：一般情况下难以保证程序覆盖所有异常类型，通常在最后一个except捕获一个Exception基类，这样就可以捕获任意非系统异常。或者直接写except捕获所有异常（包括系统异常）</p>
+<ol>
+<li><code>except(Err1, Err2,Err3……)</code></li>
+</ol>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">d</span> = &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;f1&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">2</span>&#125;<br><span class="hljs-attribute">l</span> =<span class="hljs-meta"> [1,2,3]</span><br><span class="hljs-attribute">try</span>:<br>    <span class="hljs-attribute">v</span> = d[<span class="hljs-string">&quot;gender&quot;</span>]<br>    <span class="hljs-attribute">l</span>[<span class="hljs-number">3</span>] = <span class="hljs-number">4</span><br><span class="hljs-attribute">except</span> (KeyError, IndexError) as e:<br>    <span class="hljs-attribute">print</span>(<span class="hljs-string">&quot;key or index error for:&quot;</span>, e)<br><br><span class="hljs-attribute">APACHE</span><br></code></pre></td></tr></table></figure>
+<ol>
+<li>使用多次except，单独处理</li>
+</ol>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs stylus">d = &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;f1&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">2</span>&#125;<br>l = <span class="hljs-selector-attr">[1,2,3]</span><br>try:<br>    v = d<span class="hljs-selector-attr">[<span class="hljs-string">&quot;gender&quot;</span>]</span><br>    l<span class="hljs-selector-attr">[3]</span> = <span class="hljs-number">4</span><br>except KeyError as e:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;key error for:&quot;</span>, e)<br>    d<span class="hljs-selector-attr">[<span class="hljs-string">&quot;gender&quot;</span>]</span> = <span class="hljs-string">&quot;x&quot;</span><br>except IndexError as e:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;index error for:&quot;</span>, e)<br>    l<span class="hljs-selector-class">.append</span>(<span class="hljs-number">4</span>)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(d)</span></span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(l)</span></span><br><br><br>STYLUS<br></code></pre></td></tr></table></figure>
+<p><strong>异常处理分支</strong></p>
+<ol>
+<li><code>try-except-else</code>：如果没有捕获到异常，则运行其他代码</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">l = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]<br><span class="hljs-keyword">try</span>:<br>    l[<span class="hljs-number">3</span>] = <span class="hljs-number">4</span><br><span class="hljs-keyword">except</span> IndexError <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(e)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;no error, now in else&quot;</span>)<br><br>PYTHON<br></code></pre></td></tr></table></figure>
+<ol>
+<li><code>try-except-finally</code>：不论是否捕获到异常，都需执行<code>finnally</code>中的代码</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">l = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br><span class="hljs-keyword">try</span>:<br>    l[<span class="hljs-number">3</span>] = <span class="hljs-number">4</span><br><span class="hljs-keyword">except</span> IndexError <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(e)<br><span class="hljs-keyword">finally</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;reach finally&quot;</span>)<br><br>PYTHON<br></code></pre></td></tr></table></figure>
+<p><strong>自定义异常</strong></p>
+<p>自定义异常需要继承Eception基类，并定义初始化函数和str函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyInputError</span>(<span class="hljs-title class_ inherited__">Exception</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Exception raised when there&#x27;re errors in input&quot;&quot;&quot;</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, value</span>): <span class="hljs-comment"># 自定义异常类型的初始化</span><br>        self.value = value<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__str__</span>(<span class="hljs-params">self</span>): <span class="hljs-comment"># 自定义异常类型的string表达形式</span><br>        <span class="hljs-keyword">return</span> (<span class="hljs-string">&quot;&#123;&#125; is invalid input&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-built_in">repr</span>(self.value)))<br>    <br><span class="hljs-keyword">try</span>:<br>    <span class="hljs-keyword">raise</span> MyInputError(<span class="hljs-number">1</span>) <span class="hljs-comment"># 抛出MyInputError这个异常</span><br><span class="hljs-keyword">except</span> MyInputError <span class="hljs-keyword">as</span> err:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;error: &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(err))<br></code></pre></td></tr></table></figure>
+<p><strong>手动抛出异常</strong></p>
+<p><code>taise</code>：提示代码中可能出现的异常，供他人调用时debug</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">def</span> <span class="hljs-function"><span class="hljs-title">no_negative</span>(<span class="hljs-variable">num</span>):</span><br><span class="hljs-function">    <span class="hljs-variable"><span class="hljs-keyword">if</span></span> <span class="hljs-variable">num</span> &lt; <span class="hljs-number">0</span>:</span><br><span class="hljs-function">        <span class="hljs-variable">raise</span> <span class="hljs-title">ValueError</span>(<span class="hljs-string">&quot;I said no negative&quot;</span>)</span><br>    <span class="hljs-variable">return</span> <span class="hljs-variable">num</span><br><br><span class="hljs-function"><span class="hljs-title">print</span>(<span class="hljs-title">no_negative</span>(-<span class="hljs-number">1</span>))</span><br><br><span class="hljs-variable">ISBL</span><br></code></pre></td></tr></table></figure>
+<p><strong>可被raise的Error如下表：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">异常名称</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">BaseException</td>
+<td style="text-align:left">所有异常的基类</td>
+</tr>
+<tr>
+<td style="text-align:left">SystemExit</td>
+<td style="text-align:left">解释器请求退出</td>
+</tr>
+<tr>
+<td style="text-align:left">KeyboardInterrupt</td>
+<td style="text-align:left">用户中断执行(通常是输入^C)</td>
+</tr>
+<tr>
+<td style="text-align:left">Exception</td>
+<td style="text-align:left">常规错误的基类</td>
+</tr>
+<tr>
+<td style="text-align:left">StopIteration</td>
+<td style="text-align:left">迭代器没有更多的值</td>
+</tr>
+<tr>
+<td style="text-align:left">GeneratorExit</td>
+<td style="text-align:left">生成器(generator)发生异常来通知退出</td>
+</tr>
+<tr>
+<td style="text-align:left">StandardError</td>
+<td style="text-align:left">所有的内建标准异常的基类</td>
+</tr>
+<tr>
+<td style="text-align:left">ArithmeticError</td>
+<td style="text-align:left">所有数值计算错误的基类</td>
+</tr>
+<tr>
+<td style="text-align:left">FloatingPointError</td>
+<td style="text-align:left">浮点计算错误</td>
+</tr>
+<tr>
+<td style="text-align:left">OverflowError</td>
+<td style="text-align:left">数值运算超出最大限制</td>
+</tr>
+<tr>
+<td style="text-align:left">ZeroDivisionError</td>
+<td style="text-align:left">除(或取模)零 (所有数据类型)</td>
+</tr>
+<tr>
+<td style="text-align:left">AssertionError</td>
+<td style="text-align:left">断言语句失败</td>
+</tr>
+<tr>
+<td style="text-align:left">AttributeError</td>
+<td style="text-align:left">对象没有这个属性</td>
+</tr>
+<tr>
+<td style="text-align:left">EOFError</td>
+<td style="text-align:left">没有内建输入,到达EOF 标记</td>
+</tr>
+<tr>
+<td style="text-align:left">EnvironmentError</td>
+<td style="text-align:left">操作系统错误的基类</td>
+</tr>
+<tr>
+<td style="text-align:left">IOError</td>
+<td style="text-align:left">输入/输出操作失败</td>
+</tr>
+<tr>
+<td style="text-align:left">OSError</td>
+<td style="text-align:left">操作系统错误</td>
+</tr>
+<tr>
+<td style="text-align:left">WindowsError</td>
+<td style="text-align:left">系统调用失败</td>
+</tr>
+<tr>
+<td style="text-align:left">ImportError</td>
+<td style="text-align:left">导入模块/对象失败</td>
+</tr>
+<tr>
+<td style="text-align:left">LookupError</td>
+<td style="text-align:left">无效数据查询的基类</td>
+</tr>
+<tr>
+<td style="text-align:left">IndexError</td>
+<td style="text-align:left">序列中没有此索引(index)</td>
+</tr>
+<tr>
+<td style="text-align:left">KeyError</td>
+<td style="text-align:left">映射中没有这个键</td>
+</tr>
+<tr>
+<td style="text-align:left">MemoryError</td>
+<td style="text-align:left">内存溢出错误(对于Python 解释器不是致命的)</td>
+</tr>
+<tr>
+<td style="text-align:left">NameError</td>
+<td style="text-align:left">未声明/初始化对象 (没有属性)</td>
+</tr>
+<tr>
+<td style="text-align:left">UnboundLocalError</td>
+<td style="text-align:left">访问未初始化的本地变量</td>
+</tr>
+<tr>
+<td style="text-align:left">ReferenceError</td>
+<td style="text-align:left">弱引用(Weak reference)试图访问已经垃圾回收了的对象</td>
+</tr>
+<tr>
+<td style="text-align:left">RuntimeError</td>
+<td style="text-align:left">一般的运行时错误</td>
+</tr>
+<tr>
+<td style="text-align:left">NotImplementedError</td>
+<td style="text-align:left">尚未实现的方法</td>
+</tr>
+<tr>
+<td style="text-align:left">SyntaxError</td>
+<td style="text-align:left">Python 语法错误</td>
+</tr>
+<tr>
+<td style="text-align:left">IndentationError</td>
+<td style="text-align:left">缩进错误</td>
+</tr>
+<tr>
+<td style="text-align:left">TabError</td>
+<td style="text-align:left">Tab 和空格混用</td>
+</tr>
+<tr>
+<td style="text-align:left">SystemError</td>
+<td style="text-align:left">一般的解释器系统错误</td>
+</tr>
+<tr>
+<td style="text-align:left">TypeError</td>
+<td style="text-align:left">对类型无效的操作</td>
+</tr>
+<tr>
+<td style="text-align:left">ValueError</td>
+<td style="text-align:left">传入无效的参数</td>
+</tr>
+<tr>
+<td style="text-align:left">UnicodeError</td>
+<td style="text-align:left">Unicode 相关的错误</td>
+</tr>
+<tr>
+<td style="text-align:left">UnicodeDecodeError</td>
+<td style="text-align:left">Unicode 解码时的错误</td>
+</tr>
+<tr>
+<td style="text-align:left">UnicodeEncodeError</td>
+<td style="text-align:left">Unicode 编码时错误</td>
+</tr>
+<tr>
+<td style="text-align:left">UnicodeTranslateError</td>
+<td style="text-align:left">Unicode 转换时错误</td>
+</tr>
+<tr>
+<td style="text-align:left">Warning</td>
+<td style="text-align:left">警告的基类</td>
+</tr>
+<tr>
+<td style="text-align:left">DeprecationWarning</td>
+<td style="text-align:left">关于被弃用的特征的警告</td>
+</tr>
+<tr>
+<td style="text-align:left">FutureWarning</td>
+<td style="text-align:left">关于构造将来语义会有改变的警告</td>
+</tr>
+<tr>
+<td style="text-align:left">OverflowWarning</td>
+<td style="text-align:left">旧的关于自动提升为长整型(long)的警告</td>
+</tr>
+<tr>
+<td style="text-align:left">PendingDeprecationWarning</td>
+<td style="text-align:left">关于特性将会被废弃的警告</td>
+</tr>
+<tr>
+<td style="text-align:left">RuntimeWarning</td>
+<td style="text-align:left">可疑的运行时行为(runtime behavior)的警告</td>
+</tr>
+<tr>
+<td style="text-align:left">SyntaxWarning</td>
+<td style="text-align:left">可疑的语法的警告</td>
+</tr>
+<tr>
+<td style="text-align:left">UserWarning</td>
+<td style="text-align:left">用户代码生成的警告</td>
+</tr>
+</tbody>
+</table>
+<h2 id="json序列化"><a class="markdownIt-Anchor" href="#json序列化"></a> Json序列化</h2>
+<p>内置模块pickle实现了Python对象的二进制序列化和反序列化。序列化即将对象及其层次结构转化为字节流的过程。</p>
+<h3 id="pickle"><a class="markdownIt-Anchor" href="#pickle"></a> pickle</h3>
+<p><strong>序列化对象</strong></p>
+<p><code>pickle.dumps()</code>：将对象序列化，并返回该对象的bytes类型数据</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs llvm">import pickle<br><br>data <span class="hljs-operator">=</span> &#123;<span class="hljs-string">&quot;filename&quot;</span>: <span class="hljs-string">&quot;f1.txt&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;create_time&quot;</span>: <span class="hljs-string">&quot;today&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;size&quot;</span>: <span class="hljs-number">111</span>&#125;<br>pickle.dumps(data)<br><br># 结果：b&#x27;\<span class="hljs-keyword">x</span><span class="hljs-number">80</span>\<span class="hljs-keyword">x</span><span class="hljs-number">04</span>\<span class="hljs-keyword">x</span><span class="hljs-number">958</span>\<span class="hljs-keyword">x</span><span class="hljs-number">00</span>\<span class="hljs-keyword">x</span><span class="hljs-number">00</span>\<span class="hljs-keyword">x</span><span class="hljs-number">00</span>\<span class="hljs-keyword">x</span><span class="hljs-number">00</span>\<span class="hljs-keyword">x</span><span class="hljs-number">00</span>\<span class="hljs-keyword">x</span><span class="hljs-number">00</span>\<span class="hljs-keyword">x</span><span class="hljs-number">00</span>&#125;\<span class="hljs-keyword">x</span><span class="hljs-number">94</span>(\<span class="hljs-keyword">x</span><span class="hljs-number">8</span><span class="hljs-keyword">c</span>\<span class="hljs-keyword">x</span><span class="hljs-number">08</span>filename\<span class="hljs-keyword">x</span><span class="hljs-number">94</span>\<span class="hljs-keyword">x</span><span class="hljs-number">8</span><span class="hljs-keyword">c</span>\<span class="hljs-keyword">x</span><span class="hljs-number">06</span>f<span class="hljs-number">1</span>.txt\<span class="hljs-keyword">x</span><span class="hljs-number">94</span>\<span class="hljs-keyword">x</span><span class="hljs-number">8</span><span class="hljs-keyword">c</span>\<span class="hljs-keyword">x</span><span class="hljs-number">0</span>bcreate_time\<span class="hljs-keyword">x</span><span class="hljs-number">94</span>\<span class="hljs-keyword">x</span><span class="hljs-number">8</span><span class="hljs-keyword">c</span>\<span class="hljs-keyword">x</span><span class="hljs-number">05</span>today\<span class="hljs-keyword">x</span><span class="hljs-number">94</span>\<span class="hljs-keyword">x</span><span class="hljs-number">8</span><span class="hljs-keyword">c</span>\<span class="hljs-keyword">x</span><span class="hljs-number">04</span>size\<span class="hljs-keyword">x</span><span class="hljs-number">94</span>Kou.&#x27;<br><br>LLVM<br></code></pre></td></tr></table></figure>
+<p><strong>保存对象至文件</strong></p>
+<p><code>pickle.dump()</code>：将对象序列化并保存至本地</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> pickle<br><span class="hljs-keyword">data</span> = &#123;<span class="hljs-string">&quot;1&quot;</span>: <span class="hljs-string">&quot;xiaozhou&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>: <span class="hljs-string">&quot;xiaoxue&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>: <span class="hljs-string">&quot;xiaoxiaozhou&quot;</span>&#125;<br><br>with <span class="hljs-keyword">open</span>(<span class="hljs-string">&quot;data.txt&quot;</span>, <span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    pickle.dump(<span class="hljs-keyword">data</span>, f)<br>print(os.listdir())<br><br># 结果:[<span class="hljs-string">&#x27;files&#x27;</span>, <span class="hljs-string">&#x27;data.txt&#x27;</span>]<br><br>KOTLIN<br></code></pre></td></tr></table></figure>
+<p><strong>读取文件</strong></p>
+<p><code>pickle.load()</code>：将本地文件读取出来</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> pickle<br><br>with <span class="hljs-keyword">open</span>(<span class="hljs-string">&quot;data.txt&quot;</span>, <span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    <span class="hljs-keyword">data</span> = pickle.load(f)<br>print(<span class="hljs-keyword">data</span>)<br><br># 结果：&#123;<span class="hljs-string">&#x27;1&#x27;</span>: <span class="hljs-string">&#x27;xiaozhou&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>: <span class="hljs-string">&#x27;xiaoxue&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>: <span class="hljs-string">&#x27;xiaoxiaozhou&#x27;</span>&#125;<br><br>KOTLIN<br></code></pre></td></tr></table></figure>
+<p>注意：</p>
+<ol>
+<li>Pickle在反序列化类的时候需要有这个类的class，否则会找不到这个类二失败。</li>
+<li>有些对象例如打开的文件、网络链接、线程进程等，如果将这些对象赋给class的属性上，就不能被打包，因为这些需要依赖外部系统状态。</li>
+</ol>
+<p>##Json</p>
+<p>不需要转成二进制，在网络中传输相对安全</p>
+<p><code>json.dumps()</code>和<code>json.loads()</code>：将对象转化为json格式的字符串 &amp; 将字符串转换为对象。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import json<br><br>data = &#123;<span class="hljs-string">&quot;filename&quot;</span>: <span class="hljs-string">&quot;f1.txt&quot;</span>, <span class="hljs-string">&quot;create_time&quot;</span>: <span class="hljs-string">&quot;today&quot;</span>, <span class="hljs-string">&quot;size&quot;</span>: <span class="hljs-number">111</span>&#125;<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(type(data)</span></span>)<br>j = json<span class="hljs-selector-class">.dumps</span>(data)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(j)</span></span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(type(j)</span></span>)<br><br>#结果：<br>&lt;class <span class="hljs-string">&#x27;dict&#x27;</span>&gt;<br>&#123;<span class="hljs-string">&quot;filename&quot;</span>: <span class="hljs-string">&quot;f1.txt&quot;</span>, <span class="hljs-string">&quot;create_time&quot;</span>: <span class="hljs-string">&quot;today&quot;</span>, <span class="hljs-string">&quot;size&quot;</span>: <span class="hljs-number">111</span>&#125;<br>&lt;class <span class="hljs-string">&#x27;str&#x27;</span>&gt;<br><br>STYLUS<br></code></pre></td></tr></table></figure>
+<p><code>json.dump()</code>和<code>json.load()</code>：与上面类似，一般与文件操作一起用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python">data = &#123;<span class="hljs-string">&quot;filename&quot;</span>: <span class="hljs-string">&quot;f1.txt&quot;</span>, <span class="hljs-string">&quot;create_time&quot;</span>: <span class="hljs-string">&quot;today&quot;</span>, <span class="hljs-string">&quot;size&quot;</span>: <span class="hljs-number">111</span>&#125;<br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;data.json&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    json.dump(data, f)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;直接当纯文本读：&quot;</span>)<br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;data.json&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    <span class="hljs-built_in">print</span>(f.read())<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;用 json 加载了读：&quot;</span>)<br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;data.json&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    new_data = json.load(f)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;字典读取：&quot;</span>, new_data)<br><br><span class="hljs-comment"># 结果</span><br>直接当纯文本读：<br>&#123;<span class="hljs-string">&quot;filename&quot;</span>: <span class="hljs-string">&quot;f1.txt&quot;</span>, <span class="hljs-string">&quot;create_time&quot;</span>: <span class="hljs-string">&quot;today&quot;</span>, <span class="hljs-string">&quot;size&quot;</span>: <span class="hljs-number">111</span>&#125;<br>用 json 加载了读：<br>字典读取： &#123;<span class="hljs-string">&#x27;filename&#x27;</span>: <span class="hljs-string">&#x27;f1.txt&#x27;</span>, <span class="hljs-string">&#x27;create_time&#x27;</span>: <span class="hljs-string">&#x27;today&#x27;</span>, <span class="hljs-string">&#x27;size&#x27;</span>: <span class="hljs-number">111</span>&#125;<br><br>PYTHON<br></code></pre></td></tr></table></figure>
+<p>注意：json无法序列化class对象</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">对比</th>
+<th style="text-align:center">Pickle</th>
+<th style="text-align:center">Json</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">存储格式</td>
+<td style="text-align:center">Python 特定的 Bytes 格式</td>
+<td style="text-align:center">通用 JSON text 格式，可用于常用的网络通讯中</td>
+</tr>
+<tr>
+<td style="text-align:center">数据种类</td>
+<td style="text-align:center"><strong>类，功能</strong>，字典，列表，元组等</td>
+<td style="text-align:center">基本和 Pickle 一样，但不能存类，功能</td>
+</tr>
+<tr>
+<td style="text-align:center">保存后可读性</td>
+<td style="text-align:center">不能直接阅读</td>
+<td style="text-align:center">能直接阅读</td>
+</tr>
+<tr>
+<td style="text-align:center">跨语言性</td>
+<td style="text-align:center">只能用在 Python</td>
+<td style="text-align:center">可以跨多语言读写</td>
+</tr>
+<tr>
+<td style="text-align:center">处理时间</td>
+<td style="text-align:center">长（需编码数据）</td>
+<td style="text-align:center">短（不需编码）</td>
+</tr>
+<tr>
+<td style="text-align:center">安全性</td>
+<td style="text-align:center">不安全（除非你信任数据源）</td>
+<td style="text-align:center">相对安全</td>
+</tr>
+</tbody>
+</table>
+<h2 id="正则"><a class="markdownIt-Anchor" href="#正则"></a> 正则</h2>
+<p>正则常见字符</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\d</td>
+<td>代表任意数字，就是阿拉伯数字 0-9 这些玩意。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\D</code></td>
+<td>大写的就是和小写的唱反调，\d 你代表的是任意数字是吧？那么我 \D 就代表不是数字的。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\w</code></td>
+<td>代表字母，数字，下划线。也就是 a-z、A-Z、0-9、_。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\W</code></td>
+<td>跟 \w 唱反调，代表不是字母，不是数字，不是下划线的。</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td>代表一个换行。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\r</code></td>
+<td>代表一个回车。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\f</code></td>
+<td>代表换页。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\t</code></td>
+<td>代表一个 Tab 。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\s</code></td>
+<td>代表所有的空白字符，也就是上面这个：\n、\r、\t、\f。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\S</code></td>
+<td>跟 \s 唱反调，代表所有不是空白的字符。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\A</code></td>
+<td>代表字符串的开始。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\Z</code></td>
+<td>代表字符串的结束。</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td>匹配字符串开始的位置。</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td>匹配字符创结束的位置。</td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td>代表所有的单个字符，除了 \n \r</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[...]</code></td>
+<td>代表在 [] 范围内的字符，比如 [a-z] 就代表 a到z的字母</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>[^...]</code></td>
+<td>跟 […] 唱反调，代表不在 [] 范围内的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">{n}</td>
+<td>匹配在 {n} 前面的东西，比如: o{2} 不能匹配 Bob 中的 o ，但是能匹配 food 中的两个o。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>&#123;n,m&#125;</code></td>
+<td>匹配在 {n,m} 前面的东西，比如：o{1,3} 将匹配“fooooood”中的前三个o。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>&#123;n，&#125;</code></td>
+<td>匹配在 {n,} 前面的东西，比如：o{2,} 不能匹配“Bob”中的“o”，但能匹配“foooood”中的所有o。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>*</code></td>
+<td>和 {0,} 一个样，匹配 * 前面的 0 次或多次。 比如 zo* 能匹配“z”、“zo”以及“zoo”。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>+</code></td>
+<td>和{1，} 一个样，匹配 + 前面 1 次或多次。 比如 zo+”能匹配“zo”以及“zoo”，但不能匹配“z”。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>？</code></td>
+<td>和{0,1} 一个样，匹配 ？前面 0 次或 1 次。</td>
+</tr>
+<tr>
+<td style="text-align:center">a|b</td>
+<td>匹配 a 或者 b。</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>（）</code></td>
+<td>匹配括号里面的内容。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="匹配字符串"><a class="markdownIt-Anchor" href="#匹配字符串"></a> 匹配字符串</h3>
+<p>例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br>ptn = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\w+?@\w+?\.com&quot;</span>) <span class="hljs-comment"># 定义正则</span><br><br>matched = ptn.search(<span class="hljs-string">&quot;mofan@mofanpy.com&quot;</span>) <span class="hljs-comment"># 使用正则查找字符串，返回第一个匹配的字符串</span><br><span class="hljs-built_in">print</span>(matched)<br><br><span class="hljs-comment"># 打印结果：&lt;re.Match object; span=(0, 17), match=&#x27;mofan@mofanpy.com&#x27;&gt;</span><br><br>PYTHON<br></code></pre></td></tr></table></figure>
+<p><code>r</code>代表后面的字符串是一个正则</p>
+<p>根据上表，<code>\w</code>匹配字母数字下划线，<code>+?</code>代表匹配多次</p>
+<p>打印结果中的<code>span=(0, 17)</code>表示找到的字符串在原始字符的位置，<code>match</code>表示找到的具体字符串内容</p>
+<p>正则除了<code>search()</code>，还有其他功能：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">功能</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">re.search()</td>
+<td style="text-align:left">扫描查找整个字符串，找到第一个模式匹配的</td>
+<td style="text-align:left">re.search(rrun, I run to you) &gt; ‘run’</td>
+</tr>
+<tr>
+<td style="text-align:left">re.match()</td>
+<td style="text-align:left">从字符的最开头匹配，找到第一个模式匹配的<strong>即使用 re.M 多行匹配，也是从最最开头开始匹配</strong></td>
+<td style="text-align:left">re.match(rrun, I run to you) &gt; None</td>
+</tr>
+<tr>
+<td style="text-align:left">re.findall()</td>
+<td style="text-align:left">返回一个不重复的 pattern 的匹配列表</td>
+<td style="text-align:left">re.findall(rr[ua]n, I run to you. you ran to him) &gt; [‘run’, ‘ran’]</td>
+</tr>
+<tr>
+<td style="text-align:left">re.finditer()</td>
+<td style="text-align:left">和 findall 一样，只是用迭代器的方式使用</td>
+<td style="text-align:left">for item in re.finditer(rr[ua]n, I run to you. you ran to him):</td>
+</tr>
+<tr>
+<td style="text-align:left">re.split()</td>
+<td style="text-align:left">用正则分开字符串</td>
+<td style="text-align:left">re.split(rr[ua]n, I run to you. you ran to him) &gt; [‘I ‘, ‘ to you. you ‘, ‘ to him’]</td>
+</tr>
+<tr>
+<td style="text-align:left">re.sub()</td>
+<td style="text-align:left">用正则替换字符</td>
+<td style="text-align:left">re.sub(rr[ua]n, jump, I run to you. you ran to him) &gt; ‘I jump to you. you jump to him’</td>
+</tr>
+<tr>
+<td style="text-align:left">re.subn()</td>
+<td style="text-align:left">和 sub 一样，额外返回一个替代次数</td>
+<td style="text-align:left">re.subn(rr[ua]n, jump, I run to you. you ran to him) &gt; (‘I jump to you. you jump to him’, 2)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="匹配html"><a class="markdownIt-Anchor" href="#匹配html"></a> 匹配HTML</h3>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gherkin">re.compile(&#x27;<span class="hljs-variable">&lt;li&gt;</span>.<span class="hljs-symbol">*</span>?list_num.<span class="hljs-symbol">*</span>?(\d+).<span class="hljs-variable">&lt;/div&gt;</span>.<span class="hljs-symbol">*</span>?<span class="hljs-variable">&lt;img src=&quot;(.*?)&quot;.*?class=&quot;name&quot;.*?title=&quot;(.*?)&quot;&gt;</span>.<span class="hljs-symbol">*</span>?class=<span class="hljs-string">&quot;star&quot;</span>&gt;.<span class="hljs-symbol">*</span>?class=<span class="hljs-string">&quot;tuijian&quot;</span>&gt;(.<span class="hljs-symbol">*</span>?)<span class="hljs-variable">&lt;/span&gt;</span>.<span class="hljs-symbol">*</span>?class=<span class="hljs-string">&quot;publisher_info&quot;</span>&gt;.<span class="hljs-symbol">*</span>?target=<span class="hljs-string">&quot;_blank&quot;</span>&gt;(.<span class="hljs-symbol">*</span>?)<span class="hljs-variable">&lt;/a&gt;</span>.<span class="hljs-symbol">*</span>?class=<span class="hljs-string">&quot;biaosheng&quot;</span>&gt;.<span class="hljs-symbol">*</span>?<span class="hljs-variable">&lt;span&gt;</span>(.<span class="hljs-symbol">*</span>?)<span class="hljs-variable">&lt;/span&gt;</span><span class="hljs-variable">&lt;/div&gt;</span>.<span class="hljs-symbol">*</span>?<span class="hljs-variable">&lt;p&gt;</span><span class="hljs-variable">&lt;span\sclass=&quot;price_n&quot;&gt;</span>&amp;yen;(.<span class="hljs-symbol">*</span>?)<span class="hljs-variable">&lt;/span&gt;</span>.<span class="hljs-symbol">*</span>?<span class="hljs-variable">&lt;/li&gt;</span>&#x27;, re.S)<br><br>GHERKIN<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><code>.*?list_num.*?</code>这里的 <code>.*？</code> 加在了量词 <code>*</code> 的后面，使得该量词 <code>*</code> 变为非贪婪模式，即匹配尽量少的字符。例如，对 “123abc” 使用 <code>/\d+/</code> 将会匹配 “123”，而使用 <code>/\d+?/</code> 则只会匹配到 “1”。</p>
+<ul>
+<li>在当前案例中，使用正则来匹配html字符串，大量使用 <code>.*？</code> 来匹配其他字符串。</li>
+</ul>
+</li>
+<li>
+<p>当前匹配模式为 <code>re.S</code> ，表示跨行匹配。将多行字符串当作一个整体，将换行符 <code>\n</code> 当作一个普通字符加入这个整体中。</p>
+</li>
+<li>
+<p><code>&lt;span\sclass=&quot;price_n&quot;</code> 这里的 <code>\s</code> 代表空白字符，正则中不允许有空格出现</p>
+</li>
+<li>
+<p>建议在写长正则时，先将单个值的正则写出来，最后再拼起来，这样可以省去很多排错时间</p>
+</li>
+<li>
+<p>如正则一直无法匹配，尝试查看源码是否存在该值。如下图这种a标签的内容是计算上去的，并非源码中提供。</p>
+<p><a href="https://zhouyinglin.cn/C:/Users/v_vzylzhou/AppData/Roaming/Typora/typora-user-images/image-20221018101345894.png"><img src="https://zhouyinglin.cn/C:/Users/v_vzylzhou/AppData/Roaming/Typora/typora-user-images/image-20221018101345894.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+</li>
+</ul>
+<p><a href="https://zhouyinglin.cn/C:/Users/v_vzylzhou/AppData/Roaming/Typora/typora-user-images/image-20221018101315765.png"><img src="https://zhouyinglin.cn/C:/Users/v_vzylzhou/AppData/Roaming/Typora/typora-user-images/image-20221018101315765.png" srcset="/img/loading.gif" lazyload alt="img"></a></p>
+<p><strong>匹配模式</strong></p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>re.I</td>
+<td>使匹配对大小写不敏感</td>
+</tr>
+<tr>
+<td>re.L</td>
+<td>做本地化识别（locale-aware）匹配</td>
+</tr>
+<tr>
+<td>re.M</td>
+<td>多行匹配，影响 ^ 和 $</td>
+</tr>
+<tr>
+<td>re.S</td>
+<td>使 . 匹配包括换行在内的所有字符，跨行匹配</td>
+</tr>
+<tr>
+<td>re.U</td>
+<td>根据Unicode字符集解析字符。这个标志影响 \w, \W, \b, \B.</td>
+</tr>
+<tr>
+<td>re.X</td>
+<td>该标志通过给予你更灵活的格式以便你将正则表达式写得更易于理解。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="迭代器生成器与修饰器"><a class="markdownIt-Anchor" href="#迭代器生成器与修饰器"></a> 迭代器，生成器与修饰器</h2>
+<p><strong>迭代器</strong></p>
+<p>某对象实现了<code>__iter__()</code>函数，且该函数返回一个迭代器对象，这个对象就可以成为可迭代对象。可以用for循环遍历的对象均是可迭代对象。</p>
+<p>迭代器协议包括：</p>
+<ol>
+<li>实现了<code>__next__()</code>函数</li>
+<li><code>__next__()</code>函数返回了某个数值</li>
+<li><code>__next__()</code>取值完成后，抛出<code>StopIteration</code>异常</li>
+</ol>
+<p><strong>生成器</strong></p>
+<p>用于在遍历大规模数据时使用的写法，避免内存中数据量过大。生成器调用<code>__next__()</code>函数以<strong>惰性方式</strong>获取下一个值，遍历结束后无法再次遍历。</p>
+<p>优势就在于边迭代边输出，提供了延迟操作。</p>
+<p>（哪儿都没说明白，等用上了再说）</p>
+<p><strong>装饰器</strong></p>
+<p>装饰器的实现前提：函数也是对象，函数可以当做参数传入其他函数。函数也可以当做返回值被return</p>
+<p>为function做额外的事情，如写日志、测试、鉴权等。装饰器一般在多个函数中做同样操作时发挥的作用最大，可以较大限度减少代码量</p>
+<p>举例说明：</p>
+<p>这里的mains函数作为参数传入了dector函数，内部又调用了原函数mains，但在调用前后分别执行输出了语句。这就是装饰器dector的作用，<strong>在不改变mains函数行为的前提下，改变了mains函数的行为</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">dector</span>(<span class="hljs-params">func</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">tests</span>(<span class="hljs-params">*args, **kwargs</span>):  <span class="hljs-comment"># # 如需给原参数传参，这样写可以传任意数量和类型的参数</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;这是触发前的测试&quot;</span>)<br>        res = func(*args, **kwargs)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;这是触发后的操作&quot;</span>)<br>        <span class="hljs-keyword">return</span> res<br>    <span class="hljs-keyword">return</span> tests<br><br><span class="hljs-comment"># 这段代码等价于 mains = dector(mains)</span><br><span class="hljs-meta">@dector</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">mains</span>(<span class="hljs-params">name</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;这是主进程&quot;</span>)<br><br><br>mains(<span class="hljs-string">&quot;小周&quot;</span>)<br><br>输出：<br>这是触发前的测试<br>这是主进程<br>这是触发后的操作<br><br>PYTHON<br></code></pre></td></tr></table></figure>
+<p><strong>自定义参数、保留函数元信息</strong></p>
+<p>除了原函数所需要的参数，装饰器本身也可以定义参数，例如希望指定装饰器内部函数的执行次数，可以在装饰器这里传入。</p>
+<p>需要注意的是，当同一个函数被包装器修饰后，它的名字就已经变成了包装器内部的函数（wrapper），如果需要改成原来的greet，在上面加上一个<code>@functools.wraps(func)</code>就可以了，这会将原函数的元信息拷贝至对应的装饰器函数里。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">import</span> functools<br><br>def repeat(num):<br>    def my_decorator(func):<br>    	@functools.wraps(func) #将原函数的元信息拷贝至装饰器函数中<br>        def <span class="hljs-keyword">wrapper</span>(*args, **kwargs):<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(num): # <span class="hljs-number">4</span>被传入进来后，按照这个数字循环调用greet<br>                print(<span class="hljs-string">&#x27;wrapper of decorator&#x27;</span>)<br>                func(*args, **kwargs)<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">wrapper</span><br>    <span class="hljs-keyword">return</span> my_decorator<br><br>@repeat(<span class="hljs-number">4</span>)  # 此处是可以允许传参的<br>def greet(message):<br>    print(message)<br>#<span class="hljs-comment">-------------------------------------#</span><br>print(greet.__name__)<br>输出：<span class="hljs-keyword">wrapper</span><br></code></pre></td></tr></table></figure>
+<p><strong>装饰器的嵌套</strong></p>
+<p>允许有多个装饰器，执行顺序是从里到外（有待研究）：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@decorator1</span><br><span class="hljs-variable">@decorator2</span><br><span class="hljs-variable">@decorator3</span><br>def <span class="hljs-built_in">func</span>():<br>    ...<br>    <br># 等效于：<br><span class="hljs-built_in">decorator1</span>(<span class="hljs-built_in">decorator2</span>(<span class="hljs-built_in">decorator3</span>(func)))<br></code></pre></td></tr></table></figure>
+<p><strong>类装饰器</strong></p>
+<p>在<code>myDecorator</code>类的<code>__init__()</code>中定义和调用了<code>aFunction</code>函数，在<code>__init__()</code>执行结束后，<code>aFunction</code>函数已经声明且调用完了。然后输出第三句输出。最后执行<code>aFunction()</code>时，实际上是执行了<code>myDecorator</code>的<code>__call__()</code>方法。</p>
+<p>因此，被装饰后的函数<code>aFunction()</code>，已经是类<code>myDecorator</code>的对象了，当再次调用<code>aFunction()</code>时，也就是在调用类<code>myDecorator</code>的对象，所以会调到<code>__call__()</code>函数。</p>
+<p>使用类装饰器来装饰函数来对函数添加一些额外的属性或功能时，一般会在类的<code>__init__()</code>中传入函数，在<code>__call__()</code>调用修饰的函数或者其他额外处理。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs scss">class <span class="hljs-built_in">myDecorator</span>(object):<br>    def <span class="hljs-built_in">__init__</span>(self, f):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;inside myDecorator.__init__()&quot;</span>)<br>        <span class="hljs-built_in">f</span>() <br>    def <span class="hljs-built_in">__call__</span>(self):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;inside myDecorator.__call__()&quot;</span>)<br><br>@myDecorator<br>def <span class="hljs-built_in">aFunction</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;inside aFunction()&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Finished decorating aFunction()&quot;</span>) # 表示aFunction已经调用结束<br><span class="hljs-built_in">aFunction</span>()<br><br>输出：<br>inside myDecorator.<span class="hljs-built_in">__init__</span>()<br>inside <span class="hljs-built_in">aFunction</span>()<br>Finished decorating <span class="hljs-built_in">aFunction</span>()<br>inside myDecorator.<span class="hljs-built_in">__call__</span>()<br></code></pre></td></tr></table></figure>
+<p>补充：</p>
+<p>定义了<code>__call__()</code>方法的类的对象可以像函数一样被调用，此时调用的是对象的<code>__call__()</code>方法。因为按照装饰器语法的涵义，</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">@myDecorator</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">aFunction</span>():<br>    <span class="hljs-comment"># ……</span><br>    <br><span class="hljs-comment"># 等价于</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">aFunction</span>():<br>    <span class="hljs-comment"># ……</span><br>aFunction = myDecorator(aFunction)<br><br></code></pre></td></tr></table></figure>
+<h2 id="进阶用法"><a class="markdownIt-Anchor" href="#进阶用法"></a> 进阶用法</h2>
+<h3 id="lambda表达式"><a class="markdownIt-Anchor" href="#lambda表达式"></a> lambda表达式</h3>
+<p>用于创建匿名函数，语法上限为单个表达式，是正常函数定义的语法糖。如下两种写法是一样的：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">def <span class="hljs-built_in">add</span>(<span class="hljs-keyword">a</span>, b):<br>    <span class="hljs-literal">return</span> <span class="hljs-keyword">a</span> + b<br><br><span class="hljs-built_in">add</span> = lambdaa, b:<span class="hljs-keyword">a</span>+b<br><br>LIVECODESERVER<br></code></pre></td></tr></table></figure>
+<h3 id="遍历缩写"><a class="markdownIt-Anchor" href="#遍历缩写"></a> 遍历缩写</h3>
+<p>如下写法是一样的。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">l</span> =<span class="hljs-meta"> []</span><br><span class="hljs-attribute">for</span> i in range(<span class="hljs-number">10</span>):<br>    <span class="hljs-attribute">l</span>.append(i*<span class="hljs-number">2</span>)<br><br><span class="hljs-attribute">l</span> =<span class="hljs-meta"> [i*2 for i in range(10)]</span><br><br><span class="hljs-comment"># 使用缩写方式创建字典</span><br><span class="hljs-attribute">d</span> = &#123;<span class="hljs-string">&quot;index&quot;</span>+str(i): i*<span class="hljs-number">2</span> fro i in range(<span class="hljs-number">10</span>)&#125;<br><br><span class="hljs-attribute">APACHE</span><br></code></pre></td></tr></table></figure>
+<h3 id="分支缩写"><a class="markdownIt-Anchor" href="#分支缩写"></a> 分支缩写</h3>
+<p>对于简单逻辑，允许如下写法：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs stylus">done = False<br><span class="hljs-keyword">if</span> done:<br>    <span class="hljs-selector-tag">a</span> = <span class="hljs-number">1</span><br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-selector-tag">a</span> = <span class="hljs-number">2</span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(a)</span></span><br><br>done = False<br><span class="hljs-selector-tag">a</span> = <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> done <span class="hljs-keyword">else</span> <span class="hljs-number">2</span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(a)</span></span><br><br>STYLUS<br></code></pre></td></tr></table></figure>
+<h3 id="遍历简写"><a class="markdownIt-Anchor" href="#遍历简写"></a> 遍历简写</h3>
+<p>在for、if中使用简写</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 原始for循环中的if判断</span><br><span class="hljs-attribute">l</span> =<span class="hljs-meta"> []</span><br><span class="hljs-attribute">for</span> i in range(<span class="hljs-number">10</span>):<br>    <span class="hljs-attribute">if</span> i % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>:<br>        <span class="hljs-attribute">l</span>.append(i*<span class="hljs-number">2</span>)<br><br><span class="hljs-comment"># for循环+if判断简写，字典同此写法</span><br><span class="hljs-attribute">l</span> =<span class="hljs-meta"> [i*2 for i in range(10) if i % 2 == 0]</span><br><br><span class="hljs-attribute">APACHE</span><br></code></pre></td></tr></table></figure>
+<h3 id="带计数器的序列enumerate函数"><a class="markdownIt-Anchor" href="#带计数器的序列enumerate函数"></a> 带计数器的序列：enumerate()函数</h3>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs fortran"># 这个例子其实逻辑并不算通畅，l[<span class="hljs-built_in">count</span>] = <span class="hljs-keyword">data</span>这行完全可以放到<span class="hljs-keyword">if</span>内，不太能理解为什么要放外面<br><span class="hljs-built_in">count</span> = <span class="hljs-number">0</span><br>l = [<span class="hljs-number">11</span>,<span class="hljs-number">22</span>,<span class="hljs-number">33</span>,<span class="hljs-number">44</span>]<br>for <span class="hljs-keyword">data</span> <span class="hljs-keyword">in</span> l:<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">count</span> == <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">data</span> += <span class="hljs-number">11</span><br>    l[<span class="hljs-built_in">count</span>] = <span class="hljs-keyword">data</span> # 当<span class="hljs-keyword">if</span>为Ture时，<span class="hljs-keyword">data</span>的值自增<span class="hljs-number">11</span>，并赋给当此循环的下标所在值，<br>    <span class="hljs-built_in">count</span> += <span class="hljs-number">1</span><br><span class="hljs-built_in">print</span>(l)<br><br># enumerate(l)返回了下标和元素两个值，因此在for循环中可以直接使用<br># 此处的下标可以自定义初始值，如for <span class="hljs-built_in">count</span>, <span class="hljs-keyword">data</span> <span class="hljs-keyword">in</span> enumerate(l， start=<span class="hljs-number">5</span>):<br>l = [<span class="hljs-number">11</span>,<span class="hljs-number">22</span>,<span class="hljs-number">33</span>,<span class="hljs-number">44</span>]<br>for <span class="hljs-built_in">count</span>, <span class="hljs-keyword">data</span> <span class="hljs-keyword">in</span> enumerate(l):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">count</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">count</span> == <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">data</span> += <span class="hljs-number">11</span><br>    l[<span class="hljs-built_in">count</span>] = <span class="hljs-keyword">data</span><br><span class="hljs-built_in">print</span>(l)<br><br>FORTRAN<br></code></pre></td></tr></table></figure>
+<h3 id="zip遍历"><a class="markdownIt-Anchor" href="#zip遍历"></a> zip遍历</h3>
+<p>zip()将序列作为参数将其打包，可同时迭代多个序列</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-comment"># 普通方式：执行普通遍历，在每次循环中分别获取两个列表的元素</span><br>name = [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>]<br>score = [1,2,3]<br>d = &#123;&#125;<br>for i in range(3):<br>    d[name[i]] = score[i]<br>print(d)<br><br><span class="hljs-comment"># 同时将两个列表遍历，获得的值直接分配给n、s，空字典d 可直接赋值</span><br><span class="hljs-comment"># 复杂情况下zip()函数的简化程度会更高</span><br>name = [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>]<br>score = [1,2,3]<br>d = &#123;&#125;<br>for n, s in zip(name, score):<br>    d[n]=s<br>print(d)<br><br>MAKEFILE<br></code></pre></td></tr></table></figure>
+<h3 id="反转序列"><a class="markdownIt-Anchor" href="#反转序列"></a> 反转序列</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python">l = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>]<br><span class="hljs-comment"># 最原始的办法：遍历原序列，从最后追个元素追加至新列表</span><br>_l = []<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(l)):<br>    _l.append(l[-i-<span class="hljs-number">1</span>])<br><span class="hljs-built_in">print</span>(_l)<br><br><span class="hljs-comment"># 短for循环反转</span><br>_l = [l[-i-<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(l))]<br><br><span class="hljs-comment"># 内置的原地反转函数</span><br>l.reverse()<br><br><span class="hljs-comment"># 迭代时反转</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">reversed</span>(l):<br>    <span class="hljs-built_in">print</span>(i)<br>    <br><span class="hljs-comment"># 拷贝后反转</span><br>_l = l[::-<span class="hljs-number">1</span>]<br><br>PYTHON<br></code></pre></td></tr></table></figure>
+<h2 id="conda使用"><a class="markdownIt-Anchor" href="#conda使用"></a> conda使用</h2>
+<p>安装（略）</p>
+<h3 id="基本操作"><a class="markdownIt-Anchor" href="#基本操作"></a> 基本操作</h3>
+<p>创建独立的虚拟环境</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">conda</span> create --name test python=<span class="hljs-number">3</span>.<span class="hljs-number">8</span><br><br><span class="hljs-attribute">APACHE</span><br></code></pre></td></tr></table></figure>
+<p>查看当前虚拟环境列表</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda <span class="hljs-built_in">env</span> list<br><br>BASH<br></code></pre></td></tr></table></figure>
+<p>切换新建的<code>test</code>环境</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs applescript">conda <span class="hljs-built_in">activate</span> test<br><br>APPLESCRIPT<br></code></pre></td></tr></table></figure>
+<p>退出当前虚拟环境</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><br><span class="hljs-attribute">conda deactivate</span><br></code></pre></td></tr></table></figure>
+<p>依赖迁移</p>
+<p>在cmd或指定的本地路径下执行，导出依赖列表</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">pip <span class="hljs-keyword">freeze</span> &gt; requirements.txt<br><br>PGSQL<br></code></pre></td></tr></table></figure>
+<p>将txt文件放置新项目位置，执行读取</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> -r requirements.txt<br><br>CMAKE<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Study/" class="category-chain-item">Study</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python3.8速通</div>
+      <div>https://zhouyinglin.cn/post/python3sutong.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>小周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月7日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月20日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/disuxiaoshuo.html" title="《低俗小说》剧透解析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">《低俗小说》剧透解析</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/fc930271.html" title="人类生活指南">
+                        <span class="hidden-mobile">人类生活指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-comment-blond.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"login":"enable","lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.0.1/tieba","https://unpkg.com/@waline/emojis@1.0.1/bilibili"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+     
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <div id="waline"></div> <script> const locale = { placeholder: "说点什么吧！(填写邮箱可在被回复时收到邮件提醒)", }; Waline.init({ el: "#waline", serverURL: "https://comment.zhouyinglin.cn/", locale, }); </script>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <link rel="stylesheet" href="/dist/APlayer.min.css"> <div id="aplayer"></div> <script type="text/javascript" src="/dist/APlayer.min.js"></script> <script type="text/javascript" src="/js/amusic.js"></script>  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div class="statistics" style="font-size: 0.85rem"> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #3c4858;"  id="hitokoto"></span></a> <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script></div>  <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-pv"></span>
+         次 
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总用户量 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+<div class="statistics">
+ 	<a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+ </div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

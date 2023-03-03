@@ -1,0 +1,994 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/zz.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="小周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="链表 区块链一般表示为一个单链列表，区块链中的块相当于链表中的Node节点，节点之间使用哈希串联形成链。区块链上的数据基本不可能修改，比普通链表要复杂得多  树 区块链中使用Merkle Tree即默克尔树。是二叉树的一种，最底层是叶子节点，内容是对应数据的哈希。每两片相邻的叶子结点加起来做哈希计算，计算结果为上层节点的内容，这样持续计算就会产生一个最顶端的哈希值，该值被放在比特币的区块头中。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="区块链学习大纲">
+<meta property="og:url" content="https://zhouyinglin.cn/post/3f17b6d5.html">
+<meta property="og:site_name" content="小周的院子">
+<meta property="og:description" content="链表 区块链一般表示为一个单链列表，区块链中的块相当于链表中的Node节点，节点之间使用哈希串联形成链。区块链上的数据基本不可能修改，比普通链表要复杂得多  树 区块链中使用Merkle Tree即默克尔树。是二叉树的一种，最底层是叶子节点，内容是对应数据的哈希。每两片相邻的叶子结点加起来做哈希计算，计算结果为上层节点的内容，这样持续计算就会产生一个最顶端的哈希值，该值被放在比特币的区块头中。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/BlockChain.jpg">
+<meta property="article:published_time" content="2022-08-06T12:42:11.000Z">
+<meta property="article:modified_time" content="2022-12-15T02:32:52.000Z">
+<meta property="article:author" content="小周">
+<meta property="article:tag" content="BlockChain">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/BlockChain.jpg">
+  
+  
+  
+    <meta name="baidu-site-verification" content="code-bMcoZ9RRBp" />
+  
+  <title>区块链学习大纲 - 小周的院子</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhouyinglin.cn","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DOFm5rBfeIBUxN13vhiXlS4S-MdYXbMMI","app_key":"FJKOtk5nWqYzGoXXiFAvHIDC","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小周的院子</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+    
+    <!-- 添加zyl天气 -->
+
+<div id="tp-weather-widget"></div>
+    <script>
+        (function (a, h, g, f, e, d, c, b) { b = function () { d = h.createElement(g); c = h.getElementsByTagName(g)[0]; d.src = e; d.charset = "utf-8"; d.async = 1; c.parentNode.insertBefore(d, c) }; a["SeniverseWeatherWidgetObject"] = f; a[f] || (a[f] = function () { (a[f].q = a[f].q || []).push(arguments) }); a[f].l = +new Date(); if (a.attachEvent) { a.attachEvent("onload", b) } else { a.addEventListener("load", b, false) } }(window, document, "script", "SeniverseWeatherWidget", "//cdn.sencdn.com/widget2/static/js/bundle.js?t=" + parseInt((new Date().getTime() / 100000000).toString(), 10)));
+        window.SeniverseWeatherWidget('show', {
+            flavor: "slim",
+            location: "WKJ1F428HH2F",
+            geolocation: true,
+            language: "zh-Hans",
+            unit: "c",
+            theme: "auto",
+            token: "5089001e-aa9f-41c5-862d-e416aabf81f7",
+            hover: "enabled",
+            container: "tp-weather-widget"
+        })
+    </script>
+
+
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文章
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    归档
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/boxs/">
+                <i class="iconfont icon-switch-fill"></i>
+                百宝箱
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.foreverblog.cn/go.html">
+                <i class="iconfont icon-rss"></i>
+                虫洞
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202212161220542.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="区块链学习大纲"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-06 20:42" pubdate>
+          2022年8月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          48 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">区块链学习大纲</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<h4 id="链表"><a class="markdownIt-Anchor" href="#链表"></a> 链表</h4>
+<p>区块链一般表示为一个单链列表，区块链中的块相当于链表中的Node节点，节点之间使用哈希串联形成链。区块链上的数据基本不可能修改，比普通链表要复杂得多</p>
+<h4 id="树"><a class="markdownIt-Anchor" href="#树"></a> 树</h4>
+<p>区块链中使用Merkle Tree即默克尔树。是二叉树的一种，最底层是叶子节点，内容是对应数据的哈希。每两片相邻的叶子结点加起来做哈希计算，计算结果为上层节点的内容，这样持续计算就会产生一个最顶端的哈希值，该值被放在比特币的区块头中。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806204245.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>主要用于验证一个交易已经存在对应的区块中，一般来说，验证交易需要搭建节点下载和同步区块链数据后根据哈希值查询，这样既占用空间和验证计算量都较大。如果使用Merkle Tree，可直接下载块头数据即可验证</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806204257.png" srcset="/img/loading.gif" lazyload alt></p>
+<h4 id="过滤器"><a class="markdownIt-Anchor" href="#过滤器"></a> 过滤器</h4>
+<p>Bloom Filter即布隆过滤器。它是一种基于概率的数据结构，主要用来判断某个元素是否在集合内，它具有运行速度快（时间效率），占用内存小的优点（空间效率），但是有一定的误识别率和删除困难的问题。它能够告诉你某个元素一定不在集合内或可能在集合内。</p>
+<p>在比特币网络中，轻节点客户端查找自己账户地址相关的UTXO时需要用到。客户端通过过滤器告诉全节点自己的地址信息，全节点返回结果可能相关的UTXO，过滤器过滤掉了不属于该地址的UTXO。保护隐私、节省带宽</p>
+<hr>
+<h4 id="hash"><a class="markdownIt-Anchor" href="#hash"></a> HASH</h4>
+<p>即哈希算法、散列算法，一个单项函数，可以将任意长度的输入数据转化为固定长度的输出。将一个输入给哈希，会很快计算出来一个输出，但一个输出无法反推输入，只能暴力穷举，这种概率非常小。如果两个输入数据不同但哈希相同，则发生了哈希碰撞。</p>
+<p>区块链中，哈希算法主要用于防止交易被篡改，交易经过哈希算法计算写入MerkleTree<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806204312.png" srcset="/img/loading.gif" lazyload alt></p>
+<h4 id="非对称加密与数字签名"><a class="markdownIt-Anchor" href="#非对称加密与数字签名"></a> 非对称加密与数字签名</h4>
+<p>非对称加密中有连个密钥，公钥和私钥，是一对。如果使用公钥加密，那必须用对应的私钥解密；如果对私钥加密，那必须用对应公钥解密。非对称加密信息传输过程如下：</p>
+<ol>
+<li>A要向B发送信息，A和B都要产生一对用于加密、解密的公钥和私钥</li>
+<li>A保管自己的私钥，把公钥告诉B；B保管自己的私钥，把公钥告诉A</li>
+<li>A要给B发送信息时，A用B的公钥加密信息，因为A知道B的公钥</li>
+<li>A将这个消息发给B（已经用B的公钥加密消息）</li>
+<li>B收到这个消息后，B用自己的私钥解密A的消息。其他所有收到这个报文的人都无法解密，因为只有B才有B的私钥<br>
+<img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806204330.png" srcset="/img/loading.gif" lazyload alt></li>
+</ol>
+<p>数字签名有两个算法：签名、验证。签名就是使用私钥处理信息或因为信息的哈希而产生的签名，验证就是使用公钥验证签名的真实性。整个验证过程如下：</p>
+<ol>
+<li>张三在比特币转账前需要将交易信息缩短成一段字符串，用自己的私钥进行加密以形成数字签名</li>
+<li>张三会将交易信息、数字签名和公钥都广播出去，矿工会将这些记录下来，并用张三的公钥进行验证</li>
+<li>如果验证成功就证明该笔交易确实是由张三发出的，之后接受转账者李四会收到比特币</li>
+</ol>
+<p>在区块链中，非对称加密和数字签名利用公私钥对加密，可以保证数据安全。</p>
+<p>分布式网络：</p>
+<h4 id="p2p网络"><a class="markdownIt-Anchor" href="#p2p网络"></a> P2P网络</h4>
+<ul>
+<li>传统Client-Server模式是中心化网络，资源集中，海量访问时可能受限</li>
+<li>P2P网络是去中心化的，各节点可直接通信，节点既是服务器又是客户端</li>
+<li>P2P架构下是无信任的，用户无需担心隐私泄露，且通信加密，安全</li>
+<li>节点间的直接通信，效率较高</li>
+<li>目前的应用：文件共享（如种子下载）、区块链应用</li>
+</ul>
+<h4 id="共识算法"><a class="markdownIt-Anchor" href="#共识算法"></a> 共识算法</h4>
+<p>共识算法是允许用户或机器在分布式环境中协调关系的机制，它需要确保系统中的所有代理对单一事实来源能够最终达成一致意见（即使某些代理持反对意见），也就是说，系统必须具有良好的容错性。经典的共识概念可以参考拜占庭将军问题。</p>
+<p>目前我们国家的货币系统是一个记账货币，例如支付宝扫码支付，其中并没有进行实际的货币转移，而是支付宝在它的数据库里记了一笔账，这就是中心化的记账方式。这种方式效率很高，但也存在一系列问题，如中心化节点引发的错误等黑天鹅事件，一般的解决方案就是做备份、对人员进行SOP培训，或者使用更可靠、安全的系统。</p>
+<p>去中心化记账系统中，每个区块都记录着很多交易，这种系统有很多优点，但其中一个很重要的问题就是各节点账本的一致性。因为每加入这个系统的节点都需要保存一份完整的账本，但却不能有两个节点同时记账，因为节点处于不同的环境，接收到的交易信息不一致，如果同时记账就会导致账本的不一致。所以，需要通过共识机制决定让哪个节点来记账，目前常用的就是POW、POS等</p>
+<h5 id="pow工作量证明"><a class="markdownIt-Anchor" href="#pow工作量证明"></a> POW工作量证明</h5>
+<p>例如，工作面试中，招聘网站写着岗位需要本科学历，如何证明是本科毕业生？只要将本科毕业证给面试官看就行了。但是你要拿到本科毕业证需要上4年大学、在此之前还要上3年高中、初中小学，中途要上课、考试，还不能挂科。这是一个艰辛的过程，但对于面试官而言，只要展示出毕业证就可以证明你上过大学。这种获取困难但验证简单的不对称性也是POW的特点。它<strong>通过对一个区块链头部中的父区块哈希、MerkleTree树根、nonce值三个字段进行哈希运算</strong>，如果结果小于目标值则计算成功，如果大于目标值则改变nonce值，重复运算直到结果小于目标值为止</p>
+<p>区块头部信息：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字段名</th>
+<th style="text-align:center">长度/字节</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">version</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">版本号</td>
+</tr>
+<tr>
+<td style="text-align:center">prev_hash</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">前一区块哈希</td>
+</tr>
+<tr>
+<td style="text-align:center">merkle_root</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">区块体中交易的Merkle树的根节点的哈希</td>
+</tr>
+<tr>
+<td style="text-align:center">time</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">当前区块生成时间，时间戳</td>
+</tr>
+<tr>
+<td style="text-align:center">terget</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">当前目标值</td>
+</tr>
+<tr>
+<td style="text-align:center">nonce</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">随机数</td>
+</tr>
+</tbody>
+</table>
+<h5 id="pos权益证明"><a class="markdownIt-Anchor" href="#pos权益证明"></a> POS权益证明</h5>
+<p>参与比特币挖矿的人越来越多，PoW的许多问题逐渐显现，例如随着算力竞争迅速加剧，获取代币需要消耗的能源大量增加，记账权也逐渐向聚集了大量算力的“矿池”集中。为此研究者尝试采用新的机制取代工作量证明。POS最早的应用是点点币，它出了币龄的概念，币龄是持有的代币与持有时间乘积的累加。利用币龄竞争取代算力竞争，使区块链的证明不再仅仅依靠工作量，有效地解决了PoW的资源浪费问题。关于POS可详见百度</p>
+<p><img src="https://img2022.cnblogs.com/blog/1560490/202205/1560490-20220531160019464-766728807.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>在区块链中，共识算法可以解决两个问题：双花问题和拜占庭将军问题</p>
+<h4 id="并行计算模型"><a class="markdownIt-Anchor" href="#并行计算模型"></a> 并行计算模型</h4>
+<p>在区块链系统中，交易是组成事务的基本单元。交易吞吐量（TPS）很大程度上能限制或拓宽区块链业务的适用场景，愈高的吞吐量，意味着区块链能够支持愈广的适用范围和愈大的用户规模。业界的TPS优化方案层出不穷，但都是为了尽可能提交交易的并行处理能力，降低交易处理时间。如FISCO BCOS基于DAG模型的并行交易引擎等</p>
+<p>事务一致性原理</p>
+<p>一致性是指分布式系统中（如区块链）的多个服务节点，给定一系列的操作，在约定协议的保障下，<strong>使它们对外界呈现的状态是一致的</strong>。换句话说，也就是保证<strong>集群中所有服务节点中的数据完全相同并且能够对某个提案（Proposal）达成一致</strong></p>
+<p><strong>注意</strong>：共识性描述的是节点之间彼此对某个状态达成一致结果的过程，而一致性是指多个节点对外呈现的数据的状态，描述的是对数据状态的维护能力。也就是说，一致性描述的是结棍状态，共识则是一种手段。达成共识并不意味着保证了一致性，只能说共识机制能够实现某种程度上的一致性。在实际应用中，如果要保证系统满足不同程度的一致性，往往需要通过共识算法来达成</p>
+<h5 id="一致性的要求"><a class="markdownIt-Anchor" href="#一致性的要求"></a> 一致性的要求</h5>
+<ul>
+<li>达成一致的结果在有限的时间内完成，简称为<strong>有限性</strong></li>
+<li>不同节点最终完成决略的结果是相同的，即<strong>约同性</strong></li>
+<li>决策的结果必须是系统中某个节点提出来的。即<strong>合法性</strong>。</li>
+</ul>
+<p>在分布式系统中，如果一个由节点提出的提案，能够用在有限的时间内达到一致性的结果，我们就说该提案达到了一致性</p>
+<h5 id="一致性的分类"><a class="markdownIt-Anchor" href="#一致性的分类"></a> 一致性的分类</h5>
+<ul>
+<li>严格一致性
+<ul>
+<li>理想状态，对于某数据项的任何读写操作将返回最近一次对它进行的写操作的结果所对应的值，依赖于绝对的全局时间。严格一致性在系统不发生任何故障，且所有节点之间的通信无需任何时间这种理想的条件下才能达到，这时候整个分布式系统相当于一台机器。这在现实中基本不可能达到，且一致性越强往往导致处理性能、可扩展性弱</li>
+</ul>
+</li>
+<li>强一致性
+<ul>
+<li>标准：当分布式系统中更新操作完成之后，任何多个进程或线程，访问系统都会获得最新的值</li>
+<li>强一致性包括以下两类
+<ul>
+<li>顺序一致性</li>
+<li>线性一致性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>弱一致性
+<ul>
+<li>系统并不保证后续进程或线程的访问都会返回最新的更新的值。系统在数据成功吸入之后，不承诺立即可以读到最新写入的值，也不会具体承诺多久读到。但是<strong>会尽可能保证在某个时间级别（秒级）之后</strong>。可以让数据达到一致性状态。也就是说，如果能容忍后续的部分或者全部访问不到，则是弱一致性</li>
+</ul>
+</li>
+<li>最终一致性
+<ul>
+<li>弱一致性的特定形式。系统保证在没有后续更新的前提下，系统最终返回上一次更新操作的值。 也就是说，如果经过一段时间后要求能访问到更新后的数据，则是最终一致性。在最终一致性的要求下，如果没有故障发生，不一致窗口的时间主要受通信延迟，系统负载和复制副本的个数影响。DNS是一个典型的最终一致性系统。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="博弈论"><a class="markdownIt-Anchor" href="#博弈论"></a> 博弈论</h4>
+<p>多个个体之间的收益与奖励、以及如何使用它们来分析一次性和持续性游戏中的激励因素。博弈论应用到区块链的核心就是共识机制——让链上所有成员就同一问题达成一致：<strong>纳什均衡、谢林点</strong>。博弈论是研究战略决策的理论，一个博弈论模型至少有三个组成部分：</p>
+<ol>
+<li>决策者，例如公司董事长</li>
+<li>战略，为了推动发展而做出的决定</li>
+<li>回报，策略的结果</li>
+</ol>
+<p>博弈论中的2种类型：</p>
+<ol>
+<li>零和游戏：以牺牲另一个玩家为代价换取一个玩家的收益的游戏</li>
+<li>非零和游戏：一个玩家的收益不以另一个玩家的损失为代价的游戏</li>
+</ol>
+<p>纳什均衡：博弈论的一个解决方案，假设每个参与者都知道其他参与者的策略的情况下，没有参与者可以通过改变自身策略使自身受益时的一个概念。</p>
+<p>谢林点：同样是博弈论的一个解决方案，指人们在没有沟通的情况下的选择倾向，做出这一选择可能因为它<strong>看起来自然、特别、或者与选择者有关</strong>。</p>
+<ul>
+<li>例如，两人驱车相对而行，如果两车相撞，两人均死于车祸；如一方转弯，而另一方没有，则转弯的一方被耻笑为胆小鬼，另一方胜出。这种情况下使用谢林点的概念来解决问题，即开车时闭上眼睛，切断与对方的沟通，专注自己本能。在现实生活中，车子一般靠右行驶，直接会让各自均靠右边行驶。</li>
+<li>在生活中，有各种聚焦点，如公司、小区门口、奶茶店等，这些地方都属于谢林点</li>
+</ul>
+<p>补充：有限理性概念：</p>
+<p>例如小明每天都去水果店买一个苹果，每次来店主都会离开5分钟，且店里没有监控，他可以很容易地偷到一个苹果，但他从来没有这样做过。有限理性概念意味着当有选择的时候，<strong>人们总是会选择一条简单且习惯的道路</strong>。这条道路可能不是最适合他们的，也可能不会给他们最高的回报，却是<strong>最简单的道路</strong></p>
+<h4 id="区块链-加密货币中的博弈理论"><a class="markdownIt-Anchor" href="#区块链-加密货币中的博弈理论"></a> 区块链、加密货币中的博弈理论</h4>
+<p>区块链使用博弈论来保护系统。例如比特币中的双花攻击，系统本身是没有道德可言的，因为道德无法量化，系统中的大部分节点会接着最长合法链的后面去挖矿，双花攻击的成本很大，根本没有必要去做这件事。从这个方面来看，可以说区块链本身就是一个能够自动执行纳什均衡点的系统</p>
+<p>资料来源：<a target="_blank" rel="noopener" href="https://blockgeeks.com/guides/cryptocurrency-game-theory/">https://blockgeeks.com/guides/cryptocurrency-game-theory/</a></p>
+<h4 id="激励相容"><a class="markdownIt-Anchor" href="#激励相容"></a> 激励相容</h4>
+<p>经济学家哈维茨在机制设计理论中提出的，意思是在市场经济中，每个理性经纪人都会有自利的一面，其个人行为灰暗自利的规则行为行动。如果能有一种制度安排使得行为人追求的<strong>个人利益正好与企业实现集体价值最大化的目标相吻合</strong>，这一制度安排就是“激励相容”。</p>
+<p>这通过实施一个博弈规则来达到该目标。激励相容通过经济平衡的手段，鼓励节点参与到维护区块系统安全运行中来，防止对总账本进行篡改，是长期维持区块链网络运行的动力。当集体和个人的利益达到了一个平衡点，这个游戏就会一直持续下去，不会崩塌。</p>
+<p>语言：Sodility、WebAssembly</p>
+<p><a target="_blank" rel="noopener" href="https://solidity-cn.readthedocs.io/zh/develop/">https://solidity-cn.readthedocs.io/zh/develop/</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn">https://developer.mozilla.org/zh-CN/docs/Learn</a></p>
+<hr>
+<h5 id="网络拓扑结构"><a class="markdownIt-Anchor" href="#网络拓扑结构"></a> 网络拓扑结构</h5>
+<p>大部分区块链网络底层仍然使用TCP/IP协议，和HTTP、SMTP协议都处在应用层。经常和P2P对比的是当下最为广泛的HTTP，从C/S架构变更成点对点拓扑结构。比特币的P2P网络非常复杂，这里只了解全节点场景下的网络路由</p>
+<p>比特币P2P网络基于TCP协议，主网默认端口8333。P2P网络拓扑结构本身可有很多种，如中心化、半中心化拓、全分布式。</p>
+<ul>
+<li>比特币全节点组成的网络是一种全分布式的拓扑结构，节点间的传输过程接近“泛洪算法”。</li>
+<li>比特币全节点与SPV简化支付验证客户端之间的交互模式接近半中心化的拓扑结构，SPV随机选择一个全节点连接，这个全节点成为SPV的代理，帮助SPV广播交易</li>
+</ul>
+<h5 id="节点发现"><a class="markdownIt-Anchor" href="#节点发现"></a> 节点发现</h5>
+<p>节点发现是接入区块链P2P网络的第一步</p>
+<ul>
+<li>初始化节点发现：你的全节点刚下载，首次运行，没有任何节点数据
+<ul>
+<li>DNS-seed，即DNS 种子节点。例如nslookup <a target="_blank" rel="noopener" href="http://seed.bitcoin.sipa.be">seed.bitcoin.sipa.be</a> 会发现多个IPv4主机地址，使用nc命令连接域名下的某个主机的8333端口就会发现连接成功<code>nc -nvv 68.183.188.105 8333 found 0 associations</code></li>
+<li>硬编码种子节点</li>
+</ul>
+</li>
+<li>启动后节点发现：正在运行的钱包已经能跟随网络动态维护可用节点
+<ul>
+<li>初始节点发现后，你的节点需要向已存在的节点要一份对等节点列表（peer list），所以在每次需要发送协议消息的时候，它会花费固定的时间尝试和已存的节点列表中的节点建立链接，如果有任何一个节点在超时之前可以连接上，就不用去 DNS seed 获取地址</li>
+</ul>
+</li>
+</ul>
+<h5 id="局域网穿透"><a class="markdownIt-Anchor" href="#局域网穿透"></a> 局域网穿透</h5>
+<p>局域网里运行的区块链节点，在公网是无法发现的，公网上的节点只能被动接受连接，并不能主动发起连接。通过NAT、UPnP技术可自行建立映射。比特币和以太坊均使用了UPnP协议作为局域网穿透工具（局域网内的路由设备支持NAT网关、支持UPnP协议）</p>
+<ul>
+<li>NAT：源 NAT，替换 TCP 报文中的源地址并映射到内网地址</li>
+<li>UPnP：通用即插即用（Universal Plug and Play）主要用于设备的智能互联互通，所有在网络上的设备马上就能知道有新设备加入</li>
+</ul>
+<h5 id="节点交互"><a class="markdownIt-Anchor" href="#节点交互"></a> 节点交互</h5>
+<p>一旦节点建立连接以后，节点之间的交互是遵循一些特定的命令，这些命令写在消息的头部，消息体写的则是消息内容。</p>
+<ul>
+<li>请求命令</li>
+<li>数据交互命令</li>
+</ul>
+<h5 id="用java-sdk接入到区块链"><a class="markdownIt-Anchor" href="#用java-sdk接入到区块链"></a> 用Java SDK接入到区块链</h5>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/sdk/java_sdk/quick_start.html">https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/sdk/java_sdk/quick_start.html</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Study/" class="category-chain-item">Study</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/BlockChain/">#BlockChain</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>区块链学习大纲</div>
+      <div>https://zhouyinglin.cn/post/3f17b6d5.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>小周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月6日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月15日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/bbbbe684.html" title="Ubuntu22.04桌面版配置Clash for Linux">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Ubuntu22.04桌面版配置Clash for Linux</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/b233c6fd.html" title="机器学习实践（二）：k-NN算法">
+                        <span class="hidden-mobile">机器学习实践（二）：k-NN算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-comment-blond.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"login":"enable","lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.0.1/tieba","https://unpkg.com/@waline/emojis@1.0.1/bilibili"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+     
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <div id="waline"></div> <script> const locale = { placeholder: "说点什么吧！(填写邮箱可在被回复时收到邮件提醒)", }; Waline.init({ el: "#waline", serverURL: "https://comment.zhouyinglin.cn/", locale, }); </script>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <link rel="stylesheet" href="/dist/APlayer.min.css"> <div id="aplayer"></div> <script type="text/javascript" src="/dist/APlayer.min.js"></script> <script type="text/javascript" src="/js/amusic.js"></script>  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div class="statistics" style="font-size: 0.85rem"> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #3c4858;"  id="hitokoto"></span></a> <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script></div>  <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-pv"></span>
+         次 
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总用户量 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+<div class="statistics">
+ 	<a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+ </div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

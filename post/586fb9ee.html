@@ -1,0 +1,841 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/zz.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="小周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、引言 互联网的出现和普及使得传统身份有了另一种表现形式，即数字身份，除自然人以外，机构组织、智能设备、虚拟网络都可以作为实体并拥有数字身份，这些实体作为数字化社会的重要组成部分，共同构建了数字生态，数字社会身份体系如下图所示。  我们一般认为，数字身份的演进可分为三个阶段，第一阶段是由单一权威机构进行管理和控制的中心化身份，不同机构之间身份数据互不相通；第二阶段是由多机构或者联盟进行管理和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DPKI的崛起之路——分布式数字身份(DID)">
+<meta property="og:url" content="https://zhouyinglin.cn/post/586fb9ee.html">
+<meta property="og:site_name" content="小周的院子">
+<meta property="og:description" content="一、引言 互联网的出现和普及使得传统身份有了另一种表现形式，即数字身份，除自然人以外，机构组织、智能设备、虚拟网络都可以作为实体并拥有数字身份，这些实体作为数字化社会的重要组成部分，共同构建了数字生态，数字社会身份体系如下图所示。  我们一般认为，数字身份的演进可分为三个阶段，第一阶段是由单一权威机构进行管理和控制的中心化身份，不同机构之间身份数据互不相通；第二阶段是由多机构或者联盟进行管理和">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/Sidetree Protocol.png">
+<meta property="article:published_time" content="2022-08-06T12:35:58.000Z">
+<meta property="article:modified_time" content="2022-12-15T02:32:52.000Z">
+<meta property="article:author" content="小周">
+<meta property="article:tag" content="分布式">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/Sidetree Protocol.png">
+  
+  
+  
+    <meta name="baidu-site-verification" content="code-bMcoZ9RRBp" />
+  
+  <title>DPKI的崛起之路——分布式数字身份(DID) - 小周的院子</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhouyinglin.cn","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DOFm5rBfeIBUxN13vhiXlS4S-MdYXbMMI","app_key":"FJKOtk5nWqYzGoXXiFAvHIDC","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小周的院子</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+    
+    <!-- 添加zyl天气 -->
+
+<div id="tp-weather-widget"></div>
+    <script>
+        (function (a, h, g, f, e, d, c, b) { b = function () { d = h.createElement(g); c = h.getElementsByTagName(g)[0]; d.src = e; d.charset = "utf-8"; d.async = 1; c.parentNode.insertBefore(d, c) }; a["SeniverseWeatherWidgetObject"] = f; a[f] || (a[f] = function () { (a[f].q = a[f].q || []).push(arguments) }); a[f].l = +new Date(); if (a.attachEvent) { a.attachEvent("onload", b) } else { a.addEventListener("load", b, false) } }(window, document, "script", "SeniverseWeatherWidget", "//cdn.sencdn.com/widget2/static/js/bundle.js?t=" + parseInt((new Date().getTime() / 100000000).toString(), 10)));
+        window.SeniverseWeatherWidget('show', {
+            flavor: "slim",
+            location: "WKJ1F428HH2F",
+            geolocation: true,
+            language: "zh-Hans",
+            unit: "c",
+            theme: "auto",
+            token: "5089001e-aa9f-41c5-862d-e416aabf81f7",
+            hover: "enabled",
+            container: "tp-weather-widget"
+        })
+    </script>
+
+
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文章
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    归档
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/boxs/">
+                <i class="iconfont icon-switch-fill"></i>
+                百宝箱
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.foreverblog.cn/go.html">
+                <i class="iconfont icon-rss"></i>
+                虫洞
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202212161220542.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="DPKI的崛起之路——分布式数字身份(DID)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-06 20:35" pubdate>
+          2022年8月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          33 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">DPKI的崛起之路——分布式数字身份(DID)</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<h1 id="一-引言"><a class="markdownIt-Anchor" href="#一-引言"></a> 一、引言</h1>
+<p>互联网的出现和普及使得传统身份有了另一种表现形式，即数字身份，除自然人以外，机构组织、智能设备、虚拟网络都可以作为实体并拥有数字身份，这些实体作为数字化社会的重要组成部分，共同构建了数字生态，数字社会身份体系如下图所示。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806203631.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>我们一般认为，数字身份的演进可分为三个阶段，第一阶段是由单一权威机构进行管理和控制的中心化身份，不同机构之间身份数据互不相通；第二阶段是由多机构或者联盟进行管理和控制的联盟身份，在该体系下，用户的身份数据具备了一定的可移植性，第三阶段以用户为中心，身份信息由用户自主掌控授权，身份管理走向去中心化。可以预见，在未来的数字化社会中，分布式数字身份体系带来的全新观念必将催生新的商业模式[1]，本篇文章将聚焦分布式数字身份(DID)，探索其广阔应用场景。</p>
+<h1 id="二-pkidpki"><a class="markdownIt-Anchor" href="#二-pkidpki"></a> <strong>二、PKI&amp;&amp;DPKI</strong></h1>
+<p>“身份”本身是基础并客观存在的，今天的互联网广泛通过“租借”第三方机构（ICANN、DNS注册机构、证书颁发机构）服务来构建信任体系，实现实体间的安全通信，若要实现去中心化生态体系，又该如何求解，这里我们就来聊一聊PKI与DPKI体系之间的关系。</p>
+<h2 id="1-pki"><a class="markdownIt-Anchor" href="#1-pki"></a> <strong>1. PKI</strong></h2>
+<p>PKI是Public Key Infrastructure的缩写，翻译过来也就是公钥基础设施，是生成、存储、分发和撤销用户数字身份证书所必须的软件、硬件、人、策略及处理过程的集合，也是国际公认普遍适用的一整套信息安全系统。PKI的建立依赖于权威的认证，离不开可信第三方（ICANN、DNS注册机构、证书颁发机构）的协同工作，通过运用多种技术，可为应用提供认证、加密和数字签名等安全支撑，为信息系统提供密钥管理和证书管理等安全服务，其主要载体为X.509格式的证书文件，PKI技术架构如下图所示。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806203656.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id><a class="markdownIt-Anchor" href="#"></a> </h3>
+<h2 id="2-dpki"><a class="markdownIt-Anchor" href="#2-dpki"></a> 2. <strong>DPKI</strong></h2>
+<p>分布式公钥基础设施(DPKI)作为PKI的演进，并非是对PKI的全盘抛弃和替代，更多是在原有认证体系基础之上的一种改进和补充，通过构建一种分布式的认证体系来解决中心化认证体系存在的问题，是未来网络信任生态的基础设施。DPKI与PKI在业务流程上并无明显区别，首先用户提供相关信息并发起申请，接下来发证方审核信息，颁发证书，最后用户出示证书完成验证。但不同于PKI体系，DPKI强调用户身份的自主可控、身份可移植和分布式认证，个人身份的验证不再依赖于发证方，DPKI认证体系的具体特性如下图所示。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806203708.png" srcset="/img/loading.gif" lazyload alt></p>
+<h1 id="三-分布式数字身份did"><a class="markdownIt-Anchor" href="#三-分布式数字身份did"></a> <strong>三、分布式数字身份(DID)</strong></h1>
+<p>伴随着区块链等可信技术的发展，各大公司、机构纷纷入局，对DPKI的实现展开了更深入的研究探索，分布式数字身份(DID)解决方案应运而生。通过结合区块链技术，分布式数字身份使用户真正拥有并控制自己的个人数据和资产，可实现跨部门、跨行业、跨地域的去中心化共享能力。</p>
+<h2 id="1-w3c-did"><a class="markdownIt-Anchor" href="#1-w3c-did"></a> <strong>1. W3C DID</strong></h2>
+<p>万维网联盟(W3C)作为Web技术领域最具权威和影响力的标准化组织，已制定了200多项影响深远的Web技术标准及实施指南，其下属DID工作组已于2019年底发布了首个DID标准规范[2]，该标准主要包括分布式身份标识和可验证声明(身份凭证)两大基础模块，定义了身份标识符格式，描述文档以及身份凭证的生成、出示、验证和销毁等流程，覆盖了身份和凭证管理的完整生命周期，使DID技术向着规范化、标准化的目标迈出了一大步，W3C DID标准结构如下图所示。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806203718.png" srcset="/img/loading.gif" lazyload alt></p>
+<h2 id="2-基础层did规范"><a class="markdownIt-Anchor" href="#2-基础层did规范"></a> **2. 基础层：DID规范 **</h2>
+<p>DID基础层主要定义规范了身份标识符及相应描述文档，该规范可用来标识人、组织、物品、抽象实体等任意主体。其中，DID标识符是一个特定格式的字符串且全局唯一，用来代表一个实体的数字身份，类似于我们的身份证号码一样，而每个DID标识都会对应一个DID文档(Document)，文档为JSON字符串格式，主要包含了与DID验证相关的密钥信息和验证方法，用以实现对实体身份标识的控制，DID文档内容格式如下图所示。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806203730.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>并且，一个实体可对应多个DID，实体在通过注册申请后可获得一个或多个由自己进行维护管理的DID标识，不同DID标识所代表的身份之间互不相关，有效降低了身份信息之间的耦合性。总的来说，我们可以将DID基础层看作是一个键值数据库，DID标识符当作键，而DID文档则是对应的值，二者之间的关系结构如下图所示。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806203743.png" srcset="/img/loading.gif" lazyload alt></p>
+<h2 id="3-应用层可验证证明"><a class="markdownIt-Anchor" href="#3-应用层可验证证明"></a> **3. 应用层：可验证证明 **</h2>
+<p>通过上一小节对DID规范的介绍可以看出，DID文档中不包含任何与个人真实信息相关的内容，如姓名、手机号、地址等。因此，仅仅依靠DID标识是无法完成身份验证的，DID应用层可验证声明[3]的助力不可或缺。</p>
+<p>可验证声明(VC)用于在网络上（区块链）流转可验证信息，是建立DID整个体系的价值所在。对于DID应用层，我们可将参与实体划分为发行人(Issuer)、持有人(Holder)、验证人(Verifier)、DID注册系统（区块链）、凭证存储平台。其中，发行人拥有用户数据并且能出具相应VC，如政府部门、公安机关、教育机构等；持有人则是VC的持有者，任何人都可以充当该实体角色；验证人负责接受VC并进行核验，由此为VC持有人提供相应类型的服务；DID注册系统及凭证存储平台分别负责链上链下数据信息的验证维护，可验证声明应用服务如下图所示。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/20220806203801.png" srcset="/img/loading.gif" lazyload alt></p>
+<h1 id="四-应用场景"><a class="markdownIt-Anchor" href="#四-应用场景"></a> <strong>四、应用场景</strong></h1>
+<h2 id="1身份认证"><a class="markdownIt-Anchor" href="#1身份认证"></a> **1.身份认证 **</h2>
+<p>身份认证可以说是DID最基本的应用了，对于有身份识别(KYC)需求的场景，通过提前将多个机构颁发的VC与用户绑定，且锚定到区块链上，凭借密码算法，可进行分布式验证，用户只需获取一次VC，便可随时出示使用。例如员工入职背景调查，材料在流转过程中极易遭受篡改，且验证手段较为匮乏，若使用DID解决方案，学生可以在链上使用自己的DID标识向学校申请学历（学位）凭证，向前公司申请工作（离职）凭证，而在求职时，现公司只需通过验证接口对上述凭证真实性进行核验，即可快速完成员工的入职背调。</p>
+<h2 id="2-无密码安全登录"><a class="markdownIt-Anchor" href="#2-无密码安全登录"></a> <strong>2. 无密码安全登录</strong></h2>
+<p>无口令安全登录的应用场景类似于微信扫码登陆，当我们需要注册或登录网站时，无需输入用户名、电子邮箱、密码之类的口令，只需使用手机中存储的用户DID信息完成与网站DID的双向验证。虽然登陆形式看起来没有发生任何变化，但与传统扫码认证方式不同的是，DID中的身份信息由用户自己掌控，用户首先通过二维码获得网站DID并进行验证获得公钥，再使用公钥加密请求数据，发送自己的身份信息交由服务器验证，若验证通过，则登陆成功。通过整个流程我们可以看出，服务器并不知道用户的口令，而且也无法获得除用户DID文档以外的任何信息，从而有效防止数据泄露，保护用户身份隐私。</p>
+<h2 id="3-个人隐私保护"><a class="markdownIt-Anchor" href="#3-个人隐私保护"></a> **3. 个人隐私保护 **</h2>
+<p>隐私保护是任何身份管理解决方案中不可或缺的一部分，DID也不例外，通过对用户属性的选择性披露可以有效降低用户隐私泄露的风险。在实际生活中，用户身份通常具有多个属性，如身份证上的姓名、出生年月、家庭住址、身份证号等，我们并不总是希望直接将整个证件亮给验证者查看，过多关联信息的泄露会带来一系列麻烦，不法份子就曾利用通行大数据（健康宝）窃取明星隐私并进行传播售卖[4]。DID凭证结合零知识证明技术，可以做到信息最小化提供的同时不影响凭证的合法性验证，有效保护用户隐私。例如，一个有社会责任心的商店老板拒绝向未成年人出售香烟，对于买烟的顾客需要查验其年龄信息，此时若使用身份证则会泄露关联敏感信息，但在DID技术中，可以只出示部分信息，证明自己已超过一定年龄（18岁）而无需透露其他信息，包括出生年月，从而实现对个人隐私信息的选择性披露。</p>
+<h2 id="4-数字版权保护"><a class="markdownIt-Anchor" href="#4-数字版权保护"></a> **4. 数字版权保护 **</h2>
+<p>线上数字内容往往会面临一系列的版权纠纷，利用区块链不可篡改及数字身份自主可控的特性，可有效解决数字内容版权保护问题，实现多方信息的实时共享、版权认证、交易维权，促使数字资产合法合规流动。链上参与者通过使用DID技术，使得作品具备唯一标识，著作权经过认证后，成为不可篡改的链上凭证，可以作为举证、流转的声明，应用于资产确权、数据定价、流转监测分析以及侵权取证等场景。</p>
+<h2 id="5-物联网及边缘计算"><a class="markdownIt-Anchor" href="#5-物联网及边缘计算"></a> **5. 物联网及边缘计算 **</h2>
+<p>物联网设备通常分布在不同的地域，采用多种方式接入网络，这也使得其编码标准存在多样性，具有较高管理成本和安全风险。若使用DID技术为物联网设备分配全局唯一标识，并结合厂家生产信息、物联网运营商以及设备的所有权信息，为设备颁发多种凭证，赋予设备可声明、可验证的自主身份，即可在区块链上实现设备身份和数据的高效分布式认证，有效保障数据来源的真实性，同时也有利于对设备产生的数据进行确权、计价。</p>
+<h1 id="五-小结"><a class="markdownIt-Anchor" href="#五-小结"></a> <strong>五、小结</strong></h1>
+<p>在本篇文章中，我们详细介绍了分布式数字身份(DID)技术的发展与应用，可以预见，随着时间的推移及行业的共同努力，技术体系愈发完善，相关运作模式趋于规范合理，在未来将会有更多的权威机构、产业机构以及个人、物联网设备通过分布式数字身份体系的助力，参与到广阔的数字经济世界来，开拓更多的创新应用场景。</p>
+<p>未来的数字化社会必定以用户为核心，实体可通过自主管理数据与可信共享交换来创造价值，分布式数字身份将会帮助数字化社会更健康、更透明、更高效地发展。</p>
+<p><strong>参考文献</strong></p>
+<p>1.张开翔, 数字时代的身份基础设施建设, 微众银行, 2020.06.29</p>
+<p>2.<a target="_blank" rel="noopener" href="https://www.w3.org/TR/did-core/">https://www.w3.org/TR/did-core/</a></p>
+<p>3.<a target="_blank" rel="noopener" href="https://www.w3.org/TR/vc-data-model/">https://www.w3.org/TR/vc-data-model/</a></p>
+<p>4.<a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1687424669586301192&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1687424669586301192&amp;wfr=spider&amp;for=pc</a></p>
+<p>5.<a target="_blank" rel="noopener" href="https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/">https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/</a></p>
+<p>6.<a target="_blank" rel="noopener" href="https://weidentity.readthedocs.io/zh_CN/latest/">https://weidentity.readthedocs.io/zh_CN/latest/</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/News/" class="category-chain-item">News</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">#分布式</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>DPKI的崛起之路——分布式数字身份(DID)</div>
+      <div>https://zhouyinglin.cn/post/586fb9ee.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>小周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月6日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月15日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/b233c6fd.html" title="机器学习实践（二）：k-NN算法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">机器学习实践（二）：k-NN算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/61824467.html" title="机器学习实践（一）：鸢尾花分类">
+                        <span class="hidden-mobile">机器学习实践（一）：鸢尾花分类</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-comment-blond.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"login":"enable","lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.0.1/tieba","https://unpkg.com/@waline/emojis@1.0.1/bilibili"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+     
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <div id="waline"></div> <script> const locale = { placeholder: "说点什么吧！(填写邮箱可在被回复时收到邮件提醒)", }; Waline.init({ el: "#waline", serverURL: "https://comment.zhouyinglin.cn/", locale, }); </script>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <link rel="stylesheet" href="/dist/APlayer.min.css"> <div id="aplayer"></div> <script type="text/javascript" src="/dist/APlayer.min.js"></script> <script type="text/javascript" src="/js/amusic.js"></script>  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div class="statistics" style="font-size: 0.85rem"> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #3c4858;"  id="hitokoto"></span></a> <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script></div>  <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-pv"></span>
+         次 
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总用户量 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+<div class="statistics">
+ 	<a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+ </div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

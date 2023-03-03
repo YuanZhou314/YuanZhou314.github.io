@@ -1,0 +1,929 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/zz.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="小周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一些废话 之前为了图方便将图床挂在github，后来发现移动端访问时所有图片都加载不出来，这可不行啊，翻来想去最后决定用大厂的对象存储当图床。用腾讯云的原因如下几点：   Typora内置的上传插件支持PicGo，这点太赞了，对静态博客极度友好   PicGo的内置腾讯云对象存储上传插件   便宜   群友推荐   本人域名和云服务器均在腾讯云购买   OK，废话不多说，开始了正文。  查">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo-配置腾讯云对象存储COS作为图床">
+<meta property="og:url" content="https://zhouyinglin.cn/post/84c67fbf.html">
+<meta property="og:site_name" content="小周的院子">
+<meta property="og:description" content="一些废话 之前为了图方便将图床挂在github，后来发现移动端访问时所有图片都加载不出来，这可不行啊，翻来想去最后决定用大厂的对象存储当图床。用腾讯云的原因如下几点：   Typora内置的上传插件支持PicGo，这点太赞了，对静态博客极度友好   PicGo的内置腾讯云对象存储上传插件   便宜   群友推荐   本人域名和云服务器均在腾讯云购买   OK，废话不多说，开始了正文。  查">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/dxcc.png">
+<meta property="article:published_time" content="2022-08-12T03:45:31.000Z">
+<meta property="article:modified_time" content="2022-12-15T02:32:52.000Z">
+<meta property="article:author" content="小周">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/dxcc.png">
+  
+  
+  
+    <meta name="baidu-site-verification" content="code-bMcoZ9RRBp" />
+  
+  <title>Hexo-配置腾讯云对象存储COS作为图床 - 小周的院子</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhouyinglin.cn","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DOFm5rBfeIBUxN13vhiXlS4S-MdYXbMMI","app_key":"FJKOtk5nWqYzGoXXiFAvHIDC","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小周的院子</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+    
+    <!-- 添加zyl天气 -->
+
+<div id="tp-weather-widget"></div>
+    <script>
+        (function (a, h, g, f, e, d, c, b) { b = function () { d = h.createElement(g); c = h.getElementsByTagName(g)[0]; d.src = e; d.charset = "utf-8"; d.async = 1; c.parentNode.insertBefore(d, c) }; a["SeniverseWeatherWidgetObject"] = f; a[f] || (a[f] = function () { (a[f].q = a[f].q || []).push(arguments) }); a[f].l = +new Date(); if (a.attachEvent) { a.attachEvent("onload", b) } else { a.addEventListener("load", b, false) } }(window, document, "script", "SeniverseWeatherWidget", "//cdn.sencdn.com/widget2/static/js/bundle.js?t=" + parseInt((new Date().getTime() / 100000000).toString(), 10)));
+        window.SeniverseWeatherWidget('show', {
+            flavor: "slim",
+            location: "WKJ1F428HH2F",
+            geolocation: true,
+            language: "zh-Hans",
+            unit: "c",
+            theme: "auto",
+            token: "5089001e-aa9f-41c5-862d-e416aabf81f7",
+            hover: "enabled",
+            container: "tp-weather-widget"
+        })
+    </script>
+
+
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文章
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    归档
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/boxs/">
+                <i class="iconfont icon-switch-fill"></i>
+                百宝箱
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.foreverblog.cn/go.html">
+                <i class="iconfont icon-rss"></i>
+                虫洞
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202212161220542.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Hexo-配置腾讯云对象存储COS作为图床"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-12 11:45" pubdate>
+          2022年8月12日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Hexo-配置腾讯云对象存储COS作为图床</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<!-- categories:Dev、Ops、Study、Sth、News-->
+<!-- tags: 
+Python、MySQL、LeetCode、机器学习、Linux、Big Data、Java、BlockChain、Docker、Web 、分布式、
+Maven、数据结构、JVM、JavaScript、Crontab、Shell、Ubuntu、VPN、NodeJS、String、VM、Hadoop、
+Life、树莓派、Git、Hexo
+ -->
+<h4 id="一些废话"><a class="markdownIt-Anchor" href="#一些废话"></a> 一些废话</h4>
+<p>之前为了图方便将图床挂在github，后来发现移动端访问时所有图片都加载不出来，这可不行啊，翻来想去最后决定用大厂的对象存储当图床。用腾讯云的原因如下几点：</p>
+<ul>
+<li>
+<p>Typora内置的上传插件支持PicGo，这点太赞了，对静态博客极度友好</p>
+</li>
+<li>
+<p>PicGo的内置腾讯云对象存储上传插件</p>
+</li>
+<li>
+<p>便宜</p>
+</li>
+<li>
+<p>群友推荐</p>
+</li>
+<li>
+<p>本人域名和云服务器均在腾讯云购买</p>
+</li>
+</ul>
+<p>OK，废话不多说，开始了正文。</p>
+<h4 id="查看picgo配置项"><a class="markdownIt-Anchor" href="#查看picgo配置项"></a> 查看PicGo配置项</h4>
+<p>首先打开<a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Doc/">PicGo</a>，Windows和Mac打开这玩意儿都是启动在状态栏，所以不要一点点点，找一下状态栏，它已经启动了。<a target="_blank" rel="noopener" href="http://xn--PicGoSM-3p5kt1us69cxd8eqf3b.MS">PicGo默认是传到SM.MS</a> ，点击左侧【图床设置】&gt;【腾讯云COS】，把【COS版本】打到V5，看看需要填写哪些参数，等会配置COS的时候就可以填进去。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812095000738.png" srcset="/img/loading.gif" lazyload alt></p>
+<h4 id="配置腾讯云cos"><a class="markdownIt-Anchor" href="#配置腾讯云cos"></a> 配置腾讯云COS</h4>
+<p>打开<a target="_blank" rel="noopener" href="https://cloud.tencent.com/">腾讯云官网</a>，没注册的先注册。进入<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/cos">对象存储控制台</a>，点击【创建存储桶】</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812095542647.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>所属地域选择你最近的城市，名称自定义，访问权限我建议选择【公有读私有写】，否则外部无法通过域名访问到COS中的内容。</p>
+<p>选择公有读私有写之后弹出一个注意，大概意思就是如果你开放了公有读，外部就可以随意读取，不安全且会消耗下行流量。但我传的是博客图片，隐私性不高所以没事，流量这个等会儿再处理。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812100135756.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>高级可选配置不需要，服务端加密的话作为图床应该是不需要的，直接下一步，然后确认配置就可以创建成功。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812100158738.png" srcset="/img/loading.gif" lazyload alt></p>
+<h5 id="配置桶名称区域"><a class="markdownIt-Anchor" href="#配置桶名称区域"></a> 配置桶名称&amp;区域</h5>
+<p>在<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/cos/bucket">存储桶列表</a>里面，就可以看到刚才创建的存储桶，其中<code>存储桶名称</code>和<code>所属地域</code>是填写在PicGo的<code>设定存储空间名</code>和<code>确认存储区域</code>，可以直接复制填写进去了。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812100709394.png" srcset="/img/loading.gif" lazyload alt></p>
+<h5 id="配置secretid-secretkey-appid"><a class="markdownIt-Anchor" href="#配置secretid-secretkey-appid"></a> 配置secretId、secretKey、appId</h5>
+<p>打开<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/cam/capi">腾讯云访问管理控制台</a>，如果当前是主账号进去会有个高风险提示，我试了一下创建子账号，很麻烦，再加上腾讯云这些页面的功能甚多，引导做的也不太好，兜了一圈最后放弃了，直接用主账号访问了。有兴趣的同学可以自己尝试看看，我这里直接【继续使用】了</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812101703710.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>点击新建密钥，把密钥的APPID，SecretId、SecretKey填入PicGo对应的输入框中。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812102237121.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>除了必填项，这些非必填项如果有的话也可以填一下，我是没有填，因为我的图片直接放在COS的根目录，没有做目录处理，其实最好是做一下的，以免管理混乱。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812102452832.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>设置好之后点击确定，并点击【设为默认床图】，尝试一下在Pic上传区将文件传上去。注意：PicGo无法预览对象存储中的文件，但可以复制它的链接。拿到链接后直接放到博客里面，部署到本地或者github（白名单内的IP或域名），即可查看到图片。</p>
+<p>到这为止，基本的上传配置就结束了，如果有错误或者对腾讯云平台不懂的地方，可以在腾讯云查看相关的文档和售前客服，这里点名夸一下腾讯云的文档和机器人客服，做的蛮好的，问题都会给你详细的解答，很细节。</p>
+<h4 id="配置防盗链"><a class="markdownIt-Anchor" href="#配置防盗链"></a> 配置防盗链</h4>
+<p>由于我们配置的桶是公有读私有写，在外部是可以随意访问（官方的说法是<code>可被任意匿名用户访问</code>），因此需要开启防盗链，只允许我们配置的域名/IP访问桶内文件，点击桶右侧的【配置管理】</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812102956616.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>点击安全管理&gt;防盗链设置，点击【编辑】，设置当前状态为【开启】，选择白名单，填入自己的域名或IP</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812103426594.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><img src="https://qcloudimg.tencent-cloud.cn/raw/52e566fe464efdbf801b6632913851fe.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>由于我的静态文件放在云服务器上；网页项目代码放在github pages；且配置了相关的域名。因此我的白名单设置为：</p>
+<ul>
+<li>自己的域名</li>
+<li>github pages的域名</li>
+<li>云服务器本地调试的IP：4000</li>
+</ul>
+<p>这样配置之后，白名单内的域名就可以访问到COS中的文件了。现在测试一下防盗链是否生效。</p>
+<p>打开我的某一篇<a href="https://zhouyinglin.cn/2022/08/08/%E5%88%A9%E7%94%A8git-branches%E5%A4%87%E4%BB%BDHexo%E5%8D%9A%E5%AE%A2%E6%96%87%E4%BB%B6/">文章</a>，查看第一张图片的图片地址为：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">https</span>://blog-cnd-<span class="hljs-number">1307088890</span>.cos.ap-guangzhou.myqcloud.com/image-<span class="hljs-number">20220808104848697</span>.png<br></code></pre></td></tr></table></figure>
+<p>ok ，我打开博客园后台，点击插入图片，输入图片地址URL，会发现下方的预览不生效，应该是防盗链生效了</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812105516410.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>发布文章再次确认一下，图片是看不到的，确定防盗链功能已经生效</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812104935273.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>事实上直接在本机测试也可以（前提是<strong>本机IP不在白名单中</strong>），打开浏览器访问该图片地址，会发现同样无法访问</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812105433502.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>有的人可能会说，看不到人家会截图，但截图是他的事跟你没有关系，如果他拿到你的图片地址可以随意使用，就会消耗你的下行流量，流量是要钱的，这就跟你的钱包相关了。所以防盗链的功能是非常有必要配置的。</p>
+<h4 id="温馨提示"><a class="markdownIt-Anchor" href="#温馨提示"></a> 温馨提示</h4>
+<ol>
+<li>如果你是桌面端用户（win、mac）搭建的静态博客，强烈建议使用Typora+PicGo写文章，不能太赞了。Typora的偏好设置&gt;图像中可以配置PicGo，配置完后从Typora中上传图片到腾讯云对象存储只需右键图片，点击上传图片即可。</li>
+</ol>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220812110658010.png" srcset="/img/loading.gif" lazyload alt></p>
+<ol start="2">
+<li>
+<p>Typora也有预览图片功能，Typora并没有在我们的白名单中，但也许是有缓存，在上传至COS几分钟后开始消失（防盗链功能生效）。所以建议在文章全部写完之后，再全部上传，否则会提前看不到图片，多少有点懵。</p>
+</li>
+<li>
+<p>关于如何在对象存储中获取文件外部访问的链接：在文件列表页点击右侧【预览】，文件打开后右上角有个【复制对象地址】，那就是外部访问链接，而不是什么对象地址、临时链接。</p>
+</li>
+</ol>
+<h4 id="关于价格"><a class="markdownIt-Anchor" href="#关于价格"></a> 关于价格</h4>
+<p>我目前是用了一天时间，而且我的网站才刚搭建，人数并不多，只有一些我自己、群友或者身边朋友会访问，提供一下我目前的访问量吧</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>总访客量</td>
+<td>343</td>
+</tr>
+<tr>
+<td>总用户数</td>
+<td>74人</td>
+</tr>
+<tr>
+<td>建站时间</td>
+<td>6天19小时</td>
+</tr>
+<tr>
+<td>对象数量（图片数）</td>
+<td>211个</td>
+</tr>
+<tr>
+<td>存储量</td>
+<td>29MB</td>
+</tr>
+<tr>
+<td>本月总流量</td>
+<td>14.92MB</td>
+</tr>
+<tr>
+<td>本月请求总数</td>
+<td>1287次</td>
+</tr>
+<tr>
+<td>存储类型</td>
+<td>标准存储</td>
+</tr>
+</tbody>
+</table>
+<h5 id="存储容量"><a class="markdownIt-Anchor" href="#存储容量"></a> 存储容量</h5>
+<p>目前我所了解到的是，首次开通COS服务的个人用户会赠送50GB的存储额度，有效期180天，到期之后不可续费，需要重新<a target="_blank" rel="noopener" href="https://buy.cloud.tencent.com/cos?packageType=std">购买资源包</a>。</p>
+<p>就赠送的50G180天来看，价值应该是35块钱，折后约24块，在价格计算器里可以自己算出来的。资源包的生效日期是可以调整的，这个可以注意一下。加购数据处理资源包和分发网络没有特殊需求就不要。</p>
+<p>我目前还没有购买，不过也是打算准备买了，目前打折优惠还可以。就算买2年+20G也才38块钱。</p>
+<h5 id="流量"><a class="markdownIt-Anchor" href="#流量"></a> 流量</h5>
+<p>这里的流量主要指外网下行流量，流量比较贵，最低配置每个月10G+2年要81块钱</p>
+<h5 id="读写请求"><a class="markdownIt-Anchor" href="#读写请求"></a> 读写请求</h5>
+<p>请求是最便宜的，最低配每月10万次+2年的配置是1.63元。个人网站的请求应该不会太高，所以都配置最低就好了。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Dev/" class="category-chain-item">Dev</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Hexo/">#Hexo</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Hexo-配置腾讯云对象存储COS作为图床</div>
+      <div>https://zhouyinglin.cn/post/84c67fbf.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>小周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月12日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月15日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/92548214.html" title="使用ping命令丢包或不通时的链路测试方法(阿里云)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">使用ping命令丢包或不通时的链路测试方法(阿里云)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/d4d4abf9.html" title="Linux通过sed&amp;grep批量查找替换字符串">
+                        <span class="hidden-mobile">Linux通过sed&amp;grep批量查找替换字符串</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-comment-blond.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"login":"enable","lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.0.1/tieba","https://unpkg.com/@waline/emojis@1.0.1/bilibili"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+     
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <div id="waline"></div> <script> const locale = { placeholder: "说点什么吧！(填写邮箱可在被回复时收到邮件提醒)", }; Waline.init({ el: "#waline", serverURL: "https://comment.zhouyinglin.cn/", locale, }); </script>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <link rel="stylesheet" href="/dist/APlayer.min.css"> <div id="aplayer"></div> <script type="text/javascript" src="/dist/APlayer.min.js"></script> <script type="text/javascript" src="/js/amusic.js"></script>  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div class="statistics" style="font-size: 0.85rem"> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #3c4858;"  id="hitokoto"></span></a> <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script></div>  <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-pv"></span>
+         次 
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总用户量 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+<div class="statistics">
+ 	<a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+ </div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

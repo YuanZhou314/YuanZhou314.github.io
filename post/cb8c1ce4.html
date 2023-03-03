@@ -1,0 +1,845 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/zz.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="小周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Tkinter一般用于界面设计，是Python自带的模块。它在实际开发中可能并不常用，用python写一些小工具时会用到。实际开发一般用的是Qt ，但Tkinter也可以很好地帮助理解GUI开发的逻辑。 以下是Tkinter的常用组件说明：   窗口组件 123456789101112from tkinter import *# 创建窗口实例window &#x3D; Tk()# 窗口标题window">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-Tkinter组件实践">
+<meta property="og:url" content="https://zhouyinglin.cn/post/cb8c1ce4.html">
+<meta property="og:site_name" content="小周的院子">
+<meta property="og:description" content="Tkinter一般用于界面设计，是Python自带的模块。它在实际开发中可能并不常用，用python写一些小工具时会用到。实际开发一般用的是Qt ，但Tkinter也可以很好地帮助理解GUI开发的逻辑。 以下是Tkinter的常用组件说明：   窗口组件 123456789101112from tkinter import *# 创建窗口实例window &#x3D; Tk()# 窗口标题window">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/tkinter.png">
+<meta property="article:published_time" content="2022-09-14T04:34:33.000Z">
+<meta property="article:modified_time" content="2022-12-15T02:32:52.000Z">
+<meta property="article:author" content="小周">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/tkinter.png">
+  
+  
+  
+    <meta name="baidu-site-verification" content="code-bMcoZ9RRBp" />
+  
+  <title>Python-Tkinter组件实践 - 小周的院子</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhouyinglin.cn","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DOFm5rBfeIBUxN13vhiXlS4S-MdYXbMMI","app_key":"FJKOtk5nWqYzGoXXiFAvHIDC","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小周的院子</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+    
+    <!-- 添加zyl天气 -->
+
+<div id="tp-weather-widget"></div>
+    <script>
+        (function (a, h, g, f, e, d, c, b) { b = function () { d = h.createElement(g); c = h.getElementsByTagName(g)[0]; d.src = e; d.charset = "utf-8"; d.async = 1; c.parentNode.insertBefore(d, c) }; a["SeniverseWeatherWidgetObject"] = f; a[f] || (a[f] = function () { (a[f].q = a[f].q || []).push(arguments) }); a[f].l = +new Date(); if (a.attachEvent) { a.attachEvent("onload", b) } else { a.addEventListener("load", b, false) } }(window, document, "script", "SeniverseWeatherWidget", "//cdn.sencdn.com/widget2/static/js/bundle.js?t=" + parseInt((new Date().getTime() / 100000000).toString(), 10)));
+        window.SeniverseWeatherWidget('show', {
+            flavor: "slim",
+            location: "WKJ1F428HH2F",
+            geolocation: true,
+            language: "zh-Hans",
+            unit: "c",
+            theme: "auto",
+            token: "5089001e-aa9f-41c5-862d-e416aabf81f7",
+            hover: "enabled",
+            container: "tp-weather-widget"
+        })
+    </script>
+
+
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文章
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    归档
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/boxs/">
+                <i class="iconfont icon-switch-fill"></i>
+                百宝箱
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.foreverblog.cn/go.html">
+                <i class="iconfont icon-rss"></i>
+                虫洞
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202212161220542.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Python-Tkinter组件实践"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-14 12:34" pubdate>
+          2022年9月14日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          76 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python-Tkinter组件实践</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<!-- categories:Dev、Ops、Study、Sth、News、work-->
+<!-- tags: 
+Python、MySQL、LeetCode、机器学习、Linux、Big Data、Java、BlockChain、Docker、Web 、分布式、
+Maven、数据结构、JVM、JavaScript、Crontab、Shell、Ubuntu、VPN、NodeJS、String、VM、Hadoop、
+Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美学、写作、哲学、文档、绘画、前端、
+历史、政治、社会、
+ -->
+<p>Tkinter一般用于界面设计，是Python自带的模块。它在实际开发中可能并不常用，用python写一些小工具时会用到。实际开发一般用的是Qt ，但Tkinter也可以很好地帮助理解GUI开发的逻辑。</p>
+<p>以下是Tkinter的常用组件说明：</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/1372069-20180805235412647-270287964.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="窗口组件"><a class="markdownIt-Anchor" href="#窗口组件"></a> 窗口组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><br><span class="hljs-comment"># 创建窗口实例</span><br>window = Tk()<br><br><span class="hljs-comment"># 窗口标题</span><br>window.title(<span class="hljs-string">&quot;创建窗口&quot;</span>)<br><br><span class="hljs-comment"># 主窗口循环显示。同一个窗口只需要执行一次</span><br><span class="hljs-comment"># 创建窗口并等待与用户交互，直到用户手动关闭为止</span><br><span class="hljs-comment"># 此处的mainloop是一个很大的while循环，每点击一次就会更新一次。因此必须有循环</span><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914121437808.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="按钮组件"><a class="markdownIt-Anchor" href="#按钮组件"></a> 按钮组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><br>window = Tk()<br>window.title(<span class="hljs-string">&quot;按钮组件&quot;</span>)<br>window.geometry(<span class="hljs-string">&#x27;315x315&#x27;</span>)<br><br><span class="hljs-comment"># 新建一个标签组件</span><br>lbtext = Label(window, text=<span class="hljs-string">&#x27;点下面，有惊喜&#x27;</span>)<br>lbtext.pack()<br><br><span class="hljs-comment"># 定义点击事件</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">clicked</span>():<br>    lbtext.configure(text=<span class="hljs-string">&quot;哈哈哈你被骗到啦，想屁吃&quot;</span>)<br><br><br><span class="hljs-comment"># 新建一个按钮组件</span><br>btn = Button(window, text=<span class="hljs-string">&quot;万元好礼，点击就送&quot;</span>, command=clicked)<br>btn.pack()<br><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914121155891.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="标签组件"><a class="markdownIt-Anchor" href="#标签组件"></a> 标签组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> font<br><br>window = Tk()<br>window.title(<span class="hljs-string">&quot;标签组件&quot;</span>)<br><span class="hljs-comment"># 设置窗口大小，乘号是小写x字母</span><br>window.geometry(<span class="hljs-string">&#x27;315x315&#x27;</span>)<br><br><span class="hljs-comment"># bg:背景颜色, font:字体, width、height:字符/背景的高宽，fg是组件前景色，gb是组件后景色</span><br>lbtext = Label(window, text=<span class="hljs-string">&quot;月摇江湄，你回首花落梦碎。&quot;</span>,<br>               font=(<span class="hljs-string">&#x27;Arial Bold&#x27;</span>, <span class="hljs-number">50</span>), fg=<span class="hljs-string">&#x27;red&#x27;</span>, bg=<span class="hljs-string">&#x27;green&#x27;</span>, width=<span class="hljs-number">10</span>, height=<span class="hljs-number">1</span>)<br><br><span class="hljs-comment"># 配置放置标签，配置内容文字区域放置位置，窗口部件有以下三种放置方式：</span><br><br><span class="hljs-comment"># 1. grid:内容放置在规律的方格中，row和colum是行、列；padx是单元格左右间距；pady是单元格上下间距；ipadx是单元格内部元素与单元格的左右间距；ipady是单元格内部元素与单元格的上下间距</span><br><span class="hljs-comment"># lbtext.grid(column=1, row=0, padx=10, pady=10, ipadx=10, ipady=10)</span><br><br><span class="hljs-comment"># 2. pack:自适应排列.配置参数side时可按top、bottom、laft、right方式排列，如lbtext.pack(side=&#x27;top&#x27;)</span><br>lbtext.pack()<br><br><span class="hljs-comment"># 3. place:通过精确坐标来定位。x、y代表部件放置的位置，anchor=&#x27;nw&#x27;表示锚定点的西北角，锚定点在内容顶端中间的位置。锚定点的位置参考图：https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/maodingdian.png</span><br><span class="hljs-comment"># lbtext.place(x=50, y=100, anchor=&#x27;nw&#x27;)</span><br><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914121326146.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="输入框组件"><a class="markdownIt-Anchor" href="#输入框组件"></a> 输入框组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><br>window = Tk()<br>window.title(<span class="hljs-string">&quot;文本框组件&quot;</span>)<br>window.geometry(<span class="hljs-string">&#x27;315x315&#x27;</span>)<br><br>lbtext = Label(window, text=<span class="hljs-string">&#x27;输入内容后请按下按钮&#x27;</span>)<br>lbtext.pack()<br><br><span class="hljs-comment"># 添加一个文本输入框</span><br>txt = Entry(window, width=<span class="hljs-number">10</span>)<br>txt.pack()<br><br><span class="hljs-comment"># 自动设置焦点，无需点击文本框再输入</span><br>txt.focus()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">clicked</span>():  <span class="hljs-comment"># 添加按钮点击事件，将所填写的内容简单判断后，赋值给标签组件</span><br>    res = <span class="hljs-string">&quot;Welcome to &quot;</span> + txt.get()<br>    <span class="hljs-keyword">if</span> txt.get() != <span class="hljs-string">&quot;&quot;</span>:<br>        lbtext.configure(text=res)<br><br><br><span class="hljs-comment"># 此处可直接在后面添加放置方式。</span><br>btn = Button(window, text=<span class="hljs-string">&quot;走你！&quot;</span>, command=clicked).pack()<br><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914122132449.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="单选框组件"><a class="markdownIt-Anchor" href="#单选框组件"></a> 单选框组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> font<br><br>window = Tk()<br>window.title(<span class="hljs-string">&quot;标签组件&quot;</span>)<br><span class="hljs-comment"># 设置窗口大小，乘号是小写x字母</span><br>window.geometry(<span class="hljs-string">&#x27;315x315&#x27;</span>)<br><br><span class="hljs-comment"># bg:背景颜色, font:字体, width、height:字符/背景的高宽，fg是组件前景色，gb是组件后景色</span><br>lbtext = Label(window, text=<span class="hljs-string">&quot;月摇江湄，你回首花落梦碎。&quot;</span>,<br>               font=(<span class="hljs-string">&#x27;Arial Bold&#x27;</span>, <span class="hljs-number">50</span>), fg=<span class="hljs-string">&#x27;red&#x27;</span>, bg=<span class="hljs-string">&#x27;green&#x27;</span>, width=<span class="hljs-number">10</span>, height=<span class="hljs-number">1</span>)<br><br><span class="hljs-comment"># 配置放置标签，配置内容文字区域放置位置，窗口部件有以下三种放置方式：</span><br><br><span class="hljs-comment"># 1. grid:内容放置在规律的方格中，row和colum是行、列；padx是单元格左右间距；pady是单元格上下间距；ipadx是单元格内部元素与单元格的左右间距；ipady是单元格内部元素与单元格的上下间距</span><br><span class="hljs-comment"># lbtext.grid(column=1, row=0, padx=10, pady=10, ipadx=10, ipady=10)</span><br><br><span class="hljs-comment"># 2. pack:自适应排列.配置参数side时可按top、bottom、laft、right方式排列，如lbtext.pack(side=&#x27;top&#x27;)</span><br>lbtext.pack()<br><br><span class="hljs-comment"># 3. place:通过精确坐标来定位。x、y代表部件放置的位置，anchor=&#x27;nw&#x27;表示锚定点的西北角，锚定点在内容顶端中间的位置。锚定点的位置参考图：https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/maodingdian.png</span><br><span class="hljs-comment"># lbtext.place(x=50, y=100, anchor=&#x27;nw&#x27;)</span><br><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914121516705.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="对话框组件"><a class="markdownIt-Anchor" href="#对话框组件"></a> 对话框组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> font<br><br>window = Tk()<br>window.title(<span class="hljs-string">&quot;标签组件&quot;</span>)<br><span class="hljs-comment"># 设置窗口大小，乘号是小写x字母</span><br>window.geometry(<span class="hljs-string">&#x27;315x315&#x27;</span>)<br><br><span class="hljs-comment"># bg:背景颜色, font:字体, width、height:字符/背景的高宽，fg是组件前景色，gb是组件后景色</span><br>lbtext = Label(window, text=<span class="hljs-string">&quot;月摇江湄，你回首花落梦碎。&quot;</span>,<br>               font=(<span class="hljs-string">&#x27;Arial Bold&#x27;</span>, <span class="hljs-number">50</span>), fg=<span class="hljs-string">&#x27;red&#x27;</span>, bg=<span class="hljs-string">&#x27;green&#x27;</span>, width=<span class="hljs-number">10</span>, height=<span class="hljs-number">1</span>)<br><br><span class="hljs-comment"># 配置放置标签，配置内容文字区域放置位置，窗口部件有以下三种放置方式：</span><br><br><span class="hljs-comment"># 1. grid:内容放置在规律的方格中，row和colum是行、列；padx是单元格左右间距；pady是单元格上下间距；ipadx是单元格内部元素与单元格的左右间距；ipady是单元格内部元素与单元格的上下间距</span><br><span class="hljs-comment"># lbtext.grid(column=1, row=0, padx=10, pady=10, ipadx=10, ipady=10)</span><br><br><span class="hljs-comment"># 2. pack:自适应排列.配置参数side时可按top、bottom、laft、right方式排列，如lbtext.pack(side=&#x27;top&#x27;)</span><br>lbtext.pack()<br><br><span class="hljs-comment"># 3. place:通过精确坐标来定位。x、y代表部件放置的位置，anchor=&#x27;nw&#x27;表示锚定点的西北角，锚定点在内容顶端中间的位置。锚定点的位置参考图：https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/maodingdian.png</span><br><span class="hljs-comment"># lbtext.place(x=50, y=100, anchor=&#x27;nw&#x27;)</span><br><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914121550065.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="复选框组件"><a class="markdownIt-Anchor" href="#复选框组件"></a> 复选框组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> font<br><br>window = Tk()<br>window.title(<span class="hljs-string">&quot;标签组件&quot;</span>)<br><span class="hljs-comment"># 设置窗口大小，乘号是小写x字母</span><br>window.geometry(<span class="hljs-string">&#x27;315x315&#x27;</span>)<br><br><span class="hljs-comment"># bg:背景颜色, font:字体, width、height:字符/背景的高宽，fg是组件前景色，gb是组件后景色</span><br>lbtext = Label(window, text=<span class="hljs-string">&quot;月摇江湄，你回首花落梦碎。&quot;</span>,<br>               font=(<span class="hljs-string">&#x27;Arial Bold&#x27;</span>, <span class="hljs-number">50</span>), fg=<span class="hljs-string">&#x27;red&#x27;</span>, bg=<span class="hljs-string">&#x27;green&#x27;</span>, width=<span class="hljs-number">10</span>, height=<span class="hljs-number">1</span>)<br><br><span class="hljs-comment"># 配置放置标签，配置内容文字区域放置位置，窗口部件有以下三种放置方式：</span><br><br><span class="hljs-comment"># 1. grid:内容放置在规律的方格中，row和colum是行、列；padx是单元格左右间距；pady是单元格上下间距；ipadx是单元格内部元素与单元格的左右间距；ipady是单元格内部元素与单元格的上下间距</span><br><span class="hljs-comment"># lbtext.grid(column=1, row=0, padx=10, pady=10, ipadx=10, ipady=10)</span><br><br><span class="hljs-comment"># 2. pack:自适应排列.配置参数side时可按top、bottom、laft、right方式排列，如lbtext.pack(side=&#x27;top&#x27;)</span><br>lbtext.pack()<br><br><span class="hljs-comment"># 3. place:通过精确坐标来定位。x、y代表部件放置的位置，anchor=&#x27;nw&#x27;表示锚定点的西北角，锚定点在内容顶端中间的位置。锚定点的位置参考图：https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/maodingdian.png</span><br><span class="hljs-comment"># lbtext.place(x=50, y=100, anchor=&#x27;nw&#x27;)</span><br><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914121638001.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="进度条组件"><a class="markdownIt-Anchor" href="#进度条组件"></a> 进度条组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> ttk<br><span class="hljs-keyword">from</span> tkinter.ttk <span class="hljs-keyword">import</span> Progressbar<br><br>window = Tk()<br>window.title(<span class="hljs-string">&quot;对话框组件&quot;</span>)<br>window.geometry(<span class="hljs-string">&#x27;315x315&#x27;</span>)<br><br><span class="hljs-comment"># 创建style实例绘制进度条</span><br>style = ttk.Style()<br>style.theme_use(<span class="hljs-string">&#x27;default&#x27;</span>)<br><br><span class="hljs-comment"># 设置进度条颜色</span><br>style.configure(<span class="hljs-string">&#x27;black.Horizontal.TProgressbar&#x27;</span>, background=<span class="hljs-string">&#x27;red&#x27;</span>)<br>bar = Progressbar(window, length=<span class="hljs-number">200</span>, style=<span class="hljs-string">&#x27;black.Horizontal.TProgressbar&#x27;</span>)<br><br><span class="hljs-comment"># 设置当前进度条的值，100分是拉满</span><br>bar[<span class="hljs-string">&#x27;value&#x27;</span>] = <span class="hljs-number">50</span><br>bar.grid(column=<span class="hljs-number">0</span>, row=<span class="hljs-number">1</span>)<br>window.mainloop()<br><br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914121704705.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="数值调整组件"><a class="markdownIt-Anchor" href="#数值调整组件"></a> 数值调整组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><br>window = Tk()<br>window.title(<span class="hljs-string">&quot;对话框组件&quot;</span>)<br>window.geometry(<span class="hljs-string">&#x27;315x315&#x27;</span>)<br><br><span class="hljs-comment"># 创建范围值，从0~100</span><br><span class="hljs-comment"># spin = Spinbox(window, from_=0, to=100, width=5)</span><br><br><span class="hljs-comment"># 或者设置某些特定的值</span><br><span class="hljs-comment"># spin = Spinbox(window, values=(3, 6, 9), width=5)</span><br><br><span class="hljs-comment"># 如需设置默认值，需要通过IntVar的set函数设置，无法直接使用 &#x27;textvariable=10&#x27;</span><br>var = IntVar()<br>var.<span class="hljs-built_in">set</span>(<span class="hljs-number">10</span>)<br>spin = Spinbox(window, from_=<span class="hljs-number">0</span>, to=<span class="hljs-number">10</span>, width=<span class="hljs-number">5</span>, textvariable=var)<br>spin.grid(column=<span class="hljs-number">0</span>, row=<span class="hljs-number">0</span>)<br><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914122225120.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="文本区组件"><a class="markdownIt-Anchor" href="#文本区组件"></a> 文本区组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> scrolledtext<br><br>window = Tk()<br>window.title(<span class="hljs-string">&quot;文本区组件&quot;</span>)<br>window.geometry(<span class="hljs-string">&#x27;315x315&#x27;</span>)<br><br><span class="hljs-comment"># 创建本文区实例，并设置区域宽高</span><br>txt = scrolledtext.ScrolledText(window, width=<span class="hljs-number">50</span>, height=<span class="hljs-number">10</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">addtext</span>():<br>    txt.insert(INSERT, <span class="hljs-string">&quot;当代价不再重要，人们也会对恐惧有所遗忘。&quot;</span>)  <span class="hljs-comment"># 在文本区插入文本,此处为追加</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">deltext</span>():<br>    txt.delete(<span class="hljs-number">1.0</span>, END)  <span class="hljs-comment"># 将文本区内容删除</span><br><br><br>btn1 = Button(window, text=<span class="hljs-string">&#x27;点击加入&#x27;</span>, command=addtext)<br>btn2 = Button(window, text=<span class="hljs-string">&#x27;点击清空&#x27;</span>, command=deltext)<br><br>txt.grid(column=<span class="hljs-number">0</span>, row=<span class="hljs-number">0</span>)<br>btn1.grid(column=<span class="hljs-number">0</span>, row=<span class="hljs-number">1</span>)<br>btn2.grid(column=<span class="hljs-number">0</span>, row=<span class="hljs-number">2</span>)<br><br>window.mainloop()<br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914121803360.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="下拉框组件"><a class="markdownIt-Anchor" href="#下拉框组件"></a> 下拉框组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> tkinter.ttk <span class="hljs-keyword">import</span> Combobox<br><br>window = Tk()<br>window.title(<span class="hljs-string">&quot;下拉框组件&quot;</span>)<br>window.geometry(<span class="hljs-string">&#x27;315x315&#x27;</span>)<br>lbtext = Label(window, text=<span class="hljs-string">&#x27;点下面，有惊喜&#x27;</span>)<br>lbtext.pack()<br><br><span class="hljs-comment"># 新建组合框实例</span><br>combo = Combobox(window)<br><span class="hljs-comment"># 使用元组配置组合框内容</span><br>combo[<span class="hljs-string">&#x27;values&#x27;</span>] = (<span class="hljs-string">&#x27;香辣虾&#x27;</span>, <span class="hljs-string">&#x27;烤鸡翅&#x27;</span>, <span class="hljs-string">&#x27;螃蟹粥&#x27;</span>, <span class="hljs-string">&#x27;流心月饼&#x27;</span>, <span class="hljs-string">&#x27;豆芽菜&#x27;</span>)<br><span class="hljs-comment"># 默认选项</span><br>combo.current(<span class="hljs-number">0</span>)<br>combo.pack()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">clicked</span>():  <span class="hljs-comment"># 设置点击事件，将选中的内容赋给标签组件</span><br>    comtxt = combo.get()<br>    lbtext.configure(text=comtxt)<br><br><br>btn = Button(window, text=<span class="hljs-string">&#x27;点我点我！！&#x27;</span>, command=clicked)<br>btn.pack()<br><br>window.mainloop()<br><br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914121831793.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="文件对话框组件"><a class="markdownIt-Anchor" href="#文件对话框组件"></a> 文件对话框组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> filedialog<br><br>window = Tk()<br>window.title(<span class="hljs-string">&quot;对话框组件&quot;</span>)<br>window.geometry(<span class="hljs-string">&#x27;315x315&#x27;</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">opendir</span>():<br>    <span class="hljs-comment"># askopenfilename 选择单个文件,initialdir 参数指定打开的初始目录</span><br>    <span class="hljs-comment"># files = filedialog.askopenfilename(initialdir=os.path.dirname(__file__))</span><br><br>    <span class="hljs-comment"># askopenfilenames 选择多个文件</span><br>    <span class="hljs-comment"># files = filedialog.askopenfilenames(initialdir=os.path.dirname(__file__))</span><br><br>    <span class="hljs-comment"># filetypes 参数指定文件类型</span><br>    files = filedialog.askopenfilenames(filetypes=(<br>        (<span class="hljs-string">&quot;Text files&quot;</span>, <span class="hljs-string">&quot;*.txt&quot;</span>), (<span class="hljs-string">&quot;all files&quot;</span>, <span class="hljs-string">&quot;*.*&quot;</span>)), initialdir=os.path.dirname(__file__))<br><br><br>btn = Button(window, text=<span class="hljs-string">&#x27;选择文件&#x27;</span>, command=opendir)<br>btn.pack()<br><br>window.mainloop()<br><br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914121903912.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="菜单组件"><a class="markdownIt-Anchor" href="#菜单组件"></a> 菜单组件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> re <span class="hljs-keyword">import</span> sub<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> *<br><br>window = Tk()<br>window.title(<span class="hljs-string">&quot;菜单组件&quot;</span>)<br>window.geometry(<span class="hljs-string">&#x27;315x315&#x27;</span>)<br>lbtext = Label(window, text=<span class="hljs-string">&#x27;菜单显示&#x27;</span>)<br>lbtext.pack()<br><br><span class="hljs-comment"># 功能的实现入口在这里</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_job</span>():<br>    <span class="hljs-keyword">pass</span><br><br><br><span class="hljs-comment"># 创建菜单栏容器	</span><br>menubar = Menu(window)<br><br><span class="hljs-comment"># 创建File菜单项</span><br>filemenu = Menu(menubar, tearoff=<span class="hljs-number">0</span>)<br><br><span class="hljs-comment"># 给菜单项命名为File，并放入菜单栏容器</span><br>menubar.add_cascade(label=<span class="hljs-string">&#x27;File&#x27;</span>, menu=filemenu)<br><br><span class="hljs-comment"># 在File菜单项中加入New、Open、Save等效菜单</span><br>filemenu.add_cascade(label=<span class="hljs-string">&#x27;New&#x27;</span>, command=do_job)<br>filemenu.add_cascade(label=<span class="hljs-string">&#x27;Open&#x27;</span>, command=do_job)<br>filemenu.add_cascade(label=<span class="hljs-string">&#x27;Save&#x27;</span>, command=do_job)<br>filemenu.add_separator()  <span class="hljs-comment"># 添加一条分隔线</span><br><span class="hljs-comment"># 退出使用tkinter的自带quit()函数</span><br>filemenu.add_cascade(label=<span class="hljs-string">&#x27;Exit&#x27;</span>, command=window.quit)<br><br><span class="hljs-comment"># 创建Edit菜单，与File一样，需要创建菜单项、并放入容器，然后给菜单项创建功能单元</span><br>editmenu = Menu(menubar, tearoff=<span class="hljs-number">0</span>)<br>menubar.add_cascade(label=<span class="hljs-string">&#x27;Edit&#x27;</span>, menu=editmenu)<br>editmenu.add_cascade(label=<span class="hljs-string">&#x27;Cut&#x27;</span>, command=do_job)<br>editmenu.add_cascade(label=<span class="hljs-string">&#x27;Copy&#x27;</span>, command=do_job)<br>editmenu.add_cascade(label=<span class="hljs-string">&#x27;Paste&#x27;</span>, command=do_job)<br><br><span class="hljs-comment"># 创建二级菜单,在filemenu的基础上创建菜单项，并命名为“Import”,再给二级菜单项创建功能单元“Submenu_1”</span><br>submenu = Menu(filemenu)<br>filemenu.add_cascade(label=<span class="hljs-string">&#x27;Import&#x27;</span>, menu=submenu, underline=<span class="hljs-number">0</span>)<br>submenu.add_command(label=<span class="hljs-string">&#x27;Submenu_1&#x27;</span>, command=do_job)<br><br><span class="hljs-comment"># 配置菜单栏显示</span><br>window.config(menu=menubar)<br><br>window.mainloop()<br><br></code></pre></td></tr></table></figure>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/image-20220914122022227.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>参考文章</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shwee/p/9427975.html">https://www.cnblogs.com/shwee/p/9427975.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://likegeeks.com/python-gui-examples-tkinter-tutorial/">https://likegeeks.com/python-gui-examples-tkinter-tutorial/</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Dev/" class="category-chain-item">Dev</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python-Tkinter组件实践</div>
+      <div>https://zhouyinglin.cn/post/cb8c1ce4.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>小周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月14日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月15日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/post/54df5254.html" title="关于COVID-19疫情防控政策">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关于COVID-19疫情防控政策</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/9dc1e00a.html" title="从英女王的去世，看向往且需要君主/王室的人类之子们">
+                        <span class="hidden-mobile">从英女王的去世，看向往且需要君主/王室的人类之子们</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-comment-blond.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"login":"enable","lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.0.1/tieba","https://unpkg.com/@waline/emojis@1.0.1/bilibili"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+     
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <div id="waline"></div> <script> const locale = { placeholder: "说点什么吧！(填写邮箱可在被回复时收到邮件提醒)", }; Waline.init({ el: "#waline", serverURL: "https://comment.zhouyinglin.cn/", locale, }); </script>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <link rel="stylesheet" href="/dist/APlayer.min.css"> <div id="aplayer"></div> <script type="text/javascript" src="/dist/APlayer.min.js"></script> <script type="text/javascript" src="/js/amusic.js"></script>  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div class="statistics" style="font-size: 0.85rem"> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #3c4858;"  id="hitokoto"></span></a> <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script></div>  <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-pv"></span>
+         次 
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总用户量 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+<div class="statistics">
+ 	<a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+ </div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
