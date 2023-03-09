@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>VSCode格式化导包代码出现的问题</title>
+    <link href="/post/470b7fc9.html"/>
+    <url>/post/470b7fc9.html</url>
+    
+    <content type="html"><![CDATA[<span id="more"></span><!-- categories:Dev、Ops、Study、Sth、News、work--><!-- tags: Python、MySQL、LeetCode、机器学习、Linux、Big Data、Java、BlockChain、Docker、Web 、分布式、Maven、数据结构、JVM、JavaScript、Crontab、Shell、Ubuntu、VPN、NodeJS、String、VM、Hadoop、Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美学、写作、哲学、文档、绘画、前端、历史、政治、社会、导购 --><p>当导入上层相邻目录的包时，需要先将其路径添加至<code>sys.path</code>，再执行<code>import</code>。be like:</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">sys<span class="hljs-selector-class">.path</span><span class="hljs-selector-class">.append</span>(sys<span class="hljs-selector-class">.path</span><span class="hljs-selector-attr">[0]</span> + <span class="hljs-string">&#x27;\\..\\..&#x27;</span>)<br>from tools<span class="hljs-selector-class">.py</span><span class="hljs-selector-class">.pyTools</span> import Tools_all<br></code></pre></td></tr></table></figure><p>而VSCode默认自带格式化工具<code>autopep8 </code>会将其顺序自动调整为下面这样，导致无法正确导入</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">from tools<span class="hljs-selector-class">.py</span><span class="hljs-selector-class">.pyTools</span> import Tools_all<br>sys<span class="hljs-selector-class">.path</span><span class="hljs-selector-class">.append</span>(sys<span class="hljs-selector-class">.path</span><span class="hljs-selector-attr">[0]</span> + <span class="hljs-string">&#x27;\\..\\..&#x27;</span>)<br></code></pre></td></tr></table></figure><p>因此需要在文件&gt;首选项&gt;联机服务设置，搜索<code>formatting</code>,将如下位置调整为<code>yapf</code>。注意，修改后需要在<code>pip</code>安装<code>yapf</code>库，VSCode 会自动提示的。</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303091534007.png" alt></p><h2 id="autopep8-yapf-black对比"><a class="markdownIt-Anchor" href="#autopep8-yapf-black对比"></a> autopep8 、yapf 、 black对比</h2><p><a href="https://github.com/hhatto/autopep8"><strong>autopep8</strong></a></p><p>autopep8 是一个国人中知名度最高和使用最广泛的自动格式化工具。 一个较为宽松的格式化工具，只会以最低限度的标准对不符合 pep8 标准的代码进行修正。可能无法满足那些有特定需求，或想让代码看起来更干净更漂亮的人。autopep8 是刚开始学习 python 的人都被推荐的一个格式化工具，不幸的是它已经不适合当下了。较低的维护频率，较低的社区活跃度，一大堆 issuse 未解决。都是我们放弃它的理由。</p><p><a href="https://github.com/google/yapf"><strong>yapf</strong></a></p><p>由 google 开发并维护的格式化工具，特点是支持多种格式化风格与功能繁多的自定义配置。默认支持三种格式化样式：pep8, google, Facebook 和 chromium。 yapf的初衷不是让代码符合pep准则， 而且让代码看起来更整洁更友好。yapf 包含着 google 文化中的工程师极客精神，支持多样化的自定义配置是他的优点。如果你对自己的代码风格有硬性的要求，yapf 将是你不二的选择。</p><p><a href="https://github.com/psf/black"><strong>black</strong></a></p><p>可以说是最流行最多人使用的python格式化工具了，统一的格式化标准。傻瓜化的使用方式，极少的定制化选项（没错，开发者包括使用 black 的人都认为这是个优势）。yapf 包含着 google 文化中的工程师极客精神，支持多样化的自定义配置是他的优点。如果你对自己的代码风格有硬性的要求，yapf 将是你不二的选择。</p><p>black 秉承的是 “less is more” 的设计标准，开发组人员负责调研哪种格式化风格更适合pythonista的开发。允许我们自定义的余地较小，但对于我们来说，有人替我们考虑了哪种方式更好，躺平享受成果不失为一种最好的选择。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Dev</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>关于近期较火的ChatGPT的一些尝试……</title>
     <link href="/post/f439431f.html"/>
     <url>/post/f439431f.html</url>
