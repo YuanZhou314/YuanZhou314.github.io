@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>IOS-自带邮件Gmail邮箱</title>
+    <link href="/post/c8056d43.html"/>
+    <url>/post/c8056d43.html</url>
+    
+    <content type="html"><![CDATA[<span id="more"></span><!-- categories:Dev、Ops、Study、Sth、News、work--><!-- tags: Python、MySQL、LeetCode、机器学习、Linux、Big Data、Java、BlockChain、Docker、Web 、分布式、Maven、数据结构、JVM、JavaScript、Crontab、Shell、Ubuntu、VPN、NodeJS、String、VM、Hadoop、Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美学、写作、哲学、文档、绘画、前端、历史、政治、社会、导购 --><p>**前提条件：**挂梯子</p><p>**说明：**以下截图都是添加成功后打开的，正常的添加过程可能与此顺序不同，问题不大！</p><p><strong>省流：使用Google两步验证中的专用密码验证账户。</strong></p><h3 id="正文"><a class="markdownIt-Anchor" href="#正文"></a> 正文</h3><p>从正常的Google入口自然是无法登陆的，之前尝试过很多次都没用，登陆的网页怎么都打不开。</p><p>真正的入口是最下面的【其他】。</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303151100430.png" alt></p><p>然后选择添加邮件账户。</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303151105229.png" alt></p><p>这里先正常输入全名自己随便写，电子邮件+密码就是你的邮箱+邮箱密码，描述是自动填充进去的。</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303151107836.png" alt></p><p>填写好之后会让你填写<strong>收件服务器 &amp; 发件服务器</strong>，如下是我已经填好了的，具体怎么填我待会儿说。在填写之前，首先确保你的Gmail已经开启了IMAP。</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303151114140.png" alt></p><h3 id="网页开启功能"><a class="markdownIt-Anchor" href="#网页开启功能"></a> 网页开启功能</h3><p>在Gmail 网页版—【设置】—【查看所有设置】—【转发和 POP/IMAP】—【IMAP访问】处点击最下面的<strong>配置说明</strong>。官方关于这方面的教程，就是这么多。</p><p>在网页端设置好就可以去设置手机端了。</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303151113477.png" alt></p><h3 id="配置收件服务器"><a class="markdownIt-Anchor" href="#配置收件服务器"></a> 配置收件服务器</h3><p>主机名：<a href="http://imap.gmail.com">imap.gmail.com</a></p><p>用户名：你的邮箱地址</p><p>密码：你的Google账号开启<strong>两步验证</strong>后的<strong>应用专用密码</strong></p><p>如下，两步验证开启之后，最底下有一个【应用专用密码】，设置好之后填写在收件服务器的密码处即可。这里我用邮箱密码它就会提示密码未输入，就很奇怪。找了很久才找到使用专用密码这个思路。</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303151126119.png" alt></p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303151133894.png" alt></p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303151119462.png" alt></p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303151120899.png" alt></p><h3 id="配置smtp服务器"><a class="markdownIt-Anchor" href="#配置smtp服务器"></a> 配置SMTP服务器.</h3><p>主机名：<a href="http://smtp.gmail.com">smtp.gmail.com</a></p><p>用户名：你的邮箱地址</p><p>密码：你的邮箱密码</p><p>注意开启SSL 、鉴定（使用密码），这里的密码我直接用的是邮箱密码，亲测可用。</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303151122935.png" alt></p><p>最后回到这个页面选择【高级】，在收件设置这里打开SSL开关，鉴定选择密码即可。</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303151127317.png" alt></p><p>最后看一下效果，收发件均正常！</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303151129927.png" alt></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>work</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Life</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Python asyncio基本使用</title>
     <link href="/post/ce418c79.html"/>
     <url>/post/ce418c79.html</url>
