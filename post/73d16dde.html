@@ -16,24 +16,27 @@
   <meta name="author" content="小周">
   <meta name="keywords" content="">
   
-    <meta name="description" content="asyncio(读做：A-&#39;Sing-K-IO) 是 Python3.4 引入的标准库，内置了对异步的支持。它的编程模型就是一个消息循环（事件循环），从asyncio模块中获取一个eventLoop，然后把需要执行的协程放进去，就实现了异步IO。  主要概念  协程函数：定义函数时用的函数名 协程对象：执行协程函数得到的协程对象，如result&#x3D;func()，result即协程对象。   协">
+    <meta name="description" content="站长评价：第一次看这篇文章，觉得很有道理。但后面多看几遍，发现有些论点有些站不住脚。但是由于本人的知识储备还不够，是个文盲，无法反驳这些观点。只好先码住，等想起来了再记上。  我很喜欢跟郭锦程聊天，因为他知识面广，总能说出些让人惊喜的观点。有次我们一起看球，比赛前的空隙，就聊到了什么是底层思维Q 郭锦程:「一个人若要实现阶层跃迁Q，首先得摆脱被剥削的状态，对吧?」 我说:「是啊，不然越努力越">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python asyncio基本使用">
-<meta property="og:url" content="https://zhouyinglin.cn/post/ce418c79.html">
+<meta property="og:title" content="为什么长辈总喜欢用他们的那套思维束缚子女？">
+<meta property="og:url" content="https://zhouyinglin.cn/post/73d16dde.html">
 <meta property="og:site_name" content="小周的院子">
-<meta property="og:description" content="asyncio(读做：A-&#39;Sing-K-IO) 是 Python3.4 引入的标准库，内置了对异步的支持。它的编程模型就是一个消息循环（事件循环），从asyncio模块中获取一个eventLoop，然后把需要执行的协程放进去，就实现了异步IO。  主要概念  协程函数：定义函数时用的函数名 协程对象：执行协程函数得到的协程对象，如result&#x3D;func()，result即协程对象。   协">
+<meta property="og:description" content="站长评价：第一次看这篇文章，觉得很有道理。但后面多看几遍，发现有些论点有些站不住脚。但是由于本人的知识储备还不够，是个文盲，无法反驳这些观点。只好先码住，等想起来了再记上。  我很喜欢跟郭锦程聊天，因为他知识面广，总能说出些让人惊喜的观点。有次我们一起看球，比赛前的空隙，就聊到了什么是底层思维Q 郭锦程:「一个人若要实现阶层跃迁Q，首先得摆脱被剥削的状态，对吧?」 我说:「是啊，不然越努力越">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-13T03:25:50.000Z">
-<meta property="article:modified_time" content="2023-03-13T07:25:29.288Z">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303131757674.png">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303131749397.png">
+<meta property="article:published_time" content="2023-03-17T06:06:49.000Z">
+<meta property="article:modified_time" content="2023-03-17T06:08:33.152Z">
 <meta property="article:author" content="小周">
-<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Life">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303131757674.png">
   
   
   
     <meta name="baidu-site-verification" content="code-bMcoZ9RRBp" />
   
-  <title>Python asyncio基本使用 - 小周的院子</title>
+  <title>为什么长辈总喜欢用他们的那套思维束缚子女？ - 小周的院子</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -283,7 +286,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Python asyncio基本使用"></span>
+            <span id="subtitle" data-typed-text="为什么长辈总喜欢用他们的那套思维束缚子女？"></span>
           
         </div>
 
@@ -294,8 +297,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-13 11:25" pubdate>
-          2023年3月13日 上午
+        <time datetime="2023-03-17 14:06" pubdate>
+          2023年3月17日 下午
         </time>
       </span>
     
@@ -306,7 +309,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k 字
+          3.8k 字
         
       </span>
     
@@ -317,7 +320,7 @@
         
         
         
-          29 分钟
+          33 分钟
         
       </span>
     
@@ -363,7 +366,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Python asyncio基本使用</h1>
+            <h1 style="display: none">为什么长辈总喜欢用他们的那套思维束缚子女？</h1>
             
             
               <div class="markdown-body">
@@ -376,58 +379,49 @@ Maven、数据结构、JVM、JavaScript、Crontab、Shell、Ubuntu、VPN、NodeJ
 Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美学、写作、哲学、文档、绘画、前端、
 历史、政治、社会、导购
  -->
-<p><code>asyncio</code>(读做：A-'Sing-K-IO) 是 Python3.4 引入的标准库，内置了对异步的支持。它的编程模型就是一个消息循环（事件循环），从<code>asyncio</code>模块中获取一个<code>eventLoop</code>，然后把需要执行的协程放进去，就实现了异步IO。</p>
-<h2 id="主要概念"><a class="markdownIt-Anchor" href="#主要概念"></a> 主要概念</h2>
-<ul>
-<li>协程函数：定义函数时用的函数名</li>
-<li>协程对象：执行协程函数得到的协程对象，如<code>result=func()</code>，<code>result</code>即协程对象。</li>
-</ul>
-<h2 id="协程代码demo"><a class="markdownIt-Anchor" href="#协程代码demo"></a> 协程代码demo</h2>
-<p>在函数前面添加<code>async</code>，该函数类型就变成了协程函数，类型为<code>coroutine</code>，协程函数的特点是执行的时候可以暂停，交出执行权。</p>
-<p>当执行引擎遇到下面的<code>await</code>命令时，线程不会等待这个 IO，而是直接中断并执行下一个消息循环，当 IO 阻塞结束，再回来继续往下运行。即：<strong>遇到 IO 阻塞时自动切换其他任</strong>务。</p>
-<p>注：直接调用协程函数是不运行内部代码的，必须放入事件循环才能运行。</p>
-<ul>
-<li><code>asyncio.gather()</code>需要所有任务都执行结束，如某个携程函数崩了，就会抛出异常</li>
-<li><code>asyncio.wait()</code>可以定义函数返回的时机。FIRST_COMPLETED(第一个结束的), FIRST_EXCEPTION(第一个出现异常的), ALL_COMPLETED(全部执行完，默认的)</li>
-</ul>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs stata">async def <span class="hljs-keyword">count</span>():<br>    <span class="hljs-keyword">print</span>(&#x27;<span class="hljs-keyword">one</span>&#x27;)<br>    await asyncio.<span class="hljs-keyword">sleep</span>(2)<br>    <span class="hljs-keyword">print</span>(&#x27;<span class="hljs-keyword">two</span>&#x27;)<br><br>async def main():<br>    await asyncio.gather(<span class="hljs-keyword">count</span>(), <span class="hljs-keyword">count</span>(), <span class="hljs-keyword">count</span>())<br><br>asyncio.<span class="hljs-keyword">run</span>(main())  # Python3.7后写法<br><br># 该代码输出：<br><span class="hljs-keyword">one</span><br><span class="hljs-keyword">one</span><br><span class="hljs-keyword">one</span><br><span class="hljs-keyword">two</span><br><span class="hljs-keyword">two</span><br><span class="hljs-keyword">two</span><br></code></pre></td></tr></table></figure>
-<h2 id="事件循环eventloop"><a class="markdownIt-Anchor" href="#事件循环eventloop"></a> 事件循环Eventloop</h2>
-<p>asyncio内部执行大致流程</p>
-<ol>
-<li>首先建立一个需要运行的任务列表，列表中有多个任务</li>
-<li>循环检查列表中所有任务，将 可执行 和 已完成 的任务返回</li>
-<li>进行任务处理：
-<ul>
-<li><strong>执行</strong> 可执行 状态的任务</li>
-<li>将 已完成 的任务从任务列表中<strong>移除</strong></li>
-</ul>
-</li>
-<li>如果 任务列表中的任务都已完成，则终止循环</li>
-</ol>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-comment"># 手动或获取一个时间循环</span><br>asyncio.get_event_loop()<br><br><span class="hljs-comment"># 将任务手动放到 任务列表</span><br><span class="hljs-keyword">loop</span>.run_unitl_complete(任务)<br></code></pre></td></tr></table></figure>
-<h2 id="await关键字"><a class="markdownIt-Anchor" href="#await关键字"></a> await关键字</h2>
-<p><code>await</code>后面可以接三种类型的对象，均为 IO 等待：</p>
-<ol>
-<li><strong>协程对象</strong>：如：<code>await asyncio.sleep(1)</code>、<code>await func()</code>等不同写法。</li>
-</ol>
-<p>注意，当一个协程函数中有多段<code>await</code>修饰的代码时，会等第一个<code>await</code>操作完了（等待对象的值得到结果后）才会继续往下执行。因为代码由上而下执行，交换执行权只在阻塞时的协程函数中进行。</p>
-<p>也就是说，<code>await</code>的作用就是处理执行权交错导致的数据混乱。由<code>await</code>修饰的代码，必须有结果了才会继续执</p>
-<ol start="2">
-<li><strong>Task 对象</strong>：允许立即将任务添加至事件循环中。</li>
-</ol>
-<p><code>await</code>后面接协程对象时，将会直接进行 IO 阻塞。而<code>asyncio.create_task(func())</code>只会将<code>func()</code>添加到事件循环中，等出现 IO 阻塞时才会去轮询执行。如下是一个demo</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">nested</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">2</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-number">2</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;return&#x27;</span><br><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    task_list = [<br>        asyncio.create_task(nested(), name=<span class="hljs-string">&#x27;n1&#x27;</span>),<br>        asyncio.create_task(nested(), name=<span class="hljs-string">&#x27;n2&#x27;</span>)<br>    ]<br>     <span class="hljs-comment"># done为获取所有任务执行完成后的结果集，pending存放了超时后的结果集，一般不用</span><br>    done, pending = <span class="hljs-keyword">await</span> asyncio.wait(task_list, timeout=<span class="hljs-literal">None</span>,return_when=asyncio.tasks.ALL_COMPLETED)<br><br><span class="hljs-comment"># 输出</span><br><span class="hljs-number">1</span><br><span class="hljs-number">1</span><br><span class="hljs-number">2</span><br><span class="hljs-number">2</span><br>&#123;&lt;Task finished name=<span class="hljs-string">&#x27;n2&#x27;</span> coro=&lt;nested() done, defined at d:/z-bank/bank/temp2.py:<span class="hljs-number">4</span>&gt; result=<span class="hljs-number">8</span>&gt;, &lt;Task finished name=<span class="hljs-string">&#x27;n1&#x27;</span> coro=&lt;nested() done, defined at d:/z-bank/bank/temp2.py:<span class="hljs-number">4</span>&gt; result=<span class="hljs-number">8</span>&gt;&#125;<br></code></pre></td></tr></table></figure>
-<p>注意，上述代码中事件循环在<code>asyncio.run()</code>运行时已经创建好了，所以在协程函数main的内部可以直接创建任务列表。而如果在协程函数外部，是无法先创建任务列表的，因为事件循环尚未创建。</p>
-<p>如果需要在外部创建任务列表（即不使用main函数），参考如下写法。（这种写法使用较少，一般都是用一个<code>main()</code>代替 ）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">nested</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">2</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-number">2</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;return&#x27;</span><br>    <br>task_list = [<br>        nested(),<br>        nested()<br>    ]<br>done, pending = asyncio.run(asyncio.wait(task_list))<br></code></pre></td></tr></table></figure>
-<ol start="3">
-<li><strong>Future 对象</strong>：更底层、一般不会直接用，是Task类的基类，强调的是等待处理。</li>
-</ol>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-keyword">async</span> def after(fut):<br>    <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">2</span>)<br>    fut.set_result(<span class="hljs-string">&#x27;1&#x27;</span>)<br><br><span class="hljs-keyword">async</span> def main():<br>    <span class="hljs-keyword">loop</span> = asyncio.get_running_loop()<br>    fut = <span class="hljs-keyword">loop</span>.create_future()<br>    <span class="hljs-keyword">await</span> <span class="hljs-keyword">loop</span>.create_task(after(fut)) <span class="hljs-comment"># 将给 fut 赋值的函数添加到任务列表等待执行</span><br>    <span class="hljs-comment"># 开始 IO 等待，切换其他任务，即after()函数，执行完成后，fut已经有结果了，就直接赋值给data</span><br>    <span class="hljs-comment"># 如果 fut 一直没有获得值，那么就会一直等待下去。</span><br>    data = <span class="hljs-keyword">await</span> fut<br></code></pre></td></tr></table></figure>
-<h2 id="应用场景"><a class="markdownIt-Anchor" href="#应用场景"></a> 应用场景</h2>
-<p>异步编程的使用场景一般是 IO 密集应用，包括网络读取、数据库读取。计算密集应用下没有太多优势，异步优势在于高效使用CPU处理缓慢的IO。</p>
-<p>因此，最佳的使用场景是<strong>IO密集</strong>且IO操作较慢，需要多任务协同实现。如下爬虫爬取100个页面，当程序运行时，Python 会自动调度这100个协程，当一个协程在等待网络 IO 返回时，切换到第二个协程并发起请求，在这个协程等待返回时，继续切换到第三个协程并发起请求……。程序充分利用了网络 IO 的等待时间，从而大大提高了运行速度。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> asyncio<br><span class="hljs-keyword">import</span> aiohttp<br><br>template = <span class="hljs-string">&#x27;http://exercise.kingname.info/exercise_middleware_ip/&#123;page&#125;&#x27;</span><br><br><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">get</span>(<span class="hljs-params">session, queue</span>):<br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        <span class="hljs-keyword">try</span>:<br>            page = queue.get_nowait()<br>        <span class="hljs-keyword">except</span> asyncio.QueueEmpty:<br>            <span class="hljs-keyword">return</span><br>        url = template.<span class="hljs-built_in">format</span>(page=page)<br>        resp = <span class="hljs-keyword">await</span> session.get(url)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-keyword">await</span> resp.text(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-keyword">async</span> <span class="hljs-keyword">with</span> aiohttp.ClientSession() <span class="hljs-keyword">as</span> session:<br>        queue = asyncio.Queue()<br>        <span class="hljs-keyword">for</span> page <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>):<br>            queue.put_nowait(page)<br>        tasks = []<br>        <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">100</span>):<br>            task = get(session, queue)<br>            tasks.append(task)<br>        <span class="hljs-keyword">await</span> asyncio.wait(tasks)<br><br><br>loop = asyncio.get_event_loop()<br>loop.run_until_complete(main())<br></code></pre></td></tr></table></figure>
+<p>站长评价：第一次看这篇文章，觉得很有道理。但后面多看几遍，发现有些论点有些站不住脚。但是由于本人的知识储备还不够，是个文盲，无法反驳这些观点。只好先码住，等想起来了再记上。</p>
+<hr>
+<p>我很喜欢跟郭锦程聊天，因为他知识面广，总能说出些让人惊喜的观点。有次我们一起看球，比赛前的空隙，就聊到了什么是底层思维Q</p>
+<p>郭锦程:「一个人若要实现阶层跃迁Q，首先得摆脱被剥削的状态，对吧?」</p>
+<p>我说:「是啊，不然越努力越悲催，永远都逃不脱贫旁循环。」</p>
+<p>郭锦程:「但如果思维认知上不去，阶级身份也不可能跟得上，在我们的传统里，有一款最经典的底层思维，绵延两千多年，且已内化到文化基因中，根深蒂固，防不胜防，你我的身上，或多或少都有些印记。」</p>
+<p>我:「你指的是「小农思想」 ? 」</p>
+<p>锦程:「不错，你看哈，在对农民的描述中，用的最多的词，除了「吃苦耐劳」 ，就是「老实巴交」。这种词汇，要是用来描述你，你多半是不开心的，但若是用来描述你的员工或下厘，你肯定会很开心。<strong>这么一联想，你肯定就能知道，什么样的人，自己不想当农民，却希望别人都是农民!</strong>」</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303131757674.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>我说：「岂不是说小农们是被 pua 的受害者？」</p>
+<p>锦程：「坏就坏在这里，被小农思想 pua 的受害者，又会反过来用它去 pua 别人，就像病毒一样，人传人，代传代。沾上你，就势必要把你异化成牛马，让你平庸且痛苦。你抗拒？那就把你打成叛逆和异端，极尽批评、排斥，让你孤独且痛苦。」</p>
+<p>他翻出知乎上的另一个话题给我看。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303131749397.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>锦程：「我就是从农村一路考出来的人，对老家的人谈不上厌恶，更谈不上优越感，反而有些痛苦，总之是很复杂的情绪。 一方面，与其说是对老家人厌恶，不如说是对曾经的自己很厌恶，或者说是厌恶那个迫切需要被改变的自己。 另一方面，则是因为无法沟通，只能刻意疏离，以逃避必然爆发的观念冲突——你知道他们是错的，你也知道他们因何而错，但他们却认为，是你在外面学坏了。就比如生孩子这个话题吧，像你这个年纪，还不结婚不生娃，要是在我们老家，肯定会被判个大逆不道，人人都要对你耳提面命几句。」</p>
+<p>我：「给这么大压力么？」</p>
+<p>他：「可不是么？你说那些八竿子才打得着的亲戚，见面就问，孩子多大啦？怎么还没生呢？怎么能不生呢？他是真的关心你过得幸福不幸福么？  笑话，他连你是怎么想的，你的需求是什么都不关心。</p>
+<p><strong>他只是不想看到有人的选择跟他不一样而已，就用一种对抗的态度，给你施加压力。</strong>」</p>
+<p>我：「不错，其实我并不排斥和人讨论生 or 不生的话题，甚至希望听到一些有说服力的观点，但我真的很反感对方用规训的态度，来干涉我的选择。」</p>
+<p>他说：「规训这个词，太到位了——他根本不是关心你，而是在规训你！王小波是怎么描述规训的？他在《黄金时代》中说：  <strong>对于格外生性者，就须采取槌骟术，也就是割开阴囊，掏出睾丸，一木槌砸个稀烂。 从此后手术者只知道吃草干活，别的什么都不知道，连杀都不用捆。</strong></p>
+<p>你不妨代入一下那头格外生性的牛——你知道他们为什么要阉割你，也知道阉割后你会是个什么死样子，但他们就是要当着你的面，阉割你，还硬要说是为你好，你什么感受？」</p>
+<p>我有点质疑地说：「我能理解传统思维对人的压迫和规训，但是不是有点把老家人想得太坏了？他们或许只是出于本能地不喜欢『离经叛道』者罢了，并没有太多主观上的『坏』。」</p>
+<p>他说：「这才是最让人无奈的地方，因为他们身在『坑』中却不自知，你好不容易才从『坑』里爬了出来，但他们还想把你往下拽！」</p>
+<p>我：「为什么说这种思想是『坑』呢？」</p>
+<p>他：「<strong>因为它被设计出来时，就是为了困住人、剥削人的</strong>。你知道思想是可以被设计的，对吧？」</p>
+<p>我：「知道，在《三体》中，希恩斯通过『思想钢印』给自己注入了『水有毒』的思想，后来即使渴死，也喝不进哪怕一滴水。但那是在科幻世界，啥都可以设计，小农思想要怎么设计？」</p>
+<p>他：「小农思想不是被直接设计出来的，而是在小农经济中衍生的，但小农经济之所以能成为古代封建经济的主流，完全是出于人为意志的筛选。<strong>什么叫小农思想？就是那种为满足个人温饱，在一小块地上自耕自作，无约束、无协作、无交换而长期形成的一种思想观念和行为习惯</strong>。古代的统治者虽然无法制造出思想钢印，但是只要把老百姓的生活格局限制在小农经济中，小农思想就会自动生成。」</p>
+<p>我：「所以你认为小农经济不是自然形成的，而是被封建体制给创造出来的？」</p>
+<p>他：「也不能说是创造，小农经济的形成过程，应该还是自然的，但古代集权体制封堵了其他经济形式的可能，让小农一家独大。这个过程，就跟思想界，原本是百家争鸣，最后却独尊了儒术一样。<strong>小农经济和儒家思想，都是作为集权统治最有效的两套工具而被筛选了出来，然后培育成了禁锢华夏文明的参天大树</strong>。历史课本把春秋及之前的社会称为『奴隶制』，把战国及秦之后的社会称为『封建制』，其实不太合理。  **因为奴隶不是一种制度，而是一种身份，即使到清朝，依然存在卖身的农奴。**把秦到清按封建社会划分，是西方人的提法，他们按西方社会演进的时间轴来理解我国社会。<strong>但他们并没有经历长期的大一统，西方的封建制一直延续到了资产阶级革命，而我们的封建制，早在秦汉时期就结束了。</strong></p>
+<p>秦始皇和汉武帝都想打造出一套高效的中央集权体制，以便集中全天下的资源为自己所用，只是他们用到的办法，很不相同。  秦始皇用的是暴力，繁刑重敛，结果二世而亡。汉武帝则吸取了这个教训，采用了更温和的『教化』手段，用哲学家福柯的话说，就是从『刑罚社会』，过渡到了『规训社会』。 从此，中央集权制登上历史舞台，并绵延两千多年。虽然汉武帝换了条路线，但他及后世皇帝的统治目标，和秦始皇一毛一样，所谓『<strong>百代以来，皆行秦法</strong>』说的就是这个意思。  秦法是什么法？  <strong>按《商君书》的说法，秦法是贫民之法，疲民之法、辱民之法、弱民之法，以及愚民之法</strong>。  即秦法要打造的，是只知低头干活，毫无反抗意志的工具人。  假设我是官，你是民，你觉得我会怎么控制你？  首先是使你保持穷困，人穷则志短，这样随便给你点甜头，就能役使你。</p>
+<p><strong>说到底，穷人才是红利，廉价劳动力嘛，一旦变富，就会推高劳动成本，减少劳动剩余</strong>。</p>
+<p>其次就是用垄断刚需产品的方式，来抬高生活成本，让你为获取生存物资而不停劳作，这样你就不会想七想八，从而利于控制。第三，是给社会分个三六九等，并在文化上羞辱底层，打击你的自尊自信，使你自轻自贱，觉得穷人就没资格如何如何，这样你就会迷信权威，认为地位越高的人，说话就越对。 第四，是干掉带头搞事的刺头，那剩下的就都是软蛋了。最后就是搞知识垄断，使你的认知维持在低水平，这样你就无法识破社会的运转逻辑，那我对你，就是有知对无知，从而更容易控制你。」</p>
+<p>我说：「听上去似乎很厉害，但具体要怎么实施呢？」</p>
+<p>他说：「无非就是历史书上常说的那些——重税、连坐、重农抑商、利出一孔……  但这些政策的实施，最终都落实在小农经济这个环节。  要提取经济资源，要贫民、疲民，那就得重税，但你是不是觉得史书记载的农业税并不高，谈不上重税？」</p>
+<p>我：「古代对土地征的税，可能是不高，但还有另外两种税，  一是徭役，杜甫《石壕吏》中『急应河阳役，犹得备晨炊』说的就是这个。  二是「盐铁官营」，相当于古代版的工农业剪刀差，本质上也是税。」</p>
+<p>他：「不错，为了更大限度地从民间提取劳劳动剩余，历朝历代的统治者，都最喜欢农民，  <strong>因为农民是被绑在一亩三分地上的，控制成本最低，人为阻止人口流动的保甲制、里坊制、连坐制……都是证据</strong>。  古代皇帝动不动就说重农抑商，其实他们要抑制的只是民商，因为要把高利润的商业机会，全都垄断到官商手中，『盐铁官营』就是很重要的一例。</p>
+<p>他们讨厌的也只是商人，而不是商业，<strong>因为皇帝们认为商人有很强的组织能力，会威胁君主权威，是必须要干掉的强民</strong>，  此外还有豪侠，这些人爱打抱不平，总是一呼百应，也是威胁。  再就是知识分子，他们来自诸子百家，思想自由，不光难以被规训，还会煽动其他人。</p>
+<p><strong>总之就是要『焚百家之言，以愚黔首；隳名城，杀豪杰……以弱天下之民』</strong>。  现在想想，乾隆拒绝与英国通商，真的是他傲慢无知？  恐怕是他太了解商业所塑造的资产阶级会撼动皇权了吧！  不让做商人，也不让做豪侠，还不让多读书……</p>
+<p><strong>什么叫「利出一孔」？  就是锁死一切人们可以自我发展的上升通道——想要升官发财，你只能依附于皇权官僚这套体制</strong>。  利出一孔+依附体制，对于普通老百姓来说，结果就是出路单一，于是内卷文化，由此而生！  也就是说，<strong>统治者自己不想当农民，但希望别人都是农民——不要乱跑，不要乱想，归顺他，依附他……</strong>」</p>
+<p>我又问：「那为什么是小农而不是大农呢？」</p>
+<p>他：「小农对应的是自耕农和佃农，大农对应的是规模农业和农场主。  那大农还是农吗？不是，是地主。  最大的地主，就是皇帝本人，  再往下则是豪强、地头蛇，这些人，一方面是依附体制而升官发财的典型，另一方面又是皇帝的挑战者。  皇帝怕张角、王薄、李自成么？怕，但更怕曹操、李渊、吴三桂。</p>
+<p><strong>也就是说，体制内部也不是铁板一块——大农没发展起来的时候，意味着皇权一统、社会稳定；大农发展起来以后，意味着土地兼并、豪强并起</strong>。  所以鲁迅说，古代中国只有两个时代——<strong>做稳奴隶的时代，和连奴隶都做不稳的时代</strong>。</p>
+<p>既然皇帝要坐稳龙椅，自然要『小农』，而不要『大农』。  但我们都知道，小农经济本身并不稳定。  它首先是分散，其次是缺乏交换，这样单薄又单一的经济系统，必然是低效且脆弱的。  就像自然界的生态系统一样，越简单越脆弱。  <strong>脆弱，就会畏惧不稳定。  畏惧不稳定，就会进化出求稳的思想</strong>，  然后便逐渐演绎出后来我们所看到的小农社会的特点，比如宗族依附，比如思想保守……  <strong>我们甚至可以说——小农经济本身的不稳定，促成了阶级社会的稳定</strong>……</p>
+<p>转载自<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/538846835/answer/2811876701">知乎</a></p>
 
                 
               </div>
@@ -446,7 +440,7 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
     
       <span class="category-chain">
         
-  <a href="/categories/Dev/" class="category-chain-item">Dev</a>
+  <a href="/categories/Sth/" class="category-chain-item">Sth</a>
   
   
 
@@ -461,7 +455,7 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Python/">#Python</a>
+        <a href="/tags/Life/">#Life</a>
       
     </div>
   
@@ -473,8 +467,8 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Python asyncio基本使用</div>
-      <div>https://zhouyinglin.cn/post/ce418c79.html</div>
+      <div>为什么长辈总喜欢用他们的那套思维束缚子女？</div>
+      <div>https://zhouyinglin.cn/post/73d16dde.html</div>
     </div>
     <div class="license-meta">
       
@@ -486,13 +480,13 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月13日</div>
+          <div>2023年3月17日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年3月13日</div>
+          <div>2023年3月17日</div>
         </div>
       
       <div class="license-meta-item">
@@ -527,18 +521,12 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/post/c8056d43.html" title="IOS-自带邮件添加Gmail邮箱">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">IOS-自带邮件添加Gmail邮箱</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/post/470b7fc9.html" title="VSCode格式化导包代码出现的问题">
-                        <span class="hidden-mobile">VSCode格式化导包代码出现的问题</span>
+                      <a href="/post/c8056d43.html" title="IOS-自带邮件添加Gmail邮箱">
+                        <span class="hidden-mobile">IOS-自带邮件添加Gmail邮箱</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
