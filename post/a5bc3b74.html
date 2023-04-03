@@ -16,23 +16,34 @@
   <meta name="author" content="小周">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="https://zhouyinglin.cn/archives/2022/page/11/index.html">
+    <meta name="description" content="sys.stdout.write()：python中调用print时，事实上调用了sys.stdout.write(obj+&#39;\n&#39;) Python 中标准输出stdout默认需要缓存后再输出到屏幕，只有遇到换行或积累到一定大小才会输出。 而标准错误stderr则直接输出。 123456import syssys.stdout.write(&quot;stdout1&quot;)sys.st">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3 -u参数详解">
+<meta property="og:url" content="https://zhouyinglin.cn/post/a5bc3b74.html">
 <meta property="og:site_name" content="小周的院子">
+<meta property="og:description" content="sys.stdout.write()：python中调用print时，事实上调用了sys.stdout.write(obj+&#39;\n&#39;) Python 中标准输出stdout默认需要缓存后再输出到屏幕，只有遇到换行或积累到一定大小才会输出。 而标准错误stderr则直接输出。 123456import syssys.stdout.write(&quot;stdout1&quot;)sys.st">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-03T02:22:44.000Z">
+<meta property="article:modified_time" content="2023-04-03T02:23:15.834Z">
 <meta property="article:author" content="小周">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <meta name="baidu-site-verification" content="code-bMcoZ9RRBp" />
   
-  <title>归档 - 小周的院子</title>
+  <title>Python3 -u参数详解 - 小周的院子</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -107,7 +118,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -266,15 +277,63 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202212161220542.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="归档"></span>
+            <span id="subtitle" data-typed-text="Python3 -u参数详解"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-03 10:22" pubdate>
+          2023年4月3日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          509 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          5 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
 
         
       </div>
@@ -290,100 +349,235 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 135 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2022</p>
-    
-    <a href="/post/c4b392bb.html" class="list-group-item list-group-item-action">
-      <time>08-06</time>
-      <div class="list-group-item-title">Java生成指定数量的假数据</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Python3 -u参数详解</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<!-- categories:Dev、Ops、Study、Sth、News、work-->
+<!-- tags: 
+Python、MySQL、LeetCode、机器学习、Linux、Big Data、Java、BlockChain、Docker、Web 、分布式、
+Maven、数据结构、JVM、JavaScript、Crontab、Shell、Ubuntu、VPN、NodeJS、String、VM、Hadoop、
+Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美学、写作、哲学、文档、绘画、前端、
+历史、政治、社会、导购
+ -->
+<p><code>sys.stdout.write()</code>：python中调用<code>print</code>时，事实上调用了<code>sys.stdout.write(obj+'\n')</code></p>
+<p>Python 中标准输出<code>stdout</code>默认需要缓存后再输出到屏幕，只有遇到换行或积累到一定大小才会输出。</p>
+<p>而标准错误<code>stderr</code>则直接输出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><br>sys.stdout.write(<span class="hljs-string">&quot;stdout1&quot;</span>)<br>sys.stderr.write(<span class="hljs-string">&quot;stderr1&quot;</span>)<br>sys.stdout.write(<span class="hljs-string">&quot;stdout2&quot;</span>)<br>sys.stderr.write(<span class="hljs-string">&quot;stderr2&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>如上代码运行结果为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">stderr1stderr2stdout1stdout2<br></code></pre></td></tr></table></figure>
+<p>-u 参数强制标准输出跟标准错误一样，不通过缓存直接打印至屏幕。一般在处理运行 Python 脚本的日志问题时需要注意到这点。更换成 <code>python -u</code>就正常按照语句的顺序来打印了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">python temp.py<br>stderr1stderr2stdout1stdout2<br>python -u temp.py<br>stdout1stderr1stdout2stderr2<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
   
     
-    <a href="/post/d4a9d35c.html" class="list-group-item list-group-item-action">
-      <time>08-06</time>
-      <div class="list-group-item-title">树莓派设置音频输出音量</div>
-    </a>
+      <span class="category-chain">
+        
+  <a href="/categories/Dev/" class="category-chain-item">Dev</a>
   
-    
-    <a href="/post/f437e7c5.html" class="list-group-item list-group-item-action">
-      <time>08-06</time>
-      <div class="list-group-item-title">Linux下查询jdk安装路径</div>
-    </a>
   
+
+      </span>
     
-    <a href="/post/8f5d5cd5.html" class="list-group-item list-group-item-action">
-      <time>08-06</time>
-      <div class="list-group-item-title">树莓派更新源流程</div>
-    </a>
   
-    
-    <a href="/post/57cf4104.html" class="list-group-item list-group-item-action">
-      <time>08-06</time>
-      <div class="list-group-item-title">树莓派wifi环境下初始化及环境配置</div>
-    </a>
+</span>
+
+    </div>
   
-    
-    <a href="/post/57fcad35.html" class="list-group-item list-group-item-action">
-      <time>08-06</time>
-      <div class="list-group-item-title">Java-JVM内存区域划分</div>
-    </a>
   
-    
-    <a href="/post/83c6036c.html" class="list-group-item list-group-item-action">
-      <time>08-06</time>
-      <div class="list-group-item-title">Java 将Clob类型转换为String</div>
-    </a>
-  
-    
-    <a href="/post/78f84231.html" class="list-group-item list-group-item-action">
-      <time>08-06</time>
-      <div class="list-group-item-title">JavaScript实现&lt;li&gt;元素向上轮播</div>
-    </a>
-  
-    
-    <a href="/post/474a0c40.html" class="list-group-item list-group-item-action">
-      <time>08-06</time>
-      <div class="list-group-item-title">Ajax返回error可能出现的问题</div>
-    </a>
-  
-    
-    <a href="/post/d09355de.html" class="list-group-item list-group-item-action">
-      <time>08-06</time>
-      <div class="list-group-item-title">Java ArrayList源码详解</div>
-    </a>
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+    </div>
   
 </div>
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/2022/page/10/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/2022/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/page/9/#board">9</a><a class="page-number" href="/archives/2022/page/10/#board">10</a><span class="page-number current">11</span><a class="page-number" href="/archives/2022/page/12/#board">12</a><a class="extend next" rel="next" href="/archives/2022/page/12/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
+              
+  
 
-
-
-
-              </div>
-            </div>
-          </div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Python3 -u参数详解</div>
+      <div>https://zhouyinglin.cn/post/a5bc3b74.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>小周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月3日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年4月3日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
         </div>
       </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/73d16dde.html" title="为什么长辈总喜欢用他们的那套思维束缚子女？">
+                        <span class="hidden-mobile">为什么长辈总喜欢用他们的那套思维束缚子女？</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-comment-blond.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"login":"enable","lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.0.1/tieba","https://unpkg.com/@waline/emojis@1.0.1/bilibili"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -513,6 +707,72 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script defer src="/js/leancloud.js" ></script>
 
