@@ -523,7 +523,7 @@ index:
 
     # 为空则按 hexo config.subtitle 显示
     # If empty, text based on `subtitle` in hexo config
-    text: "我觉得自己会永远生猛下去"
+    text: "Life's shit, but I'm loving it."
 
     # 通过 API 接口作为首页副标题的内容，必须返回的是 JSON 格式，如果请求失败则按 text 字段显示，该功能必须先开启 typing 打字机功能
     # Subtitle of the homepage through the API, must be returned a JSON. If the request fails, it will be displayed in `text` value. This feature must first enable the typing animation
@@ -1050,6 +1050,18 @@ boxs:
       intro: "超级马里奥在线",
       link: "https://supermario-game.com/",
       avatar: "https://supermario-game.com/media-files/mobile/mario_red_wallpaper.jpg"
+    }
+    - {
+      title: "全球地址生成器",
+      intro: "用于注册平台账号所需的真实账单信息",
+      link: "https://www.meiguodizhi.com/",
+      avatar: "https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303140937528.jpg"
+    }
+    - {
+      title: "IP测试(待补充)",
+      intro: "用于爬虫访问访问的序列网页",
+      link: "https://zhouyinglin.cn/exercise_ip/",
+      avatar: "https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202303131500280.png"
     }
 
 #---------------------------

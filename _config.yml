@@ -33,7 +33,8 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-#skip_render: "boxs/*"
+#skip_render: 
+#        - "my/ip.html"
 
 # Writing
 new_post_name: :year-:month-:day-:title.md # File name of new posts
@@ -110,7 +111,7 @@ deploy:
   type: git
   repo: git@github.com:YuanZhou314/yuanzhou314.github.io.git
   branch: main
-  token: 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
+  token: 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
 
 leancloud_counter_security:
   enable_sync: true
