@@ -16,16 +16,16 @@
   <meta name="author" content="小周">
   <meta name="keywords" content="">
   
-    <meta name="description" content="数据模型创建后，Django会自动给予一套数据库抽象API，允许增删改查对象。在Django实际代码中，这些应该都是写在views.py内的。 官方文档：https:&#x2F;&#x2F;docs.djangoproject.com&#x2F;zh-hans&#x2F;4.1&#x2F;topics&#x2F;db&#x2F;queries&#x2F;  导入模型 12from polls.models import Choice, Questionfrom djan">
+    <meta name="description" content="数据模型创建后，Django会自动给予一套数据库抽象API，允许增删改查对象。在Django实际代码中，这些应该都是写在views.py内的。 官方文档：https:&#x2F;&#x2F;docs.djangoproject.com&#x2F;zh-hans&#x2F;4.1&#x2F;topics&#x2F;db&#x2F;queries&#x2F;  进入交互式命令行 1python manage.py shell  导入模型 12from polls.model">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Django数据库基本API示例">
 <meta property="og:url" content="https://zhouyinglin.cn/post/afd71056.html">
 <meta property="og:site_name" content="小周的院子">
-<meta property="og:description" content="数据模型创建后，Django会自动给予一套数据库抽象API，允许增删改查对象。在Django实际代码中，这些应该都是写在views.py内的。 官方文档：https:&#x2F;&#x2F;docs.djangoproject.com&#x2F;zh-hans&#x2F;4.1&#x2F;topics&#x2F;db&#x2F;queries&#x2F;  导入模型 12from polls.models import Choice, Questionfrom djan">
+<meta property="og:description" content="数据模型创建后，Django会自动给予一套数据库抽象API，允许增删改查对象。在Django实际代码中，这些应该都是写在views.py内的。 官方文档：https:&#x2F;&#x2F;docs.djangoproject.com&#x2F;zh-hans&#x2F;4.1&#x2F;topics&#x2F;db&#x2F;queries&#x2F;  进入交互式命令行 1python manage.py shell  导入模型 12from polls.model">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png">
 <meta property="article:published_time" content="2023-01-05T03:02:07.000Z">
-<meta property="article:modified_time" content="2023-01-05T07:01:45.765Z">
+<meta property="article:modified_time" content="2023-04-04T01:42:01.507Z">
 <meta property="article:author" content="小周">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary_large_image">
@@ -380,6 +380,8 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
  -->
 <p>数据模型创建后，Django会自动给予一套数据库抽象API，允许增删改查对象。在Django实际代码中，这些应该都是写在<code>views.py</code>内的。</p>
 <p>官方文档：<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.1/topics/db/queries/">https://docs.djangoproject.com/zh-hans/4.1/topics/db/queries/</a></p>
+<h2 id="进入交互式命令行"><a class="markdownIt-Anchor" href="#进入交互式命令行"></a> 进入交互式命令行</h2>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> manage.<span class="hljs-keyword">py</span> <span class="hljs-keyword">shell</span><br></code></pre></td></tr></table></figure>
 <h2 id="导入模型"><a class="markdownIt-Anchor" href="#导入模型"></a> 导入模型</h2>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">from</span> polls.models <span class="hljs-keyword">import</span> Choice, Question<br><span class="hljs-keyword">from</span> django.utils <span class="hljs-keyword">import</span> timezone<br></code></pre></td></tr></table></figure>
 <h2 id="新增记录"><a class="markdownIt-Anchor" href="#新增记录"></a> 新增记录</h2>
@@ -470,7 +472,7 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年1月5日</div>
+          <div>2023年4月4日</div>
         </div>
       
       <div class="license-meta-item">
