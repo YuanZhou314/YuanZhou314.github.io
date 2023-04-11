@@ -16,24 +16,27 @@
   <meta name="author" content="小周">
   <meta name="keywords" content="">
   
-    <meta name="description" content="sys.stdout.write()：python中调用print时，事实上调用了sys.stdout.write(obj+&#39;\n&#39;) Python 中标准输出stdout默认需要缓存后再输出到屏幕，只有遇到换行或积累到一定大小才会输出。 而标准错误stderr则直接输出。 123456import syssys.stdout.write(&quot;stdout1&quot;)sys.st">
+    <meta name="description" content="转载自懂车帝秦plus DM-i车友圈 自从DM-i车型上市以来，受到关注颇多，然而最近非议甚多，主要集中在动力受限问题上。于是，本人对购买该车型前的须知内容进行梳理。 首先，最重要的，请各位一定要明确，DM-i车型本质上不是一辆带有电池电机能上绿牌的油车，而是一辆带有发电机的电车！电车！电车！重要的话说上三遍！也就是说，这辆车可以不加油纯电行驶，但绝不可以让电池没电（这是下文的伏笔）。 其">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python3 -u参数详解">
-<meta property="og:url" content="https://zhouyinglin.cn/post/a5bc3b74.html">
+<meta property="og:title" content="关于比亚迪DM-i车型EV受限的长文分析">
+<meta property="og:url" content="https://zhouyinglin.cn/post/5d46f58f.html">
 <meta property="og:site_name" content="小周的院子">
-<meta property="og:description" content="sys.stdout.write()：python中调用print时，事实上调用了sys.stdout.write(obj+&#39;\n&#39;) Python 中标准输出stdout默认需要缓存后再输出到屏幕，只有遇到换行或积累到一定大小才会输出。 而标准错误stderr则直接输出。 123456import syssys.stdout.write(&quot;stdout1&quot;)sys.st">
+<meta property="og:description" content="转载自懂车帝秦plus DM-i车友圈 自从DM-i车型上市以来，受到关注颇多，然而最近非议甚多，主要集中在动力受限问题上。于是，本人对购买该车型前的须知内容进行梳理。 首先，最重要的，请各位一定要明确，DM-i车型本质上不是一辆带有电池电机能上绿牌的油车，而是一辆带有发电机的电车！电车！电车！重要的话说上三遍！也就是说，这辆车可以不加油纯电行驶，但绝不可以让电池没电（这是下文的伏笔）。 其">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-03T02:22:44.000Z">
-<meta property="article:modified_time" content="2023-04-03T02:23:41.858Z">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202304111544858.jpg">
+<meta property="article:published_time" content="2023-04-11T07:42:17.000Z">
+<meta property="article:modified_time" content="2023-04-11T07:44:17.775Z">
 <meta property="article:author" content="小周">
-<meta property="article:tag" content="Python">
+<meta property="article:tag" content="导购">
+<meta property="article:tag" content="车">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202304111544858.jpg">
   
   
   
     <meta name="baidu-site-verification" content="code-bMcoZ9RRBp" />
   
-  <title>Python3 -u参数详解 - 小周的院子</title>
+  <title>关于比亚迪DM-i车型EV受限的长文分析 - 小周的院子</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -283,7 +286,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Python3 -u参数详解"></span>
+            <span id="subtitle" data-typed-text="关于比亚迪DM-i车型EV受限的长文分析"></span>
           
         </div>
 
@@ -294,8 +297,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-03 10:22" pubdate>
-          2023年4月3日 上午
+        <time datetime="2023-04-11 15:42" pubdate>
+          2023年4月11日 下午
         </time>
       </span>
     
@@ -306,7 +309,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          509 字
+          2.3k 字
         
       </span>
     
@@ -317,7 +320,7 @@
         
         
         
-          5 分钟
+          19 分钟
         
       </span>
     
@@ -363,7 +366,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Python3 -u参数详解</h1>
+            <h1 style="display: none">关于比亚迪DM-i车型EV受限的长文分析</h1>
             
             
               <div class="markdown-body">
@@ -376,14 +379,34 @@ Maven、数据结构、JVM、JavaScript、Crontab、Shell、Ubuntu、VPN、NodeJ
 Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美学、写作、哲学、文档、绘画、前端、
 历史、政治、社会、导购
  -->
-<p><code>sys.stdout.write()</code>：python中调用<code>print</code>时，事实上调用了<code>sys.stdout.write(obj+'\n')</code></p>
-<p>Python 中标准输出<code>stdout</code>默认需要缓存后再输出到屏幕，只有遇到换行或积累到一定大小才会输出。</p>
-<p>而标准错误<code>stderr</code>则直接输出。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><br>sys.stdout.write(<span class="hljs-string">&quot;stdout1&quot;</span>)<br>sys.stderr.write(<span class="hljs-string">&quot;stderr1&quot;</span>)<br>sys.stdout.write(<span class="hljs-string">&quot;stdout2&quot;</span>)<br>sys.stderr.write(<span class="hljs-string">&quot;stderr2&quot;</span>)<br></code></pre></td></tr></table></figure>
-<p>如上代码运行结果为：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">stderr1stderr2stdout1stdout2<br></code></pre></td></tr></table></figure>
-<p>-u 参数强制标准输出跟标准错误一样，不通过缓存直接打印至屏幕。一般在处理运行 Python 脚本的日志问题时需要注意到这点。更换成 <code>python -u</code>就正常按照语句的顺序来打印了</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">python temp.py<br>stderr1stderr2stdout1stdout2<br>python -u temp.py<br>stdout1stderr1stdout2stderr2<br></code></pre></td></tr></table></figure>
+<p>转载自<a target="_blank" rel="noopener" href="https://www.dongchedi.com/ugc/article/7061984906112401956">懂车帝秦plus DM-i车友圈</a></p>
+<p>自从DM-i车型上市以来，受到关注颇多，然而最近非议甚多，主要集中在动力受限问题上。于是，本人对购买该车型前的须知内容进行梳理。</p>
+<p>首先，最重要的，请各位一定要明确，DM-i车型本质上不是一辆带有电池电机能上绿牌的油车，而是一辆带有发电机的电车！电车！电车！重要的话说上三遍！也就是说，这辆车可以不加油纯电行驶，但绝不可以让电池没电（这是下文的伏笔）。</p>
+<p>其次，诸位要明白DM-i系统省油的原理。第一，其搭载的发动机是一种超膨胀发动机，原理本质上就是让发动机少喷油同时拉长做工行程，结果就是省油但是马力和扭矩小（打个比方，骁云发动机一分钟用一份油做两份工，普通发动机一分钟用两份油做三份工），从而做到高效的燃油经济性。第二，最核心的一点是它的传动模式。发动机的效率绝不是一成不变的，在不同转速和扭矩时一份油做的功不一样，纯油车市区低速行驶时，发动机长期处于低效运行状态，同时怠速工况造成了燃油的白白浪费。而DM-i系统在低速时发动机并不与车轴相连，而是专心在高效转速给发电机充电，再用电驱动车轴马达，多余的电能就会存进电池，充满了电发动机直接关掉，因此不存在怠速一说——换言之，车辆移动需要多少能量发动机就产生多少能量，因此在市区低速环境下非常省油。但在高速工况下，纯油车的发动机转速高负载小，自然工作在高效状态，此时DM-i车型则是发动机直接驱动车轮，两者不存在差别——因此DM-i高速省油效果并不明显。</p>
+<p>最后，也是最敏感的问题，那就是“动力受限”的可能原因与对策。请大家好好看一下，在圈子里反映的“EV受限”问题，绝大多数发生在哪里？高速上；绝大多数在什么工况？高速行驶的时候突然动力受限。结合这两点，其实可能的原因已经很清楚了。大家可以再看看配置表上这个1.5L发动机的功率，然后看看驱动马达的功率，你会发现发动机发电的功率远小于马达最大功率，也就是说，如果把电池比作水库，在长时间高负载情况下水库从上游（发动机）得到的水抵不过下游放出去的水（马达），那自然就会保不住水位（电量）。而什么时候最最容易出现这种情况呢？很简单，高速行驶+ECO模式（优先用电）+频繁超车，就会导致电量越过最低临界点而强制保电，其中一个措施就是强制降速了。此外，磷酸铁锂电池的特性可能起到了推波助澜的作用，因为磷酸铁锂电池天生就具有低温性能差的问题，DMi车型又没有对低温环境下电池做特殊优化（像海豚那样），导致冬季电池折损更加严重，加剧了北方地区高速动力受限的情况。</p>
+<p>当然，可能会有人问，为何发动机不能直接驱动车轮？这就回到了我提到的第一点，这车本质上是电动车，同时阿特金森发动机低扭特性极差，根本没办法低速直驱车辆，因此低速必须通过电动机驱动，在电量低下时，连低速行驶也会难以实现，所以为了防止电池被彻底榨干而真的一点动力没有，电控会在低于平衡点后主动限制电能释放从而为发动机馈电争取机会。</p>
+<p>说了这么多，其实在比亚迪官方发布通告之前，以上的这一切都是我本人基于理论知识而进行的推导。在这里。我给厂家提出几个诉求：</p>
+<p>1、及时优化电控逻辑，调高强制保电的电量平衡点，同时建议在40下设置为退强制退出ECO模式；</p>
+<p>2、加强4S店以及经销网点对消费者的科普力度，我曾经去过三家以上比亚迪4S店，没一家营销人员明白系统的工作逻辑，更别提普通的消费者；</p>
+<p>3、针对已经发生的动力受限情况进行官方答复，至少找出让人信服的问题点。</p>
+<p>针对消费者，有以下忠告：</p>
+<p>1、在购车预算充足的前提下尽量选择大电池的版本；</p>
+<p>2、主动了解DM-i系统的工作逻辑，一定要意识到这车跟普通燃油车完完全全两码事；</p>
+<p>3、跑高速的时候一定要退出ECO模式切换到SPORT模式，尽量让发动机出力，同时将强制保电设定到超过50%的位置上，如果发现仍然难以保住电量，适当降低一点车速，不要频繁超车激烈驾驶；</p>
+<p>4、最后，如果仍然有顾虑，大可以看看其他厂商的混动产品。个人私货是比较看好长城DHT混动，有两个直驱档位，拓展了发动机的介入区间。</p>
+<p>评论区</p>
+<hr>
+<p>你说的这个感觉有道理，以后在亏电状态下，需要大功率输出时，尽量不用经济模式。 但是这可能只是ev受限的其中的一个原因，而不是全部。因为见过ev受限后厂家主动叫车主换电池的，换控制器单元的，所以说，只要是三电系统里面的某个部分出问题了，都会有可能导致ev受限。</p>
+<hr>
+<p>想法是好的，但这绝不是主要原因！<strong>ev受限大多都是换电池解决的</strong>，也不乏很多新车在市区出现ev受限直接趴窝的情况，根本问题还是电池稳定性问题。 我猜测很多高速出问题很可能是电池本身已经有问题了，只是高速的长时间大负荷输出把问题暴露出来而已！就像很多人平时开的好好的却接到通知到4s店升级(换电池)，之前还有车主每次充电量按电池百分比算下来都感觉小很多，售后一检测发现电池坏了需要换，这平时市区都没表现出来，但确实都是电池问题导致的！ 另外高速巡航的功率需求1.5的阿特金森完全可以满足，没有你想象的那么大！</p>
+<hr>
+<p>就正常模式，强制保电70就行啦，随便开</p>
+<hr>
+<p>只能说你知其一不知其二，发电那个比喻引用数据完全错误，不存在你说的发电不够电机输出的情况，电机最大功率145kw没错，但通常电机是在额定功率工况下工作，发电完全没有问题，如果厂家这个都没想到，那还搞锤子的混动。ev受限最大原因是电芯质量问题以及电路线束接口保护出现故障码</p>
+<hr>
+<p>这个要申精啊，必须顶，让更多车主看到。确实有太多车主是根本不了解这套动力系统的，设置也是一个eco走天下。记住开这车的核心思想就是不要用eco，强制保电！！！</p>
+<hr>
+<p>简单的说就是要保证电池电量</p>
 
                 
               </div>
@@ -402,7 +425,7 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
     
       <span class="category-chain">
         
-  <a href="/categories/Dev/" class="category-chain-item">Dev</a>
+  <a href="/categories/News/" class="category-chain-item">News</a>
   
   
 
@@ -417,7 +440,9 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Python/">#Python</a>
+        <a href="/tags/%E5%AF%BC%E8%B4%AD/">#导购</a>
+      
+        <a href="/tags/%E8%BD%A6/">#车</a>
       
     </div>
   
@@ -429,8 +454,8 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Python3 -u参数详解</div>
-      <div>https://zhouyinglin.cn/post/a5bc3b74.html</div>
+      <div>关于比亚迪DM-i车型EV受限的长文分析</div>
+      <div>https://zhouyinglin.cn/post/5d46f58f.html</div>
     </div>
     <div class="license-meta">
       
@@ -442,13 +467,13 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月3日</div>
+          <div>2023年4月11日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年4月3日</div>
+          <div>2023年4月11日</div>
         </div>
       
       <div class="license-meta-item">
@@ -483,18 +508,12 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/post/5d46f58f.html" title="关于比亚迪DM-i车型EV受限的长文分析">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">关于比亚迪DM-i车型EV受限的长文分析</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/post/73d16dde.html" title="为什么长辈总喜欢用他们的那套思维束缚子女？">
-                        <span class="hidden-mobile">为什么长辈总喜欢用他们的那套思维束缚子女？</span>
+                      <a href="/post/a5bc3b74.html" title="Python3 -u参数详解">
+                        <span class="hidden-mobile">Python3 -u参数详解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
