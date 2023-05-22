@@ -307,6 +307,67 @@
   <div class="row mx-auto index-card">
     
     
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/post/d601b667.html" target="_self">
+          IDEA运行测试错误Failed to resolve org.junit.platform:junit-platform-launcher
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/post/d601b667.html" target="_self">
+        <div>
+          问题原因： 这里的问题是IntelliJ试图在不使用IDE中配置的Maven“用户设置文件”(settings.xml)的情况下解决所需的工件本身。它将直接连接到Maven Central，但被我的雇主屏蔽了 解决方案在pom文件添加： 123456&lt;dependency&gt; &lt;!-- this is needed or IntelliJ gives junit.jar or j
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-08-06 19:28" pubdate>
+              2022-08-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Dev/" class="category-chain-item">Dev</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">#Java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="/post/2ab2ff87.html" target="_self">
           <img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/MySQL.png" srcset="/img/loading.gif" lazyload alt="MySql索引基本原理">
@@ -872,67 +933,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/JavaScript/">#JavaScript</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/c4b392bb.html" target="_self">
-          Java生成指定数量的假数据
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/post/c4b392bb.html" target="_self">
-        <div>
-          实际上也不是什么正经需求，只是在画页面的时候需要放一些随机的假数据，且最好不要重复。我这里只放了十套假数据就懒得再放了，写成了一个方法先放在这里 随机生成一些假数据： 123456789101112131415161718192021222324252627282930313233343536private String getRandomInfo(String flag, int num)&amp;#
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-08-06 18:33" pubdate>
-              2022-08-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Dev/" class="category-chain-item">Dev</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Java/">#Java</a>
             
           </div>
         
