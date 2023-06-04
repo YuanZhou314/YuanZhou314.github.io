@@ -1,0 +1,1475 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/zz.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="小周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="基本内容 产品：为了解决某些问题而存在的东西 产品经理： 想清楚产品是怎么设计的人 合格的产品经理： 把用户面临的问题想清楚：   用户   场景   需求   怎样设计才能更好地解决问题   功能   体验&#x2F;优势   价值   ##产品经理职责  开发流程  分析定义：问题定义、可行性研究、需求分析 软件设计：概要设计、详细设计 编码测试：编码、测试 运行维护：运行维护   产品经理职责">
+<meta property="og:type" content="article">
+<meta property="og:title" content="产品理论">
+<meta property="og:url" content="https://zhouyinglin.cn/post/979df087.html">
+<meta property="og:site_name" content="小周的院子">
+<meta property="og:description" content="基本内容 产品：为了解决某些问题而存在的东西 产品经理： 想清楚产品是怎么设计的人 合格的产品经理： 把用户面临的问题想清楚：   用户   场景   需求   怎样设计才能更好地解决问题   功能   体验&#x2F;优势   价值   ##产品经理职责  开发流程  分析定义：问题定义、可行性研究、需求分析 软件设计：概要设计、详细设计 编码测试：编码、测试 运行维护：运行维护   产品经理职责">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230527102231691.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230527140318873.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230527150100742.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230527153052662.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230527154225107.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230528094323200.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230528112321757.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230528114311019.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230528134735919.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230528151229469.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230528152259705.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230604100958074.png">
+<meta property="article:published_time" content="2023-06-04T06:18:49.000Z">
+<meta property="article:modified_time" content="2023-06-04T06:20:55.201Z">
+<meta property="article:author" content="小周">
+<meta property="article:tag" content="产品">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230527102231691.png">
+  
+  
+  
+    <meta name="baidu-site-verification" content="code-bMcoZ9RRBp" />
+  
+  <title>产品理论 - 小周的院子</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhouyinglin.cn","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DOFm5rBfeIBUxN13vhiXlS4S-MdYXbMMI","app_key":"FJKOtk5nWqYzGoXXiFAvHIDC","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小周的院子</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+    
+    <!-- 添加zyl天气 -->
+
+<div id="tp-weather-widget"></div>
+    <script>
+        (function (a, h, g, f, e, d, c, b) { b = function () { d = h.createElement(g); c = h.getElementsByTagName(g)[0]; d.src = e; d.charset = "utf-8"; d.async = 1; c.parentNode.insertBefore(d, c) }; a["SeniverseWeatherWidgetObject"] = f; a[f] || (a[f] = function () { (a[f].q = a[f].q || []).push(arguments) }); a[f].l = +new Date(); if (a.attachEvent) { a.attachEvent("onload", b) } else { a.addEventListener("load", b, false) } }(window, document, "script", "SeniverseWeatherWidget", "//cdn.sencdn.com/widget2/static/js/bundle.js?t=" + parseInt((new Date().getTime() / 100000000).toString(), 10)));
+        window.SeniverseWeatherWidget('show', {
+            flavor: "slim",
+            location: "WKJ1F428HH2F",
+            geolocation: true,
+            language: "zh-Hans",
+            unit: "c",
+            theme: "auto",
+            token: "5089001e-aa9f-41c5-862d-e416aabf81f7",
+            hover: "enabled",
+            container: "tp-weather-widget"
+        })
+    </script>
+
+
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文章
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    归档
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/boxs/">
+                <i class="iconfont icon-switch-fill"></i>
+                百宝箱
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.foreverblog.cn/go.html">
+                <i class="iconfont icon-rss"></i>
+                虫洞
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202212161220542.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="产品理论"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-04 14:18" pubdate>
+          2023年6月4日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          76 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">产品理论</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<!-- categories:Dev、Ops、Study、Sth、News、work-->
+<!-- tags: 
+Python、MySQL、LeetCode、机器学习、Linux、Big Data、Java、BlockChain、Docker、Web 、分布式、
+Maven、数据结构、JVM、JavaScript、Crontab、Shell、Ubuntu、VPN、NodeJS、String、VM、Hadoop、
+Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美学、写作、哲学、文档、绘画、前端、
+历史、政治、社会、导购
+ -->
+<h2 id="基本内容"><a class="markdownIt-Anchor" href="#基本内容"></a> 基本内容</h2>
+<p>产品：为了解决某些问题而存在的东西</p>
+<p>产品经理： 想清楚产品是怎么设计的人</p>
+<p>合格的产品经理：</p>
+<p>把用户面临的问题想清楚：</p>
+<ul>
+<li>
+<p>用户</p>
+</li>
+<li>
+<p>场景</p>
+</li>
+<li>
+<p>需求</p>
+</li>
+</ul>
+<p>怎样<strong>设计</strong>才能<strong>更好</strong>地解决问题</p>
+<ul>
+<li>
+<p>功能</p>
+</li>
+<li>
+<p>体验/优势</p>
+</li>
+<li>
+<p>价值</p>
+</li>
+</ul>
+<p>##产品经理职责</p>
+<h3 id="开发流程"><a class="markdownIt-Anchor" href="#开发流程"></a> 开发流程</h3>
+<ol>
+<li>分析定义：问题定义、可行性研究、需求分析</li>
+<li>软件设计：概要设计、详细设计</li>
+<li>编码测试：编码、测试</li>
+<li>运行维护：运行维护</li>
+</ol>
+<h3 id="产品经理职责"><a class="markdownIt-Anchor" href="#产品经理职责"></a> 产品经理职责</h3>
+<p>评估产品机会：需求收集、可行性研究=&gt;产出MRD或立项报告</p>
+<p>定义产品：需求分析、原型设计=&gt;产出PRD(产品需求文档)</p>
+<p>职责误区</p>
+<p>产品不是画原型的：单独画原型容易与需求脱节，没有定义产品和分析需求的过程，容易导致没有成就感</p>
+<p>产品不是管理项目的：产品不是项目经理，只需关注产品定义和价值本身，无需关注项目工作安排和分解交互。</p>
+<p>产品需求混淆：老板、用户、自己的需求不等于产品需求，应分析需求本质，以及对可行性和价值的评估</p>
+<p>产品经理不是经理：产品经理对产品的生命周期负责，与开发、运维测试属同级，没有项目管理权。</p>
+<p>##产品经理的能力要求</p>
+<p>###专业技能</p>
+<ul>
+<li>
+<p>调研分析</p>
+<ul>
+<li>商业、行业、市场、<strong>用户、竞品、需求</strong></li>
+</ul>
+</li>
+<li>
+<p>决策判断</p>
+<ul>
+<li>可行性、<strong>优先级</strong>、机会、成本、技术、风险</li>
+</ul>
+</li>
+<li>
+<p>规划定义</p>
+<ul>
+<li>业务、架构、<strong>流程、结构、功能、逻辑</strong></li>
+</ul>
+</li>
+<li>
+<p>体验设计</p>
+<ul>
+<li><strong>用户体验、产品体验、原型设计</strong>、交互设计</li>
+</ul>
+</li>
+<li>
+<p>文档工具</p>
+<ul>
+<li>BRD、MRD、<strong>PRD</strong>、立项说明书、产品说明书、<strong>协作工具、设计工具</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230527102231691.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="综合能力素质"><a class="markdownIt-Anchor" href="#综合能力素质"></a> 综合能力素质</h3>
+<p>责任心、沟通表达、同理心、终身学习、创新精神、情商/逆商、协作组织、逻辑思辨……</p>
+<h2 id="问题思考维度"><a class="markdownIt-Anchor" href="#问题思考维度"></a> 问题思考维度</h2>
+<h3 id="核心用户"><a class="markdownIt-Anchor" href="#核心用户"></a> 核心用户</h3>
+<p>用户的定义：所有与产品有关系的群体，是一群既有共性又有差异的群体组合。</p>
+<h4 id="用户的分类"><a class="markdownIt-Anchor" href="#用户的分类"></a> 用户的分类</h4>
+<p>按是否使用：已经在使用产品的<strong>目标用户</strong>和未曾使用但有使用需求的<strong>潜在用户</strong></p>
+<p><strong>种子用户</strong>：目标用户中用于尝试新版本、新功能，可以积极反馈的用户</p>
+<p><strong>核心用户</strong>：能够给公司创造最大利润来源的用户</p>
+<h4 id="抓住核心用户的原因"><a class="markdownIt-Anchor" href="#抓住核心用户的原因"></a> 抓住核心用户的原因</h4>
+<ol>
+<li>用户群体越来越细分</li>
+<li>从市场角度看：增量时代已过，市场产品同质化严重，<strong>抓住核心用户可以保持市场竞争力</strong>。</li>
+<li>从产品角度看：产品<strong>功能无法面面俱到</strong>，产品、开发、推广<strong>资源有限</strong>，必须要优先解决核心用户的核心需求。</li>
+</ol>
+<h4 id="描述核心用户特征"><a class="markdownIt-Anchor" href="#描述核心用户特征"></a> 描述核心用户特征</h4>
+<ol>
+<li>
+<p>从供需关系角度看，根据产品的服务端和消费端来确定核心用户</p>
+</li>
+<li>
+<p>按人口统计学（年龄、性别、地域、职业、学历、消费水平等）区分和描述核心用户。在产品长期使用过程中，会产生行为数据和消费数据，根据产出的数据找出人口特征，找到用户典型信息。</p>
+</li>
+<li>
+<p>从熟悉程度看，分为老用户、新用户、专家用户。</p>
+<ul>
+<li>
+<p>类似婚礼App一般只针对新用户；</p>
+</li>
+<li>
+<p>类似美团等App的主要需要维护老用户长期使用；</p>
+</li>
+<li>
+<p>类似知乎等App需要专业人士发表高质量产物。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>从业务场景划分</p>
+<ul>
+<li>
+<p>业务定位：产品细化分类不同</p>
+</li>
+<li>
+<p>用户身份（如普通用户、白银用户、黄金用户等）</p>
+</li>
+<li>
+<p>公司行业、不同规模等</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>因此，描述一个公司的核心用户特征，应从以上4点中找到对应的用户群体。</p>
+<h4 id="抓住核心用户重点"><a class="markdownIt-Anchor" href="#抓住核心用户重点"></a> 抓住核心用户（重点）</h4>
+<p>从成为核心用户的原因看，分为被动和主动。</p>
+<p>被动：被其他人推荐，或贪便宜选择的。</p>
+<p>主动：经过对比、深思熟虑后选择</p>
+<ol>
+<li><strong>捆绑式核心用户</strong>：基于人性的贪小便宜，怕损失，爱面子，被动的俘获捆绑核心用户。</li>
+</ol>
+<p>典型的捆绑式核心用户例如：健身房、理发店会员。</p>
+<p>常用方法：<strong>办会员、买套餐</strong>。</p>
+<ol start="2">
+<li><strong>诱导式核心用户</strong>：商家不断提升运营效率、压低成本、甚至补贴用户以诱导用户流量。</li>
+</ol>
+<p>典型的诱导式核心用户例如：沃尔玛（选择偏远地区开店，瞄准驱车购物，对价格敏感的工薪阶层）、好市多（瞄准中产，商品品质高）</p>
+<p>常用方法：<strong>低价或补贴诱导</strong>。</p>
+<ol start="3">
+<li><strong>享受型核心用户</strong>：提供服务类的公司，侧重心理影响的用户服务，让用户享受服务，以此提高用户黏性俘获核心用户。</li>
+</ol>
+<p>典型的享受型核心用户例如：亚马逊会员（购物免邮费、书影剧畅享）、奈飞（超预期服务，将剧集一次性放出）</p>
+<p>常用方法：<strong>提高优越感、超预期服务</strong>。</p>
+<ol start="4">
+<li><strong>网络型核心用户</strong>：注重更大用户量的公司，注重网络价值，同时建立社交网络，以老用户吸纳新用户</li>
+</ol>
+<p>常见的网络型核心用户：微信、抖音、小红书等网络社交App</p>
+<p>常用方法：<strong>建立社交关系，通过社群、粉丝实现口碑传播</strong>。</p>
+<ol start="5">
+<li><strong>股东型核心用户</strong>：将核心用户作为红似的命运共同体，用户陪伴企业共同成长，享受企业发展的红利，使核心用户以股东的心态主动思考公司和产品的发展</li>
+</ol>
+<p>常见的股东型核心用户：汉堡王（品牌死忠粉）、小米手环（基于核心用户反过来优化公司产品）</p>
+<p>常用方法：<strong>筛选优质用户、打造利益命运共同体</strong>。</p>
+<p>**案例：**传智播客作为IT技能培训公司，根据以上5种不同形式的核心用户实施如下策略：</p>
+<ul>
+<li>对于捆绑式核心用户：趁热度利用优惠办VIP。如限时优惠、线上课程会员制。</li>
+<li>对于诱导式核心用户：利用低价长期对用户进行诱导。如持续推出低价的基础班、体验课，向就业班转化</li>
+<li>对于享受型核心用户：提高优越感和超预期服务。如提高学生毕业优势，推出超预期的课程内容、提高教学服务品质</li>
+<li>对于网络型核心用户：建立社交关系，口碑推荐。如建立维护用户社群，利用社交关系依靠口碑好课吸引老学员推荐新学员。</li>
+<li>对于股东型核心用户：应先筛选出优质用户，打造利益命运共同体。如倾听核心用户的声音，跟进用户职业发展需求，持续更新课程服务。</li>
+</ul>
+<h3 id="场景化分析"><a class="markdownIt-Anchor" href="#场景化分析"></a> 场景化分析</h3>
+<p><strong>场景化分析</strong>：实质上就是一种思维方式，需要思考人、时间、地点、行动和目的五个要素。</p>
+<p>场：时间+空间</p>
+<p>景：情境和故事情节</p>
+<p>互联网行业中场景的定义：<strong>用户</strong>停留在某个特定的<strong>空间</strong>的<strong>时间</strong>里，对应的情境下产生的<strong>故事情节</strong>，就是场景。</p>
+<h4 id="场景五要素"><a class="markdownIt-Anchor" href="#场景五要素"></a> 场景五要素</h4>
+<p>根据上面的定义，产生出场景的五个要素：<strong>Who、Where、When、How、What</strong></p>
+<ol>
+<li>用户(Who)：根据供需关系、人口特征、熟悉程度、业务场景等维度划分不同类型用户</li>
+<li>地点(Where)：国家、城市、具体的空间位置、产品不同的软硬件设备(PC 、手机、平板等)</li>
+<li>时间(When)：固定的时间点、周期性时间段、某一具象时刻(吃饭前、睡前、起床后等)</li>
+<li>行为(Who)：用户的使用流程和操作动作</li>
+<li>目的(What)：用户想要什么，目的和意图是什么</li>
+</ol>
+<p>**例如：**老王睡觉前躺在床上想刷抖音</p>
+<p>场景分析：老王，在床上，使用手机，睡觉前，刷抖音视频，想消遣时间</p>
+<h4 id="场景化分析方法"><a class="markdownIt-Anchor" href="#场景化分析方法"></a> 场景化分析方法</h4>
+<p>例如刷抖音行为的场景化分析：</p>
+<p>第一步：<strong>列举场景要素</strong></p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230527140318873.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>第二步：<strong>组合构建场景</strong>。根据所列举的信息，进行组合构建场景信息。</p>
+<p>根据如下格式进行构建：</p>
+<p>用户(Who)在<code>____</code>(什么情况下When/Where)，他想要<code>____</code>(通过什么行为 How)，以便于他可以达成<code>____</code>(什么目标 What need)。</p>
+<p>例如：</p>
+<ol>
+<li>上班族在通勤时间在地铁上刷视频来获取最新的新闻资讯；</li>
+<li>家庭主妇在家中哄孩子睡着后查找做饭视频，以便于给孩子做一顿营养的午餐。</li>
+</ol>
+<p>第三步：结合构建好的场景信息，<strong>预判用户的行为与目标，挖掘当前场景下的新需求</strong>。</p>
+<p>以上面2条场景为例子，挖掘其中需求：</p>
+<ul>
+<li>上班族地铁刷视频——需要戴耳机刷、随机刷、查看热点新闻/娱乐八卦、点赞收藏分享评论信息、地铁信号不好（需要提前缓存）</li>
+<li>宝妈在家看做饭视频——小声查看视频、点赞优质内容、关注优质博主、提出疑问留言、分享给宝爸等</li>
+</ul>
+<p>通过如下三种方式预判用户的行为和目标：</p>
+<ul>
+<li>
+<p><strong>组成动作</strong></p>
+<ul>
+<li>评论+回复</li>
+<li>复制+粘贴</li>
+<li>分享+转发</li>
+</ul>
+</li>
+<li>
+<p><strong>用户认知流程</strong></p>
+<ul>
+<li>下拉刷新</li>
+<li>上拉加载</li>
+<li>左滑下一页</li>
+<li>右滑返回</li>
+<li>双击点赞</li>
+</ul>
+</li>
+<li>
+<p><strong>产品使用流程</strong></p>
+<ul>
+<li>加购+支付+查看订单</li>
+<li>搜索+筛选+查看详情</li>
+<li>输入手机号+获取验证码+注册/登录</li>
+</ul>
+</li>
+</ul>
+<h4 id="场景化分析的应用"><a class="markdownIt-Anchor" href="#场景化分析的应用"></a> 场景化分析的应用</h4>
+<ol>
+<li><strong>洞察问题</strong></li>
+</ol>
+<p>初期问题比较抽象，通过场景化将问题场景具象化，方便梳理出核心问题所在。</p>
+<ol start="2">
+<li><strong>理解用户</strong></li>
+</ol>
+<p>将用户置身于真实场景中，更容易与用户共情，站在用户立场考虑产品问题，既考虑功能逻辑，也注意用户体验。</p>
+<ol start="3">
+<li><strong>提高预期</strong></li>
+</ol>
+<p>预测用户下一行为目标，突出或提示用户下一行为操作，或直接实现用户目标，带来超预期体验，提升情感。</p>
+<p>例如：</p>
+<ul>
+<li>
+<p>个性化推送喜爱的内容、商品。</p>
+</li>
+<li>
+<p>拍摄照片后微信提示可能要发送的照片，提前提示。</p>
+</li>
+<li>
+<p>某些App在生日当天展示定制化封面，超预期、感情化。</p>
+</li>
+<li>
+<p>…………</p>
+</li>
+</ul>
+<h3 id="需求的收集与分辨"><a class="markdownIt-Anchor" href="#需求的收集与分辨"></a> 需求的收集与分辨</h3>
+<h4 id="需求的定义和层次"><a class="markdownIt-Anchor" href="#需求的定义和层次"></a> 需求的定义和层次</h4>
+<p>需求的定义：<strong>用户预期和现状之间存在了差异，就产生了需求</strong>。</p>
+<p>人类的需求有这些（马斯洛需求理论）：生理需求、安全需求、爱与归属、尊重需求、自我实现。</p>
+<p>每个产品都围绕这些不同的需求层次解决不同的问题。</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230527150100742.png" srcset="/img/loading.gif" lazyload alt></p>
+<h4 id="需求收集方法"><a class="markdownIt-Anchor" href="#需求收集方法"></a> 需求收集方法</h4>
+<ol>
+<li>从<strong>用户</strong>身上找需求：
+<ul>
+<li>望：观察用户使用行为、举止</li>
+<li>闻：听取用户反馈</li>
+<li>问：当面一对一、一对多访谈，定量设计问卷调查</li>
+<li>切：切身感受用户</li>
+</ul>
+</li>
+<li>需求差异来源于<strong>问题</strong>本身，从事件上找需求：
+<ul>
+<li>原因：造成问题的本质原因
+<ul>
+<li>通过业务分析收集业务需求</li>
+<li>通过市场数据、文献分析找寻需求</li>
+<li>通过头脑风暴一起思考，寻找需求</li>
+</ul>
+</li>
+<li>结果：
+<ul>
+<li>竞品分析，查看友商方案实现</li>
+<li>数据分析，根据产品上线后产生的用户数据，寻找用户需求</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>需求收集注意事项</strong></p>
+<ul>
+<li>
+<p>一手需求：需求的提出者是用户自己，需求是原始的。一手需求更加准确，但收集效率较低。</p>
+</li>
+<li>
+<p>二手需求：需求是他人转述的，需求是加工过的。二手需求效率更高，但需求容易被曲解。</p>
+</li>
+</ul>
+<p>因此在实际过程中，需求可由全员收集，但产品经理统计处理，做出决策。</p>
+<h4 id="需求辨别维度"><a class="markdownIt-Anchor" href="#需求辨别维度"></a> 需求辨别维度</h4>
+<p>需求收集后辨别哪些重要哪些不重要，应结合当下实际情况做出正确的决定。 首先考虑如下几点：</p>
+<ul>
+<li><strong>需求是真实的</strong>：伪需求是无价值的，需要判断是否真实。</li>
+<li><strong>需求强烈</strong>：根据价值大小、风险高低、人群规模来评判</li>
+<li><strong>高频需求</strong>：根据使用频次判断</li>
+</ul>
+<p>上述维度程度越高，就越是用户的刚性需求，解决方案才越有价值。</p>
+<p><strong>需求辨别结论：</strong></p>
+<ul>
+<li>在需求真实的基础上，高频且强烈的需求立即去做</li>
+<li>强烈但不高频的需求可以有计划地做</li>
+<li>高频但不强烈的需求可以放权转移出去</li>
+<li>低频且不强烈的需求尽量不做</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230527153052662.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="用户故事"><a class="markdownIt-Anchor" href="#用户故事"></a> 用户故事</h3>
+<p>概念：将<strong>典型的用户</strong>在<strong>应用场景</strong>下<strong>将需求进行描述</strong>的一种方式。</p>
+<p>优点：将用户和需求放在典型场景下进行<strong>模拟呈现</strong>，便于<strong>更准确的分析需求</strong></p>
+<p>作用：客户或业务部门与产品经理<strong>共同梳理需求使用</strong>的，也会被带入开发部门做出功能。</p>
+<h4 id="具体呈现"><a class="markdownIt-Anchor" href="#具体呈现"></a> 具体呈现</h4>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230527154225107.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>最终需要确定，用户故事与开发实现是否解决了用户相应的需求。</p>
+<p>例1：美团</p>
+<p>骑手：作为配送员，我想要订单集中地区配送、单个订单配送费高，这样就可以提高配送效率、收益高。</p>
+<p>商家：作为商家，我想要店铺提高曝光度、商品出货后立即有骑手取货，这样就能增加订单、避免订单累积。</p>
+<p>用户：作为用户，我想要每次下单都能拿到优惠券，下单后商家快速、骑手快速配送</p>
+<p>例2：喜马拉雅</p>
+<p>内容创作者：作为内容创作者，我想要简单好用的创作平台、持续的创作奖励机制，平台多多推广创作内容，这样就能够使我有持续创作的动力。</p>
+<p>听众：作为听众，我想要平台推送我感兴趣的内容，对于收费作品有购买优惠，这样使我更愿意使用该App</p>
+<h2 id="产品解决方案"><a class="markdownIt-Anchor" href="#产品解决方案"></a> 产品解决方案</h2>
+<h3 id="需求分析"><a class="markdownIt-Anchor" href="#需求分析"></a> 需求分析</h3>
+<h4 id="需求分析的目的"><a class="markdownIt-Anchor" href="#需求分析的目的"></a> 需求分析的目的</h4>
+<p><strong>用户的需求</strong>（用户预期/目的/想法/问题）经过<strong>需求分析</strong>，就可以得出一个<strong>产品方案</strong>（功能/服务/活动/内容），每个产品方案包含具体的的功能。</p>
+<h4 id="如何进行需求分析"><a class="markdownIt-Anchor" href="#如何进行需求分析"></a> 如何进行需求分析</h4>
+<p><strong>Y模型理论</strong></p>
+<p>①：代表用户场景，即需求的第一层深度：<strong>观点和行为</strong>。</p>
+<p>②：需求背后的目标和动机，即需求的第二层深度：<strong>目的和背景</strong>。思考时需考虑公司业务、产品目标。</p>
+<p>③：需求分析转换后的产品功能，是需求方和技术确认后即可落地的解决方案</p>
+<p>④：需求背后的隐形需求，包括马斯洛需求层次、人性七宗罪等。是需求的第三层深度：<strong>价值观与本质</strong>。</p>
+<p><strong>从①到②的思考</strong>：了解需求的背景目的，结合 4W 思考需求真伪，结合产品定位和公司业务。</p>
+<p><strong>从②代③的思考</strong>：由需求转为解决方案，思考如何解决、由多少种方案、优先级和性价比等。</p>
+<p><strong>从②到④的思考</strong>：挖掘某个需求的本质。表象无常，而人性更持久。在用户无感情况下结合用户目标满足人类某种人性需求。</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230528094323200.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><strong>大部分需求分析经过①②③即可，少部分是①②④②③，即经过深度价值观的提炼后再思考解决方案。</strong></p>
+<p>从Y模型图中看，一个需求进入后有2个步骤：</p>
+<p>一是①②④，深入调研需求，尽量思考透彻。</p>
+<p>二是④②③，将思考后的结果输出。</p>
+<p>这两个步骤尽量达到<strong>深入浅出</strong>，即<strong>深入思考问题，但给出尽可能简单的方案</strong>。因为产品经理要做的是：把简单留给用户，把复杂留给自己。</p>
+<p>使用Y模型进行需求分析，好处就是无法从①直接跳到③，，一定需要对用户需求由更深层次的分析，才<strong>不至于被伪需求欺骗，解决需求冲突，发现更多用户目标……</strong></p>
+<p>例如，福特创始人说：当年如果我去问顾客想要什么，他们肯定会告诉我想要一匹更快的马。</p>
+<p>——&gt;用户需求：更快的马</p>
+<p>——&gt;思考真伪：是想更快地到达目的地</p>
+<p>——&gt;深层需求：爱与归属，社交尊重，豪华高端</p>
+<p>——&gt;实现：更快的交工工具，可实现社交尊重：汽车</p>
+<h4 id="需求分析的应用"><a class="markdownIt-Anchor" href="#需求分析的应用"></a> 需求分析的应用</h4>
+<p>一、从人性出发，需求驱动，推导产品解决方案。如下是关于人性七宗罪的需求分析具体应用：</p>
+<p><strong>傲慢</strong>：自大、目无一切、自己拥有的比别人多</p>
+<ul>
+<li>
+<p>设计思路：追求优越感、希望受到别人的尊重和敬仰、爱慕虚荣</p>
+</li>
+<li>
+<p>产品方案：炫耀优越感、荣誉展示、会员制、成就、粉丝数、点赞数</p>
+</li>
+</ul>
+<p><strong>妒忌</strong>：有心理落差、别人拥有的比自己多</p>
+<ul>
+<li>
+<p>设计思路：制造焦虑感、诱饵效应、追赶他人、不满情绪</p>
+</li>
+<li>
+<p>产品方案：排名、拉票、置顶、等级、段位</p>
+</li>
+</ul>
+<p><strong>愤怒</strong>：妒忌的极点，负面、反感的上限，需要发泄出来</p>
+<ul>
+<li>设计思路：情绪排解出口、情绪循环、自主离开</li>
+<li>产品方案：举报、反馈、删除、关闭、拉黑、禁用、注销、不再推荐</li>
+</ul>
+<p><strong>懒惰</strong>：心理厌倦，只想做简单的事，或者不想做事，想休息、享受，衍生—无聊</p>
+<ul>
+<li>设计思路：更少地思考、减少动作，减少不必要的决策，满足使用习惯，减少理解成本</li>
+<li>产品方案：一键xx，猜你喜欢、清空、推荐、筛选、默认填写、全选等</li>
+</ul>
+<p><strong>贪婪</strong>：觉得拥有的不够多，不够满足，想要更多</p>
+<ul>
+<li>设计思路：培养贪婪心理，资源逐层分发，利用侥幸心理</li>
+<li>产品方案：免费体验，新人福利，分布完成发放积分，随机抽取，抽奖等。</li>
+</ul>
+<p><strong>饕餮</strong>：美食诱惑、食物的格调、氛围、视觉效果（当代资源丰富，对美食不再贪婪）</p>
+<ul>
+<li>设计思路：赋予食物属性，占据感性思维，场景氛围营造</li>
+<li>产品方案：直播同步传递美食感受、KOL、精美图片/视频宣传</li>
+</ul>
+<p><strong>色欲</strong>：保暖思淫欲，当代社会发展，越来越开放。</p>
+<ul>
+<li>设计思路：心理需求和生理需求的满足、虚荣心、成就感、炫耀、魅力、互撩</li>
+<li>产品方案：社交社区、直播、美颜修图、滤镜、同城、匹配、推荐，打招呼、挑选、隐私设置等。</li>
+</ul>
+<p>除了以上7宗罪和马斯洛需求理论外，还有诸如好奇、倾诉、吐槽、孤独、寂寞、围观等人性，需结合具体产品实际分析。</p>
+<p>二、多体验已有的成熟产品</p>
+<p>在平时可以多多<strong>体验市面上相对成熟的产品</strong>，积累相对成熟的产品元素：登录注册、个人中购物车等。</p>
+<p>也可以<strong>对设计较好的产品进行跨界分析</strong>。例如借鉴游戏中的成长体系等。</p>
+<h3 id="功能优先级划分"><a class="markdownIt-Anchor" href="#功能优先级划分"></a> 功能优先级划分</h3>
+<h4 id="kano模型"><a class="markdownIt-Anchor" href="#kano模型"></a> KANO模型</h4>
+<p>当收到来自四面八方的需求时，应该通过一些科学有效的方法来处理这些需求，例如KANO模型。</p>
+<p>KANO模型由某日本学者受到<strong>双因素理论</strong>的启发提出的。他在论文中首次提出“满意度的二维模式”，从而构建出KANO模型。举一个例子说明双因素理论：</p>
+<p>公司给员工发工资，员工不会觉得满意，但只要不发工资，员工就会马上觉得不满意。但公司给员工发奖金，员工满意，而不发奖金，员工也不会觉得不满意。因此，员工的满意度分为2种，<strong>一种是激励因素，一种是保健因素</strong>，这就是双因素理论的来源。而KANO模型就是基于双因素理论对用户需求进行<strong>分类</strong>和<strong>优先排序</strong>的工具。</p>
+<p>KANO模型在采样人数上大约是40~70人。它描述的是<strong>具备程度</strong>和<strong>用户满意度</strong>之间的关系，它将需求划分为：<strong>M必备型、O期望型、A魅力型、I无差异型、R反向型需求</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230528112321757.png" srcset="/img/loading.gif" lazyload alt></p>
+<h4 id="如何得出kano模型"><a class="markdownIt-Anchor" href="#如何得出kano模型"></a> 如何得出KANO模型</h4>
+<ol>
+<li><strong>设计调查问卷</strong>。通过问卷得到一些准确数据（满意程度）</li>
+</ol>
+<p>将需求池的需求导出，罗列出清单，每个功能点对应清单中的一项，而每一项需要设计2道问题，2道问题为正反提问。例如：针对浏览器意外关闭后是否可以恢复上次浏览的需求，设计问题(这就是一个标准的KANO问卷)：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mathematica">问题<span class="hljs-number">1</span><span class="hljs-operator">-</span><span class="hljs-number">1</span>、若浏览器崩溃后重启可以恢复上次浏览，你的感受是？<br>  <span class="hljs-variable">A</span>、喜欢 <span class="hljs-variable">B</span>、理应如此 <span class="hljs-built_in">C</span>、无所谓 <span class="hljs-built_in">D</span>、能忍受 <span class="hljs-built_in">E</span>、不喜欢<br>问题<span class="hljs-number">1</span><span class="hljs-operator">-</span><span class="hljs-number">2</span>、若浏览器崩溃后重启不可以恢复上次浏览，你的感受是？<br>  <span class="hljs-variable">A</span>、喜欢 <span class="hljs-variable">B</span>、理应如此 <span class="hljs-built_in">C</span>、无所谓 <span class="hljs-built_in">D</span>、能忍受 <span class="hljs-built_in">E</span>、不喜欢<br></code></pre></td></tr></table></figure>
+<p>注意：上述ABCDE选项方式可以用数字标识其意义，例如1代表不喜欢，3代表无所谓，5代表喜欢……</p>
+<ol start="2">
+<li>
+<p><strong>功能属性评定</strong>。根据功能以及对应程度划分需求属性。</p>
+<p>问卷中，一对正负问题的答案下表的行、列。例如正向问题中，选择【能忍受】，负向问题选择【理应如此】。对应下表中2行4列，其交叉点为 I ，那么该受访者对于这个问题的满意度就是【I 无差异属性】</p>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230528114311019.png" srcset="/img/loading.gif" lazyload alt></p>
+<ol start="3">
+<li><strong>根据属性象限区分优先级</strong></li>
+</ol>
+<p>必备属性：优先级最高，必做，留足资源。</p>
+<p>期望属性：优先级高，先做性价比高的</p>
+<p>魅力属性：优先级其次，先实现低成本的亮点功能</p>
+<p>反向属性：权衡各方利益后再决定，无利益可不做</p>
+<p>无差异属性：不着急做或可忽略</p>
+<p>例如下图：在一份调查问卷里调查了10个需求后，调查结果通过【离散统计】整理成类似下方的样式，可以简单明确地看出每个需求的属性和排行：</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230528134735919.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>离散统计的缺点是由于选项排序存在非黑即白的方式，一些信息会丢失。也可以使用别的方式进行统计，例如赋值表、矩阵等。</p>
+<h3 id="功能价值"><a class="markdownIt-Anchor" href="#功能价值"></a> 功能价值</h3>
+<p>功能价值的定义：功能带来的实际价值与实现功能需要的成本之比。即：功能价值=功能实际价值 / 功能实现成本</p>
+<h4 id="实际价值判断难"><a class="markdownIt-Anchor" href="#实际价值判断难"></a> 实际价值判断（难）</h4>
+<p>通过以下三个维度来判断功能的实际价值：</p>
+<ul>
+<li>范围价值=潜在用户数 x 单用户价值</li>
+<li>频次价值=需求频次 x 单次价值</li>
+<li>时间价值=持续时间 x 单位价值</li>
+</ul>
+<p>例如，墨迹天气App原为一个天气工具，后期加入了“时图”功能作为社区扩展，分享天气、美景、穿搭等内容。</p>
+<p>价值范围：从单一工具扩展为社区，内容丰富后带来更多新用户——潜在用户数(提升) x 单用户价值(提升)</p>
+<p>频次价值：从看完天气就走到看穿搭+风景+其他内容，打开次数变多——需求频次(提升) x 单次价值(提升)</p>
+<p>时间价值：从看天气的十几秒到查看其他内容，用户停留时间明显提高——持续时间(提升) x 单位价值(提升)</p>
+<p>以上的数据可从历史预测或上线后小范围试点，从<strong>数据分析统计平台</strong>中获取。</p>
+<h4 id="成本评估"><a class="markdownIt-Anchor" href="#成本评估"></a> 成本评估</h4>
+<p>考虑人力、时间、金钱、风险等。</p>
+<p>成本=消耗人天 x 平均每人天价格</p>
+<p>假设：开发6人，设计1人，产品1人，测试1人，运维1人，周期7个工作日，平均人力成本2w/月，在考虑延期风险1天，成平评估：(平均人力成本 / 工时) * 总天数 * 总人数。计算出：<code>20000/21.75 * （7+1）* 10 = 73563.21元</code></p>
+<p>最后，结合前面的实际价值的计算，就可以用<code>功能实际价值 / 功能实现成本</code>算出功能价值。</p>
+<h3 id="用户体验"><a class="markdownIt-Anchor" href="#用户体验"></a> 用户体验</h3>
+<h4 id="定义"><a class="markdownIt-Anchor" href="#定义"></a> 定义</h4>
+<p>是用户在使用产品过程中建立起来的一种纯主观感受。包括用户的印象和感觉，是否成功，是否享受，是否还想再次使用。用户能够忍受的问题、疑惑和Bug的程度等。</p>
+<h4 id="影响因素"><a class="markdownIt-Anchor" href="#影响因素"></a> 影响因素</h4>
+<ol>
+<li>使用者状态：精神状态以及性格特征（动机、期望、情绪、认知）</li>
+<li>系统性能：产品提供的功能、服务</li>
+<li>环境：故事场景、状况。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230528151229469.png" srcset="/img/loading.gif" lazyload alt></p>
+<h4 id="用户体验的类别层次"><a class="markdownIt-Anchor" href="#用户体验的类别层次"></a> 用户体验的类别层次</h4>
+<p>三个层次：</p>
+<ul>
+<li>感官
+<ul>
+<li>侧重：试听体验。色彩、声音、图像、文字、布局等</li>
+<li>要点：UI、IA等</li>
+</ul>
+</li>
+<li>交互
+<ul>
+<li>侧重：使用、交互过程体验</li>
+<li>要点：浏览、点击、输入、输出等</li>
+</ul>
+</li>
+<li>情感
+<ul>
+<li>侧重：心理的认可度</li>
+<li>要点：认同、抒发情感、口碑传播</li>
+</ul>
+</li>
+</ul>
+<h4 id="用户体验五要素"><a class="markdownIt-Anchor" href="#用户体验五要素"></a> 用户体验五要素</h4>
+<p><strong>表现层</strong>：用户所能看到的一切，文字、图片、图标、颜色、整体感觉。表现层满足了其它层面的所有目标。</p>
+<p><strong>框架层</strong>：按钮、表格、文本、导航区域位置的具体位置，将结构层中的需求提炼出来，确定具体的设计。</p>
+<p><strong>结构层</strong>：确定产品功能和特性最适合的组合方式，应符合用户理解和思考方式</p>
+<p><strong>范围层</strong>：功能和内容是否纳入产品，用户需求和网站目标转变为网站应该提供什么内容时，战略就变成了范围。</p>
+<p><strong>战略层</strong>：用户和经营者分别想从产品中获取什么，即：用户需求和团队需求。</p>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230528152259705.png" srcset="/img/loading.gif" lazyload alt></p>
+<h4 id="用户体验的设计目标"><a class="markdownIt-Anchor" href="#用户体验的设计目标"></a> 用户体验的设计目标</h4>
+<ol>
+<li><strong>有用</strong>：没用的产品就没有市场</li>
+<li><strong>易用</strong>：简洁易懂，且无需看说明书
+<ul>
+<li>贴近现实场景，例如阅读翻页功能</li>
+<li>提供便捷入口，例如再次购买</li>
+<li>减少多余操作，例如默认选项</li>
+</ul>
+</li>
+<li><strong>友好</strong>：与用户之间的关系亲切、友好
+<ul>
+<li>不显示空白符，例如加载占位图</li>
+<li>信息提示</li>
+<li>状态可见，例如状态标记</li>
+<li>协助记忆，例如显示历史、预想词</li>
+</ul>
+</li>
+<li><strong>容错</strong>：好的产品降低用户犯错概率，提高解决错误的效率
+<ul>
+<li>撤销功能，保留内容，禁用状态</li>
+<li>撤回，最近删除相册</li>
+</ul>
+</li>
+<li><strong>吸引力</strong>：界面信息、内容有吸引力，感官良好
+<ul>
+<li>审美和简约设计</li>
+</ul>
+</li>
+<li><strong>品牌</strong>：提到产品就代表品质保障
+<ul>
+<li>口碑效应</li>
+</ul>
+</li>
+</ol>
+<h3 id="项目方案"><a class="markdownIt-Anchor" href="#项目方案"></a> 项目方案</h3>
+<p>主要阶段：立项——设计——开发——测试——上线——运营——总结</p>
+<p>立项：</p>
+<ol>
+<li>项目提出：由运营人员、市场部门或老板提出项目，输出内容：基本方案</li>
+</ol>
+<p>思考维度：做什么项目、做的原因、项目的价值和作用有哪些</p>
+<ul>
+<li>公司业务、主干业务</li>
+<li>公司核心业务的核心流程</li>
+<li>在线化-前台（外部）后台（内部）</li>
+<li>好处有哪些</li>
+</ul>
+<ol start="2">
+<li>需求讨论。输出内容：会议纪要</li>
+<li>可行性分析。输出内容：MRD、可行性报告</li>
+<li>立项启动。输出内容：立项申请表</li>
+</ol>
+<h3 id="可行性分析"><a class="markdownIt-Anchor" href="#可行性分析"></a> 可行性分析</h3>
+<p>特点：应该有预见性、公正性、可靠性、科学性等特点</p>
+<p>主要内容：市场需求、资源供应、功能规模、开发技术、设备选型、环境影响、资金筹措、盈利能力</p>
+<p>从产品视角分析，以下几点需要注意：</p>
+<ul>
+<li>市场需求：机会与风险、类似产品</li>
+<li>环境影响：政策、发展趋势、投资环境</li>
+<li>盈利能力</li>
+</ul>
+<h4 id="市场"><a class="markdownIt-Anchor" href="#市场"></a> 市场</h4>
+<p>目标市场现状、规模、趋势、市场的产品格局、主要问题和机会壁垒</p>
+<ul>
+<li>市场调研</li>
+<li>市场分析：在市场调研基础上的产物，可以直观地呈现市场现状、市场趋势及市场问题和机会
+<ul>
+<li>目标市场现状——现有体量、市场格局、目前市场情况</li>
+<li>市场趋势——预测发展规模趋势变化、市场增速、市场前景</li>
+<li>问题机会和壁垒
+<ul>
+<li>问题：行业痛点、用户吐槽点、未满足的需求</li>
+<li>机会：结合问题，想要如何解决，结合趋势还有哪些需求未被满足</li>
+<li>壁垒：进入该市场的难题，以及如何建立市场壁垒</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>市场环境总结</li>
+</ul>
+<p>附：互联网市场信息查询参考平台</p>
+<p>行业报告：199IT、易观、艾媒、艾瑞、月狐等</p>
+<p>咨询媒体：36Kr、虎嗅、IT桔子、猎云网、创业邦、中国互联网信息中心</p>
+<p>用户</p>
+<ol>
+<li>目标用户群体、用户特征</li>
+</ol>
+<p>划分为各个维度：年龄段、性别、收入、婚育、学历、地域、性格特点</p>
+<ol start="2">
+<li>用户画像与用户使用场景</li>
+</ol>
+<p>虚拟用户画像：包括用户基础特征、用户名称、兴趣爱好、生活状态、网络使用习惯、产品使用习惯（频率、时间、时长）</p>
+<p>用户场景：将角色放入场景：使用目的、出发场景（时间地点）、个人偏好、使用习惯、使用体验、关闭/退出场景</p>
+<ol start="3">
+<li>用户需求总结</li>
+</ol>
+<p>读懂用户使用场景中行为的根本原因：用户需求（问题、目的、方案）</p>
+<h4 id="竞品"><a class="markdownIt-Anchor" href="#竞品"></a> 竞品</h4>
+<ol>
+<li>
+<p>竞品战略：产品基本信息、公司背景、商业模式、盈利模式等</p>
+</li>
+<li>
+<p>竞品用户定位：竞品的目标用户特征、定位原因</p>
+</li>
+<li>
+<p>竞品主要功能：竞品的基本功能差异化对比、特色功能对比</p>
+</li>
+<li>
+<p>优缺点：竞品之间的优点缺点</p>
+</li>
+<li>
+<p>竞品分析结论：结合战略、用户、功能及优缺点分析之后的总结</p>
+</li>
+</ol>
+<h3 id="产品规划"><a class="markdownIt-Anchor" href="#产品规划"></a> 产品规划</h3>
+<p><img src="https://raw.githubusercontent.com/YuanZhou314/PigRepo/main/imgs/image-20230604100958074.png" srcset="/img/loading.gif" lazyload alt></p>
+<h3 id="立项评审"><a class="markdownIt-Anchor" href="#立项评审"></a> 立项评审</h3>
+<p>立项说明书的主要内容</p>
+<ol>
+<li>产品概述
+<ul>
+<li>产品定位</li>
+<li>目标用户</li>
+<li>主要功能</li>
+</ul>
+</li>
+<li>可行性分析（市场、用户、竞品）</li>
+<li>产品规划
+<ul>
+<li>产品架构图</li>
+<li>业务流程图</li>
+<li>产品结构图</li>
+<li>功能清单</li>
+<li>迭代计划</li>
+</ul>
+</li>
+</ol>
+<h4 id="立项评审流程"><a class="markdownIt-Anchor" href="#立项评审流程"></a> 立项评审流程</h4>
+<p><strong>评审会议</strong></p>
+<ol>
+<li>预约会议
+<ol>
+<li>确认参会人及参会时间</li>
+<li>提前与参与人做好沟通</li>
+<li>邮件发出会议邀请，附上会议材料</li>
+</ol>
+</li>
+<li>会前准备
+<ol>
+<li>调试好电脑和投影</li>
+<li>协调会议记录人员</li>
+<li>开会前再次确认开会时间地点</li>
+<li>确认是否有核心人员无法参会</li>
+</ol>
+</li>
+<li>会议过程
+<ol>
+<li>强调会议主题、会议目的、会议时间及注意事项</li>
+<li>把握需求范围、控制问题探讨时间</li>
+<li>记录关键确定需求，待确定需求</li>
+</ol>
+</li>
+<li>会后跟踪
+<ol>
+<li>会后及时同步会议结论给相关人员及领导</li>
+<li>确定待确定需求跟进时间、待讨论的细节</li>
+</ol>
+</li>
+</ol>
+<p><strong>填写立项申请表</strong></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Study/" class="category-chain-item">Study</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%BA%A7%E5%93%81/">#产品</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>产品理论</div>
+      <div>https://zhouyinglin.cn/post/979df087.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>小周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年6月4日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年6月4日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/2a606884.html" title="浪漫主义诗歌——感性、直觉和内心图景">
+                        <span class="hidden-mobile">浪漫主义诗歌——感性、直觉和内心图景</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-comment-blond.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"login":"enable","lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.0.1/tieba","https://unpkg.com/@waline/emojis@1.0.1/bilibili"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+     
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <div id="waline"></div> <script> const locale = { placeholder: "说点什么吧！(填写邮箱可在被回复时收到邮件提醒)", }; Waline.init({ el: "#waline", serverURL: "https://comment.zhouyinglin.cn/", locale, }); </script>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <link rel="stylesheet" href="/dist/APlayer.min.css"> <div id="aplayer"></div> <script type="text/javascript" src="/dist/APlayer.min.js"></script> <script type="text/javascript" src="/js/amusic.js"></script>  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div class="statistics" style="font-size: 0.85rem"> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #3c4858;"  id="hitokoto"></span></a> <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script></div>  <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-pv"></span>
+         次 
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总用户量 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+<div class="statistics">
+ 	<a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+ </div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
