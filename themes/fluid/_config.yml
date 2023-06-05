@@ -1163,10 +1163,10 @@ links:
       avatar: "https://xyears.cn/view/img/logo.png"
     }
     - {
-      title: kennethreitz",
-      intro: "kennethreitz",
-      link: "https://kennethreitz.org/",
-      avatar: "https://avatars.githubusercontent.com/u/119893?v=4"
+      title: "chengzhaoxi",
+      intro: "chengzhaoxi",
+      link: "https://chengzhaoxi.xyz/",
+      avatar: ""
     }
 
   # 当成员头像加载失败时，替换为指定图片

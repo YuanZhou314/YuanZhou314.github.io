@@ -22,6 +22,12 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
 
 官方文档：https://docs.djangoproject.com/zh-hans/4.1/topics/db/queries/
 
+## 进入交互式命令行
+
+```
+python manage.py shell
+```
+
 ## 导入模型
 
 ```
