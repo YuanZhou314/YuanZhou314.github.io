@@ -1,0 +1,1353 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/zz.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="小周">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1.AWS的HPC方案  1.1 方案是什么 AWS有用一整套HPC产品和服务，以供在云中运行大型复杂的模拟和深度学习工作。AWS的HPC服务包括以下产品：    产品 说明     Amazon Elastic Compute Cloud(EC2) 提供广泛、深入的计算平台，拥有超过 500 个实例，安全可调整大小的计算容量，以满足任意工作负载的需求。   Elastic Fabric">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AWS、Google、Azure-HPC方案调研报告">
+<meta property="og:url" content="https://zhouyinglin.cn/post/2864384b.html">
+<meta property="og:site_name" content="小周的院子">
+<meta property="og:description" content="1.AWS的HPC方案  1.1 方案是什么 AWS有用一整套HPC产品和服务，以供在云中运行大型复杂的模拟和深度学习工作。AWS的HPC服务包括以下产品：    产品 说明     Amazon Elastic Compute Cloud(EC2) 提供广泛、深入的计算平台，拥有超过 500 个实例，安全可调整大小的计算容量，以满足任意工作负载的需求。   Elastic Fabric">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051535029.png">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051536054.png">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051536304.png">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051536021.png">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051536590.png">
+<meta property="og:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051536481.png">
+<meta property="article:published_time" content="2023-06-14T14:39:27.000Z">
+<meta property="article:modified_time" content="2023-06-14T14:40:28.388Z">
+<meta property="article:author" content="小周">
+<meta property="article:tag" content="竞品分许">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051535029.png">
+  
+  
+  
+    <meta name="baidu-site-verification" content="code-bMcoZ9RRBp" />
+  
+  <title>AWS、Google、Azure-HPC方案调研报告 - 小周的院子</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zhouyinglin.cn","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"DOFm5rBfeIBUxN13vhiXlS4S-MdYXbMMI","app_key":"FJKOtk5nWqYzGoXXiFAvHIDC","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>小周的院子</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+    
+    <!-- 添加zyl天气 -->
+
+<div id="tp-weather-widget"></div>
+    <script>
+        (function (a, h, g, f, e, d, c, b) { b = function () { d = h.createElement(g); c = h.getElementsByTagName(g)[0]; d.src = e; d.charset = "utf-8"; d.async = 1; c.parentNode.insertBefore(d, c) }; a["SeniverseWeatherWidgetObject"] = f; a[f] || (a[f] = function () { (a[f].q = a[f].q || []).push(arguments) }); a[f].l = +new Date(); if (a.attachEvent) { a.attachEvent("onload", b) } else { a.addEventListener("load", b, false) } }(window, document, "script", "SeniverseWeatherWidget", "//cdn.sencdn.com/widget2/static/js/bundle.js?t=" + parseInt((new Date().getTime() / 100000000).toString(), 10)));
+        window.SeniverseWeatherWidget('show', {
+            flavor: "slim",
+            location: "WKJ1F428HH2F",
+            geolocation: true,
+            language: "zh-Hans",
+            unit: "c",
+            theme: "auto",
+            token: "5089001e-aa9f-41c5-862d-e416aabf81f7",
+            hover: "enabled",
+            container: "tp-weather-widget"
+        })
+    </script>
+
+
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文章
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    归档
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/boxs/">
+                <i class="iconfont icon-switch-fill"></i>
+                百宝箱
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.foreverblog.cn/go.html">
+                <i class="iconfont icon-rss"></i>
+                虫洞
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202212161220542.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="AWS、Google、Azure-HPC方案调研报告"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-14 22:39" pubdate>
+          2023年6月14日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          83 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">AWS、Google、Azure-HPC方案调研报告</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<!-- categories:Dev、Ops、Study、Sth、News、work-->
+<!-- tags: 
+Python、MySQL、LeetCode、机器学习、Linux、Big Data、Java、BlockChain、Docker、Web 、分布式、
+Maven、数据结构、JVM、JavaScript、Crontab、Shell、Ubuntu、VPN、NodeJS、String、VM、Hadoop、
+Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美学、写作、哲学、文档、绘画、前端、
+历史、政治、社会、导购
+ -->
+<h3 id="1aws的hpc方案"><a class="markdownIt-Anchor" href="#1aws的hpc方案"></a> <strong>1.AWS的HPC方案</strong></h3>
+<h4 id="11-方案是什么"><a class="markdownIt-Anchor" href="#11-方案是什么"></a> <strong>1.1 方案是什么</strong></h4>
+<p>AWS有用一整套HPC产品和服务，以供在云中运行大型复杂的模拟和深度学习工作。AWS的HPC服务包括以下产品：</p>
+<table>
+<thead>
+<tr>
+<th><strong>产品</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Amazon Elastic Compute Cloud(EC2)</td>
+<td>提供广泛、深入的计算平台，拥有超过 500 个实例，安全可调整大小的计算容量，以满足任意工作负载的需求。</td>
+</tr>
+<tr>
+<td>Elastic Fabric Adapter（EFA）</td>
+<td>Amazon EC2 实例的网络接口，用于大规模运行 HPC 应用程序。可以在任何支持的 EC2 实例上免费启用此功能，EFA 可与用于节点间通信的最常用接口、API 和库配合使用，因此只需稍作修改或无需修改，即可将 HPC 应用程序迁移到 AWS。</td>
+</tr>
+<tr>
+<td>AWS ParallelCluster</td>
+<td>开源集群管理工具，可用于在 AWS 上快速构建、部署和管理高性能计算（HPC）计算环境。</td>
+</tr>
+<tr>
+<td>AWS Batch</td>
+<td>云原生批处理调度器，可跨所有 AWS 计算服务和功能扩展数十万个计算任务。同时优化计算资源，令使用者能够专注于分析结果和解决问题。</td>
+</tr>
+<tr>
+<td>Amazon FSx for Lustre</td>
+<td>提供完全托管式共享存储，兼具常用 Lustre 文件系统的可扩展性和性能。</td>
+</tr>
+<tr>
+<td>Amazon FSx for OpenZFS</td>
+<td>提供基于 OpenZFS 文件系统构建的完全托管式共享文件存储。</td>
+</tr>
+<tr>
+<td>NICE DCV</td>
+<td>高性能远程显示协议，为客户提供安全的方式，以在不同的网络件下从任何云或数据中心向任何设备交付远程桌面和应用程序流。</td>
+</tr>
+<tr>
+<td>NICE EnginFrame</td>
+<td>NICE引擎集成框架，集成本地和AWS高性能计算环境，通过一个统一的界面为本地和云工作流提交作业</td>
+</tr>
+</tbody>
+</table>
+<p>主要产品Amazon Elastic Compute Cloud(Amazon EC2) 经过多种优化，存在不同案例的实例提供选择，由不同配置组合而成。</p>
+<table>
+<thead>
+<tr>
+<th><strong>产品</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>特点</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Amazon EC2 通用型</td>
+<td>计算、内存和联网资源三方面的平衡，可用于各种不同的工作负载。适合于以相同比例使用资源的应用程序</td>
+<td>高性能、适用性广、支持各类框架，适合中小企业和个人用户</td>
+</tr>
+<tr>
+<td>Amazon EC2 计算优化型</td>
+<td>适用于批处理工作负载、媒体转码、高性能 Web 服务器、高性能计算 (HPC)、科学建模、专用游戏服务器和广告服务器引擎、机器学习推理和其他计算密集型应用程序</td>
+<td>更高的性能、支持集群部署，功能扩展多，适用于大规模数据处理场景</td>
+</tr>
+<tr>
+<td>Amazon EC2 内存优化型</td>
+<td>提高可处理内存中大型数据集的工作负载的性能</td>
+<td>支持大容量内存数据结构和数据库，适用于处理大量数据的场景</td>
+</tr>
+<tr>
+<td>Amazon EC2 加速计算</td>
+<td>使用硬件加速器或协同处理器来执行浮点数计算、图形处理或数据模式匹配等功能，比使用在 CPU 上运行的软件更高效</td>
+<td>高性能计算、大规模并行，适用于高性能、大量数据和计算的任务</td>
+</tr>
+<tr>
+<td>Amazon EC2 存储优化</td>
+<td>用于需要对本地存储上的大型数据集进行高速连续读写访问的工作负载每秒可以向应用程序交付数以万计的低延迟、随机 I/O 操作 (IOPS)</td>
+<td>高I/O性能，适用于大规模数据分析、媒体处理和大规模缓存</td>
+</tr>
+<tr>
+<td>Amazon EC2 HPC优化</td>
+<td>专为在 AWS 上大规模运行 HPC 工作负载提供最佳性价比而构建</td>
+<td>高性能、大规模并行，适用于大型复杂模拟和深度学习场景</td>
+</tr>
+</tbody>
+</table>
+<h4 id="12-方案特性特征特色分析-主打优势亮点是什么"><a class="markdownIt-Anchor" href="#12-方案特性特征特色分析-主打优势亮点是什么"></a> <strong>1.2 方案特性/特征/特色分析-主打优势/亮点是什么</strong></h4>
+<p><strong>高性能计算</strong>：通过EC2实例、Elastic Fabric Adapter（EFA）和AWS Batch等服务，可以满足各种规模的高性能计算需求。</p>
+<p><strong>高度可扩展性</strong>：AWS的HPC方案可以根据应用场景的需求进行快速扩容和缩容，可以满足不同规模的计算任务需求。</p>
+<p><strong>灵活部署</strong>：AWS的HPC方案支持多种部署方式，包括公共云、专用云和混合云等，可以根据客户需求进行灵活的部署选择。</p>
+<p><strong>网络性能</strong>：AWS的HPC方案具有高度优化的网络性能，可以支持大规模的并行计算和数据处理。此外，AWS还提供了Elastic Fabric Adapter(EFA)，它可以实现高性能的计算和数据传输，适用于大规模的HPC应用程序。</p>
+<p><strong>易于管理和监控</strong>：AWS的HPC方案提供了丰富的管理和监控工具，包括AWS CloudFormation、AWS Systems Manager和AWS CloudWatch等，可以方便地管理和监控HPC应用。</p>
+<p>**易用性：**这是AWS HPC优势最大的优势，AWS提供易于理解的定价、功能和配置选择，相当全面的操作文档、视频说明，以帮助用户更快上手。</p>
+<p>**灵活性：**支持用户熟悉的操作系统、编程语言和Web程序，所有环境均在云上面无缝运行所有服务，并支持迁移，简化上云流程。</p>
+<p><strong>高性能</strong>：拥有一整套完备的HPC产品服务，可直接在云上运行大型、复杂的模拟仿真和深度学习工作服在，获得近乎无限的计算容量、高性能文件系统和高吞吐网络。</p>
+<p>**可靠性：**AWS为全球200多国家和地区的超过100万活跃客户提供服务，支持机器故障后自动回复，保证用户数据。</p>
+<p>**可扩展和弹性：**允许自动增加、缩减资源容量。即可在几分钟内即可增加新的服务器，或自动缩减资源，以满足用户需要。</p>
+<h4 id="13-方案怎么卖的报价是多少市场主要客户有哪些市场规模怎么样-有哪些典型的客户案例"><a class="markdownIt-Anchor" href="#13-方案怎么卖的报价是多少市场主要客户有哪些市场规模怎么样-有哪些典型的客户案例"></a> <strong>1.3 方案怎么卖的，报价是多少，（市场）主要客户有哪些，市场规模怎么样、有哪些典型的客户案例</strong></h4>
+<p><strong>售卖方式</strong></p>
+<p>AWS的HPC方案是通过<strong>AWS云平台</strong>进行售卖。用户可以在AWS云平台上创建账户，并选择所需的HPC服务。根据服务的不同，用户需要支付相应的费用。AWS的HPC服务包括<strong>计算、存储、网络</strong>等。通常情况下，AWS的HPC服务采用按需付费的模式，即用户只需要支付自己使用的服务费用，不需要支付任何额外的费用。用户可以通过AWS的云服务平台进行购买、管理和监控自己的HPC服务。</p>
+<p>部分产品有用免费试用计划：</p>
+<table>
+<thead>
+<tr>
+<th><strong>产品</strong></th>
+<th><strong>类别</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Amazon EC2</td>
+<td>计算</td>
+<td>每月750个小时实例使用时间，免费试用12个月</td>
+</tr>
+<tr>
+<td>Amazon RDS</td>
+<td>数据库</td>
+<td>20GB数据库存储/20GB备份+快照存储，免费试用12个月</td>
+</tr>
+<tr>
+<td>Amazon S3</td>
+<td>存储</td>
+<td>5GB/20000 个 Get 请求，免费试用12个月</td>
+</tr>
+<tr>
+<td>Amazon API Gateway</td>
+<td>应用程序</td>
+<td>每月接收API调用100万次</td>
+</tr>
+<tr>
+<td>Amazon SageMaker</td>
+<td>机器学习</td>
+<td>每月250小时，免费试用2个月</td>
+</tr>
+</tbody>
+</table>
+<p><strong>主要产品Amazon EC2 计费模式</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>计费方式</strong></th>
+<th><strong>计费说明</strong></th>
+<th><strong>使用情况</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>按需计费</td>
+<td>按小时或秒数支付计算容量，无需长期购买</td>
+<td>● 要求低成本，不想预付款或签订长期合同                ● 工作负载具有短期、无法预测且不能中断的性质</td>
+</tr>
+<tr>
+<td>Savings Plans</td>
+<td>在1~3年内稳定使用</td>
+<td>● 使用情况长期、稳定                ● 享用最新实例</td>
+</tr>
+<tr>
+<td>Amazon EC2竞价型实例</td>
+<td>利用AWS云中未使用的EC2容量，与按需计费相比，折扣高达90%</td>
+<td>● 容错或允许中断的工作                ● 应用程序开始和结束时间灵活</td>
+</tr>
+<tr>
+<td>专用主机</td>
+<td>专供用户使用的物理EC2服务器。专用主机允许按需购买，也可在部分Savings Plans 中购买</td>
+<td>● 希望节省许可费用的用户                ● 内部HPC迁移用户</td>
+</tr>
+<tr>
+<td>按需容量预留</td>
+<td>在任意时间段内的特定可用区为实例预留计算容量，缓解容量有限从而无法按需获得容量的风险</td>
+<td>● 需要容量保证的业务关键型工作负载                ● 满足高可用性监管要求的工作负载                ● 灾难恢复</td>
+</tr>
+<tr>
+<td>按秒计费</td>
+<td>EC2使用量按每秒增量计费，最少为60秒</td>
+<td>● 不规则时间段内运行的实例</td>
+</tr>
+</tbody>
+</table>
+<p><strong>报价</strong></p>
+<p>AWS 的 HPC 方案有多种不同的配置和选项（预付费或按需），甚至根据使用率和地区不同，报价情况也会有所不同。官网定价页面：<a target="_blank" rel="noopener" href="https://calculator.aws/#/addService?refid=ft_card">https://calculator.aws/#/addService?refid=ft_card</a></p>
+<p>主要计算产品Amazon EC2的配置与价格如下（单位 USD）：</p>
+<table>
+<thead>
+<tr>
+<th><strong>产品</strong></th>
+<th><strong>配置</strong></th>
+<th><strong>地区</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>操作系统</strong></th>
+<th><strong>按需每小时成本</strong></th>
+<th><strong>计算存储计划</strong></th>
+<th><strong>实例存储计划</strong></th>
+<th><strong>按需使用</strong></th>
+<th><strong>竞价型实例</strong></th>
+<th><strong>预留实例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Amazon EC2</td>
+<td>t3.medium/2vCPU/4 GiB</td>
+<td>香港</td>
+<td>共享实例</td>
+<td>Linux</td>
+<td>0.0584</td>
+<td>● 1年：预付345.14或每月30.81                ● 3年：预付678.02或每月20.81</td>
+<td>● 1年：预付300.47或每月26.79                ● 3年：565.02或每月18.03</td>
+<td>在100%的实例使用量下，每月42.63</td>
+<td>假设折扣在43%时，每月24.3</td>
+<td>● 1年：预付300或每月26.79                ● 3年：预付566或每月18.03</td>
+</tr>
+</tbody>
+</table>
+<p>存储产品Amazon EBS的配置与价格如下（单位USD）：</p>
+<table>
+<thead>
+<tr>
+<th><strong>产品</strong></th>
+<th><strong>地区</strong></th>
+<th><strong>卷数</strong></th>
+<th><strong>平均持续运行时间</strong></th>
+<th><strong>存储类型</strong></th>
+<th><strong>存储量</strong></th>
+<th><strong>快照频率</strong></th>
+<th><strong>每个快照更改量</strong></th>
+<th><strong>月度成本</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Amazon EBS</td>
+<td>香港</td>
+<td>1</td>
+<td>730h/每月</td>
+<td>通用型SSD(gp2)</td>
+<td>30GB/卷</td>
+<td>每小时</td>
+<td>3GB</td>
+<td>65.75</td>
+</tr>
+</tbody>
+</table>
+<p>托管服务Amazon API Gateway 的配置与价格如下（单位USD）：</p>
+<table>
+<thead>
+<tr>
+<th><strong>产品</strong></th>
+<th><strong>地区</strong></th>
+<th><strong>请求类型</strong></th>
+<th><strong>请求量</strong></th>
+<th><strong>请求平均大小</strong></th>
+<th><strong>连接时间、速率</strong></th>
+<th><strong>缓存</strong></th>
+<th><strong>月度成本</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Amazon API Gateway</td>
+<td>香港</td>
+<td>HTTP API</td>
+<td>1亿/每月</td>
+<td>512KB（大于512 kb算2个请求）</td>
+<td>x</td>
+<td>x</td>
+<td>138</td>
+</tr>
+<tr>
+<td>REST API</td>
+<td>1亿/每月</td>
+<td>x</td>
+<td>x</td>
+<td>0.5GB</td>
+<td>489.98</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>WebSocketAPI</td>
+<td>1亿/每月</td>
+<td>32（大于32 kb算2个请求）</td>
+<td>1s/s</td>
+<td>x</td>
+<td>126.52</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>AWS的HPC方案的市场占有是什么样的</strong></p>
+<p><strong>市场规模</strong></p>
+<p>略。</p>
+<p><strong>市场评价</strong></p>
+<p>如下网站均为全球知名的企业级软件评论平台，这些平台汇聚企业软件和服务决策者的同行评审评级，为其他潜在客户在选择合适供应商时提供参考和指导。</p>
+<table>
+<thead>
+<tr>
+<th><strong>评论网站</strong></th>
+<th><strong>评分</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gartner Peer Insights</td>
+<td>4.7 out of 5</td>
+</tr>
+<tr>
+<td>TrustRadius</td>
+<td>9.0 out of 10</td>
+</tr>
+<tr>
+<td>G2</td>
+<td>4.6 out of 5</td>
+</tr>
+<tr>
+<td>Capterra</td>
+<td>4.6 out of 5</td>
+</tr>
+<tr>
+<td>PeerSpot</td>
+<td>4.4 out of 5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>主要客户</strong></p>
+<p>合作伙伴页面：<a target="_blank" rel="noopener" href="https://aws.amazon.com/cn/hpc/partner-solutions/">亚马逊云科技高性能计算能力合作伙伴</a></p>
+<p>主要服务于各种科学和工程领域的客户，例如生物医学研究、能源、金融、仿真、气候、环境、政府及科研项目等。</p>
+<p>以下是一些AWS的HPC方案的主要客户：</p>
+<table>
+<thead>
+<tr>
+<th><strong>领域</strong></th>
+<th><strong>公司/机构</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>科学研究机构</td>
+<td>美国国家航空航天局（NASA）、美国国家气象局（NOAA）、美国国家环境保护局（EPA）等</td>
+</tr>
+<tr>
+<td>学术机构</td>
+<td>哈佛大学、麻省理工学院、斯坦福大学等</td>
+</tr>
+<tr>
+<td>金融机构</td>
+<td>花旗银行、汇丰银行、摩根士丹利等</td>
+</tr>
+<tr>
+<td>制造业企业</td>
+<td>美国铝业公司、日本神户钢铁、宝马、通用电气、三星等</td>
+</tr>
+<tr>
+<td>媒体和娱乐公司</td>
+<td>华纳兄弟、迪士尼、Netflix等</td>
+</tr>
+<tr>
+<td>航空航天领域</td>
+<td>飞机制造商和航空航天公司，如Airbus、Boeing、SpaceX等</td>
+</tr>
+<tr>
+<td>政府机构</td>
+<td>美国国防部、英国国防部、澳大利亚国防部等</td>
+</tr>
+</tbody>
+</table>
+<p><strong>典型案例</strong></p>
+<p><strong>FCD仿真设计：<strong>法国公司 FLYING WHALES为了设计一种高载重的货运飞艇需要运行复杂的CFD流体运动学计算。但由于物理测试成本过高，且内部HPC资源较弱，因此需要将其HPC迁移到AWS云上。购买了Amazon EC2 C5n.18xlarge 实例和 EFA ，使用竞价型实例来预置C5n实例，将H</strong>PC集群成本降低了64%</strong>。在工作性能上，将<strong>CFD工作流作业的运行速度提升了15倍</strong>，使得公司可以如期交付产品。AWS HPC的快速扩展性能接近于国家超级计算机的水平，工程师不必在作业队列中等待运行模拟，<strong>每周节省几十个小时时间</strong>。</p>
+<p><strong>科学研究：<strong>美国加州理工学院一间生物实验室需要研究新型基因。由于预算有限，无法搭建本地集群，且计算需求不断变化，需要一个具有弹性且灵活的HPC集群。接入AWS后，使用了Amazon Virtual Private Cloud (Amazon VPC) 。借助于AWS，实验室</strong>无需花费时间定期计算资源使用量</strong>，也<strong>无需定期更新硬件</strong>。扩展资源时直接在云上操作，<strong>无需走流程采购实体</strong>。在性能方面，<strong>基因组测序分析所需时间从数周缩短为数天</strong>。对于非Linux用户，实验室使用Amazon WorkSpaces 托管桌面计算服务，使Windows用户直接从实验室PC连接AWS，拥有与Linux用户同等的的访问权限。</p>
+<p><strong>生物医疗：<strong>美国公司Illumina长期使用AWS来分析管理基因组数据，每个月在AWS服务商花费100万USD，只是计算方面每个月就要花费40万USD。在成本优化项目中，Illumina使用了Amazon EC2 Spot 实例运行分析软件，这些实例与按需使用相比价格更低，每个月</strong>计算成本从40万降低到10多万</strong>。通过将部分不频繁访问的数据分层到其他标准，<strong>每个月又能节省9万USD的存储成本</strong>。使得Illumina能够降低客户使用门槛，提高产品使用率，<strong>为客户提供成本更低、性能更好的基因分析平台</strong>，这对临床市场客户尤为重要。</p>
+<p><strong>金融</strong>：美国金融公司Aon Securities Inc. (ASI) 通过金融建模工具PathWise 帮助保险公司为其投资产品分析风险，需要高扩展性的计算资源。接入AWS后使用Amazon EC2和Amazon Elastic Block Store (Amazon EBS) 进行自动运行和持久存储，可以<strong>实现在几分钟之内而不是8个小时运行500万个策略</strong>，使得<strong>原本10天的流程缩短到了10分钟</strong>，提高了管理效率，精算师可以将时间放在对数据的处理上，而不是建设基础设施。</p>
+<h3 id="2-google的hpc方案"><a class="markdownIt-Anchor" href="#2-google的hpc方案"></a> <strong>2. google的HPC方案</strong></h3>
+<h4 id="11-方案是什么-2"><a class="markdownIt-Anchor" href="#11-方案是什么-2"></a> <strong>1.1 方案是什么</strong></h4>
+<table>
+<thead>
+<tr>
+<th>行业</th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>医疗保健和生命科学</td>
+<td>将数据分析用于药品开发利用 Google Cloud 高性能计算来分析和处理海量数据，发现更多具有前景的药物靶点，并推动科学研究的发展。</td>
+</tr>
+<tr>
+<td>金融服务</td>
+<td>1、使用高性能计算进行风险模拟获取实时或按需大规模计算和模拟风险所需的所有计算资源，而无需构建用户自己的服务器场。2、使用高性能计算执行定量分析Google Cloud 的规模和速度支持使用高效且可扩缩的计算资源进行定量研究，并将用户的想法转化为盈利策略。</td>
+</tr>
+<tr>
+<td>制造</td>
+<td>借力 HPC 加速研发推出支持 AI 的产品和服务，发掘新的洞见用于创新，并通过高性能计算加速用户的工程和设计流程。</td>
+</tr>
+<tr>
+<td>教育</td>
+<td>高性能计算Google Cloud 灵活且可扩展的产品有助于加快完成时间，因此可以将想法转化为发现，将灵感转化为产品。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="12-方案特性特征特色分析"><a class="markdownIt-Anchor" href="#12-方案特性特征特色分析"></a> <strong>1.2 方案特性/特征/特色分析</strong></h4>
+<h5 id="121hpc主要特性"><a class="markdownIt-Anchor" href="#121hpc主要特性"></a> <strong>1.2.1HPC主要特性</strong></h5>
+<p>利用云的灵活性、功能和规模加快 HPC 工作负载速度</p>
+<p>利用 HPC 工具、服务和合作伙伴解决方案，充分发挥拥有最新强大基础架构的高级 HPC 虚拟机的功能。</p>
+<p>1、强大的基础架构</p>
+<p>Compute Engine 的虚拟机采用了最新的 CPU 和 GPU，支持实时迁移，可以使用高性能对象、数据块和文件存储空间，并且基于吞吐量高、延迟时间短的虚拟机到虚拟机网络。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051535029.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>2、PC 工具和服务</p>
+<p>从使用 Batch 轻松扩缩工作负载，到使用 GKE 灵活运行容器化的 HPC 工作负载，再到使用 Google Cloud HPC Toolkit 部署全自动扩缩 HPC 集群环境，Google 的 HPC 工具和服务可让用户轻松运行较棘手的工作负载。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051536054.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>3、广泛的合作伙伴生态系统</p>
+<p>Google 与众多应用开发者、工作负载管理员、存储提供商和系统集成商合作，确保用户的应用在 Google Cloud 上以较佳方式开箱即用地运行。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051536304.png" srcset="/img/loading.gif" lazyload alt></p>
+<h5 id="122优势"><a class="markdownIt-Anchor" href="#122优势"></a> <strong>1.2.2优势</strong></h5>
+<p>灵活强大的 HPC 平台，为创新开辟道路</p>
+<p>1、更快获得结果</p>
+<p>根据成熟的最佳实践，利用 Cloud HPC Toolkit 在几分钟内创建 HPC 集群。借助预配置的 HPC 蓝图快速启动作业，获得可预测的性能。</p>
+<p>2、推动并维持创新</p>
+<p>利用按需使用的高性能资源为团队助力。在最新的 Intel 和 AMD CPU、NVIDIA GPU 和高吞吐量、低延迟的对象和文件存储上构建和运行密集型工作负载。</p>
+<p>3、只为需要的服务付费</p>
+<p>借助预算和承诺使用折扣，控制和管理费用。 为用户最灵活的工作负载使用 Spot 虚拟机，节省高达 90% 的费用。</p>
+<h5 id="123为-google-compute-engine-引入计算和内存优化的虚拟机"><a class="markdownIt-Anchor" href="#123为-google-compute-engine-引入计算和内存优化的虚拟机"></a> <strong>1.2.3为 Google Compute Engine 引入计算和内存优化的虚拟机</strong></h5>
+<p><strong>计算优化的虚拟机</strong></p>
+<p>计算优化 VM (C2) 是 GCP 上的一个新计算系列，具有高每线程性能和内存速度，有利于大多数计算密集型工作负载。计算优化的 VM 非常适合 HPC、电子设计自动化 (EDA)、游戏、单线程应用程序等。与当前的 GCP VM 相比，新的 Compute-Optimized VM 的性能提高了 40% 以上。它们还利用第二代英特尔至强可扩展处理器，可以以 3.8 GHz 的持续时钟速度运行。此外，C2 VM 提供对底层服务器平台架构的完全透明性，从而实现高级性能调整。可以选择具有多达 60 个 vCPU、240 GB 内存和多达 3TB 本地存储的计算优化 VM。Compute-Optimized VM 目前处于 alpha 阶段。</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051536021.png" srcset="/img/loading.gif" lazyload alt></p>
+<p><strong>内存优化虚拟机</strong></p>
+<p>内存优化虚拟机 (M2) 为 Compute Engine 虚拟机提供最高的内存配置。它们非常适合内存密集型工作负载，例如大型内存数据库（例如 SAP HANA）以及内存数据分析工作负载。18年7 月，发布了具有高达 4 TB 内存的内存优化 VM。现在 M2 系列提供高达 12 TB 的内存和 416 个 vCPU，使用户能够在 GCP 上运行扩展工作负载。这些 VM 也基于第二代 Intel Xeon 可扩展处理器，这些最新的内存优化 VM 将提供以下尺寸：</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051536590.png" srcset="/img/loading.gif" lazyload alt></p>
+<h4 id="13-方案怎么卖的报价是多少市场主要客户有哪些市场规模怎么样-有哪些典型的客户案例-2"><a class="markdownIt-Anchor" href="#13-方案怎么卖的报价是多少市场主要客户有哪些市场规模怎么样-有哪些典型的客户案例-2"></a> <strong>1.3 方案怎么卖的，报价是多少，（市场）主要客户有哪些，市场规模怎么样、有哪些典型的客户案例</strong></h4>
+<h5 id="131报价"><a class="markdownIt-Anchor" href="#131报价"></a> <strong>1.3.1报价</strong></h5>
+<p>采用随用随付的价格模式，只需为实际使用的服务付费。没有预付费用，也没有终止费用。价格因产品和使用情况而异。</p>
+<p>价格表：</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.google.com/pricing/list?hl=zh-cn">https://cloud.google.com/pricing/list?hl=zh-cn</a></p>
+<h5 id="132客户案例"><a class="markdownIt-Anchor" href="#132客户案例"></a> <strong>1.3.2客户&amp;案例</strong></h5>
+<p>客户&amp;案例：</p>
+<table>
+<thead>
+<tr>
+<th>行业</th>
+<th>客户</th>
+<th>案例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>医疗保健</td>
+<td>Broad</td>
+<td>云平台分析人类基因组的速度提高 400%<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/broad-institute">https://cloud.google.com/customers/broad-institute</a></td>
+</tr>
+<tr>
+<td>生命科学</td>
+<td>Schrödinger</td>
+<td>加速药品研发<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/schrodinger?hl=zh-cn">https://cloud.google.com/customers/schrodinger?hl=zh-cn</a></td>
+</tr>
+<tr>
+<td>科技</td>
+<td>1、AirBus2、Banggood3、琥珀移动4、美图</td>
+<td>1、Airbus Defence and Space 的 Intelligence 业务线利用 Google Cloud Platform 构建了一个可扩缩的在线平台，让客户能够实时访问 PB 级的卫星图像。<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/airbus/?hl=zh-cn">https://cloud.google.com/customers/airbus/?hl=zh-cn</a>2、Banggood通过在Google Cloud上使用翻译API自动翻译大量的产品信息和网站内容，降低了本地化成本和周转时间。<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/banggood/?hl=zh-cn">https://cloud.google.com/customers/banggood/?hl=zh-cn</a>3、琥珀移动利用Firebase和BigQuery提供的数据，开发以用户体验为中心的应用，满足顾客的需求。<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/ambermobile/?hl=zh-cn">https://cloud.google.com/customers/ambermobile/?hl=zh-cn</a>4、美图使用Google Cloud来收集并分析数据，以更深入了解其用户。基于分析结果，美图得以开发出一个便于使用的人工智能平台，让人们可以用数字方式让自己变得更美。<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/meitu/?hl=zh-cn">https://cloud.google.com/customers/meitu/?hl=zh-cn</a></td>
+</tr>
+<tr>
+<td>零售与消费品</td>
+<td>1、Carrefour2、Lush</td>
+<td>Carrefour 运行 SAP on Google Cloud，通过全面的数据集中化为线上和线下的客户提供最佳服务。<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/carrefour/?hl=zh-cn">https://cloud.google.com/customers/carrefour/?hl=zh-cn</a>2、在 22 天内，Lush 将其全球电子商务网站迁移到 Google Cloud Platform，显著提高了网站的可靠性和稳定性<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/lush/?hl=zh-cn">https://cloud.google.com/customers/lush/?hl=zh-cn</a></td>
+</tr>
+<tr>
+<td>游戏</td>
+<td>1、King2、LINE GAMES</td>
+<td>King 使用 BigQuery 构建云端数据仓储平台，通过 Google Cloud 机器学习技术降低成本并提升分析能力。<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/king/?hl=zh-cn">https://cloud.google.com/customers/king/?hl=zh-cn</a>2、借力于 BigQuery 和 Holistics，LINE GAMES 通过识别可提升游戏体验的机会，降低了用户的流失率；同时通过从互联网数据中心迁移到云端解决方案，成本降低可达 50%。<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/line-games/?hl=zh-cn">https://cloud.google.com/customers/line-games/?hl=zh-cn</a></td>
+</tr>
+<tr>
+<td>金融服务与保险</td>
+<td>Loopring</td>
+<td>Loopring 选择用 Google Cloud 的弹性和速度来缩短交易时间，打造更优质的 zkRollup 客户体验。<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/loopring/?hl=zh-cn">https://cloud.google.com/customers/loopring/?hl=zh-cn</a></td>
+</tr>
+<tr>
+<td>制造</td>
+<td>Mitsubishi Motors</td>
+<td>将服务收入提升 20%<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/mitsubishi-motors/?hl=zh-cn">https://cloud.google.com/customers/mitsubishi-motors/?hl=zh-cn</a></td>
+</tr>
+<tr>
+<td>媒体与娱乐</td>
+<td>华曦达</td>
+<td>为了提供易于部署且高性能表现的 OTT 解决方案，华曦达运用 Google Cloud 的计算、视频处理和数据分析能力来缩短部署时间，并提升电视观看体验。<a target="_blank" rel="noopener" href="https://cloud.google.com/customers/sdmc/?hl=zh-cn">https://cloud.google.com/customers/sdmc/?hl=zh-cn</a></td>
+</tr>
+</tbody>
+</table>
+<p>国内市场主要客户行业：游戏国外市场主要客户行业：科技</p>
+<h5 id="133市场规模"><a class="markdownIt-Anchor" href="#133市场规模"></a> <strong>1.3.3市场规模</strong></h5>
+<p>云市场占有规模（数据为2021年的数据）：</p>
+<p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202306051536481.png" srcset="/img/loading.gif" lazyload alt></p>
+<p>谷歌云凭借8%的市场份额稳居全球第三。只是，相比亚马逊与微软，谷歌在云服务市场份额相对较低。</p>
+<h3 id="3-azure的hpc方案"><a class="markdownIt-Anchor" href="#3-azure的hpc方案"></a> <strong>3. azure的HPC方案</strong></h3>
+<h4 id="11-方案是什么-3"><a class="markdownIt-Anchor" href="#11-方案是什么-3"></a> <strong>1.1 方案是什么</strong></h4>
+<p>azure的HPC方案主要根据当前已存在的解决方案进行构建，首先在Azure 中按要求选择相应的<strong>体系结构</strong>（即解决方案），再根据具体的负载情况选择配置，最后管理、优化集群。</p>
+<p>体系结构页面：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/azure/architecture/browse/?terms=HPC">浏览 Azure 体系结构 - Azure Architecture Center | Microsoft Learn</a></p>
+<p>当前主要的体系结构有：</p>
+<p>​                ● Azure 上的计算机辅助工程服务</p>
+<p>​                ● Azure 上的计算流体动力学 (CFD) 模拟</p>
+<p>​                ● Azure 上的 3D 视频渲染</p>
+<p>单独的HPC服务有：</p>
+<p>​            \1.     Azure Batch AI 服务和 Azure Data Science VM：这是一种用于人工智能 (AI) 和数据科学工作负载的云服务，支持高吞吐量的计算和数据存储。</p>
+<p>​            \2.     Azure HPC集群：这是一种使用户能够创建和管理高性能计算 (HPC) 集群的解决方案。</p>
+<p>​            \3.     Azure Data Box：这是一种用于数据传输和存储的解决方案，支持各种数据类型和大小。它可以通过标准集装箱运输，方便地在云端和本地之间传输数据。</p>
+<p>​            \4.     Azure File Share：这是一种用于数据存储的云文件系统，可以支持大规模批处理和 HPC 工作负荷</p>
+<p>​            \5.     Azure Redis Cache：这是一种用于高速缓存和数据存储的解决方案，支持高性能、低延迟和高可用性的数据存储</p>
+<p>​            \6.     Azure Cosmos DB：这是一种支持文档、表格、图形和键值存储的 NoSQL 数据库服务，可以支持大规模批处理和 HPC 工作负荷。</p>
+<h4 id="12-方案特性特征特色分析-2"><a class="markdownIt-Anchor" href="#12-方案特性特征特色分析-2"></a> <strong>1.2 方案特性/特征/特色分析</strong></h4>
+<p><strong>硬件支持广泛</strong>：Azure支持广泛的硬件设备，包括CPU、GPU、FPGA等，这使得Azure能够适应各种类型的计算密集型工作负载。</p>
+<p><strong>云端资源管理灵活</strong>：Azure允许用户通过自助服务方式使用资源，可以根据需要选择不同的虚拟机大小、网络配置和存储方案。此外，用户还可以通过Azure的监控和诊断功能来了解其HPC集群的使用情况。</p>
+<p><strong>高性能存储</strong>：Azure提供了一系列高性能存储解决方案，包括Azure Blob存储、Azure Data Lake存储、Azure NetApp EF等，这些存储方案可以满足大规模批处理和HPC工作负载的需求。</p>
+<p>**高速网络：**Azure提供了一系列高速网络解决方案，包括RDMA网络、高性能计算网络等，这些网络可以提高紧密耦合的并行应用程序的性能。</p>
+<h4 id="13-方案怎么卖的报价是多少主要客户有哪些典型案例"><a class="markdownIt-Anchor" href="#13-方案怎么卖的报价是多少主要客户有哪些典型案例"></a> <strong>1.3 方案怎么卖的，报价是多少，主要客户有哪些，典型案例</strong></h4>
+<p><strong>价格</strong></p>
+<p>收费类型如下：</p>
+<p>​            \1.     即用即付：以秒为单位为计算容量付款，无需长期承诺或提前付款。</p>
+<p>​            \2.     长期订阅：承诺在 1 年或 3 年内按小时预付款</p>
+<p>​            \3.     预留实例：在1~3年内按每月预付款</p>
+<p>​            \4.     现成VM：高价买断机器</p>
+<p>如下是标准版Av2虚拟机的价格：</p>
+<table>
+<thead>
+<tr>
+<th><strong>实例</strong></th>
+<th><strong>内核</strong></th>
+<th><strong>RAM</strong></th>
+<th><strong>临时****存储</strong></th>
+<th><strong>即用即付(现成优先级)</strong></th>
+<th><strong>即用即付(低优先级)</strong></th>
+<th><strong>即用即付(普通优先级)</strong></th>
+<th><strong>1 年节省计划</strong></th>
+<th><strong>3 年节省计划</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1 v2</td>
+<td>1</td>
+<td>2 GiB</td>
+<td>10 GiB</td>
+<td><strong>$9.3447</strong>/月~70% savings</td>
+<td><strong>$6.5700</strong>/月</td>
+<td><strong>$31.3900</strong>/月</td>
+<td><strong>$21.2211</strong>/月~32% savings</td>
+<td><strong>$14.1474</strong>/月~54% savings</td>
+</tr>
+</tbody>
+</table>
+<p><strong>主要客户</strong></p>
+<p>汽车、能源、健康和生命科学、硅、金融和制造业等行业通常使用 Azure HPC 工作负载来运行复杂的模拟。以下公司使用了Azure的HPC方案：</p>
+<p>​                ● 鸿海研究院使用Azure HPC GPU加速其AI研究</p>
+<p>​                ● AMD公司使用Azure HPC GPU加速其工作流程</p>
+<p>​                ● 微软自身使用Azure HPC GPU加速其AI模型训练</p>
+<p>​                ● 中国气象局使用Azure的HPC方案进行气象预报</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/word/" class="category-chain-item">word</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AB%9E%E5%93%81%E5%88%86%E8%AE%B8/">#竞品分许</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>AWS、Google、Azure-HPC方案调研报告</div>
+      <div>https://zhouyinglin.cn/post/2864384b.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>小周</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年6月14日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年6月14日</div>
+        </div>
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                <i class="iconfont icon-sa"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/post/17fc1407.html" title="扫盲:通往哲学的后楼梯">
+                        <span class="hidden-mobile">扫盲:通往哲学的后楼梯</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://lib.baomitu.com/waline/2.5.1/waline.min.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/waline/2.5.1/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://waline-comment-blond.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"login":"enable","lang":"zh-CN","emoji":["https://unpkg.com/@waline/emojis@1.0.1/tieba","https://unpkg.com/@waline/emojis@1.0.1/bilibili"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+     
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+      <div class="col-lg-7 mx-auto nopadding-x-md">
+        <div class="container custom mx-auto">
+          <div id="waline"></div> <script> const locale = { placeholder: "说点什么吧！(填写邮箱可在被回复时收到邮件提醒)", }; Waline.init({ el: "#waline", serverURL: "https://comment.zhouyinglin.cn/", locale, }); </script>
+        </div>
+      </div>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <link rel="stylesheet" href="/dist/APlayer.min.css"> <div id="aplayer"></div> <script type="text/javascript" src="/dist/APlayer.min.js"></script> <script type="text/javascript" src="/js/amusic.js"></script>  <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div class="statistics" style="font-size: 0.85rem"> <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #3c4858;"  id="hitokoto"></span></a> <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script></div>  <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div>
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访客量 
+        <span id="leancloud-site-pv"></span>
+         次 
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总用户量 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+<div class="statistics">
+ 	<a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+ </div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
