@@ -310,6 +310,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/post/91527534.html" target="_self">
+          linux下普通用户无法使用yum，提示需root用户
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/post/91527534.html" target="_self">
+        <div>
+          使用root 用户用 vi 或 vim 编辑&#x2F;etc&#x2F;sudoers文件，找到 &quot;root ALL&#x3D;(ALL) ALL&quot;一栏，在下一行填写： 1user ALL&#x3D;(root) NOPASSWORD:yum * 然后按：wq!完成编辑。注意这里要用到 ! 强制保存，如果不用的话会提示这是一个readonly文件，不支持修改。 上面语句的作用是：
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-08-06 20:21" pubdate>
+              2022-08-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Ops/" class="category-chain-item">Ops</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">#Linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/post/8a0f9ffc.html" target="_self">
           记录一次云服务器被异地登录密码破解、不得已重装系统的经历
         </a>
@@ -903,78 +964,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/post/46cf604d.html" target="_self">
-          <img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/docker2.png" srcset="/img/loading.gif" lazyload alt="Docker进阶-挂载-容器数据卷">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/post/46cf604d.html" target="_self">
-          Docker进阶-挂载-容器数据卷
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt " href="/post/46cf604d.html" target="_self">
-        <div>
-          容器数据卷 卷技术，作用是数据共享。由于容器删除后内部修改的数据也会丢失，因此需要有个地方存储数据。 卷技术可以让容器本地产生的数据映射到本地，卷技术的本质是目录的挂载，将容器内部的目录挂载到宿主机上，实现容器持久化。包括容器间也可以共享 12docker -v 主机目录:容器目录# 就算重启容器，映射关系也还是会存在   安装mysql navicat连接到云服务器的3305端口，映射到do
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-08-06 19:55" pubdate>
-              2022-08-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Ops/" class="category-chain-item">Ops</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Docker/">#Docker</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/11/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="page-number" href="/page/11/#board">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/#board">13</a><a class="page-number" href="/page/14/#board">14</a><a class="page-number" href="/page/15/#board">15</a><a class="extend next" rel="next" href="/page/13/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/11/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="page-number" href="/page/11/#board">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/#board">13</a><a class="page-number" href="/page/14/#board">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/#board">16</a><a class="extend next" rel="next" href="/page/13/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
