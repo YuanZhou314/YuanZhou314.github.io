@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://zhouyinglin.cn/C:/Users/v_vzylzhou/AppData/Roaming/Typora/typora-user-images/image-20221018101345894.png">
 <meta property="og:image" content="https://zhouyinglin.cn/C:/Users/v_vzylzhou/AppData/Roaming/Typora/typora-user-images/image-20221018101315765.png">
 <meta property="article:published_time" content="2022-11-07T03:41:53.000Z">
-<meta property="article:modified_time" content="2023-03-03T08:17:45.548Z">
+<meta property="article:modified_time" content="2023-07-24T09:24:07.622Z">
 <meta property="article:author" content="小周">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary_large_image">
@@ -320,7 +320,7 @@
         
         
         
-          160 分钟
+          161 分钟
         
       </span>
     
@@ -655,6 +655,8 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
 </ul>
 <p><strong>匿名函数</strong></p>
 <p>lambda表达式创建，没有代码块，只有一个表达式<code>sum = lambda parm1, parm2 : parm1 + parm2</code></p>
+<p>冒号前表示输入参数，冒号后表示函数输出；</p>
+<p><code>lambda:None</code>表示没有输入参数，且输出None</p>
 <h3 id="类"><a class="markdownIt-Anchor" href="#类"></a> 类</h3>
 <p>创建：</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Pepole</span>:<br>		<span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params"><span class="hljs-variable language_">self</span></span>):<br>				<span class="hljs-variable language_">self</span>.name=<span class="hljs-string">&#x27;xxx&#x27;</span><br>				……<br>xxx=xxx<br>……<br><br><span class="hljs-variable constant_">RUBY</span><br></code></pre></td></tr></table></figure>
@@ -682,8 +684,9 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
 </tr>
 </tbody>
 </table>
-<p><strong>类的特殊方法</strong></p>
-<p><code>__init__()</code>类被实例化后自动调用，可被继承。若在子类中调用父类，需要显式调用父类的<code>__init__()</code>方法，以确保父类正确初始化</p>
+<p><strong>类的特殊方法</strong><br>
+<code>__new__()</code>；构造函数，用于创建对象</p>
+<p><code>__init__()</code>类被实例化后自动调用，用于初始化实例对象，可被继承。若子类需要调用，需显式调用，以确保父类正确初始化</p>
 <p><code>__repr__()</code>输出对象的字符串（正式值），返回的字符串准确、无歧义，尽可能表达出如何创建出来的这个对象</p>
 <p><code>__str__()</code>输出对象的字符串（非正式值），返回的字符串可读性更高，使用更方便</p>
 <p><code>__iter__()</code>创建迭代器时被调用，遍历序列时使用</p>
@@ -717,7 +720,8 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
 <p><strong>其他操作</strong></p>
 <p>切分文件全名中的目录和文件：<code>os.path.split()</code></p>
 <h2 id="文件操作"><a class="markdownIt-Anchor" href="#文件操作"></a> 文件操作</h2>
-<p>获取当前工作区目录：<code>os.path.split(os.path.realpath(__file__))[0]</code></p>
+<p>脚本环境下获取当前工作区目录：<code>os.path.split(os.path.realpath(__file__))[0]</code></p>
+<p>命令环境下获取当前工作区目录：<code>os.getcwd()</code>或<code>os.path.abspath('.')</code></p>
 <p>如果在只写模式中读取，或在只读模式中写入，会报<code>io.UnsupportedOperation</code>错误</p>
 <p><strong>增</strong></p>
 <ul>
@@ -777,7 +781,7 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
 <p>自定义异常需要继承Eception基类，并定义初始化函数和str函数</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyInputError</span>(<span class="hljs-title class_ inherited__">Exception</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Exception raised when there&#x27;re errors in input&quot;&quot;&quot;</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, value</span>): <span class="hljs-comment"># 自定义异常类型的初始化</span><br>        self.value = value<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__str__</span>(<span class="hljs-params">self</span>): <span class="hljs-comment"># 自定义异常类型的string表达形式</span><br>        <span class="hljs-keyword">return</span> (<span class="hljs-string">&quot;&#123;&#125; is invalid input&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-built_in">repr</span>(self.value)))<br>    <br><span class="hljs-keyword">try</span>:<br>    <span class="hljs-keyword">raise</span> MyInputError(<span class="hljs-number">1</span>) <span class="hljs-comment"># 抛出MyInputError这个异常</span><br><span class="hljs-keyword">except</span> MyInputError <span class="hljs-keyword">as</span> err:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;error: &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(err))<br></code></pre></td></tr></table></figure>
 <p><strong>手动抛出异常</strong></p>
-<p><code>taise</code>：提示代码中可能出现的异常，供他人调用时debug</p>
+<p><code>raise</code>：提示代码中可能出现的异常，供他人调用时debug</p>
 <figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">def</span> <span class="hljs-function"><span class="hljs-title">no_negative</span>(<span class="hljs-variable">num</span>):</span><br><span class="hljs-function">    <span class="hljs-variable"><span class="hljs-keyword">if</span></span> <span class="hljs-variable">num</span> &lt; <span class="hljs-number">0</span>:</span><br><span class="hljs-function">        <span class="hljs-variable">raise</span> <span class="hljs-title">ValueError</span>(<span class="hljs-string">&quot;I said no negative&quot;</span>)</span><br>    <span class="hljs-variable">return</span> <span class="hljs-variable">num</span><br><br><span class="hljs-function"><span class="hljs-title">print</span>(<span class="hljs-title">no_negative</span>(-<span class="hljs-number">1</span>))</span><br><br><span class="hljs-variable">ISBL</span><br></code></pre></td></tr></table></figure>
 <p><strong>可被raise的Error如下表：</strong></p>
 <table>
@@ -991,7 +995,7 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
 <li>Pickle在反序列化类的时候需要有这个类的class，否则会找不到这个类二失败。</li>
 <li>有些对象例如打开的文件、网络链接、线程进程等，如果将这些对象赋给class的属性上，就不能被打包，因为这些需要依赖外部系统状态。</li>
 </ol>
-<p>##Json</p>
+<h2 id="json"><a class="markdownIt-Anchor" href="#json"></a> Json</h2>
 <p>不需要转成二进制，在网络中传输相对安全</p>
 <p><code>json.dumps()</code>和<code>json.loads()</code>：将对象转化为json格式的字符串 &amp; 将字符串转换为对象。</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import json<br><br>data = &#123;<span class="hljs-string">&quot;filename&quot;</span>: <span class="hljs-string">&quot;f1.txt&quot;</span>, <span class="hljs-string">&quot;create_time&quot;</span>: <span class="hljs-string">&quot;today&quot;</span>, <span class="hljs-string">&quot;size&quot;</span>: <span class="hljs-number">111</span>&#125;<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(type(data)</span></span>)<br>j = json<span class="hljs-selector-class">.dumps</span>(data)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(j)</span></span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(type(j)</span></span>)<br><br>#结果：<br>&lt;class <span class="hljs-string">&#x27;dict&#x27;</span>&gt;<br>&#123;<span class="hljs-string">&quot;filename&quot;</span>: <span class="hljs-string">&quot;f1.txt&quot;</span>, <span class="hljs-string">&quot;create_time&quot;</span>: <span class="hljs-string">&quot;today&quot;</span>, <span class="hljs-string">&quot;size&quot;</span>: <span class="hljs-number">111</span>&#125;<br>&lt;class <span class="hljs-string">&#x27;str&#x27;</span>&gt;<br><br>STYLUS<br></code></pre></td></tr></table></figure>
@@ -1278,9 +1282,9 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
 <p>（哪儿都没说明白，等用上了再说）</p>
 <p><strong>装饰器</strong></p>
 <p>装饰器的实现前提：函数也是对象，函数可以当做参数传入其他函数。函数也可以当做返回值被return</p>
-<p>为function做额外的事情，如写日志、测试、鉴权等。装饰器一般在多个函数中做同样操作时发挥的作用最大，可以较大限度减少代码量</p>
+<p>装饰器的作用就是为一个函数做额外的事情，如写日志、测试、鉴权等。装饰器一般在多个函数中做同样操作时发挥的作用最大，可以较大限度减少代码量</p>
 <p>举例说明：</p>
-<p>这里的mains函数作为参数传入了dector函数，内部又调用了原函数mains，但在调用前后分别执行输出了语句。这就是装饰器dector的作用，<strong>在不改变mains函数行为的前提下，改变了mains函数的行为</strong>。</p>
+<p>这里的mains函数上方添加了一行<code>@dector</code>，将<code>mains</code>函数作为参数传入了dector中。在<code>dector</code>内部又调用了原函数mains（即参数func），但在调用前后分别执行输出了语句。这就是装饰器dector的作用，<strong>在不改变原函数行为的前提下，改变原函数的行为</strong>。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">dector</span>(<span class="hljs-params">func</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">tests</span>(<span class="hljs-params">*args, **kwargs</span>):  <span class="hljs-comment"># # 如需给原参数传参，这样写可以传任意数量和类型的参数</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;这是触发前的测试&quot;</span>)<br>        res = func(*args, **kwargs)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;这是触发后的操作&quot;</span>)<br>        <span class="hljs-keyword">return</span> res<br>    <span class="hljs-keyword">return</span> tests<br><br><span class="hljs-comment"># 这段代码等价于 mains = dector(mains)</span><br><span class="hljs-meta">@dector</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">mains</span>(<span class="hljs-params">name</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;这是主进程&quot;</span>)<br><br><br>mains(<span class="hljs-string">&quot;小周&quot;</span>)<br><br>输出：<br>这是触发前的测试<br>这是主进程<br>这是触发后的操作<br><br>PYTHON<br></code></pre></td></tr></table></figure>
 <p><strong>自定义参数、保留函数元信息</strong></p>
 <p>除了原函数所需要的参数，装饰器本身也可以定义参数，例如希望指定装饰器内部函数的执行次数，可以在装饰器这里传入。</p>
@@ -1300,7 +1304,7 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
 <h2 id="进阶用法"><a class="markdownIt-Anchor" href="#进阶用法"></a> 进阶用法</h2>
 <h3 id="lambda表达式"><a class="markdownIt-Anchor" href="#lambda表达式"></a> lambda表达式</h3>
 <p>用于创建匿名函数，语法上限为单个表达式，是正常函数定义的语法糖。如下两种写法是一样的：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">def <span class="hljs-built_in">add</span>(<span class="hljs-keyword">a</span>, b):<br>    <span class="hljs-literal">return</span> <span class="hljs-keyword">a</span> + b<br><br><span class="hljs-built_in">add</span> = lambdaa, b:<span class="hljs-keyword">a</span>+b<br><br>LIVECODESERVER<br></code></pre></td></tr></table></figure>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">def <span class="hljs-built_in">add</span>(<span class="hljs-keyword">a</span>, b):<br>    <span class="hljs-literal">return</span> <span class="hljs-keyword">a</span> + b<br><br><span class="hljs-built_in">add</span> = lambda <span class="hljs-keyword">a</span>,b:<span class="hljs-keyword">a</span>+b<br><br>LIVECODESERVER<br></code></pre></td></tr></table></figure>
 <h3 id="遍历缩写"><a class="markdownIt-Anchor" href="#遍历缩写"></a> 遍历缩写</h3>
 <p>如下写法是一样的。</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">l</span> =<span class="hljs-meta"> []</span><br><span class="hljs-attribute">for</span> i in range(<span class="hljs-number">10</span>):<br>    <span class="hljs-attribute">l</span>.append(i*<span class="hljs-number">2</span>)<br><br><span class="hljs-attribute">l</span> =<span class="hljs-meta"> [i*2 for i in range(10)]</span><br><br><span class="hljs-comment"># 使用缩写方式创建字典</span><br><span class="hljs-attribute">d</span> = &#123;<span class="hljs-string">&quot;index&quot;</span>+str(i): i*<span class="hljs-number">2</span> fro i in range(<span class="hljs-number">10</span>)&#125;<br><br><span class="hljs-attribute">APACHE</span><br></code></pre></td></tr></table></figure>
@@ -1399,7 +1403,7 @@ Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年3月3日</div>
+          <div>2023年7月24日</div>
         </div>
       
       <div class="license-meta-item">
