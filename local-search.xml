@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>上市公司财报三张表的简单分析</title>
+    <link href="/post/32cd3835.html"/>
+    <url>/post/32cd3835.html</url>
+    
+    <content type="html"><![CDATA[<span id="more"></span><!-- categories:Dev、Ops、Study、Sth、News、work--><!-- tags: Python、MySQL、LeetCode、机器学习、Linux、Big Data、Java、BlockChain、Docker、Web 、分布式、Maven、数据结构、JVM、JavaScript、Crontab、Shell、Ubuntu、VPN、NodeJS、String、VM、Hadoop、Life、树莓派、Git、Hexo、算法、运维、网络、看法、电影、美学、写作、哲学、文档、绘画、前端、历史、政治、社会、导购 --><p>财报的三张表：资产负债表、利润表、现金流量表。</p><p>现在的同花顺网站会将主要查看的指标放在前列，方便查看。如下图，房地产公司雅居乐集团，同花顺资料页面为：<a href="http://basic.10jqka.com.cn/176/HK3383/finance.html">http://basic.10jqka.com.cn/176/HK3383/finance.html</a></p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202307281815252.png" alt></p><h3 id="资产负债表"><a class="markdownIt-Anchor" href="#资产负债表"></a> 资产负债表</h3><p>计算公式：资产 - 负债 = 权益，主要反映企业手中的资产和负债的情况。</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202307281635681.png" alt></p><p>选择资产负债表一栏，查看左侧字段的全部指标内，可以看到资产分为流动资产和非流动资产。</p><p>流动资产：一年内可以变现的东西，包括票据、应收账款、存货、现金等，主要关注如下几点</p><ul><li>货币资金：</li><li>应收账款及票据：没有收到的钱，即外部的赊账</li><li>存货：未售出的商品，包括商品的部件</li></ul><p>非流动资产：一年之内无法变现的东西，主要关注如下几点</p><ul><li>固定资产/不动产：无法短期变现的东西</li><li>在建工程：生产线扩建</li><li>无形资产：发明、专利、知识产权等，无形但可以产生收益的东西</li><li>商誉：收购其他公司产生出来的，双刃剑</li></ul><p>资产合计字段就是，流动资产+非流动资产</p><p>其次是负债，也分为流动负债和非流动负债。</p><p>流动负债：一年之内要还的钱，主要关注如下几点：</p><ul><li>短期借款（重要）：向银行借的钱，往往数额较大，但一年内要还</li><li>应付账款及票据：欠别人的钱</li></ul><p>非流动负债：一年内不用还的钱，借的周期较长。</p><ul><li>长期借款</li><li>应付债券</li></ul><p>负债合计字段就是，流动负债+非流动负债；</p><p>最后是权益，权益就是资产合计-负债合计。对于股票购买者而言，权益就是股东的权益，主要看：</p><ul><li>未分配利润：除去分红、还没有给股东的钱。只要该项正常递增，说明企业发展健康。</li></ul><h3 id="利润表"><a class="markdownIt-Anchor" href="#利润表"></a> 利润表</h3><p>计算公式：收入 - 成本 - 费用 = 利润。收入 - 成本 = 毛利润，毛利润再扣取费用就是净利润，主要反应一个企业的总收入和成本的情况</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202307281721329.png" alt></p><p>营业收入：没有扣除成本的总入，总收入是否正常递增，决定企业发展健康度。</p><p>xx费用：包括销售费用、管理费用、财务费用，或其他费用的情况。</p><h3 id="现金流量表"><a class="markdownIt-Anchor" href="#现金流量表"></a> 现金流量表</h3><p>计算公式：经营现金流净额 + 投资现金流净额 + 筹资现金流净额 = 现金净额（现金变化），主要反映一个企业当前的经营状况是否良好，账上是否还有现金。它从三个维度来查看现金变化情况：经营、投资、筹资。</p><ul><li><p>经营现金流净额 = 经营活动现金流入（卖出商品的钱） - 经营活动现金流出（支付商品成本或工资），一般来说这个值跟净利润的值相差不大，一般都是正的，为负则有问题。</p></li><li><p>投资现金流净额 =  投资活动现金流入（购买固定资产、投入新产品） - 投资活动现金流出。</p></li><li><p>筹资现金流净额 =  筹资活动现金流入（借得的钱、别人投资的钱、发行债券的钱） - 筹资活动现金流出（还钱、还债、分配股利，发股息等等）。</p></li></ul><p>以上三方面的现金净额增加，就可以得到现金及现金等价物净增值，反映出来的是现金变化，即到公司账上的钱，可以看出一个公司的现金情况、是否缺钱。例如表格中的核心指标一栏：</p><p><img src="https://blog-cnd-1307088890.cos.ap-guangzhou.myqcloud.com/202307281745480.png" alt></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Study</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>财务</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>NodeJS 方式搭建腾讯云 STS 临时密钥服务端</title>
     <link href="/post/f1f207d2.html"/>
     <url>/post/f1f207d2.html</url>
